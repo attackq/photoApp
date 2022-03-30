@@ -1,0 +1,28 @@
+.user__logo {
+  background: #C4C4C4;
+  border-radius: 50%;
+}
+.user__logo a {
+  display: inline-block;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 30px;
+  text-decoration: none;
+  color: #000000;
+  text-align: center;
+  vertical-align: middle;
+}
+.user__logo.big a {
+  font-size: 40px;
+}
+.user__name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+}
+.user__name.big {
+  width: 100px;
+  height: 100px;
+}

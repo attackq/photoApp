@@ -1,0 +1,17 @@
+.header {
+  background: rgba(0, 0, 0, 0.8);
+}
+.header__inner {
+  display: flex;
+  align-items: center;
+}
+
+.header__search {
+  margin-right: auto;
+  position: relative;
+}
+.user {
+  position: relative;
+}
+
+

@@ -1,0 +1,26 @@
+.header__nav {
+  display: flex;
+  margin-right: 205px;
+}
+.nav__link {
+  font-weight: 500;
+  font-size: 20px;
+  text-decoration: none;
+  color: #FFFFFF;
+  padding-top: 6px;
+  margin-right: 45px;
+}
+.nav__link:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  margin-top: 4px;
+  background: transparent;
+  transition: all 0.3s;
+}
+.nav__link:hover:after {
+  width: 100%;
+  background: #8FFF00;
+}
+

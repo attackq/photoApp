@@ -1,0 +1,26 @@
+.header__logo {
+  display: flex;
+  align-items: center;
+  margin-right: 120px;
+}
+.logo__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: #000000;
+  border-radius: 5px;
+  margin: 15px 18px 15px 0;
+}
+.logo__img svg {
+  width: 27px;
+  height: 27px;
+  fill: #FFFFFF;
+}
+.logo__text {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 30px;
+  color: #FFFFFF;
+}

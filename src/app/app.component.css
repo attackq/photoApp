@@ -1,0 +1,206 @@
+.account {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: url("../assets/icons/Mainbg.jpg")  no-repeat;
+  background-size: cover;
+  height: 250px;
+}
+.account__wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.account__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20px;
+}
+.account__user {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+.account__user svg {
+  display: block;
+  width: 25px;
+  height: 25px;
+  fill: #FFFFFF;
+  cursor: pointer;
+}
+.account__name {
+  margin-right: 40px;
+}
+.account__desc {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: center;
+  color: #FFFFFF;
+  margin-bottom: 15px;
+}
+.account__follow {
+  display: flex;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #FFFFFF;
+}
+.followers {
+  margin-right: 45px;
+  position: relative;
+}
+.followers:after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  position: absolute;
+  right: -27px;
+  top: 8px;
+}
+.account__btn {
+  padding: 6px 25px;
+  margin-left: 120px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 0.11em;
+  color: #FFFFFF;
+  background: #27AE60;
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+
+
+.content {
+  background: #E5E5E5;
+  flex: 1 1 auto;
+}
+
+.content__wrapper {
+  padding: 25px 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 0 -7.5px;
+}
+.content__column {
+  flex: 0 0 33.333%;
+  margin: 15px 0;
+  padding: 0 7.5px;
+}
+.content__card {
+  height: 280px;
+  position: relative;
+}
+.content__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hover__block {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  background: #333333;
+  opacity: 0.8;
+  align-items: center;
+
+}
+.hover__title {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
+  width: 50%;
+  padding: 4px 0;
+  margin-left: 8px;
+}
+.hover__icons {
+  display: flex;
+  align-items: center;
+}
+.hover__icon {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+.hover__svg {
+  margin-right: 5px;
+}
+.hover__svg {
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+}
+.hover__svg svg {
+  width: 100%;
+  height: 100%;
+  fill: #FFFFFF;
+}
+.hover__svg.red svg {
+  fill: #EB5757;
+}
+
+.hover__text {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: center;
+  color: #FFFFFF;
+}
+footer {
+  background: #000000;
+}
+.footer__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+}
+.footer__links {
+  display: flex;
+  width: 50%;
+}
+.footer__links li {
+  list-style-type: none;
+  margin: 0 135px 0 0;
+  color: #828282;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.footer__links li:hover {
+  color: #FFFFFF;
+}
+.footer__icons {
+  display: flex;
+  width: 50%;
+  justify-content: flex-end;
+}
+.footer__icons svg {
+  width: 30px;
+  height: 30px;
+  fill: #828282;
+  margin-left: 40px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.footer__icons svg:hover {
+  fill: #FFFFFF;
+}
