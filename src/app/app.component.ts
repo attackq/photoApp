@@ -24,10 +24,6 @@ export class AppComponent {
     logo: "assets/images/8.jpg"
   }
 
-  public hover:boolean = false;
 
-  public hoverPopup(): void {
-    this.hover = !this.hover;
-  }
   title = 'photoApp';
 }

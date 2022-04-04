@@ -13,6 +13,9 @@ import { FilterPopupComponent } from './filter/filter-popup/filter-popup.compone
 import { AccountComponent } from './account/account.component';
 import { AccountInfoComponent } from './account/account-info/account-info.component';
 import { ButtonComponent } from './shared/button/button.component';
+import { ContentComponent } from './content/content.component';
+import { PostComponent } from './content/post/post.component';
+import { PostHoverComponent } from './content/post/post-hover/post-hover.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { ButtonComponent } from './shared/button/button.component';
     FilterPopupComponent,
     AccountComponent,
     AccountInfoComponent,
-    ButtonComponent
+    ButtonComponent,
+    ContentComponent,
+    PostComponent,
+    PostHoverComponent
   ],
   imports: [
     BrowserModule

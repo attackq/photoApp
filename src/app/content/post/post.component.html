@@ -1,0 +1,13 @@
+<div (mouseenter)="hoverPopup()"
+     (mouseleave)="hoverPopup()">
+  <div class="content__card">
+    <img [src]="postImg" alt="">
+    <app-post-hover
+      *ngIf="hover"
+      [postTitle]="post1.title"
+      [postLikes]="post1.likes"
+      [postComments]="post1.comments"
+    ></app-post-hover>
+  </div>
+</div>
+

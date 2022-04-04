@@ -10,7 +10,7 @@ import {UserInfo} from "../user-info";
 })
 export class HeaderComponent implements OnInit {
 
-  icons = iconsSrc;
+  public icons = iconsSrc;
 
   public user1: UserInfo = {
     name: 'Walter Cobalt',

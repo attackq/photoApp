@@ -1,0 +1,14 @@
+
+
+.content__card {
+  height: 280px;
+  position: relative;
+}
+
+.content__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
