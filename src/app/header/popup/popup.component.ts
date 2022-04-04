@@ -10,9 +10,10 @@ export interface PopupLinks {
 })
 export class PopupComponent implements OnInit {
 
-  @Input() username = '';
+  @Input()
+  username = '';
 
-  popuplinks: PopupLinks[] = [
+  public popuplinks: PopupLinks[] = [
     {name: 'Privacy'},
     {name: 'Terms'},
     {name: 'Log Out'},

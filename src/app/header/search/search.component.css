@@ -27,10 +27,10 @@
   left: 18px;
   cursor: pointer;
 }
-.search__logo svg{
+.search__logo img{
   width: 31px;
   height: 31px;
-  fill: #4F4F4F;
+  filter: brightness(0) saturate(100%) invert(32%) sepia(0%) saturate(300%) hue-rotate(208deg) brightness(90%) contrast(90%);
 }
 .search__logo input {
   display: none;

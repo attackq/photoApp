@@ -1,15 +1,17 @@
 <div class="header">
   <div class="container">
     <div class="header__inner">
-      <app-head-logo></app-head-logo>
+      <app-head-logo [imagePath]=icons.photoLogo></app-head-logo>
       <app-nav></app-nav>
       <div class="header__search">
-        <app-search></app-search>
+        <app-search [imagePath]="icons.search"></app-search>
       </div>
       <div class="user">
-        <app-user-logo [username]='this.users[0].name.slice(0,1)' (click)="togglePopup()"></app-user-logo>
-        <app-popup [username]="this.users[0].name.split(' ')[0]" *ngIf="toggle"></app-popup>
+        <app-user-logo [username]='user1.name.slice(0,1)' (click)="togglePopup()" [avatar]="this.user1.logo"></app-user-logo>
+        <app-popup [username]="this.user1.name.split(' ')[0]" *ngIf="toggle"></app-popup>
       </div>
     </div>
   </div>
 </div>
+
+

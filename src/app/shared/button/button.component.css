@@ -1,0 +1,20 @@
+.button {
+  padding: 6px 25px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 0.11em;
+  color: #FFFFFF;
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+.button.green {
+  background: #27AE60;
+}
+.button.blue {
+  background: #2D9CDB;
+}

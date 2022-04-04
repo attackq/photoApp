@@ -1,0 +1,18 @@
+.account {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 250px;
+}
+
+.account__wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.account__btn {
+  margin-left: 120px;
+}

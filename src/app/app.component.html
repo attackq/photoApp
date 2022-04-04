@@ -1,51 +1,26 @@
 <div class="wrapper">
   <app-header></app-header>
-
-  <div class="account">
-    <div class="container">
-      <div class="account__wrapper">
-        <app-user-logo [username]='this.users[0].name.slice(0,1)' [size]="'big'"></app-user-logo>
-        <div class="account__info">
-          <div class="account__user">
-            <div class="account__name">{{users[0].name}}</div>
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;" xml:space="preserve">
-            <g id="XMLID_23_">
-              <path id="XMLID_24_" d="M75,180v60c0,8.284,6.716,15,15,15h60c3.978,0,7.793-1.581,10.606-4.394l164.999-165
-                c5.858-5.858,5.858-15.355,0-21.213l-60-60C262.794,1.581,258.978,0,255,0s-7.794,1.581-10.606,4.394l-165,165
-                C76.58,172.206,75,176.022,75,180z M105,186.213L255,36.213L293.787,75l-150,150H105V186.213z"/>
-              <path id="XMLID_27_" d="M315,150.001c-8.284,0-15,6.716-15,15V300H30V30H165c8.284,0,15-6.716,15-15s-6.716-15-15-15H15
-                C6.716,0,0,6.716,0,15v300c0,8.284,6.716,15,15,15h300c8.284,0,15-6.716,15-15V165.001C330,156.716,323.284,150.001,315,150.001z"
-              />
-            </g>
-          </svg>
-          </div>
-          <div class="account__desc">You can find pictures here!</div>
-          <div class="account__follow">
-            <div class="followers">1M Followers</div>
-            <div class="following">1 Following</div>
-          </div>
-        </div>
-      </div>
-      <button class="account__btn">Add photo</button>
-    </div>
-  </div>
+  <app-account></app-account>
 
   <app-filter></app-filter>
 
   <div class="content">
     <div class="container">
       <div class="content__wrapper">
-        <div class="content__column" (mouseenter)="hoverPopup()" (mouseleave)="hoverPopup()">
-          <div class="content__card" >
-            <img src="../assets/icons/user-back.jpg" alt="">
-            <div class="hover__block" *ngIf="hover" >
+        <div class="content__column"
+             (mouseenter)="hoverPopup()"
+             (mouseleave)="hoverPopup()">
+          <div class="content__card">
+            <img src="../assets/images/user-back.jpg" alt="">
+            <div class="hover__block" *ngIf="hover">
               <div class="hover__title">F1 crush by Walter C.</div>
               <div class="hover__icons">
                 <div class="hover__icon">
                   <div class="hover__svg red">
-                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743" style="enable-background:new 0 0 45.743 45.743;"
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
+                         style="enable-background:new 0 0 45.743 45.743;"
                          xml:space="preserve">
               <g>
                 <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
@@ -58,8 +33,10 @@
                 </div>
                 <div class="hover__icon">
                   <div class="hover__svg">
-                    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;"
+                         xmlns:graph="&ns_graphs;"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                         xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
                          x="0px" y="0px" width="42px" height="42px" viewBox="-0.5 0.5 42 42" xml:space="preserve">
                 <path d="M29.5,30.5h7c2.529,0,3-0.529,3-3v-21c0-2.41-0.59-3-3-3h-32c-2.47,0-3,0.53-3,3v20.971c0,2.469,0.41,3.029,3,3.029h13
                   c0,0,9.562,8.756,10.75,9.812c0.422,0.375,1.281,0.172,1.25-0.812V30.5z M7.5,21.5h21v3h-21V21.5z M7.5,15.5h13v3h-13V15.5z
@@ -69,8 +46,10 @@
                 </div>
                 <div class="hover__icon">
                   <div class="hover__svg">
-                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                         viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;"
+                         xml:space="preserve">
                 <g><path d="M421.196,0H90.804C80.459,0,72.073,8.387,72.073,18.731v474.522c0,16.686,20.232,24.991,31.975,13.244L256,354.546
                   l151.952,151.951c11.701,11.704,31.975,3.541,31.975-13.244V18.731C439.927,8.387,431.541,0,421.196,0z M109.535,37.462h292.93
                   v39.664h-292.93V37.462z M402.464,448.032L269.245,314.813c-7.314-7.315-19.174-7.316-26.49,0L109.535,448.032V114.588h292.93
@@ -81,16 +60,18 @@
             </div>
           </div>
         </div>
-        <div class="content__column" >
-          <div class="content__card" >
+        <div class="content__column">
+          <div class="content__card">
             <img src="https://via.placeholder.com/1920x1080" alt="">
-            <div class="hover__block" >
+            <div class="hover__block">
               <div class="hover__title">F1 crush by Walter C.</div>
               <div class="hover__icons">
                 <div class="hover__icon">
                   <div class="hover__svg red">
-                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743" style="enable-background:new 0 0 45.743 45.743;"
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
+                         style="enable-background:new 0 0 45.743 45.743;"
                          xml:space="preserve">
               <g>
                 <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
@@ -103,8 +84,10 @@
                 </div>
                 <div class="hover__icon">
                   <div class="hover__svg">
-                    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;"
+                         xmlns:graph="&ns_graphs;"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                         xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
                          x="0px" y="0px" width="42px" height="42px" viewBox="-0.5 0.5 42 42" xml:space="preserve">
                 <path d="M29.5,30.5h7c2.529,0,3-0.529,3-3v-21c0-2.41-0.59-3-3-3h-32c-2.47,0-3,0.53-3,3v20.971c0,2.469,0.41,3.029,3,3.029h13
                   c0,0,9.562,8.756,10.75,9.812c0.422,0.375,1.281,0.172,1.25-0.812V30.5z M7.5,21.5h21v3h-21V21.5z M7.5,15.5h13v3h-13V15.5z
@@ -114,8 +97,10 @@
                 </div>
                 <div class="hover__icon">
                   <div class="hover__svg">
-                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                         viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;"
+                         xml:space="preserve">
                 <g><path d="M421.196,0H90.804C80.459,0,72.073,8.387,72.073,18.731v474.522c0,16.686,20.232,24.991,31.975,13.244L256,354.546
                   l151.952,151.951c11.701,11.704,31.975,3.541,31.975-13.244V18.731C439.927,8.387,431.541,0,421.196,0z M109.535,37.462h292.93
                   v39.664h-292.93V37.462z M402.464,448.032L269.245,314.813c-7.314-7.315-19.174-7.316-26.49,0L109.535,448.032V114.588h292.93
@@ -126,16 +111,18 @@
             </div>
           </div>
         </div>
-        <div class="content__column" >
-          <div class="content__card" >
-            <img src="../assets/icons/user-back.jpg" alt="">
-            <div class="hover__block" >
+        <div class="content__column">
+          <div class="content__card">
+            <img src="../assets/images/user-back.jpg" alt="">
+            <div class="hover__block">
               <div class="hover__title">F1 crush by Walter C.</div>
               <div class="hover__icons">
                 <div class="hover__icon">
                   <div class="hover__svg red">
-                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743" style="enable-background:new 0 0 45.743 45.743;"
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
+                         style="enable-background:new 0 0 45.743 45.743;"
                          xml:space="preserve">
               <g>
                 <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
@@ -148,8 +135,10 @@
                 </div>
                 <div class="hover__icon">
                   <div class="hover__svg">
-                    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;"
+                         xmlns:graph="&ns_graphs;"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                         xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
                          x="0px" y="0px" width="42px" height="42px" viewBox="-0.5 0.5 42 42" xml:space="preserve">
                 <path d="M29.5,30.5h7c2.529,0,3-0.529,3-3v-21c0-2.41-0.59-3-3-3h-32c-2.47,0-3,0.53-3,3v20.971c0,2.469,0.41,3.029,3,3.029h13
                   c0,0,9.562,8.756,10.75,9.812c0.422,0.375,1.281,0.172,1.25-0.812V30.5z M7.5,21.5h21v3h-21V21.5z M7.5,15.5h13v3h-13V15.5z
@@ -159,8 +148,10 @@
                 </div>
                 <div class="hover__icon">
                   <div class="hover__svg">
-                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                         viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;"
+                         xml:space="preserve">
                 <g><path d="M421.196,0H90.804C80.459,0,72.073,8.387,72.073,18.731v474.522c0,16.686,20.232,24.991,31.975,13.244L256,354.546
                   l151.952,151.951c11.701,11.704,31.975,3.541,31.975-13.244V18.731C439.927,8.387,431.541,0,421.196,0z M109.535,37.462h292.93
                   v39.664h-292.93V37.462z M402.464,448.032L269.245,314.813c-7.314-7.315-19.174-7.316-26.49,0L109.535,448.032V114.588h292.93
@@ -171,16 +162,18 @@
             </div>
           </div>
         </div>
-        <div class="content__column" >
-          <div class="content__card" >
-            <img src="../assets/icons/user-back.jpg" alt="">
-            <div class="hover__block" >
+        <div class="content__column">
+          <div class="content__card">
+            <img src="../assets/images/user-back.jpg" alt="">
+            <div class="hover__block">
               <div class="hover__title">F1 crush by Walter C.</div>
               <div class="hover__icons">
                 <div class="hover__icon">
                   <div class="hover__svg red">
-                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743" style="enable-background:new 0 0 45.743 45.743;"
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
+                         style="enable-background:new 0 0 45.743 45.743;"
                          xml:space="preserve">
               <g>
                 <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
@@ -193,8 +186,10 @@
                 </div>
                 <div class="hover__icon">
                   <div class="hover__svg">
-                    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;"
+                         xmlns:graph="&ns_graphs;"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                         xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
                          x="0px" y="0px" width="42px" height="42px" viewBox="-0.5 0.5 42 42" xml:space="preserve">
                 <path d="M29.5,30.5h7c2.529,0,3-0.529,3-3v-21c0-2.41-0.59-3-3-3h-32c-2.47,0-3,0.53-3,3v20.971c0,2.469,0.41,3.029,3,3.029h13
                   c0,0,9.562,8.756,10.75,9.812c0.422,0.375,1.281,0.172,1.25-0.812V30.5z M7.5,21.5h21v3h-21V21.5z M7.5,15.5h13v3h-13V15.5z
@@ -204,8 +199,10 @@
                 </div>
                 <div class="hover__icon">
                   <div class="hover__svg">
-                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                         viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;"
+                         xml:space="preserve">
                 <g><path d="M421.196,0H90.804C80.459,0,72.073,8.387,72.073,18.731v474.522c0,16.686,20.232,24.991,31.975,13.244L256,354.546
                   l151.952,151.951c11.701,11.704,31.975,3.541,31.975-13.244V18.731C439.927,8.387,431.541,0,421.196,0z M109.535,37.462h292.93
                   v39.664h-292.93V37.462z M402.464,448.032L269.245,314.813c-7.314-7.315-19.174-7.316-26.49,0L109.535,448.032V114.588h292.93
@@ -221,21 +218,23 @@
   </div>
 
   <footer class="footer">
-      <div class="container">
-        <div class="footer__row">
-          <ul class="footer__links">
-            <li>About</li>
-            <li>Terms</li>
-            <li>Privacy</li>
-          </ul>
-          <div class="footer__icons">
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                         viewBox="0 0 455 455" style="enable-background:new 0 0 455 455;" xml:space="preserve">
+    <div class="container">
+      <div class="footer__row">
+        <ul class="footer__links">
+          <li>About</li>
+          <li>Terms</li>
+          <li>Privacy</li>
+        </ul>
+        <div class="footer__icons">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+               x="0px" y="0px"
+               viewBox="0 0 455 455" style="enable-background:new 0 0 455 455;" xml:space="preserve">
                   <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M0,0v455h455V0H0z M301.004,125.217H265.44
                     c-7.044,0-14.153,7.28-14.153,12.696v36.264h49.647c-1.999,27.807-6.103,53.235-6.103,53.235h-43.798V385h-65.266V227.395h-31.771
                     v-53.029h31.771v-43.356c0-7.928-1.606-61.009,66.872-61.009h48.366V125.217z"/></svg>
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 viewBox="0 0 455.73 455.73" style="enable-background:new 0 0 455.73 455.73;" xml:space="preserve">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+               x="0px" y="0px"
+               viewBox="0 0 455.73 455.73" style="enable-background:new 0 0 455.73 455.73;" xml:space="preserve">
             <path d="M227.86,182.55c-24.98,0-45.32,20.33-45.32,45.31c0,24.99,20.34,45.33,45.32,45.33c24.99,0,45.32-20.34,45.32-45.33
                     C273.18,202.88,252.85,182.55,227.86,182.55z M227.86,182.55c-24.98,0-45.32,20.33-45.32,45.31c0,24.99,20.34,45.33,45.32,45.33
                     c24.99,0,45.32-20.34,45.32-45.33C273.18,202.88,252.85,182.55,227.86,182.55z M303.36,108.66H152.37
@@ -272,8 +271,9 @@
                     c43.28,0,78.49,35.21,78.49,78.48C306.35,271.14,271.14,306.35,227.86,306.35z M308.87,165.61c-10.24,0-18.57-8.33-18.57-18.57
                     s8.33-18.57,18.57-18.57s18.57,8.33,18.57,18.57S319.11,165.61,308.87,165.61z M227.86,182.55c-24.98,0-45.32,20.33-45.32,45.31
                     c0,24.99,20.34,45.33,45.32,45.33c24.99,0,45.32-20.34,45.32-45.33C273.18,202.88,252.85,182.55,227.86,182.55z"/></svg>
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 viewBox="0 0 455 455" style="enable-background:new 0 0 455 455;" xml:space="preserve">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+               x="0px" y="0px"
+               viewBox="0 0 455 455" style="enable-background:new 0 0 455 455;" xml:space="preserve">
                 <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M0,0v455h455V0H0z M352.751,163.259c0.123,2.773,0.186,5.561,0.186,8.36
                   c0,85.403-65.002,183.876-183.873,183.876c-36.496,0-70.466-10.697-99.065-29.037c5.056,0.601,10.199,0.907,15.417,0.907
                   c30.278,0,58.143-10.331,80.262-27.668c-28.28-0.519-52.148-19.204-60.373-44.88c3.948,0.757,7.997,1.163,12.161,1.163
@@ -282,9 +282,9 @@
                   c31.873,39.101,79.493,64.828,133.203,67.526c-1.103-4.732-1.677-9.665-1.677-14.729c0-35.688,28.938-64.623,64.626-64.623
                   c18.589,0,35.385,7.847,47.173,20.406c14.719-2.895,28.551-8.276,41.038-15.681c-4.824,15.092-15.071,27.754-28.415,35.754
                   c13.074-1.563,25.528-5.038,37.118-10.178C376.336,142.766,365.38,154.149,352.751,163.259z"/></svg>
-          </div>
         </div>
       </div>
+    </div>
   </footer>
 </div>
 

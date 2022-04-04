@@ -11,7 +11,7 @@ export interface Links {
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  links: Links[] = [
+  public links: Links[] = [
     {name: 'Home', id: 1},
     {name: 'Feed', id: 2},
   ]

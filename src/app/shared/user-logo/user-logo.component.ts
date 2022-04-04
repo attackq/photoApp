@@ -6,8 +6,12 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./user-logo.component.css']
 })
 export class UserLogoComponent implements OnInit {
-  @Input() username = '';
-  @Input() size = '';
+  @Input()
+  public username: string = '';
+  @Input()
+  public size: string = '';
+  @Input()
+  avatar: string = ''
 
   constructor() { }
 

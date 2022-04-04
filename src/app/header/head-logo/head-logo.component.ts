@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-head-logo',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./head-logo.component.css']
 })
 export class HeadLogoComponent implements OnInit {
+
+  @Input()
+  public imagePath: string = '';
 
   constructor() { }
 

@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {iconsSrc} from "../icons-path";
+import {UserInfo} from "../user-info";
 
-export interface Users {
-  name: string;
-}
 
 @Component({
   selector: 'app-header',
@@ -10,16 +9,26 @@ export interface Users {
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  users: Users[] = [
-    {name: 'Walter Cobalt'},
-  ]
 
-  constructor() { }
+  icons = iconsSrc;
+
+  public user1: UserInfo = {
+    name: 'Walter Cobalt',
+    description: 'You can find pictures here!',
+    followers: 10,
+    following: 3,
+    logo: "assets/images/8.jpg"
+  }
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
-  toggle: boolean = false;
-  togglePopup() {
+
+  public toggle: boolean = false;
+
+  public togglePopup(): void {
     this.toggle = !this.toggle;
   }
 

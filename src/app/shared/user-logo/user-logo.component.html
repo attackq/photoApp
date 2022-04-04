@@ -1,0 +1,8 @@
+<div class="user__logo {{size}}" >
+  <a href="#">
+    <div class="user__name {{size}}">
+      <img [src]="avatar" alt="" *ngIf="avatar !== ''">
+      <div class="user__text" *ngIf="avatar === ''">{{username}}</div>
+    </div>
+  </a>
+</div>
