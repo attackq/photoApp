@@ -10,6 +10,12 @@ export class PostComponent implements OnInit {
 
   @Input()
   public postImg: string = '';
+  @Input()
+  public postTitle: string = '';
+  @Input()
+  public postLikes: number = 0;
+  @Input()
+  public postComments: number = 0;
 
   public hover:boolean = false;
 
@@ -17,13 +23,22 @@ export class PostComponent implements OnInit {
     this.hover = !this.hover;
   }
 
-  public post1: Post = {
-    photo: 'assets/images/user-back.jpg',
-    title: 'F1 crush',
-    description: 'Look at this!',
-    likes: 13,
-    comments: 2
-  }
+  public posts: Post[] = [
+    {
+      photo: 'assets/images/user-back.jpg',
+      title: 'F1 crush',
+      description: 'Look at this!',
+      likes: 13,
+      comments: 2
+    },
+    {
+      photo: 'assets/images/user-back.jpg',
+      title: 'F133333 crush',
+      description: 'Look at this!',
+      likes: 13,
+      comments: 2
+    }
+  ]
 
   constructor() { }
 

@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {iconsSrc} from "../icons-path";
 import {UserInfo} from "../user-info";
 
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

@@ -8,13 +8,50 @@ import {Post} from "../post";
 })
 export class ContentComponent implements OnInit {
 
-  public post1: Post = {
-    photo: 'assets/images/user-back.jpg',
-    title: 'F1 crush',
-    description: 'Look at this!',
-    likes: 13,
-    comments: 2
-  }
+  public posts: Post[] = [
+    {
+      photo: 'assets/images/graffiti.jpg',
+      title: 'F1 crush',
+      description: 'Look at this!',
+      likes: 13,
+      comments: 2
+    },
+    {
+      photo: 'assets/images/bmw_e30.jpg',
+      title: 'BMW E30',
+      description: 'Look at this!',
+      likes: 4,
+      comments: 5
+    },
+    {
+      photo: 'assets/images/kosmos.jpg',
+      title: 'Space',
+      description: 'Look at this!',
+      likes: 24,
+      comments: 4
+    },
+    {
+      photo: 'assets/images/closed.jpg',
+      title: 'Lines',
+      description: 'Look at this!',
+      likes: 44,
+      comments: 1
+    },
+    {
+      photo: 'assets/images/lambo.jpg',
+      title: 'Lines',
+      description: 'Look at this!',
+      likes: 44,
+      comments: 1
+    },
+    {
+      photo: 'assets/images/spaceman.jpg',
+      title: 'Lines',
+      description: 'Look at this!',
+      likes: 44,
+      comments: 1
+    },
+  ]
 
   constructor() {
   }

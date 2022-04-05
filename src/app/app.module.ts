@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './header/nav/nav.component';
@@ -16,6 +17,8 @@ import { ButtonComponent } from './shared/button/button.component';
 import { ContentComponent } from './content/content.component';
 import { PostComponent } from './content/post/post.component';
 import { PostHoverComponent } from './content/post/post-hover/post-hover.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -33,10 +36,13 @@ import { PostHoverComponent } from './content/post/post-hover/post-hover.compone
     ButtonComponent,
     ContentComponent,
     PostComponent,
-    PostHoverComponent
+    PostHoverComponent,
+    FooterComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    ScrollingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
