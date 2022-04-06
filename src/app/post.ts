@@ -1,7 +1,7 @@
 export interface Post {
   photo: string,
   title: string,
-  description: string;
+  description: string,
   likes: number,
   comments: number
 }

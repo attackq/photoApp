@@ -20,6 +20,7 @@ import { PostHoverComponent } from './content/post/post-hover/post-hover.compone
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,13 +1,14 @@
 .content__wrapper {
-  padding: 25px 0 0 0;
+  padding: 20px 0 20px 0;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   margin: 0 -7.5px;
+
 }
 
 .content__column {
   flex: 0 0 33.333%;
-  margin: 15px 0;
+  margin: 5px 0;
   padding: 0 7.5px;
 }

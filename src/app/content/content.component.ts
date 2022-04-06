@@ -50,7 +50,8 @@ export class ContentComponent implements OnInit {
       description: 'Look at this!',
       likes: 44,
       comments: 1
-    },
+    }
+
   ]
 
   constructor() {

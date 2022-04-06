@@ -24,6 +24,6 @@ export class AppComponent {
     logo: "assets/images/8.jpg"
   }
 
-
   title = 'photoApp';
+
 }
