@@ -9,6 +9,9 @@ import {UserInfo} from "../user-info";
 })
 export class HeaderComponent implements OnInit {
 
+  @Input()
+  public loginHeader: boolean = false;
+
   public icons = iconsSrc;
 
   public user1: UserInfo = {

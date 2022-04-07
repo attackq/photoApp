@@ -1,12 +1,12 @@
-<div class="header">
+<div class="header" [ngClass]="loginHeader ? 'login' : 'n'">
   <div class="container">
     <div class="header__inner">
       <app-head-logo [imagePath]=icons.photoLogo></app-head-logo>
-      <app-nav></app-nav>
-      <div class="header__search">
+      <app-nav *ngIf="!loginHeader"></app-nav>
+      <div class="header__search" *ngIf="!loginHeader">
         <app-search [imagePath]="icons.search"></app-search>
       </div>
-      <div class="user">
+      <div class="user" *ngIf="!loginHeader">
         <app-user-logo [username]='user1.name.slice(0,1)' (click)="togglePopup()" [avatar]="this.user1.logo"></app-user-logo>
         <app-popup [username]="this.user1.name.split(' ')[0]" *ngIf="toggle"></app-popup>
       </div>
@@ -15,3 +15,4 @@
 </div>
 
 
+<!--[ngClass]="addColor ? 'red' : 'white'"-->
