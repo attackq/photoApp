@@ -9,5 +9,9 @@
 /*.content::-webkit-scrollbar {*/
 /*  display: none;  !* Safari and Chrome *!*/
 /*}*/
-
+.login__background {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
 

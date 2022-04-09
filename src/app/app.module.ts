@@ -20,6 +20,7 @@ import { PostHoverComponent } from './content/post/post-hover/post-hover.compone
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
     BrowserModule,
     BrowserAnimationsModule,
     ScrollingModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

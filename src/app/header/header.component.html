@@ -1,4 +1,4 @@
-<div class="header" >
+<div class="header" [ngClass]="loginHeader ? 'login' : 'n'" >
   <div class="container">
     <div class="header__inner" [ngClass]="loginHeader ? 'login' : 'n'">
       <app-head-logo [imagePath]=icons.photoLogo></app-head-logo>

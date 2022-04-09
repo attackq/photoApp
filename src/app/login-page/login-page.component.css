@@ -1,0 +1,31 @@
+.login {
+  display: flex;
+  flex: 1 1 auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  align-items: center;
+}
+
+.login__wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.login__title {
+  font-size: 70px;
+  line-height: 85px;
+  font-weight: 300;
+  letter-spacing: 0.11em;
+  margin-bottom: 10px;
+}
+
+.login__subtitle {
+  font-size: 40px;
+  line-height: 49px;
+  font-weight: 300;
+  letter-spacing: 0.11em;
+  margin-bottom: 45px;
+}

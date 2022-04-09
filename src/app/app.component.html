@@ -1,8 +1,12 @@
 <div class="wrapper">
-  <app-header [loginHeader]="true"></app-header>
-  <app-account></app-account>
-  <app-filter ></app-filter>
-  <app-content class="content"></app-content>
-  <app-footer></app-footer>
+  <app-header [loginHeader]="login"></app-header>
+  <app-account *ngIf="!login"></app-account>
+<!--  <div *ngIf="login" class="login__background">-->
+<!--    <router-outlet class="login"></router-outlet>-->
+<!--  </div>-->
+  <app-login-page *ngIf="login" class="login__background"></app-login-page>
+  <app-filter *ngIf="!login"></app-filter>
+  <app-content class="content" *ngIf="!login"></app-content>
+  <app-footer *ngIf="!login"></app-footer>
  </div>
 
