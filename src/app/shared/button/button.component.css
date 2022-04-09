@@ -18,3 +18,24 @@
 .button.blue {
   background: #2D9CDB;
 }
+.button.white {
+  padding: 8px 15px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  color: #333333;
+  background: #FFFFFF;
+  box-shadow: none;
+}
+.button.none {
+  padding: 0;
+  margin-right: 40px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  color: #FFFFFF;
+  background: none;
+  box-shadow: none;
+}

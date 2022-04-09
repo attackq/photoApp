@@ -19,6 +19,7 @@ import { PostComponent } from './content/post/post.component';
 import { PostHoverComponent } from './content/post/post-hover/post-hover.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { FooterComponent } from './footer/footer.component';
     ContentComponent,
     PostComponent,
     PostHoverComponent,
-    FooterComponent
+    FooterComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,

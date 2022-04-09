@@ -1,6 +1,6 @@
-<div class="header" [ngClass]="loginHeader ? 'login' : 'n'">
+<div class="header" >
   <div class="container">
-    <div class="header__inner">
+    <div class="header__inner" [ngClass]="loginHeader ? 'login' : 'n'">
       <app-head-logo [imagePath]=icons.photoLogo></app-head-logo>
       <app-nav *ngIf="!loginHeader"></app-nav>
       <div class="header__search" *ngIf="!loginHeader">
@@ -10,9 +10,20 @@
         <app-user-logo [username]='user1.name.slice(0,1)' (click)="togglePopup()" [avatar]="this.user1.logo"></app-user-logo>
         <app-popup [username]="this.user1.name.split(' ')[0]" *ngIf="toggle"></app-popup>
       </div>
+      <div class="header__login" *ngIf="loginHeader">
+        <app-button [label]="'Log in'"
+                    [bgColor]="'none'"
+                    *ngIf="loginHeader">
+        </app-button>
+        <app-button [label]="'Sing up'"
+                    [bgColor]="'white'"
+                    *ngIf="loginHeader">
+        </app-button>
+      </div>
     </div>
   </div>
 </div>
 
 
 <!--[ngClass]="addColor ? 'red' : 'white'"-->
+<!--[ngClass]="loginHeader ? 'login' : 'n'"-->

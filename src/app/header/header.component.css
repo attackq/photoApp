@@ -7,10 +7,14 @@
   top: 0;
   left: 0;
   width: 100%;
+
 }
 .header__inner {
   display: flex;
   align-items: center;
+}
+.header__inner.login {
+  justify-content: space-between;
 }
 .header__search {
   margin-right: auto;
