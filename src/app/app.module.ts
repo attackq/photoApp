@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AccountPageComponent } from './account-page/account-page.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { AppRoutingModule } from './app-routing.module';
     PostComponent,
     PostHoverComponent,
     FooterComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    AccountPageComponent
   ],
   imports: [
     BrowserModule,

@@ -9,8 +9,11 @@ import {UserInfo} from "../user-info";
 })
 export class HeaderComponent implements OnInit {
 
-  @Input()
-  public loginHeader: boolean = false;
+  public login: boolean = true;
+
+  public toggleLogin(): void {
+    this.login = !this.login;
+  }
 
   public icons = iconsSrc;
 
@@ -25,6 +28,7 @@ export class HeaderComponent implements OnInit {
   constructor() {
   }
 
+
   ngOnInit(): void {
   }
 
@@ -33,5 +37,6 @@ export class HeaderComponent implements OnInit {
   public togglePopup(): void {
     this.toggle = !this.toggle;
   }
+
 
 }

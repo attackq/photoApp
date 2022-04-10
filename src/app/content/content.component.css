@@ -1,3 +1,7 @@
+.content__data {
+  background: #E5E5E5;
+  flex: 1 1 auto;
+}
 .content__wrapper {
   padding: 20px 0 20px 0;
   display: flex;

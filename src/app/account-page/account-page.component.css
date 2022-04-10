@@ -1,0 +1,13 @@
+.account__page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  flex: 1 1 auto;
+}
+.content__scroll {
+  display: flex;
+  flex: 1 1 auto;
+}
+.scroll__viewport {
+  flex: 1 1 auto;
+}

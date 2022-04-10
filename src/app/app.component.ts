@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { UserInfo } from "./user-info";
+import {Component, ViewEncapsulation} from '@angular/core';
 
 export interface Users {
   name: string;
@@ -8,9 +7,9 @@ export interface Users {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  encapsulation:  ViewEncapsulation.None
 })
 export class AppComponent {
-  public login: boolean = false;
   title = 'photoApp';
 }

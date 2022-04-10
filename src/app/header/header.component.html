@@ -1,23 +1,28 @@
-<div class="header" [ngClass]="loginHeader ? 'login' : 'n'" >
+<div class="header" [ngClass]="login ? 'login' : 'other'">
   <div class="container">
-    <div class="header__inner" [ngClass]="loginHeader ? 'login' : 'n'">
-      <app-head-logo [imagePath]=icons.photoLogo></app-head-logo>
-      <app-nav *ngIf="!loginHeader"></app-nav>
-      <div class="header__search" *ngIf="!loginHeader">
+    <div class="header__inner" [ngClass]="login ? 'login' : 'other'">
+      <app-head-logo [imagePath]=icons.photoLogo
+                     (click)="!login && toggleLogin()"
+                     [routerLink]="'/login'"></app-head-logo>
+      <app-nav *ngIf="!login"></app-nav>
+      <div class="header__search" *ngIf="!login">
         <app-search [imagePath]="icons.search"></app-search>
       </div>
-      <div class="user" *ngIf="!loginHeader">
-        <app-user-logo [username]='user1.name.slice(0,1)' (click)="togglePopup()" [avatar]="this.user1.logo"></app-user-logo>
+      <div class="user" *ngIf="!login">
+        <app-user-logo [username]='user1.name.slice(0,1)' (click)="togglePopup()"
+                       [avatar]="this.user1.logo"></app-user-logo>
         <app-popup [username]="this.user1.name.split(' ')[0]" *ngIf="toggle"></app-popup>
       </div>
-      <div class="header__login" *ngIf="loginHeader">
+      <div class="header__login" *ngIf="login">
         <app-button [label]="'Log in'"
                     [bgColor]="'none'"
-                    *ngIf="loginHeader">
+                    *ngIf="login"
+                    [routerLink]="'/account'"
+                    (click)="toggleLogin()">
         </app-button>
         <app-button [label]="'Sing up'"
                     [bgColor]="'white'"
-                    *ngIf="loginHeader">
+                    *ngIf="login">
         </app-button>
       </div>
     </div>

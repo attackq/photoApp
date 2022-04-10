@@ -1,5 +1,6 @@
 .content {
-  background: #E5E5E5;
+  display: flex;
+  flex-direction: column;
   flex: 1 1 auto;
   /*height: 70vh;*/
   /*overflow: auto;*/
@@ -9,9 +10,5 @@
 /*.content::-webkit-scrollbar {*/
 /*  display: none;  !* Safari and Chrome *!*/
 /*}*/
-.login__background {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-}
+
 
