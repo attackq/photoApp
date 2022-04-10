@@ -12,15 +12,15 @@
   font-family: 'Montserrat', sans-serif;
   cursor: pointer;
 }
-button:hover {
-  color: #a02727;
-}
+
 .button.green {
   background: #27AE60;
 }
+
 .button.blue {
   background: #2D9CDB;
 }
+
 .button.white {
   padding: 8px 15px;
   font-weight: 500;
@@ -31,6 +31,7 @@ button:hover {
   background: #FFFFFF;
   box-shadow: none;
 }
+
 .button.none {
   padding: 0;
   margin-right: 40px;
@@ -43,19 +44,6 @@ button:hover {
   box-shadow: none;
   transition: color 0.3s;
 }
-.button.none:after {
-  content: '';
-  display: block;
-  width: 0;
-  height: 2px;
-  margin-top: 4px;
-  background: transparent;
-  transition: all 0.3s;
-}
-.button.none:hover:after {
-  width: 100%;
-  background: #8FFF00;
-}
 
 .button.black {
   padding: 15px 65px;
@@ -65,6 +53,8 @@ button:hover {
   line-height: 30px;
   color: #F2F2F2;
 }
+
+.button.none:after,
 .button.black:after {
   content: '';
   display: block;
@@ -74,7 +64,15 @@ button:hover {
   background: transparent;
   transition: all 0.3s;
 }
+
+.button.none:hover:after {
+  width: 100%;
+  background: #8FFF00;
+}
+
+.button.none:hover:after,
 .button.black:hover:after {
   width: 100%;
   background: #8FFF00;
 }
+
