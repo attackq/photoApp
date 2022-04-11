@@ -22,6 +22,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AccountPageComponent } from './account-page/account-page.component';
+import { AccountPopupComponent } from './account-popup/account-popup.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AccountPageComponent } from './account-page/account-page.component';
     PostHoverComponent,
     FooterComponent,
     LoginPageComponent,
-    AccountPageComponent
+    AccountPageComponent,
+    AccountPopupComponent
   ],
   imports: [
     BrowserModule,

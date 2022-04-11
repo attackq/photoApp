@@ -1,0 +1,24 @@
+<div class="modal__bg">
+  <div class="modal__content">
+    <div class="modal__title">
+      <div class="modal__text">Add new photo</div>
+      <img [src]="icons.close" alt="">
+    </div>
+    <div class="modal__choose">Please, choose the photo</div>
+    <form action="#" class="choose__form">
+      <label class="choose__label" for="choose">Choose</label>
+      <input type="file" id="choose">
+      <div class="choose__img">
+        <img src="assets/images/bmw30.jpg" alt="">
+        <div class="choose__close">
+          <img [src]="icons.close" alt="">
+        </div>
+      </div>
+      <div class="modal__choose">Please, add the description</div>
+      <input type="text" class="choose__input" placeholder="Write the title...">
+      <textarea name="descr" class="choose__input big" placeholder="Write the description..."></textarea>
+      <label class="choose__label blue" for="publish">Choose</label>
+      <input type="submit" id="publish">
+    </form>
+  </div>
+</div>

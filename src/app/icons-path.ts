@@ -8,7 +8,8 @@ export interface IconsPath {
   bookmark: string,
   inst: string,
   facebook: string,
-  twitter: string
+  twitter: string,
+  close: string
 }
 
 export const iconsSrc: IconsPath = {
@@ -22,4 +23,5 @@ export const iconsSrc: IconsPath = {
   inst: 'assets/icons/instagram.svg',
   facebook: 'assets/icons/facebook.svg',
   twitter: 'assets/icons/twitter.svg',
+  close: 'assets/icons/close.svg'
 }
