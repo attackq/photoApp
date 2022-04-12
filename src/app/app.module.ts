@@ -23,7 +23,11 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AccountPageComponent } from './account-page/account-page.component';
 import { AccountPopupComponent } from './account-popup/account-popup.component';
-
+import {environment} from "../environments/environment";
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 
 @NgModule({
   declarations: [
@@ -48,6 +52,10 @@ import { AccountPopupComponent } from './account-popup/account-popup.component';
     AccountPopupComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
     BrowserModule,
     BrowserAnimationsModule,
     ScrollingModule,

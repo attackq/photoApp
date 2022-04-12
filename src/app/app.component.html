@@ -5,5 +5,9 @@
   </div>
   <app-footer></app-footer>
   <app-account-popup></app-account-popup>
+  {{user?.displayName}}
+  <button (click)="login()" [routerLink]="'/account'">Login</button>
+  <button (click)="logout()">Logout</button>
 </div>
+
 
