@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {AuthService} from "./services/auth/auth.service";
 import firebase from "firebase/compat/app";
-import {Router} from "@angular/router";
+
 
 export interface Users {
   name: string;
