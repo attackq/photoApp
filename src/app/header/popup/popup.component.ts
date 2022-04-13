@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 export interface PopupLinks {
   name: string
@@ -11,16 +13,20 @@ export interface PopupLinks {
 export class PopupComponent implements OnInit {
 
   @Input()
-  username = '';
+  public username: string = '';
 
   public popuplinks: PopupLinks[] = [
     {name: 'Privacy'},
     {name: 'Terms'},
-    {name: 'Log Out'},
   ]
-  constructor() { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  public logout(): void {
+    this.authService.signOut().subscribe(() => this.router.navigate(["/login"]));
   }
 
 }

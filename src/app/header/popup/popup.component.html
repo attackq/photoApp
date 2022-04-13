@@ -4,5 +4,6 @@
     <ng-container>
       <a href="#" *ngFor="let link of popuplinks" class="popup__link">{{link.name}}</a>
     </ng-container>
+    <a href="#" class="popup__link" (click)="logout()">Log out</a>
   </div>
 </div>

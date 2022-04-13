@@ -17,20 +17,12 @@ export class AppComponent implements OnInit {
 
   public user: firebase.User | null = null;
 
-  constructor(private authService: AuthService,
-              private router: Router) {
+  constructor(private authService: AuthService) {
   }
 
   public ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
   }
-
-  public  login(): void {
-    this.authService.googleSingIn().subscribe();
-  }
-
-  public logout(): void {
-    this.authService.signOut().subscribe(() => this.router.navigate(["/"]));
-  }
   title = 'photoApp';
+
 }

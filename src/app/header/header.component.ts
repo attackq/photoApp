@@ -1,6 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {iconsSrc} from "../icons-path";
 import {UserInfo} from "../user-info";
+import { AuthService } from '../services/auth/auth.service';
+import { Router } from '@angular/router';
+import firebase from "firebase/compat/app";
+
 
 @Component({
   selector: 'app-header',
@@ -9,11 +13,8 @@ import {UserInfo} from "../user-info";
 })
 export class HeaderComponent implements OnInit {
 
-  public login: boolean = true;
-
-  public toggleLogin(): void {
-    this.login = !this.login;
-  }
+  @Input()
+  public user: firebase.User | null = null;
 
   public icons = iconsSrc;
 
@@ -25,17 +26,21 @@ export class HeaderComponent implements OnInit {
     logo: "assets/images/8.jpg"
   }
 
-  constructor() {
+  constructor(private authService: AuthService,
+              private router: Router) {
   }
-
 
   ngOnInit(): void {
   }
 
-  public toggle: boolean = false;
+  public toggle: boolean = true;
 
   public togglePopup(): void {
     this.toggle = !this.toggle;
+  }
+
+  public login(): void {
+    this.authService.googleSingIn().subscribe(() => this.router.navigate(["/account"]));
   }
 
 

@@ -10,6 +10,7 @@
   border-radius: 3px;
 }
 .popup__hello {
+  display: flex;
   padding: 5px 15px;
   font-weight: 600;
   font-size: 20px;

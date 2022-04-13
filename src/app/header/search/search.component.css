@@ -12,12 +12,15 @@
   font-size: 25px;
   line-height: 30px;
   text-align: center;
+  padding-left: 20px;
+
 }
 .search__input:focus {
   outline: none;
 }
 .search__input::placeholder {
   color: rgba(255, 255, 255, 0.3);
+
 }
 .search__logo {
   display: flex;

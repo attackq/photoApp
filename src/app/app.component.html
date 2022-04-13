@@ -1,13 +1,10 @@
 <div class="wrapper">
-  <app-header></app-header>
+  <app-header [user]="user"> </app-header>
   <div class="content">
     <router-outlet></router-outlet>
   </div>
   <app-footer></app-footer>
   <app-account-popup></app-account-popup>
-  {{user?.displayName}}
-  <button (click)="login()" [routerLink]="'/account'">Login</button>
-  <button (click)="logout()">Logout</button>
 </div>
 
 

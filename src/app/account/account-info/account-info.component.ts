@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {iconsSrc} from "../../icons-path";
 
+
 @Component({
   selector: 'app-account-info',
   templateUrl: './account-info.component.html',
@@ -16,7 +17,6 @@ export class AccountInfoComponent implements OnInit {
   public following: number = 0;
   @Input()
   public description: string = '';
-
 
   icons = iconsSrc;
 

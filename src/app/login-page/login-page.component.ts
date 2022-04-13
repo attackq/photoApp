@@ -1,4 +1,8 @@
 import {Component, HostBinding, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import { AuthService } from '../services/auth/auth.service';
+import { Router } from '@angular/router';
+import firebase from "firebase/compat/app";
+
 
 @Component({
   selector: 'app-login-page',
@@ -9,13 +13,19 @@ import {Component, HostBinding, Input, OnInit, ViewEncapsulation} from '@angular
 })
 export class LoginPageComponent implements OnInit {
 
+
   public bgPath: string = 'assets/images/logiwp.jpg';
 
-  constructor() { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   @HostBinding('class.login__background') someField: boolean = true;
 
   ngOnInit(): void {
+  }
+
+  public login(): void {
+    this.authService.googleSingIn().subscribe(() => this.router.navigate(["/account"]));
   }
 
 }

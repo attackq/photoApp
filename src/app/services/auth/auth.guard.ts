@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import {map, take, tap} from "rxjs/operators";
 import {AuthService} from "./auth.service";
@@ -10,7 +10,8 @@ import firebase from "firebase/compat/app";
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private router: Router) {
   }
 
   canActivate(
@@ -21,7 +22,7 @@ export class AuthGuard implements CanActivate {
       map((user: firebase.User | null) => !!user),
       tap((isLogged: boolean) => {
         if (!isLogged) {
-          console.log('you are not authorized');
+          console.log('not auth');
         }
       }),
     )

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserInfo} from "../user-info";
+import firebase from "firebase/compat/app";
 
 @Component({
   selector: 'app-account',

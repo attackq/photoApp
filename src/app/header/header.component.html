@@ -1,34 +1,33 @@
-<div class="header" [ngClass]="login ? 'login' : 'other'">
+<div class="header" [ngClass]="!user ? 'login' : 'other'">
   <div class="container">
-    <div class="header__inner" [ngClass]="login ? 'login' : 'other'">
-      <app-head-logo [imagePath]=icons.photoLogo
-                     (click)="!login && toggleLogin()"
-                     [routerLink]="'/login'"></app-head-logo>
-      <app-nav *ngIf="!login"></app-nav>
-      <div class="header__search" *ngIf="!login">
+    <div class="header__inner" [ngClass]="!user ? 'login' : 'other'">
+      <app-head-logo [imagePath]=icons.photoLogo></app-head-logo>
+      <app-nav *ngIf="user"></app-nav>
+      <div class="header__search" *ngIf="user">
         <app-search [imagePath]="icons.search"></app-search>
       </div>
-      <div class="user" *ngIf="!login">
-        <app-user-logo [username]='user1.name.slice(0,1)' (click)="togglePopup()"
-                       [avatar]="this.user1.logo"></app-user-logo>
-        <app-popup [username]="this.user1.name.split(' ')[0]" *ngIf="toggle"></app-popup>
+      <div class="user" *ngIf="user">
+        <app-user-logo [username]='user.displayName!.slice(0,1)'
+                       [avatar]="this.user1.logo"
+                       (click)="togglePopup()"></app-user-logo>
+        <app-popup  [username]="this.user.displayName!.split(' ')[0]"
+                    *ngIf="toggle"></app-popup>
       </div>
-      <div class="header__login" *ngIf="login">
+      <div class="header__login" *ngIf="!user">
         <app-button [label]="'Log in'"
                     [bgColor]="'none'"
-                    *ngIf="login"
-                    [routerLink]="'/account'"
-                    (click)="toggleLogin()">
+                    *ngIf="!user"
+                    (click)="login()">
         </app-button>
         <app-button [label]="'Sing up'"
                     [bgColor]="'white'"
-                    *ngIf="login">
+                    *ngIf="!user">
         </app-button>
       </div>
     </div>
   </div>
 </div>
-
-
+<!-- [username]="this.user1.name.split(' ')[0]" -->
 <!--[ngClass]="addColor ? 'red' : 'white'"-->
 <!--[ngClass]="loginHeader ? 'login' : 'n'"-->
+<!-- (click)="togglePopup()" -->
