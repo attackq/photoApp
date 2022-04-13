@@ -49,7 +49,7 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
     FooterComponent,
     LoginPageComponent,
     AccountPageComponent,
-    AccountPopupComponent
+    AccountPopupComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -62,6 +62,7 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
     AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

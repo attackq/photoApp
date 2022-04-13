@@ -20,10 +20,6 @@ export class AuthService {
     return this.authWithPopup(new firebase.auth.GoogleAuthProvider())
   }
 
-  public checkLogged() {
-    return this.afAuth.authState.subscribe((value: firebase.User | null) => this.user$.next(value));
-  }
-
   public authWithPopup(provider: AuthProvider) : Observable<UserCredential>{
     return from(this.afAuth.signInWithPopup(provider));
   }
