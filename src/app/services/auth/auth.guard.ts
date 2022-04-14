@@ -20,11 +20,12 @@ export class AuthGuard implements CanActivate {
     return this.authService.user$.pipe(
       take(1),
       map((user: firebase.User | null) => !!user),
-      tap((isLogged: boolean) => {
-        if (!isLogged) {
-          console.log('not auth');
-        }
-      }),
+      tap(user => console.log(user))
+      // tap((isLogged: boolean) => {
+      //   if (!isLogged) {
+      //     console.log('not auth');
+      //   }
+      // }),
     )
   }
 

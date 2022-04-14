@@ -17,13 +17,18 @@ export class AuthService {
   }
 
   public googleSingIn(): Observable<UserCredential> {
-    return this.authWithPopup(new firebase.auth.GoogleAuthProvider())
+    return this.authWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
   public authWithPopup(provider: AuthProvider) : Observable<UserCredential>{
     return from(this.afAuth.signInWithPopup(provider));
   }
 
+  public nameS() {
+    let x = this.user$.subscribe(user => user?.displayName);
+    console.log(x);
+    return x;
+  }
   public signOut(): Observable<void> {
     return from(this.afAuth.signOut());
   }

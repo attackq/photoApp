@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import {iconsSrc} from "../../icons-path";
-
 
 @Component({
   selector: 'app-account-info',

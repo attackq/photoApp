@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {AuthService} from "./services/auth/auth.service";
 import firebase from "firebase/compat/app";
-
+import { AuthGuard } from './services/auth/auth.guard';
 
 export interface Users {
   name: string;
@@ -10,6 +10,7 @@ export interface Users {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  providers: [AuthGuard],
   styleUrls: ['./app.component.css'],
   encapsulation:  ViewEncapsulation.None
 })

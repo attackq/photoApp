@@ -40,8 +40,8 @@ export class HeaderComponent implements OnInit {
   }
 
   public login(): void {
-    this.authService.googleSingIn().subscribe(() => this.router.navigate(["/account"]));
+    this.authService.googleSingIn().subscribe(
+      () => this.authService.user$.subscribe(() => this.router.navigate(["/account"])));
   }
-
 
 }

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserInfo} from "../user-info";
 import firebase from "firebase/compat/app";
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-account',
@@ -8,6 +9,8 @@ import firebase from "firebase/compat/app";
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
+
+  public user: firebase.User | null = null;
 
   public backgroundPath: string = 'assets/images/Mainbg.jpg';
 
@@ -19,9 +22,10 @@ export class AccountComponent implements OnInit {
     logo: "assets/images/8.jpg"
   }
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
   }
 
 }

@@ -13,7 +13,6 @@ import firebase from "firebase/compat/app";
 })
 export class LoginPageComponent implements OnInit {
 
-
   public bgPath: string = 'assets/images/logiwp.jpg';
 
   constructor(private authService: AuthService,
@@ -25,7 +24,8 @@ export class LoginPageComponent implements OnInit {
   }
 
   public login(): void {
-    this.authService.googleSingIn().subscribe(() => this.router.navigate(["/account"]));
+    this.authService.googleSingIn().subscribe(
+      () => this.authService.user$.subscribe(() => this.router.navigate(["/account"])));
   }
 
 }
