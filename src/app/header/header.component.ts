@@ -13,7 +13,6 @@ import firebase from "firebase/compat/app";
 })
 export class HeaderComponent implements OnInit {
 
-  @Input()
   public user: firebase.User | null = null;
 
   public icons = iconsSrc;
@@ -23,17 +22,18 @@ export class HeaderComponent implements OnInit {
     description: 'You can find pictures here!',
     followers: 10,
     following: 3,
-    logo: "assets/images/8.jpg"
+    logo: ''
   }
-
+  // assets/images/8.jpg
   constructor(private authService: AuthService,
               private router: Router) {
   }
 
   ngOnInit(): void {
+    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
   }
 
-  public toggle: boolean = true;
+  public toggle: boolean = false;
 
   public togglePopup(): void {
     this.toggle = !this.toggle;

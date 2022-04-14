@@ -7,7 +7,7 @@
         <app-search [imagePath]="icons.search"></app-search>
       </div>
       <div class="user" *ngIf="user">
-        <app-user-logo [username]='user.displayName!.slice(0,1)'
+        <app-user-logo [username]='this.user.displayName!.slice(0,1)'
                        [avatar]="this.user1.logo"
                        (click)="togglePopup()"></app-user-logo>
         <app-popup  [username]="this.user.displayName!.split(' ')[0]"
@@ -27,7 +27,3 @@
     </div>
   </div>
 </div>
-<!-- [username]="this.user1.name.split(' ')[0]" -->
-<!--[ngClass]="addColor ? 'red' : 'white'"-->
-<!--[ngClass]="loginHeader ? 'login' : 'n'"-->
-<!-- (click)="togglePopup()" -->
