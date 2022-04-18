@@ -1,10 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {iconsSrc} from "../icons-path";
 import {UserInfo} from "../user-info";
-import { AuthService } from '../services/auth/auth.service';
-import { Router } from '@angular/router';
+import {AuthService} from '../services/auth/auth.service';
+import {Router} from '@angular/router';
 import firebase from "firebase/compat/app";
-
 
 @Component({
   selector: 'app-header',
@@ -22,9 +21,9 @@ export class HeaderComponent implements OnInit {
     description: 'You can find pictures here!',
     followers: 10,
     following: 3,
-    logo: ''
+    logo: 'assets/images/8.jpg'
   }
-  // assets/images/8.jpg
+
   constructor(private authService: AuthService,
               private router: Router) {
   }

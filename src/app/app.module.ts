@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { MatDialogModule} from "@angular/material/dialog";
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './header/nav/nav.component';
@@ -29,6 +30,7 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { AuthGuard } from './services/auth/auth.guard';
+import { OutsideClickDirective } from './outside-click.directive';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { AuthGuard } from './services/auth/auth.guard';
     LoginPageComponent,
     AccountPageComponent,
     AccountPopupComponent,
+    OutsideClickDirective,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -61,6 +64,7 @@ import { AuthGuard } from './services/auth/auth.guard';
     BrowserAnimationsModule,
     ScrollingModule,
     AppRoutingModule,
+    MatDialogModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

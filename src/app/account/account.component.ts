@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UserInfo} from "../user-info";
 import firebase from "firebase/compat/app";
 import { AuthService } from '../services/auth/auth.service';
+import {MatDialog} from '@angular/material/dialog';
+import { AccountPopupComponent } from "../account-popup/account-popup.component";
 
 @Component({
   selector: 'app-account',
@@ -22,10 +24,16 @@ export class AccountComponent implements OnInit {
     logo: "assets/images/8.jpg"
   }
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
   }
 
+  openDialog() {
+    this.dialog.open(AccountPopupComponent);
+  }
 }
+
+

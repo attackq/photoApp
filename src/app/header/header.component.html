@@ -1,4 +1,4 @@
-<div class="header" [ngClass]="!user ? 'login' : 'other'">
+<div class="header" [ngClass]="!user ? 'login' : 'other'" >
   <div class="container">
     <div class="header__inner" [ngClass]="!user ? 'login' : 'other'">
       <app-head-logo [imagePath]=icons.photoLogo></app-head-logo>
@@ -6,12 +6,13 @@
       <div class="header__search" *ngIf="user">
         <app-search [imagePath]="icons.search"></app-search>
       </div>
-      <div class="user" *ngIf="user">
+      <div class="user" *ngIf="user" >
         <app-user-logo [username]='this.user.displayName!.slice(0,1)'
                        [avatar]="this.user1.logo"
                        (click)="togglePopup()"></app-user-logo>
         <app-popup  [username]="this.user.displayName!.split(' ')[0]"
-                    *ngIf="toggle"></app-popup>
+                    *ngIf="toggle"
+                    (outsideClick)="toggle = false" appOutsideClick></app-popup>
       </div>
       <div class="header__login" *ngIf="!user">
         <app-button [label]="'Log in'"
