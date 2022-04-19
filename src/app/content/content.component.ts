@@ -32,21 +32,21 @@ export class ContentComponent implements OnInit {
     },
     {
       photo: 'assets/images/closed.jpg',
-      title: 'Lines',
+      title: 'Closed',
       description: 'Look at this!',
       likes: 44,
       comments: 1
     },
     {
       photo: 'assets/images/lambo.jpg',
-      title: 'Lines',
+      title: 'Lambo',
       description: 'Look at this!',
       likes: 44,
       comments: 1
     },
     {
       photo: 'assets/images/spaceman.jpg',
-      title: 'Lines',
+      title: 'CosmoApple',
       description: 'Look at this!',
       likes: 44,
       comments: 1

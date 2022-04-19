@@ -3,7 +3,8 @@ import {UserInfo} from "../user-info";
 import firebase from "firebase/compat/app";
 import { AuthService } from '../services/auth/auth.service';
 import {MatDialog} from '@angular/material/dialog';
-import { AccountPopupComponent } from "../account-popup/account-popup.component";
+import {AccountPopupComponent} from "../account-popup/account-popup.component";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-account',
@@ -23,6 +24,8 @@ export class AccountComponent implements OnInit {
     following: 3,
     logo: "assets/images/8.jpg"
   }
+
+  public user$: Observable<firebase.User | null> = this.authService.user$;
 
   constructor(private authService: AuthService,
               public dialog: MatDialog) { }
