@@ -5,7 +5,7 @@ import {Directive, EventEmitter, HostListener, Output, ElementRef} from '@angula
 })
 export class OutsideClickDirective {
   @Output()
-  outsideClick: EventEmitter<MouseEvent> = new EventEmitter();
+  outsideClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   @HostListener('document:mousedown', ['$event'])
   onClick(event: MouseEvent): void {

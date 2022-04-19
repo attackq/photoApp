@@ -16,6 +16,7 @@ export class PostHoverComponent implements OnInit {
   public postComments: number = 0;
 
   public addColor: boolean = false;
+
   public clickEvent(): void {
     this.addColor = !this.addColor;
     if (this.addColor) {
