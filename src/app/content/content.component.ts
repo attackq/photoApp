@@ -1,5 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Post} from "../post";
+import {Post, User, UserStore} from "../post";
+import {Observable} from "rxjs";
+import {CrudService} from "../services/crud/crud.service";
+import {Collections} from "../services/crud/collections";
+import firebase from "firebase/compat";
+import DocumentReference = firebase.firestore.DocumentReference;
 
 @Component({
   selector: 'app-content',
@@ -7,6 +12,32 @@ import {Post} from "../post";
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
+
+  public fireUsers: Observable<UserStore[]> = this.crudService.handleData<UserStore>(Collections.USERS)
+
+  public addUser(): void {
+    const user: User = {
+      name: 'John',
+      surname: 'Wick'
+    }
+    this.crudService.createObject(Collections.USERS, user).subscribe((value: DocumentReference<User>) => console.log(value));
+  }
+
+  public getInfo(id: string): void {
+    this.crudService.getUserDoc<User>(Collections.USERS, id).subscribe((value: User | undefined) => console.log(value));
+  }
+
+  public delete(id: string): void {
+    this.crudService.deleteObject(Collections.USERS, id).subscribe();
+  }
+
+  public update(id: string): void {
+    const newUser: User = {
+      name: 'Tom',
+      surname: 'Jerry'
+    }
+    this.crudService.updateObject(Collections.USERS, id, newUser).subscribe();
+  }
 
   public posts: Post[] = [
     {
@@ -54,7 +85,7 @@ export class ContentComponent implements OnInit {
 
   ]
 
-  constructor() {
+  constructor(private crudService: CrudService) {
   }
 
   ngOnInit(): void {

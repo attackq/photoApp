@@ -1,3 +1,13 @@
+<button (click)="addUser()">Add</button>
+<ng-container *ngFor="let user of (fireUsers | async)">
+  <ng-container *ngIf="user.id">
+    <div class="element">{{user.id}}</div>
+    <button (click)="getInfo(user.id)">Get</button>
+    <button (click)="update(user.id)">Update</button>
+    <button (click)="delete(user.id)">Delete</button>
+  </ng-container>
+</ng-container>
+
 <div class="content__data">
   <div class="container">
     <div class="content__wrapper">
