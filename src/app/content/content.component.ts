@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Post, User, UserStore} from "../post";
+import {Post, PostStore} from "../post";
 import {Observable} from "rxjs";
 import {CrudService} from "../services/crud/crud.service";
 import {Collections} from "../services/crud/collections";
@@ -13,30 +13,36 @@ import DocumentReference = firebase.firestore.DocumentReference;
 })
 export class ContentComponent implements OnInit {
 
-  public fireUsers: Observable<UserStore[]> = this.crudService.handleData<UserStore>(Collections.USERS)
+  public firePosts: Observable<PostStore[]> = this.crudService.handleData<PostStore>(Collections.POSTS)
 
   public addUser(): void {
-    const user: User = {
-      name: 'John',
-      surname: 'Wick'
+    const post: Post = {
+      photo: 'car',
+      title: 'Builders',
+      description: 'There are two builders',
+      likes: 10,
+      comments: 1
     }
-    this.crudService.createObject(Collections.USERS, user).subscribe((value: DocumentReference<User>) => console.log(value));
+    this.crudService.createObject(Collections.POSTS, post).subscribe((value: DocumentReference<Post>) => console.log(value));
   }
 
   public getInfo(id: string): void {
-    this.crudService.getUserDoc<User>(Collections.USERS, id).subscribe((value: User | undefined) => console.log(value));
+    this.crudService.getUserDoc<Post>(Collections.POSTS, id).subscribe((value: Post | undefined) => console.log(value));
   }
 
   public delete(id: string): void {
-    this.crudService.deleteObject(Collections.USERS, id).subscribe();
+    this.crudService.deleteObject(Collections.POSTS, id).subscribe();
   }
 
   public update(id: string): void {
-    const newUser: User = {
-      name: 'Tom',
-      surname: 'Jerry'
+    const newPost: Post = {
+      photo: 'house',
+      title: 'Something',
+      description: 'There is something',
+      likes: 30,
+      comments: 2
     }
-    this.crudService.updateObject(Collections.USERS, id, newUser).subscribe();
+    this.crudService.updateObject(Collections.POSTS, id, newPost).subscribe();
   }
 
   public posts: Post[] = [
