@@ -1,9 +1,18 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {iconsSrc} from "../icons-path";
 import {UserInfo} from "../user-info";
 import {AuthService} from '../services/auth/auth.service';
 import {Router} from '@angular/router';
 import firebase from "firebase/compat/app";
+import {UserLogoComponent} from "../shared/user-logo/user-logo.component";
 
 @Component({
   selector: 'app-header',
@@ -27,7 +36,7 @@ export class HeaderComponent implements OnInit {
   }
 
   constructor(private authService: AuthService,
-              private router: Router) { }
+              private router: Router) {  }
 
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
