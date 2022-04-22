@@ -1,18 +1,10 @@
-<button (click)="addUser()">Add</button>
-<ng-container *ngFor="let post of (firePosts | async)">
-  <ng-container *ngIf="post.id">
-    <div class="element">{{post.title}} ======= {{post.id}}</div>
-    <button (click)="getInfo(post.id)">Get</button>
-    <button (click)="update(post.id)">Update</button>
-    <button (click)="delete(post.id)">Delete</button>
-  </ng-container>
-</ng-container>
-
 <div class="content__data">
   <div class="container">
     <div class="content__wrapper">
-      <ng-container *ngFor="let post of posts">
+      <ng-container *ngFor="let post of (firePosts | async)">
         <app-post class="content__column"
+                  [postDesc]="post.description"
+                  [postID]="post.id"
                   [postImg]="post.photo"
                   [postTitle]="post.title"
                   [postLikes]="post.likes"
@@ -22,6 +14,5 @@
     </div>
   </div>
 </div>
-
 
 

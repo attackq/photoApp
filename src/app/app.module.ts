@@ -30,7 +30,7 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { AuthGuard } from './services/auth/auth.guard';
-import { OutsideClickDirective } from './outside-click.directive';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -53,7 +53,6 @@ import { OutsideClickDirective } from './outside-click.directive';
     LoginPageComponent,
     AccountPageComponent,
     AccountPopupComponent,
-    OutsideClickDirective,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -64,7 +63,8 @@ import { OutsideClickDirective } from './outside-click.directive';
     BrowserAnimationsModule,
     ScrollingModule,
     AppRoutingModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

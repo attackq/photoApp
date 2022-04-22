@@ -1,5 +1,4 @@
 .content__data {
-  background: #E5E5E5;
   flex: 1 1 auto;
 }
 .content__wrapper {
@@ -14,4 +13,12 @@
   flex: 0 0 33.333%;
   margin: 5px 0;
   padding: 0 7.5px;
+}
+.add__btn {
+  margin-bottom: 20px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #333333;
 }

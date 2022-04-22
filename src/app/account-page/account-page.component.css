@@ -9,5 +9,6 @@
   flex: 1 1 auto;
 }
 .scroll__viewport {
+  background: #E5E5E5;
   flex: 1 1 auto;
 }

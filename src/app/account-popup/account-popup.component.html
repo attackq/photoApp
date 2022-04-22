@@ -5,7 +5,7 @@
         <img [src]="icons.close" alt="" mat-dialog-close>
       </div>
       <div class="modal__choose">Please, choose the photo</div>
-      <form action="#" class="choose__form">
+      <form [formGroup]="myForm" class="choose__form">
         <label class="choose__label" for="choose">Choose</label>
         <input type="file" id="choose" (change)="readUrl($event)">
         <div class="choose__img" *ngIf="isImage">
@@ -14,11 +14,17 @@
             <img [src]="icons.close" alt="" (click)="deleteUrl()">
           </div>
         </div>
-        <div class="modal__choose">Please, add the description</div>
-        <input type="text" class="choose__input" placeholder="Write the title...">
-        <textarea name="descr" class="choose__input big" placeholder="Write the description..."></textarea>
-        <label class="choose__label blue" for="publish">Publish</label>
-        <input type="submit" id="publish" mat-dialog-close>
+        <label class="modal__choose">Please, add the description</label>
+        <input [formControlName]="formControls.title" type="text" class="choose__input" placeholder="Write the title...">
+        <div class="modal_err" *ngIf="isControlValid(formControls.title)">Provide a title</div>
+        <textarea [formControlName]="formControls.description" name="descr" class="choose__input big" placeholder="Write the description..."></textarea>
+        <div class="modal_err" *ngIf="isControlValid(formControls.description)" >Provide a descr</div>
+        <app-button [label]="'Publish'"
+                    [bgColor]="'blue'"
+                    (click)="submitFrom()"
+                    mat-dialog-close
+                    class="form__btn">
+        </app-button>
       </form>
     </div>
 </div>

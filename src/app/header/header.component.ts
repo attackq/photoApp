@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  HostListener,
   OnInit,
   ViewChild,
   ViewEncapsulation
@@ -12,7 +13,6 @@ import {UserInfo} from "../user-info";
 import {AuthService} from '../services/auth/auth.service';
 import {Router} from '@angular/router';
 import firebase from "firebase/compat/app";
-import {UserLogoComponent} from "../shared/user-logo/user-logo.component";
 
 @Component({
   selector: 'app-header',
@@ -20,8 +20,16 @@ import {UserLogoComponent} from "../shared/user-logo/user-logo.component";
   styleUrls: ['./header.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('buttonElement') button: ElementRef | undefined;
+
+  @HostListener('document:mousedown', ['$event'])
+  onGlobalClick(event: MouseEvent): void {
+    if (!this.button?.nativeElement.contains(event.target)) {
+      this.toggle = false;
+    }
+  }
 
   public user: firebase.User | null = null;
 
@@ -36,7 +44,13 @@ export class HeaderComponent implements OnInit {
   }
 
   constructor(private authService: AuthService,
-              private router: Router) {  }
+              private router: Router,
+              private elementRef: ElementRef) {
+  }
+
+  ngAfterViewInit(): void {
+    console.log(this.button);
+    }
 
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);

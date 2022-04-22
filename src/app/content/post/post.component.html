@@ -1,13 +1,16 @@
-<div (mouseenter)="hoverPopup()"
+<div class="content__card" (mouseenter)="hoverPopup()"
      (mouseleave)="hoverPopup()">
-  <div class="content__card">
-    <img [src]="postImg" alt="">
-    <app-post-hover
-      *ngIf="hover"
-      [postTitle]="postTitle"
-      [postLikes]="postLikes"
-      [postComments]="postComments"
-    ></app-post-hover>
+  <img [src]="postImg" alt="">
+  <div class="content__btns" *ngIf="hover">
+    <div>{{postDesc}}</div>
+    <button (click)="update(postID)">Update</button>
+    <button (click)="delete(postID)">Delete</button>
   </div>
+  <app-post-hover
+    *ngIf="hover"
+    [postTitle]="postTitle"
+    [postLikes]="postLikes"
+    [postComments]="postComments"
+  ></app-post-hover>
 </div>
 
