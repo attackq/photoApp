@@ -1,8 +1,12 @@
 <div class="header" [ngClass]="!user ? 'login' : 'other'" >
   <div class="container">
     <div class="header__inner" [ngClass]="!user ? 'login' : 'other'">
-      <app-header-burger></app-header-burger>
-      <app-head-logo [imagePath]=icons.photoLogo [class.hide]="condition"></app-head-logo>
+      <ng-container *ngIf="user">
+        <app-header-burger ></app-header-burger>
+      </ng-container>
+      <ng-container>
+        <app-head-logo [imagePath]=icons.photoLogo [class.hide]="condition"></app-head-logo>
+      </ng-container>
       <app-nav *ngIf="user"></app-nav>
       <div class="header__search" *ngIf="user">
         <app-search [imagePath]="icons.search"></app-search>

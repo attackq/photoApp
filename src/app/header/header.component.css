@@ -12,7 +12,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
 }
 .header__inner.login {
   justify-content: space-between;
@@ -20,6 +19,7 @@
 .header__search {
   margin-right: auto;
   position: relative;
+  margin-left: 300px;
 }
 .small__search {
   display: none;
@@ -54,10 +54,24 @@
   padding: 15px 20px !important;
 }
 
+@media (max-width: 1200px) {
+  .header__search {
+    margin-left: 115px;
+    margin-right: 20px;
+  }
+}
+@media (max-width: 992px) {
+  .header__search {
+    margin-left: 50px;
+  }
+
+}
+
 @media (max-width: 768px) {
 
   .header__search {
     display: none;
+
   }
   .small__search {
     display: block;
