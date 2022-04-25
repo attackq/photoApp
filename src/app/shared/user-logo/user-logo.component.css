@@ -24,8 +24,8 @@
   border-radius: 50%;
 }
 .user__name.big {
-  width: 100px;
-  height: 100px;
+  width: 95px;
+  height: 95px;
 }
 .user__text {
   cursor: pointer;

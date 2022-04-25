@@ -5,22 +5,23 @@
   align-items: center;
   justify-content: flex-start;
   position: relative;
+
 }
 .filter__link {
   display: flex;
   align-items: center;
-  cursor: pointer;
   margin-right: 20px;
   font-weight: 400;
   font-size: 15px;
   line-height: 18px;
   text-align: center;
   color: #828282;
+  cursor: pointer;
 }
-.filter__link svg {
+.filter__link img {
   width: 24px;
   height: 24px;
-  fill: #828282;
+  filter: brightness(0) saturate(100%) invert(59%) sepia(2%) saturate(4%) hue-rotate(316deg) brightness(87%) contrast(82%);
 }
 .filter__text {
   margin-right: 7px;

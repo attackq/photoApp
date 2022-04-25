@@ -13,7 +13,7 @@ export class FilterPopupComponent implements OnInit {
 
   @Output() newItemEvent = new EventEmitter<string>();
 
-  filterLinks: FilterLinks[] = [
+  public filterLinks: FilterLinks[] = [
     {name: 'All photos'},
     {name: 'Recent'},
     {name: 'Most liked'},
@@ -25,7 +25,7 @@ export class FilterPopupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addNewItem(value: string) {
+  public addNewItem(value: string): void {
     this.newItemEvent.emit(value);
   }
 

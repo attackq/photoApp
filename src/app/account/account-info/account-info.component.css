@@ -54,3 +54,8 @@
   right: -27px;
   top: 8px;
 }
+@media (max-width: 480px) {
+  .account__follow {
+    font-size: 16px;
+  }
+}

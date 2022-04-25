@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {iconsSrc} from "../icons-path";
 
 @Component({
   selector: 'app-filter',
@@ -7,11 +8,23 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class FilterComponent implements OnInit {
 
-  linkname: string = 'All photos';
-  chagneLinkname(newlink: string) {
-    this.linkname = newlink;
-  }
+  // @ViewChild('filterLink') filterLink: ElementRef | undefined;
+  // @ViewChild('filterPopup') filterPopup: ElementRef | undefined;
+  //
+  // @HostListener('document:mousedown', ['$event'])
+  // onGlobalClick(event: MouseEvent): void {
+  //   if (!this.filterLink?.nativeElement.contains(event.target)) {
+  //     this.toggle = false;
+  //   }
+  // }
 
+  public icons = iconsSrc;
+
+  public linkName: string = 'All photos';
+
+  public changeName(newLink: string) {
+    this.linkName = newLink;
+  }
 
   toggle: boolean = false;
   togglePopup() {
@@ -24,3 +37,4 @@ export class FilterComponent implements OnInit {
   }
 
 }
+
