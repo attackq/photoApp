@@ -34,3 +34,23 @@
   letter-spacing: 0.11em;
   margin-bottom: 45px;
 }
+@media (max-width: 767px) {
+  .login__title {
+    font-size: 60px;
+    line-height: 75px;
+  }
+  .login__subtitle {
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+}
+@media (max-width: 480px) {
+  .login__title {
+    font-size: 50px;
+    line-height: 55px;
+  }
+  .login__subtitle {
+    font-size: 25px;
+    margin-bottom: 15px;
+  }
+}

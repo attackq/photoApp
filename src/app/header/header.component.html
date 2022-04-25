@@ -1,13 +1,15 @@
 <div class="header" [ngClass]="!user ? 'login' : 'other'" >
   <div class="container">
     <div class="header__inner" [ngClass]="!user ? 'login' : 'other'">
-      <ng-container *ngIf="user">
+      <ng-container *ngIf="user" class="burger">
         <app-header-burger ></app-header-burger>
       </ng-container>
       <ng-container>
         <app-head-logo [imagePath]=icons.photoLogo [class.hide]="condition"></app-head-logo>
       </ng-container>
-      <app-nav *ngIf="user"></app-nav>
+      <ng-container *ngIf="user">
+        <app-nav></app-nav>
+      </ng-container>
       <div class="header__search" *ngIf="user">
         <app-search [imagePath]="icons.search"></app-search>
       </div>
@@ -32,10 +34,10 @@
                     *ngIf="!user"
                     (click)="login()">
         </app-button>
-        <app-button [label]="'Sing up'"
-                    [bgColor]="'white'"
-                    *ngIf="!user">
-        </app-button>
+<!--        <app-button [label]="'Sing up'"-->
+<!--                    [bgColor]="'white'"-->
+<!--                    *ngIf="!user">-->
+<!--        </app-button>-->
       </div>
     </div>
   </div>
