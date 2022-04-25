@@ -27,3 +27,26 @@
   color: #FFFFFF;
   cursor: pointer;
 }
+
+@media (max-width: 992px) {
+  .header__logo {
+    margin-left: 70px;
+    margin-right: 150px;
+  }
+}
+@media (max-width: 768px) {
+  .header__logo {
+    margin-left: 30px;
+    margin-right: 140px;
+  }
+}
+@media (max-width: 480px) {
+  .header__logo {
+    margin-right: 15px;
+
+  }
+  .logo__img {
+    margin-right: 5px;
+  }
+
+}

@@ -1,10 +1,18 @@
 <div class="header" [ngClass]="!user ? 'login' : 'other'" >
   <div class="container">
     <div class="header__inner" [ngClass]="!user ? 'login' : 'other'">
-      <app-head-logo [imagePath]=icons.photoLogo></app-head-logo>
+      <app-header-burger></app-header-burger>
+      <app-head-logo [imagePath]=icons.photoLogo [class.hide]="condition"></app-head-logo>
       <app-nav *ngIf="user"></app-nav>
       <div class="header__search" *ngIf="user">
         <app-search [imagePath]="icons.search"></app-search>
+      </div>
+      <div class="small__search" *ngIf="user" (click)="condition = !condition">
+        <img [src]="icons.search" alt="" *ngIf="!condition">
+        <img [src]="icons.close" alt="" *ngIf="condition">
+      </div>
+      <div class="search" [class.active]="condition" *ngIf="user">
+        <app-search [imagePath]="icons.search" [size]="'small'"></app-search>
       </div>
       <div class="user" *ngIf="user" #buttonElement>
         <app-user-logo [username]='this.user.displayName!.slice(0,1)'

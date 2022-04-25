@@ -10,6 +10,9 @@ export class SearchComponent implements OnInit {
   @Input()
   public imagePath: string = '';
 
+  @Input()
+  public size: string = '';
+
   constructor() { }
 
   ngOnInit(): void {

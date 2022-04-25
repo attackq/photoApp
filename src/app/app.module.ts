@@ -31,6 +31,7 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { AuthGuard } from './services/auth/auth.guard';
 import {ReactiveFormsModule} from "@angular/forms";
+import { HeaderBurgerComponent } from './header/header-burger/header-burger.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     LoginPageComponent,
     AccountPageComponent,
     AccountPopupComponent,
+    HeaderBurgerComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

@@ -1,6 +1,6 @@
-<form action="/search-btn" class="search__form">
-  <input type="text" class="search__input" placeholder="Photos, people..." name="search">
-  <label class="search__logo">
+<form action="/search-btn" class="search__form ">
+  <input type="text" class="search__input {{size}}" placeholder="Photos, people..." name="search">
+  <label class="search__logo {{size}}">
     <img [src]="imagePath" alt="">
     <input type="submit" (submit)="$event.preventDefault()">
   </label>

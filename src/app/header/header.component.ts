@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -31,6 +30,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     }
   }
 
+  public condition: boolean = false;
+
   public user: firebase.User | null = null;
 
   public icons = iconsSrc;
@@ -44,8 +45,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   constructor(private authService: AuthService,
-              private router: Router,
-              private elementRef: ElementRef) {
+              private router: Router) {
   }
 
   ngAfterViewInit(): void {

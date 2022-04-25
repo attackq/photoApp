@@ -1,6 +1,6 @@
 .header__nav {
   display: flex;
-  margin-right: 205px;
+  margin-right: 250px;
 }
 .nav__link {
   font-weight: 500;
@@ -24,3 +24,20 @@
   background: #8FFF00;
 }
 
+@media (max-width: 1200px) {
+  .header__nav {
+    margin-right: 125px;
+  }
+}
+@media (max-width: 992px) {
+  .header__nav {
+    display: none;
+    margin-right: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header__nav {
+    margin-right: 50px;
+  }
+}
