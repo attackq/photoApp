@@ -43,7 +43,7 @@ export class FilterComponent implements OnInit {
   public filterLinks: FilterLinks[] = [
     {name: 'All photos', viewValue: 'All photos'},
     {name: 'Recent', viewValue: 'Recent'},
-    {name: 'Most liked', viewValue: 'liked'},
+    {name: 'Most liked', viewValue: 'Most liked'},
     {name: 'Most commented', viewValue: 'Most commented'}
   ]
 

@@ -18,3 +18,11 @@
   height: 24px !important;
   font-family: 'Montserrat', sans-serif !important;
 }
+.mat-icon-button {
+  width: 30px !important;
+  height: 30px !important;
+  line-height: 30px !important;
+}
+.mat-icon {
+  color: #ffffff !important;
+}
