@@ -52,11 +52,11 @@
 }
 
 .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
-  background: #27AE60 !important;
+  background: #27AE60;
 }
 
 .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
-  color: #27AE60 !important;
+  color: #27AE60;
 }
 
 .mat-form-field.mat-focused .mat-form-field-ripple {

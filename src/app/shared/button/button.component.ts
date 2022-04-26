@@ -10,6 +10,8 @@ export class ButtonComponent implements OnInit {
   public label: string = '';
   @Input()
   public bgColor: string = '';
+  @Input()
+  public cond: boolean = false;
 
   constructor() { }
 

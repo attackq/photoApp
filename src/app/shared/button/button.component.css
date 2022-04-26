@@ -19,8 +19,11 @@
 
 .button.blue {
   background: #2D9CDB;
+  transition: background-color 0.5s linear;
 }
-
+.button.blue:disabled {
+  background: #8daacc;
+}
 .button.white {
   padding: 8px 15px;
   font-weight: 500;

@@ -21,6 +21,7 @@
         <div class="modal_err" *ngIf="isControlValid(formControls.description)" >Provide a descr</div>
         <app-button [label]="'Publish'"
                     [bgColor]="'blue'"
+                    [cond]="myForm.invalid"
                     (click)="submitFrom()"
                     mat-dialog-close
                     class="form__btn">

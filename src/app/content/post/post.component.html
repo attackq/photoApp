@@ -1,12 +1,12 @@
-<div class="content__card" >
+<div class="content__card">
   <img [src]="postImg" alt="">
   <div class="content__btns">
     <button mat-icon-button [matMenuTriggerFor]="beforeMenu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
-<!--    <button mat-button [matMenuTriggerFor]="beforeMenu">...</button>-->
     <mat-menu #beforeMenu="matMenu" xPosition="before">
       <button mat-menu-item (click)="update(postID)">Update</button>
+      <button mat-menu-item>Edit</button>
       <button mat-menu-item (click)="delete(postID)">Delete</button>
     </mat-menu>
   </div>
@@ -16,6 +16,4 @@
     [postComments]="postComments"
   ></app-post-hover>
 </div>
-<!--(mouseenter)="hoverPopup()"-->
-<!--(mouseleave)="hoverPopup()"-->
-<!--*ngIf="hover"-->
+
