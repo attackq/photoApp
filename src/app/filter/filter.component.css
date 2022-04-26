@@ -1,11 +1,9 @@
 .filter {
-  height: 35px;
   background: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   position: relative;
-
 }
 .filter__link {
   display: flex;
@@ -26,4 +24,17 @@
 .filter__text {
   margin-right: 7px;
 }
-
+.mat-form-field {
+  font-family: 'Montserrat', sans-serif !important;
+}
+.mat-option {
+  height: 30px !important;
+  line-height: 30px !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+.mat-select {
+  font-family: 'Montserrat', sans-serif !important;
+}
+.mat-form-field-infix {
+  width: 100% !important;
+}

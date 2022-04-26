@@ -32,6 +32,11 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { AuthGuard } from './services/auth/auth.guard';
 import {ReactiveFormsModule} from "@angular/forms";
 import { HeaderBurgerComponent } from './header/header-burger/header-burger.component';
+import {MatIconModule} from "@angular/material/icon";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -66,7 +71,12 @@ import { HeaderBurgerComponent } from './header/header-burger/header-burger.comp
     ScrollingModule,
     AppRoutingModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

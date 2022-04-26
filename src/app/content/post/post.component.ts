@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Post} from "../../post";
 import {Collections} from "../../services/crud/collections";
 import {CrudService} from "../../services/crud/crud.service";
@@ -6,7 +6,8 @@ import {CrudService} from "../../services/crud/crud.service";
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.css']
+  styleUrls: ['./post.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PostComponent implements OnInit {
 

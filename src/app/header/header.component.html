@@ -1,9 +1,6 @@
 <div class="header" [ngClass]="!user ? 'login' : 'other'" >
   <div class="container">
     <div class="header__inner" [ngClass]="!user ? 'login' : 'other'">
-      <ng-container *ngIf="user" class="burger">
-        <app-header-burger ></app-header-burger>
-      </ng-container>
       <ng-container>
         <app-head-logo [imagePath]=icons.photoLogo [class.hide]="condition"></app-head-logo>
       </ng-container>
@@ -40,5 +37,9 @@
 <!--        </app-button>-->
       </div>
     </div>
+    <ng-container *ngIf="user" class="burger">
+      <app-header-burger ></app-header-burger>
+    </ng-container>
   </div>
 </div>
+
