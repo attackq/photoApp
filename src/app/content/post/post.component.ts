@@ -1,9 +1,9 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {Post, PostStore} from "../../post";
 import {Collections} from "../../services/crud/collections";
 import {CrudService} from "../../services/crud/crud.service";
 import {UploadService} from "../../services/crud/upload.service";
-import {Observable} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {EditPopupComponent} from "./edit-popup/edit-popup.component";
 
 @Component({
   selector: 'app-post',
@@ -12,8 +12,6 @@ import {Observable} from "rxjs";
   encapsulation: ViewEncapsulation.None
 })
 export class PostComponent implements OnInit {
-
-  public firePosts: Observable<PostStore[]> = this.crudService.handleData<PostStore>(Collections.POSTS);
 
   @Input()
   public postImg: string | null = '';
@@ -33,22 +31,16 @@ export class PostComponent implements OnInit {
     this.uploadService.deleteFile(this.postImg!);
   }
 
-  public update(id: string): void {
-    const newPost: Post = {
-      photo: 'https://ps.w.org/tiny-compress-images/assets/icon-256x256.png?rev=1088385',
-      title: 'Something',
-      description: 'There is something',
-      likes: 30,
-      comments: 2
-    }
-    this.crudService.updateObject(Collections.POSTS, id, newPost).subscribe();
-  }
-
   constructor(private crudService: CrudService,
-              private uploadService: UploadService) {
+              private uploadService: UploadService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
+  }
+
+  public openDialog() {
+    this.dialog.open(EditPopupComponent);
   }
 
 }

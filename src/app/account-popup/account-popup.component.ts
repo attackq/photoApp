@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {iconsSrc} from "../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {PostControls} from "../controls";
@@ -11,7 +11,8 @@ import {combineLatest, takeWhile} from "rxjs";
 @Component({
   selector: 'app-account-popup',
   templateUrl: './account-popup.component.html',
-  styleUrls: ['./account-popup.component.css']
+  styleUrls: ['./account-popup.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AccountPopupComponent implements OnInit {
 

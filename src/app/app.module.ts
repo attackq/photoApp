@@ -37,6 +37,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
+import { EditPopupComponent } from './content/post/edit-popup/edit-popup.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {MatSelectModule} from "@angular/material/select";
     AccountPageComponent,
     AccountPopupComponent,
     HeaderBurgerComponent,
+    EditPopupComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

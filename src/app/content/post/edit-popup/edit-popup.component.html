@@ -1,0 +1,27 @@
+<div mat-dialog-content>
+  <div class="modal__content">
+    <div class="modal__title">
+      <div class="modal__text">Edit post</div>
+      <img [src]="icons.close" alt="" mat-dialog-close>
+    </div>
+    <ng-container *ngFor="let post of (firePosts | async) ">
+      <form [formGroup]="myForm" class="choose__form">
+        <label for="title" class="modal__choose">Please, edit the title</label>
+        <input id="title" [formControlName]="formControls.title" type="text" class="choose__input"
+               placeholder="Write the title...">
+        <div class="modal_err" *ngIf="isControlValid(formControls.title)">Provide a title</div>
+        <label for="title" class="modal__choose">Please, edit the description</label>
+        <textarea [formControlName]="formControls.description" name="description" class="choose__input big"
+                  placeholder="Write the description..."></textarea>
+        <div class="modal_err" *ngIf="isControlValid(formControls.description)">Provide a description</div>
+        <app-button [label]="'Change'"
+                    [bgColor]="'blue'"
+                    [cond]="myForm.invalid"
+                    (click)="updateDescription(post.id)"
+                    mat-dialog-close
+                    class="form__btn">
+        </app-button>
+      </form>
+    </ng-container>
+  </div>
+</div>

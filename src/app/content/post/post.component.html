@@ -5,8 +5,7 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button mat-menu-item (click)="update(postID)">Update</button>
-      <button mat-menu-item>Edit</button>
+      <button mat-menu-item (click)="openDialog()">Edit</button>
       <button mat-menu-item (click)="delete(postID)">Delete</button>
     </mat-menu>
   </div>
@@ -16,4 +15,3 @@
     [postComments]="postComments"
   ></app-post-hover>
 </div>
-

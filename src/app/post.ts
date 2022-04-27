@@ -6,6 +6,11 @@ export interface Post {
   comments: number
 }
 
+export interface EditDescription {
+  title: string,
+  description: string
+}
+
 export type ID = {
   id: string;
 }
