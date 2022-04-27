@@ -1,5 +1,5 @@
 export interface Post {
-  photo: string,
+  photo: string | null,
   title: string,
   description: string,
   likes: number,

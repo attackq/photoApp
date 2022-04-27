@@ -1,7 +1,9 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {Post} from "../../post";
+import {Post, PostStore} from "../../post";
 import {Collections} from "../../services/crud/collections";
 import {CrudService} from "../../services/crud/crud.service";
+import {UploadService} from "../../services/crud/upload.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-post',
@@ -11,8 +13,10 @@ import {CrudService} from "../../services/crud/crud.service";
 })
 export class PostComponent implements OnInit {
 
+  public firePosts: Observable<PostStore[]> = this.crudService.handleData<PostStore>(Collections.POSTS);
+
   @Input()
-  public postImg: string = '';
+  public postImg: string | null = '';
   @Input()
   public postTitle: string = '';
   @Input()
@@ -24,14 +28,9 @@ export class PostComponent implements OnInit {
   @Input()
   public postDesc: string = '';
 
-  public hover:boolean = false;
-
-  public hoverPopup(): void {
-    this.hover = !this.hover;
-  }
-
   public delete(id: string): void {
     this.crudService.deleteObject(Collections.POSTS, id).subscribe();
+    this.uploadService.deleteFile(this.postImg!);
   }
 
   public update(id: string): void {
@@ -45,7 +44,9 @@ export class PostComponent implements OnInit {
     this.crudService.updateObject(Collections.POSTS, id, newPost).subscribe();
   }
 
-  constructor(private crudService: CrudService) { }
+  constructor(private crudService: CrudService,
+              private uploadService: UploadService) {
+  }
 
   ngOnInit(): void {
   }

@@ -80,7 +80,9 @@
   cursor: pointer;
   background: #27AE60;
 }
-
+.choose__progress {
+  margin-top: 10px;
+}
 input[type='file'],
 input[type='submit'] {
   display: none;
