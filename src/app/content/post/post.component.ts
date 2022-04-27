@@ -39,8 +39,9 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public openDialog() {
-    this.dialog.open(EditPopupComponent);
+  public openDialog(id: string) {
+    let editPopup = this.dialog.open(EditPopupComponent);
+    editPopup.componentInstance.postID = id;
   }
 
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, InjectionToken, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {iconsSrc} from "../../../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {PostControls} from "../../../controls";
@@ -6,6 +6,9 @@ import {CrudService} from "../../../services/crud/crud.service";
 import {Observable} from "rxjs";
 import {EditDescription, PostStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
+import {MatDialog} from "@angular/material/dialog";
+import firebase from "firebase/compat";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-edit-popup',
@@ -14,9 +17,11 @@ import {Collections} from "../../../services/crud/collections";
   encapsulation: ViewEncapsulation.None
 
 })
+
 export class EditPopupComponent implements OnInit {
 
-  public firePosts: Observable<PostStore[]> = this.crudService.handleData<PostStore>(Collections.POSTS);
+  @Input()
+  public postID: string = '';
 
   public icons = iconsSrc;
 
@@ -24,7 +29,8 @@ export class EditPopupComponent implements OnInit {
 
   public formControls: typeof PostControls = PostControls;
 
-  constructor(private crudService: CrudService) { }
+  constructor(private crudService: CrudService,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.myForm.addControl(PostControls.title, new FormControl('', Validators.required));

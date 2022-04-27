@@ -5,7 +5,7 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button mat-menu-item (click)="openDialog()">Edit</button>
+      <button mat-menu-item (click)="openDialog(postID)">Edit</button>
       <button mat-menu-item (click)="delete(postID)">Delete</button>
     </mat-menu>
   </div>
