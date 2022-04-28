@@ -3,5 +3,7 @@ export interface UserInfo {
   description: string,
   followers: number,
   following: number,
-  logo: string
+  logo: string,
+  ID: string | undefined;
+  // background: string
 }

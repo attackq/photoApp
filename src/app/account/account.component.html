@@ -2,9 +2,7 @@
      [ngStyle]="{'background-image': 'url(' + backgroundPath + ')'}">
   <div class="container">
     <div class="account__wrapper">
-      <app-user-logo [username]='this.user?.displayName!.slice(0,1)'
-                     [size]="'big'"
-                     [avatar]="this.user1.logo">
+      <app-user-logo [size]="'big'">
       </app-user-logo>
       <app-account-info [username]="this.user?.displayName!"
                         [followers]="this.user1.followers"
@@ -17,5 +15,8 @@
                 [bgColor]="'green'"
                 (click)="openDialog()">
     </app-button>
+<!--    <div>{{this.userId}}</div>-->
   </div>
 </div>
+<!--[avatar]="this.user?.photoURL!"-->
+<!--[username]='this.user?.displayName!.slice(0,1)'-->

@@ -17,6 +17,7 @@ import {combineLatest, takeWhile} from "rxjs";
 export class AccountPopupComponent implements OnInit {
 
   public imageSrc: string | null = '';
+  public img: string | ArrayBuffer | null = '';
 
   public progress: string | undefined = '';
 
@@ -70,8 +71,12 @@ export class AccountPopupComponent implements OnInit {
   public onFileSelected(event: Event): void {
     if (event) {
       const eventTarget = (<HTMLInputElement>event?.target);
+      event.preventDefault();
       if (eventTarget && eventTarget.files) {
         const file: File = eventTarget.files[0];
+        const reader = new FileReader();
+        reader.onload = e => this.img = reader.result;
+        reader.readAsDataURL(file);
         combineLatest(this.uploadService.uploadFileAndGetMetadata('posts', file))
           .pipe(
             takeWhile(([, link]) => {
@@ -91,5 +96,6 @@ export class AccountPopupComponent implements OnInit {
     this.uploadService.deleteFile(this.imageSrc!);
     this.progress = '0';
     this.isImage = false;
+    this.img = '';
   }
 }

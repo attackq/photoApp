@@ -10,7 +10,7 @@
       <input type="file" id="choose" (change)="onFileSelected($event)" [formControlName]="formControls.img">
       <progress class="choose__progress" max="100" [value]="progress" *ngIf="isImage"></progress>
       <div class="choose__img" *ngIf="this.progress === '100'">
-        <img [src]="imageSrc" alt="choose your pic">
+        <img [src]="img" alt="choose your pic">
         <div class="choose__close">
           <img [src]="icons.close" alt="" (click)="deleteUrl()">
         </div>

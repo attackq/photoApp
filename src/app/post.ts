@@ -6,6 +6,13 @@ export interface Post {
   comments: number
 }
 
+export interface User {
+  email: string,
+  name: string,
+  img: string,
+  id: string
+ }
+
 export interface EditDescription {
   title: string,
   description: string
@@ -16,3 +23,5 @@ export type ID = {
 }
 
 export type PostStore = Post & ID;
+export type UserStore = User & ID;
+

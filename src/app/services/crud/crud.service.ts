@@ -38,6 +38,7 @@ export class CrudService {
       );
   }
 
+
   public createObject<T>(collectionName: string, object: T): Observable<DocumentReference<T>> {
     return (from(this.angularFirestore
       .collection(collectionName)

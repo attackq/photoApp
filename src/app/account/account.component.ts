@@ -17,17 +17,6 @@ import DocumentReference = firebase.firestore.DocumentReference;
 })
 export class AccountComponent implements OnInit {
 
-  // public addPost(): void {
-  //   const post: Post = {
-  //     photo: 'https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/Zugpsitze_mountain.jpg?crop=0,176,3008,1654&wid=4000&hei=2200&scl=0.752',
-  //     title: 'Builders',
-  //     description: 'There are two builders',
-  //     likes: 10,
-  //     comments: 1
-  //   }
-  //   this.crudService.createObject(Collections.POSTS, post).subscribe((value: DocumentReference<Post>) => console.log(value));
-  // }
-
   public user: firebase.User | null = null;
 
   public backgroundPath: string = 'assets/images/Mainbg.jpg';
@@ -37,10 +26,9 @@ export class AccountComponent implements OnInit {
     description: 'You can find pictures here!',
     followers: 10,
     following: 3,
-    logo: "assets/images/8.jpg"
+    logo: "assets/images/8.jpg",
+    ID: 'ssssss'
   }
-
-  public user$: Observable<firebase.User | null> = this.authService.user$;
 
   constructor(private authService: AuthService,
               public dialog: MatDialog,
@@ -54,6 +42,7 @@ export class AccountComponent implements OnInit {
   openDialog() {
     this.dialog.open(AccountPopupComponent);
   }
+
 }
 
 

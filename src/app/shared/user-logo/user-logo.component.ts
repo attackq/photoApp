@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import firebase from "firebase/compat";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-user-logo',
@@ -6,16 +8,24 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./user-logo.component.css']
 })
 export class UserLogoComponent implements OnInit {
-  @Input()
-  public username: string = '';
+
   @Input()
   public size: string = '';
-  @Input()
-  avatar: string = ''
 
-  constructor() { }
+  public user: firebase.User | null = null;
 
-  ngOnInit(): void {
+  public toggle: boolean = false;
+
+  public photoUrl: string;
+
+  constructor(private authService: AuthService) {
   }
 
+  ngOnInit(): void {
+    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
+  }
+
+  getPhotoUrl() {
+    return this.photoUrl = this.user?.photoURL!;
+  }
 }

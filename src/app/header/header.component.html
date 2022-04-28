@@ -1,4 +1,4 @@
-<div class="header" [ngClass]="!user ? 'login' : 'other'" >
+<div class="header" [ngClass]="!user ? 'login' : 'other'">
   <div class="container">
     <div class="header__inner" [ngClass]="!user ? 'login' : 'other'">
       <ng-container>
@@ -18,8 +18,7 @@
         <app-search [imagePath]="icons.search" [size]="'small'"></app-search>
       </div>
       <div class="user" *ngIf="user" #buttonElement>
-        <app-user-logo [username]='this.user.displayName!.slice(0,1)'
-                       [avatar]="this.user1.logo"
+        <app-user-logo
                        (click)="togglePopup()"></app-user-logo>
         <app-popup [username]="this.user.displayName!.split(' ')[0]"
                    *ngIf="toggle"
@@ -37,9 +36,12 @@
 <!--        </app-button>-->
       </div>
     </div>
+<!--    <div>{{this.user?.uid}}</div>-->
     <ng-container *ngIf="user" class="burger">
       <app-header-burger ></app-header-burger>
     </ng-container>
   </div>
 </div>
 
+<!--[avatar]="this.user?.photoURL!"-->
+<!--[username]='this.user.displayName!.slice(0,1)'-->

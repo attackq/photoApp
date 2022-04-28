@@ -1,14 +1,11 @@
-import {Component, InjectionToken, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {iconsSrc} from "../../../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {PostControls} from "../../../controls";
 import {CrudService} from "../../../services/crud/crud.service";
-import {Observable} from "rxjs";
-import {EditDescription, PostStore} from "../../../post";
+import {EditDescription} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
 import {MatDialog} from "@angular/material/dialog";
-import firebase from "firebase/compat";
-import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-edit-popup',

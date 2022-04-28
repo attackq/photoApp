@@ -12,6 +12,11 @@ import {UserInfo} from "../user-info";
 import {AuthService} from '../services/auth/auth.service';
 import {Router} from '@angular/router';
 import firebase from "firebase/compat/app";
+import {Collections} from "../services/crud/collections";
+import {DocumentReference} from "@angular/fire/compat/firestore";
+import {CrudService} from "../services/crud/crud.service";
+import {filter, switchMap} from "rxjs";
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-header',
@@ -36,21 +41,24 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   public icons = iconsSrc;
 
-  public user1: UserInfo = {
-    name: 'Walter Cobalt',
-    description: 'You can find pictures here!',
-    followers: 10,
-    following: 3,
-    logo: 'assets/images/8.jpg'
-  }
+  public userID = this.user?.uid!;
+
+  // public user1: UserInfo = {
+  //   name: 'Walter Cobalt',
+  //   description: 'You can find pictures here!',
+  //   followers: 10,
+  //   following: 3,
+  //   logo: 'assets/images/8.jpg'
+  // }
 
   constructor(private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private crudService: CrudService) {
   }
 
   ngAfterViewInit(): void {
     console.log(this.button);
-    }
+  }
 
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);

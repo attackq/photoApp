@@ -1,6 +1,11 @@
 <div class="user__logo {{size}}" >
   <div class="user__name {{size}}">
-    <img [src]="avatar" alt="" *ngIf="avatar !== ''">
-    <div class="user__text" *ngIf="avatar === ''">{{username}}</div>
+    <img [src]=getPhotoUrl() *ngIf="photoUrl !== '' && !toggle">
+    <div class="user__text" *ngIf="photoUrl === ''">{{this.user?.displayName!.slice(0,1)}}</div>
+<!--    <div class="user__c" *ngIf="toggle && size">hello</div>-->
   </div>
 </div>
+<!--(mouseleave)="toggle = false"-->
+
+<!---->
+<!---->
