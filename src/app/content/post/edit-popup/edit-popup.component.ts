@@ -5,7 +5,6 @@ import {PostControls} from "../../../controls";
 import {CrudService} from "../../../services/crud/crud.service";
 import {EditDescription} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
-import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-edit-popup',
@@ -26,8 +25,7 @@ export class EditPopupComponent implements OnInit {
 
   public formControls: typeof PostControls = PostControls;
 
-  constructor(private crudService: CrudService,
-              private dialog: MatDialog) { }
+  constructor(private crudService: CrudService) { }
 
   ngOnInit(): void {
     this.myForm.addControl(PostControls.title, new FormControl('', Validators.required));
