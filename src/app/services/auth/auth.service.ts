@@ -17,52 +17,43 @@ export class AuthService {
 
   public user$: ReplaySubject<firebase.User | null> = new ReplaySubject<firebase.User | null>(1);
 
-  public userStore: Observable<UserStore[]> = this.crudService.handleData<UserStore>(Collections.USERS);
+  public userGmail: User = {
+    email: 'rastpk@gmail.com',
+    name: 'ge',
+    img: 'na',
+    id: 'sss'
+  }
+  public userRambler: User = {
+    email: 'rastpk@rambler.ru',
+    name: 'ge',
+    img: 'na',
+    id: 'sss'
+  }
 
   constructor(private afAuth: AngularFireAuth,
               private crudService: CrudService) {
     this.afAuth.authState.pipe(
       tap((value: firebase.User | null) => this.user$.next(value)),
       filter((value: firebase.User | null) => !!value),
-      switchMap((value: firebase.User | null) => {
-        return this.userStore.pipe(
-          map((users: UserStore[]) => {
-            users.forEach((user: UserStore) => {
-              if (user.email !== value?.email) {
-                const newUser: User = {
-                  email: value?.email!,
-                  name: value?.displayName!,
-                  img: '111111111',
-                  id: value?.uid!
-                }
-                console.log(newUser);
-                return newUser
-              } else {
-                return null;
+      switchMap((userFromLogin: firebase.User | null) => {
+        return this.crudService.handleMailData(Collections.USERS, userFromLogin?.email!).pipe(
+          map(userFromStore => {
+            if (userFromStore.length !== 0) {
+              return null;
+            } else {
+              const user: User = {
+                email: userFromLogin?.email!,
+                name: userFromLogin?.displayName!,
+                img: userFromLogin?.photoURL!,
+                id: userFromLogin?.uid!
               }
-            })
+              return user;
+            }
           }),
-          switchMap(value => this.crudService.createObject(Collections.USERS, value)));
+          filter((value: User | null) => !!value),
+          switchMap(newUser => this.crudService.createObject(Collections.USERS, newUser)))
       })).subscribe()
   }
-
-
-//   this.afAuth.authState.pipe(
-//     tap((value: firebase.User | null) => this.user$.next(value)),
-//   filter((value: firebase.User | null) => !!value),
-//   switchMap((userFromSLogin: firebase.User | null) => {
-//   return  this.userStore(тут делаешь запрос с кверей, то есть проверяешь есть ли пользователь с таким эмейломм).map((
-//   userFromStore) => if(userFromStore) {
-//     return null;
-//   } else {
-//   Если такой юзер в сторе уже есть, возвращаем нал, так как нам не интересно, если такого юзера нету, то возвращаем юзера с логина
-//   return of(userFromSLogin)
-// }
-// ))
-// }),
-// filter((value: firebase.User | null) => !!value)
-// switchMap((value: firebase.User | null) => this.crudService.createObject(Collections.USERS, user)))
-// ).subscribe();
 
   public googleSingIn(): Observable<UserCredential> {
     return this.authWithPopup(new firebase.auth.GoogleAuthProvider());
