@@ -17,6 +17,7 @@ import {combineLatest, takeWhile} from "rxjs";
 export class AccountPopupComponent implements OnInit {
 
   public imageSrc: string | null = '';
+
   public img: string | ArrayBuffer | null = '';
 
   public progress: string | undefined = '';
