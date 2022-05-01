@@ -18,8 +18,7 @@
         <app-search [imagePath]="icons.search" [size]="'small'"></app-search>
       </div>
       <div class="user" *ngIf="user" #buttonElement>
-        <app-user-logo
-                       (click)="togglePopup()"></app-user-logo>
+        <app-user-logo (click)="togglePopup()"></app-user-logo>
         <app-popup [username]="this.user.displayName!.split(' ')[0]"
                    *ngIf="toggle"
                    (click)="onGlobalClick($event)"></app-popup>
@@ -36,7 +35,6 @@
 <!--        </app-button>-->
       </div>
     </div>
-<!--    <div>{{this.user?.uid}}</div>-->
     <ng-container *ngIf="user" class="burger">
       <app-header-burger ></app-header-burger>
     </ng-container>

@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
 import {iconsSrc} from "../../icons-path";
+import {MatDialog} from "@angular/material/dialog";
+import {EditPopupComponent} from "../../content/post/edit-popup/edit-popup.component";
+import {EditUserComponent} from "./edit-user/edit-user.component";
 
 @Component({
   selector: 'app-account-info',
@@ -17,10 +19,17 @@ export class AccountInfoComponent implements OnInit {
   public following: number = 0;
   @Input()
   public description: string = '';
+  @Input()
+  public firestoreID: string = '';
 
   icons = iconsSrc;
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
+
+  public openDialog(id: string) {
+    let editPopup = this.dialog.open(EditUserComponent);
+    editPopup.componentInstance.firestoreID = id;
+  }
 
   ngOnInit(): void {
   }

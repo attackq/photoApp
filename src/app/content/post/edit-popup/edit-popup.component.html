@@ -4,7 +4,7 @@
       <div class="modal__text">Edit post</div>
       <img [src]="icons.close" alt="" mat-dialog-close>
     </div>
-    <form [formGroup]="myForm" class="choose__form">
+    <form [formGroup]="editPostForm" class="choose__form">
       <label for="title" class="modal__choose">Please, edit the title</label>
       <input id="title" [formControlName]="formControls.title" type="text" class="choose__input"
              placeholder="Write the title...">
@@ -15,7 +15,7 @@
       <div class="modal_err" *ngIf="isControlValid(formControls.description)">Provide a description</div>
       <app-button [label]="'Change'"
                   [bgColor]="'blue'"
-                  [cond]="myForm.invalid"
+                  [cond]="editPostForm.invalid"
                   (click)="updateDescription(postID)"
                   mat-dialog-close
                   class="form__btn">

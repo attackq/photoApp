@@ -1,5 +1,7 @@
-export enum PostControls {
+export enum FormControls {
   img = 'img',
   title= 'title',
-  description = 'description'
+  description = 'description',
+  logo = 'logo',
+  background = 'background'
 }

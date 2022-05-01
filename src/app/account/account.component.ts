@@ -5,10 +5,11 @@ import {AuthService} from '../services/auth/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {AccountPopupComponent} from "../account-popup/account-popup.component";
 import {Observable} from "rxjs";
-import {Post, PostStore} from "../post";
+import {Post, PostStore, UserStore} from "../post";
 import {Collections} from "../services/crud/collections";
 import {CrudService} from "../services/crud/crud.service";
 import DocumentReference = firebase.firestore.DocumentReference;
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-account',
@@ -19,16 +20,7 @@ export class AccountComponent implements OnInit {
 
   public user: firebase.User | null = null;
 
-  public backgroundPath: string = 'assets/images/Mainbg.jpg';
-
-  public user1: UserInfo = {
-    name: 'Walter Cobalt',
-    description: 'You can find pictures here!',
-    followers: 10,
-    following: 3,
-    logo: "assets/images/8.jpg",
-    ID: 'ssssss'
-  }
+  public fireUsers: Observable<UserStore[]>;
 
   constructor(private authService: AuthService,
               public dialog: MatDialog,
@@ -37,6 +29,7 @@ export class AccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
+    this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, this.user?.email!);
   }
 
   openDialog() {

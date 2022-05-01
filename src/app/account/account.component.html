@@ -1,13 +1,14 @@
-<div class="account"
-     [ngStyle]="{'background-image': 'url(' + backgroundPath + ')'}">
+<div class="account" *ngFor="let fireUser of (fireUsers | async)"
+     [ngStyle]="{'background-image': 'url(' + fireUser.background + ')'}">
   <div class="container">
     <div class="account__wrapper">
       <app-user-logo [size]="'big'">
       </app-user-logo>
-      <app-account-info [username]="this.user?.displayName!"
-                        [followers]="this.user1.followers"
-                        [following]="this.user1.following"
-                        [description]="this.user1.description">
+      <app-account-info [username]="fireUser.name"
+                        [followers]="fireUser.followers.length"
+                        [following]="fireUser.following.length"
+                        [description]="fireUser.status"
+                        [firestoreID]="fireUser.id">
       </app-account-info>
     </div>
     <app-button class="account__btn"
@@ -15,7 +16,6 @@
                 [bgColor]="'green'"
                 (click)="openDialog()">
     </app-button>
-<!--    <div>{{this.userId}}</div>-->
   </div>
 </div>
 <!--[avatar]="this.user?.photoURL!"-->

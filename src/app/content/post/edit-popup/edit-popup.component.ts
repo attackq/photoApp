@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {iconsSrc} from "../../../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
-import {PostControls} from "../../../controls";
+import {FormControls} from "../../../controls";
 import {CrudService} from "../../../services/crud/crud.service";
 import {EditDescription} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
@@ -21,19 +21,19 @@ export class EditPopupComponent implements OnInit {
 
   public icons = iconsSrc;
 
-  public myForm: FormGroup = new FormGroup({});
+  public editPostForm: FormGroup = new FormGroup({});
 
-  public formControls: typeof PostControls = PostControls;
+  public formControls: typeof FormControls = FormControls;
 
   constructor(private crudService: CrudService) { }
 
   ngOnInit(): void {
-    this.myForm.addControl(PostControls.title, new FormControl('', Validators.required));
-    this.myForm.addControl(PostControls.description, new FormControl('', Validators.required));
+    this.editPostForm.addControl(FormControls.title, new FormControl('', Validators.required));
+    this.editPostForm.addControl(FormControls.description, new FormControl('', Validators.required));
   }
 
   public isControlValid(controlName: string): boolean {
-    const control: AbstractControl | undefined = this.myForm?.controls[controlName];
+    const control: AbstractControl | undefined = this.editPostForm?.controls[controlName];
     if (control) {
       return control.invalid && (control.dirty || control.touched);
     } else {
@@ -43,8 +43,8 @@ export class EditPopupComponent implements OnInit {
 
   public updateDescription(id: string): void {
     const newDescription: EditDescription = {
-      title: this.myForm.controls[PostControls.title].value,
-      description: this.myForm.controls[PostControls.description].value
+      title: this.editPostForm.controls[FormControls.title].value,
+      description: this.editPostForm.controls[FormControls.description].value
     }
     this.crudService.updateObject(Collections.POSTS, id, newDescription).subscribe();
   }

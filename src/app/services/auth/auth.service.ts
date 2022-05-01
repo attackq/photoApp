@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import firebase from "firebase/compat/app";
-import {collection, query, where} from "firebase/firestore";
 import AuthProvider = firebase.auth.AuthProvider;
-import {filter, from, Observable, of, ReplaySubject, switchMap, tap} from "rxjs";
+import {filter, from, Observable, ReplaySubject, switchMap, tap} from "rxjs";
 import UserCredential = firebase.auth.UserCredential;
 import {Collections} from "../crud/collections";
 import {CrudService} from "../crud/crud.service";
-import {User, UserStore} from "../../post";
+import {User} from "../../post";
 import {map} from "rxjs/operators";
 
 @Injectable({
@@ -16,19 +15,6 @@ import {map} from "rxjs/operators";
 export class AuthService {
 
   public user$: ReplaySubject<firebase.User | null> = new ReplaySubject<firebase.User | null>(1);
-
-  public userGmail: User = {
-    email: 'rastpk@gmail.com',
-    name: 'ge',
-    img: 'na',
-    id: 'sss'
-  }
-  public userRambler: User = {
-    email: 'rastpk@rambler.ru',
-    name: 'ge',
-    img: 'na',
-    id: 'sss'
-  }
 
   constructor(private afAuth: AngularFireAuth,
               private crudService: CrudService) {
@@ -44,8 +30,12 @@ export class AuthService {
               const user: User = {
                 email: userFromLogin?.email!,
                 name: userFromLogin?.displayName!,
-                img: userFromLogin?.photoURL!,
-                id: userFromLogin?.uid!
+                logo: userFromLogin?.photoURL!,
+                userID: userFromLogin?.uid!,
+                status: 'You can find pictures here',
+                background: 'https://firebasestorage.googleapis.com/v0/b/photoapp-2cd29.appspot.com/o/default_background_3.jpg?alt=media&token=35ef59de-dac7-401d-9c9d-5dde260dafbf',
+                followers: [],
+                following: []
               }
               return user;
             }

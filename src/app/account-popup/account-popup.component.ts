@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {iconsSrc} from "../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
-import {PostControls} from "../controls";
+import {FormControls} from "../controls";
 import {Post} from "../post";
 import {CrudService} from "../services/crud/crud.service";
 import {Collections} from "../services/crud/collections";
@@ -28,16 +28,16 @@ export class AccountPopupComponent implements OnInit {
 
   public myForm: FormGroup = new FormGroup({});
 
-  public formControls: typeof PostControls = PostControls;
+  public formControls: typeof FormControls = FormControls;
 
   constructor(private crudService: CrudService,
               private uploadService: UploadService) {
   }
 
   ngOnInit(): void {
-    this.myForm.addControl(PostControls.img, new FormControl('', Validators.required));
-    this.myForm.addControl(PostControls.title, new FormControl('', Validators.required));
-    this.myForm.addControl(PostControls.description, new FormControl('', Validators.required));
+    this.myForm.addControl(FormControls.img, new FormControl('', Validators.required));
+    this.myForm.addControl(FormControls.title, new FormControl('', Validators.required));
+    this.myForm.addControl(FormControls.description, new FormControl('', Validators.required));
   }
 
   public addPost(post: Post): void {
@@ -48,8 +48,8 @@ export class AccountPopupComponent implements OnInit {
     if (this.myForm.valid) {
       const post: Post = {
         photo: this.imageSrc,
-        title: this.myForm?.controls[PostControls.title].value,
-        description: this.myForm?.controls[PostControls.description].value,
+        title: this.myForm?.controls[FormControls.title].value,
+        description: this.myForm?.controls[FormControls.description].value,
         likes: 23,
         comments: 2
       }

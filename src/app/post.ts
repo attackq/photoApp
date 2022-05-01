@@ -9,13 +9,24 @@ export interface Post {
 export interface User {
   email: string,
   name: string,
-  img: string,
-  id: string
+  logo: string,
+  userID: string,
+  status: string,
+  background: string,
+  followers: [],
+  following: []
  }
 
 export interface EditDescription {
   title: string,
   description: string
+}
+
+export interface EditUser {
+  name: string,
+  logo: string | null,
+  status: string,
+  background: string | null,
 }
 
 export type ID = {
