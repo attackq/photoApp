@@ -18,9 +18,9 @@ export class PostComponent implements OnInit {
   @Input()
   public postTitle: string = '';
   @Input()
-  public postLikes: number = 0;
+  public postLikes: string[];
   @Input()
-  public postComments: number = 0;
+  public postComments: [];
   @Input()
   public postID: string = '';
   @Input()

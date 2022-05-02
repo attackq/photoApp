@@ -56,6 +56,24 @@ export class CrudService {
       );
   }
 
+  public handleIdData<T>(collectionName: string, value: string): Observable<T[]> {
+    return this.angularFirestore
+      .collection(collectionName, ref => {
+        const query: firebase.firestore.Query = ref;
+        return query.where('id', '==', value);
+      })
+      .snapshotChanges()
+      .pipe(
+        map((actions) =>
+          actions.map((a) => {
+            const data: any = a.payload.doc.data();
+            const {id} = a.payload.doc;
+            return {id, ...data} as T;
+          }),
+        ),
+      );
+  }
+
   public createObject<T>(collectionName: string, object: T): Observable<DocumentReference<T>> {
     return (from(this.angularFirestore
       .collection(collectionName)

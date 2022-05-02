@@ -41,16 +41,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   public icons = iconsSrc;
 
-  public userID = this.user?.uid!;
-
-  // public user1: UserInfo = {
-  //   name: 'Walter Cobalt',
-  //   description: 'You can find pictures here!',
-  //   followers: 10,
-  //   following: 3,
-  //   logo: 'assets/images/8.jpg'
-  // }
-
   constructor(private authService: AuthService,
               private router: Router,
               private crudService: CrudService) {

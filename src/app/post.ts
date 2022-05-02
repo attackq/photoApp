@@ -2,8 +2,8 @@ export interface Post {
   photo: string | null,
   title: string,
   description: string,
-  likes: number,
-  comments: number
+  likes: string[],
+  comments: []
 }
 
 export interface User {
@@ -20,6 +20,10 @@ export interface User {
 export interface EditDescription {
   title: string,
   description: string
+}
+
+export interface Like {
+  likes: string[] | undefined
 }
 
 export interface EditUser {

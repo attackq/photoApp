@@ -50,8 +50,8 @@ export class AccountPopupComponent implements OnInit {
         photo: this.imageSrc,
         title: this.myForm?.controls[FormControls.title].value,
         description: this.myForm?.controls[FormControls.description].value,
-        likes: 23,
-        comments: 2
+        likes: [],
+        comments: []
       }
       this.addPost(post);
       this.myForm?.reset();
