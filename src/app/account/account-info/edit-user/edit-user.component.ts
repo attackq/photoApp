@@ -3,10 +3,12 @@ import {iconsSrc} from "../../../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../../../controls";
 import {CrudService} from "../../../services/crud/crud.service";
-import {EditDescription, EditUser, Post} from "../../../post";
+import {EditDescription, EditUser, Post, UserStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
-import {combineLatest, takeWhile} from "rxjs";
+import {combineLatest, filter, switchMap, takeWhile} from "rxjs";
 import {UploadService} from "../../../services/crud/upload.service";
+import {AuthService} from "../../../services/auth/auth.service";
+import {map, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-edit-user',
@@ -29,16 +31,20 @@ export class EditUserComponent implements OnInit {
   public progressLogo: string | undefined = ''
   public progressBack: string | undefined = '';
 
-  public isImage: boolean = false;
+  public isImageLogo: boolean = false;
+  public isImageBack: boolean = false;
+
 
   constructor(private crudService: CrudService,
-              private uploadService: UploadService) { }
+              private uploadService: UploadService,
+              private authService: AuthService) {
+  }
 
   ngOnInit(): void {
-    this.editUserForm.addControl(FormControls.logo, new FormControl('', Validators.required));
-    this.editUserForm.addControl(FormControls.background, new FormControl('', Validators.required));
-    this.editUserForm.addControl(FormControls.title, new FormControl('', Validators.required));
-    this.editUserForm.addControl(FormControls.description, new FormControl('', Validators.required));
+    this.editUserForm.addControl(FormControls.logo, new FormControl(''));
+    this.editUserForm.addControl(FormControls.background, new FormControl(''));
+    this.editUserForm.addControl(FormControls.title, new FormControl(''));
+    this.editUserForm.addControl(FormControls.description, new FormControl(''));
   }
 
   public onLogoSelected(event: Event): void {
@@ -58,7 +64,7 @@ export class EditUserComponent implements OnInit {
             this.imageLogoSrc = link;
           });
       }
-      this.isImage = true;
+      this.isImageLogo = true;
     }
   }
 
@@ -79,7 +85,7 @@ export class EditUserComponent implements OnInit {
             this.imageBackSrc = link;
           });
       }
-      this.isImage = true;
+      this.isImageBack = true;
     }
   }
 
@@ -93,14 +99,23 @@ export class EditUserComponent implements OnInit {
   }
 
   public updateDescription(id: string): void {
-    const newUser: EditUser = {
-      name: this.editUserForm.controls[FormControls.title].value,
-      logo: this.imageLogoSrc,
-      status: this.editUserForm.controls[FormControls.description].value,
-      background: this.imageBackSrc
-    }
-    this.crudService.updateObject(Collections.USERS, id, newUser).subscribe();
+    const name = this.editUserForm.controls[FormControls.title].value;
+    // console.log(this.editUserForm.controls[FormControls.title]);
+    const status = this.editUserForm.controls[FormControls.description].value;
+    this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
+      map((user: UserStore | undefined) => {
+          // console.log(this.editUserForm.controls[FormControls.title]);
+          const newUser: EditUser = {
+            name: name || user?.name,
+            logo: this.imageLogoSrc || user?.logo!,
+            status: status || user?.status,
+            background: this.imageBackSrc || user?.background!
+          }
+          return this.crudService.updateObject(Collections.USERS, id, {...newUser});
+      }),
+    ).subscribe()
   }
+
 
   public submitFrom(id: string): void {
     if (this.editUserForm.valid) {

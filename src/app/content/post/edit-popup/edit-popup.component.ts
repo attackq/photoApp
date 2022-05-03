@@ -10,8 +10,6 @@ import {Collections} from "../../../services/crud/collections";
   selector: 'app-edit-popup',
   templateUrl: './edit-popup.component.html',
   styleUrls: ['./edit-popup.component.css'],
-  encapsulation: ViewEncapsulation.None
-
 })
 
 export class EditPopupComponent implements OnInit {

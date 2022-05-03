@@ -7,11 +7,11 @@
     <form [formGroup]="editUserForm" class="choose__form">
       <label class="choose__label" for="logo">Choose logo</label>
       <input type="file" id="logo" (change)="onLogoSelected($event)" [formControlName]="formControls.logo">
-      <progress class="choose__progress" max="100" [value]="this.progressLogo" *ngIf="isImage"></progress>
+      <progress class="choose__progress" max="100" [value]="this.progressLogo" *ngIf="isImageLogo"></progress>
       <label class="choose__label" for="background">Choose background</label>
       <input type="file" id="background" (change)="onBackSelected($event)" [formControlName]="formControls.background">
-      <progress class="choose__progress" max="100" [value]="this.progressBack" *ngIf="isImage"></progress>
-<!--      <div class="choose__img" *ngIf="this.progress === '100'">-->
+      <progress class="choose__progress" max="100" [value]="this.progressBack" *ngIf="isImageBack"></progress>
+<!--      <div class="choose__img" *ngIf="this.progressBack === '100'">-->
 <!--        <img [src]="img" alt="choose your pic">-->
 <!--        <div class="choose__close">-->
 <!--          <img [src]="icons.close" alt="" (click)="deleteUrl()">-->
@@ -20,11 +20,11 @@
       <label for="nickname" class="modal__choose">Please, edit the nickname</label>
       <input id="nickname" [formControlName]="formControls.title" type="text" class="choose__input"
              placeholder="Write the nickname...">
-      <div class="modal_err" *ngIf="isControlValid(formControls.title)">Provide a title</div>
+      <div class="modal_err" *ngIf="isControlValid(formControls.title)">Provide a nickname</div>
       <label for="status" class="modal__choose">Please, edit the status</label>
       <input id="status" [formControlName]="formControls.description" type="text" class="choose__input"
              placeholder="Write the status...">
-      <div class="modal_err" *ngIf="isControlValid(formControls.description)">Provide a description</div>
+      <div class="modal_err" *ngIf="isControlValid(formControls.description)">Provide a status</div>
       <app-button [label]="'Change'"
                   [bgColor]="'blue'"
                   [cond]="editUserForm.invalid"
@@ -35,3 +35,4 @@
     </form>
   </div>
 </div>
+

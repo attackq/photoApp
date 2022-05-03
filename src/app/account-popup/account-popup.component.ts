@@ -12,7 +12,6 @@ import {combineLatest, takeWhile} from "rxjs";
   selector: 'app-account-popup',
   templateUrl: './account-popup.component.html',
   styleUrls: ['./account-popup.component.css'],
-  encapsulation: ViewEncapsulation.None
 })
 export class AccountPopupComponent implements OnInit {
 
