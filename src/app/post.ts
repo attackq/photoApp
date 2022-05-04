@@ -4,7 +4,6 @@ export interface Post {
   description: string,
   likes: string[],
   comments: [],
-  isLike: boolean,
   sortID: number
 }
 

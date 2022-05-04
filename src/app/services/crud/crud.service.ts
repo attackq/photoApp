@@ -38,6 +38,24 @@ export class CrudService {
       );
   }
 
+  public handlePostsData<T>(collectionName: string, value: string): Observable<T[]> {
+    return this.angularFirestore
+      .collection(collectionName, ref => {
+        const query: firebase.firestore.Query = ref;
+        return query.orderBy(value, "desc");
+      })
+      .snapshotChanges()
+      .pipe(
+        map((actions) =>
+          actions.map((a) => {
+            const data: any = a.payload.doc.data();
+            const {id} = a.payload.doc;
+            return {id, ...data} as T;
+          }),
+        ),
+      );
+  }
+
   public handleMailData<T>(collectionName: string, value: string): Observable<T[]> {
     return this.angularFirestore
       .collection(collectionName, ref => {

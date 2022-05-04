@@ -11,7 +11,7 @@ import {Collections} from "../services/crud/collections";
 })
 export class ContentComponent implements OnInit {
 
-  public firePosts: Observable<PostStore[]> = this.crudService.handleData<PostStore>(Collections.POSTS);
+  public firePosts: Observable<PostStore[]> = this.crudService.handlePostsData<PostStore>(Collections.POSTS, 'sortID');
 
   constructor(private crudService: CrudService) {
   }
@@ -19,9 +19,8 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public trackByID(index: any, post: any) {
-    console.log(index);
-    return index;
+  public trackByID(index: number, post: PostStore) {
+    return post.sortID;
   }
 
 }

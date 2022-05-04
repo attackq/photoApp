@@ -51,7 +51,6 @@ export class AccountPopupComponent implements OnInit {
         description: this.myForm?.controls[FormControls.description].value,
         likes: [],
         comments: [],
-        isLike: false,
         sortID: new Date().getTime()
       }
       this.addPost(post);

@@ -23,8 +23,6 @@ export class PostHoverComponent implements OnInit {
   public postComments: [];
   @Input()
   public postID: string;
-  @Input()
-  public isLike: boolean;
 
   public user: firebase.User | null = null;
 
@@ -38,6 +36,7 @@ export class PostHoverComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
+    this.checkColor(this.postID);
   }
 
   public updateLikes(id: string) {
@@ -45,23 +44,35 @@ export class PostHoverComponent implements OnInit {
       filter((value: firebase.User | null) => !!value),
       switchMap((value: firebase.User | null) => {
         return this.crudService.getUserDoc<PostStore>(Collections.POSTS, id).pipe(
-          map((postFromStore : PostStore | undefined) => {
+          map((postFromStore: PostStore | undefined) => {
             const userIndex = postFromStore?.likes.indexOf(value?.uid!);
             if (userIndex === -1) {
               return {
                 likes: postFromStore?.likes.concat(value?.uid!),
-                isLike: true
               }
             } else {
               const newArr: string[] | undefined = postFromStore?.likes.splice(userIndex!, 1);
               return {
                 likes: postFromStore?.likes,
-                isLike: false
               };
             }
           }),
-          tap( modifiedPost => this.addColor = !!(modifiedPost.isLike && modifiedPost.likes?.includes(value?.uid!))),
+          tap(modifiedPost => {
+            this.addColor = !!(modifiedPost.likes?.includes(value?.uid!));
+          }),
           switchMap(newPost => this.crudService.updateObject(Collections.POSTS, id, {...newPost})))
+      })
+    ).subscribe();
+  }
+
+  public checkColor(id: string) {
+    this.authService.user$.pipe(
+      filter((value: firebase.User | null) => !!value),
+      switchMap((value: firebase.User | null) => {
+        return this.crudService.getUserDoc<PostStore>(Collections.POSTS, id).pipe(
+          tap((modifiedPost: PostStore | undefined) => {
+            this.addColor = !!(modifiedPost?.likes.includes(value?.uid!));
+          }))
       })
     ).subscribe();
   }
