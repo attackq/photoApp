@@ -19,6 +19,11 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public trackByID(index: any, post: any) {
+    console.log(index);
+    return index;
+  }
+
 }
 
 

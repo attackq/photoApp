@@ -25,6 +25,8 @@ export class PostComponent implements OnInit {
   public postID: string = '';
   @Input()
   public postDesc: string = '';
+  @Input()
+  public isLike: boolean;
 
   public delete(id: string): void {
     this.crudService.deleteObject(Collections.POSTS, id).subscribe();

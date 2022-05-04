@@ -50,7 +50,9 @@ export class AccountPopupComponent implements OnInit {
         title: this.myForm?.controls[FormControls.title].value,
         description: this.myForm?.controls[FormControls.description].value,
         likes: [],
-        comments: []
+        comments: [],
+        isLike: false,
+        sortID: new Date().getTime()
       }
       this.addPost(post);
       this.myForm?.reset();
@@ -86,7 +88,7 @@ export class AccountPopupComponent implements OnInit {
           .subscribe(([percent, link]) => {
             this.progress = percent;
             this.imageSrc = link;
-        });
+          });
       }
       this.isImage = true;
     }

@@ -1,18 +1,19 @@
 <div class="content__data">
   <div class="container">
     <div class="content__wrapper">
-      <ng-container *ngFor="let post of (firePosts | async)">
+      <ng-container *ngFor="let post of (firePosts | async); trackBy: trackByID">
         <app-post class="content__column"
                   [postDesc]="post.description"
                   [postID]="post.id"
                   [postImg]="post.photo"
                   [postTitle]="post.title"
                   [postLikes]="post.likes"
-                  [postComments]="post.comments">
+                  [postComments]="post.comments"
+                  [isLike]="post.isLike">
         </app-post>
       </ng-container>
     </div>
   </div>
 </div>
 
-
+<!--; trackBy: trackByFn-->

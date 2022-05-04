@@ -3,7 +3,9 @@ export interface Post {
   title: string,
   description: string,
   likes: string[],
-  comments: []
+  comments: [],
+  isLike: boolean,
+  sortID: number
 }
 
 export interface User {

@@ -4,12 +4,12 @@
 }
 
 .search__input {
-  padding: 5px 0 5px 20px;
+  padding-left: 20px;
   border: none;
   background: rgba(255, 255, 255, 0.65);
   border-radius: 10px;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 30px;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
@@ -32,7 +32,7 @@
   display: flex;
   align-items: center;
   position: absolute;
-  top: 6px;
+  top: 4px;
   left: 15px;
   cursor: pointer;
 }
@@ -41,8 +41,8 @@
   left: 8px;
 }
 .search__logo img {
-  width: 31px;
-  height: 31px;
+  width: 25px;
+  height: 25px;
   filter: brightness(0) saturate(100%) invert(32%) sepia(0%) saturate(300%) hue-rotate(208deg) brightness(90%) contrast(90%);
 }
 .search__logo.small img {
