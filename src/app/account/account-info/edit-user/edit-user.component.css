@@ -6,5 +6,10 @@
   margin-top: 0;
 }
 
+.modal__text {
+  margin-bottom: 5px;
+}
 
-
+.user {
+  margin-top: 5px;
+}
