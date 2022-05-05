@@ -48,11 +48,14 @@ export class PostComponent implements OnInit {
     editPopup.componentInstance.postID = id;
   }
 
-  public openExtendedPostDialog(img: string | null, desc: string, date: number) {
+  public openExtendedPostDialog(img: string | null, date: number) {
     let extendedPost = this.dialog.open(PostExtendedComponent);
     extendedPost.componentInstance.postImg = img;
-    extendedPost.componentInstance.postDesc = desc;
+    extendedPost.componentInstance.postDesc = this.postDesc;
     extendedPost.componentInstance.postDate = date;
+    extendedPost.componentInstance.postID = this.postID;
+    extendedPost.componentInstance.postLikes = this.postLikes;
+    extendedPost.componentInstance.postComments = this.postComments;
   }
 
 }

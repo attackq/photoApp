@@ -1,8 +1,8 @@
 <div class="user__logo {{size}}" *ngFor="let fireUser of (fireUsers | async)">
   <div class="user__name {{size}}">
     <img [src]="fireUser.logo">
-<!--    <div class="user__text" *ngIf="photoUrl === ''">{{this.user?.displayName!.slice(0,1)}}</div>-->
   </div>
 </div>
 
 <!--*ngIf="photoUrl !== '' && !toggle"-->
+<!--    <div class="user__text" *ngIf="photoUrl === ''">{{this.user?.displayName!.slice(0,1)}}</div>-->

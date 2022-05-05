@@ -40,7 +40,7 @@
 
 .mat-select {
   font-family: 'Montserrat', sans-serif !important;
-  font-size: 14px;
+  font-size: 14px !important;
 }
 
 .mat-form-field-infix {
@@ -52,11 +52,11 @@
 }
 
 .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
-  background: #27AE60;
+  background: #27AE60 !important;
 }
 
 .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
-  color: #27AE60;
+  color: #27AE60 !important;
 }
 
 .mat-form-field.mat-focused .mat-form-field-ripple {
@@ -64,7 +64,7 @@
 }
 
 .mat-form-field-infix {
-  border-top: none;
+  border-top: none !important;
 }
 .mat-form-field-appearance-standard .mat-form-field-flex {
   padding-top: 0 !important;

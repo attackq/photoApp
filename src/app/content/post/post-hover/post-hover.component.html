@@ -1,23 +1,5 @@
 <div class="hover__block">
   <div class="hover__title">{{postTitle}}</div>
-  <div class="hover__icons">
-    <div class="hover__icon">
-      <div class="hover__img" (click)="this.updateLikes(postID)" [class.active]="addColor">
-        <img [src]="icons.like" alt="" >
-      </div>
-      <div class="hover__text">{{postLikes.length}}</div>
-    </div>
-    <div class="hover__icon">
-      <div class="hover__img">
-        <img [src]="icons.comment" alt="">
-      </div>
-      <div class="hover__text">{{postComments.length}}</div>
-    </div>
-    <div class="hover__icon">
-      <div class="hover__img">
-        <img [src]="icons.bookmark" alt="">
-      </div>
-    </div>
-  </div>
+  <app-post-icons [postLikes]="postLikes" [postComments]="postComments" [postID]="this.postID"></app-post-icons>
 </div>
 

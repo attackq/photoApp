@@ -43,7 +43,7 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
     this.editUserForm.addControl(FormControls.logo, new FormControl(''));
     this.editUserForm.addControl(FormControls.background, new FormControl(''));
-    this.editUserForm.addControl(FormControls.title, new FormControl(''));
+    this.editUserForm.addControl(FormControls.name, new FormControl('',Validators.compose([ Validators.maxLength(20), Validators.required]) ));
     this.editUserForm.addControl(FormControls.description, new FormControl(''));
   }
 
@@ -99,12 +99,12 @@ export class EditUserComponent implements OnInit {
   }
 
   public updateDescription(id: string): void {
-    const name = this.editUserForm.controls[FormControls.title].value;
+    const name = this.editUserForm.controls[FormControls.name].value;
     // console.log(this.editUserForm.controls[FormControls.title]);
     const status = this.editUserForm.controls[FormControls.description].value;
     this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
       map((user: UserStore | undefined) => {
-          // console.log(this.editUserForm.controls[FormControls.title]);
+          // console.log(this.editUserForm.controls[FormControls.name]);
           const newUser: EditUser = {
             name: name || user?.name,
             logo: this.imageLogoSrc || user?.logo!,

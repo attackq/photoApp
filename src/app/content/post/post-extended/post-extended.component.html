@@ -1,8 +1,7 @@
 <div class="extended__post">
-  <div class="container">
     <div class="extended__wrapper">
       <div class="extended__img">
-        <img [src]="postImg" alt="">
+        <img [src]="postImg">
       </div>
       <div class="extended__info">
         <div class="extended__user">
@@ -10,10 +9,11 @@
           <div class="extended__name" *ngFor="let fireUser of (fireUsers | async)">{{fireUser.name}}</div>
         </div>
         <div class="extended__description">{{postDesc}}</div>
-        <div class="extended__date">{{postDate | date: 'short'}}</div>
-        <div class="extended__icons"></div>
-        <div class="extended__comments"></div>
+        <div class="extended__date">{{postDate | date: 'd.M.yy, H:mm'}}</div>
+        <div class="extended__icons">
+<!--          <app-post-icons [postLikes]="postLikes" [postComments]="postComments" [postID]="this.postID"></app-post-icons>-->
+        </div>
+        <div class="extended__comments">{{postLikes.length}}</div>
       </div>
-    </div>
   </div>
 </div>

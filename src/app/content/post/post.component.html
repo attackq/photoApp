@@ -1,6 +1,5 @@
 <div class="content__card">
-  <img [src]="postImg" alt="" (click)="openExtendedPostDialog(postImg, postDesc, postDate)">
-<!--  <div>{{postDate | date:'short'}}</div>-->
+  <img [src]="postImg" alt="" (click)="openExtendedPostDialog(postImg, postDate)">
   <div class="content__buttons">
     <button mat-icon-button [matMenuTriggerFor]="beforeMenu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>

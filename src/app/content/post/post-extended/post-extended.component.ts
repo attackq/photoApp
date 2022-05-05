@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Observable} from "rxjs";
 import {UserStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
@@ -9,7 +9,9 @@ import {AuthService} from "../../../services/auth/auth.service";
 @Component({
   selector: 'app-post-extended',
   templateUrl: './post-extended.component.html',
-  styleUrls: ['./post-extended.component.css']
+  styleUrls: ['./post-extended.component.css'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class PostExtendedComponent implements OnInit {
 
@@ -19,6 +21,12 @@ export class PostExtendedComponent implements OnInit {
   public postDesc: string = '';
   @Input()
   public postDate: number;
+  @Input()
+  public postLikes: string[];
+  @Input()
+  public postComments: [];
+  @Input()
+  public postID: string;
 
   public user: firebase.User | null = null;
 

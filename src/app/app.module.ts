@@ -40,6 +40,7 @@ import {MatSelectModule} from "@angular/material/select";
 import { EditPopupComponent } from './content/post/edit-popup/edit-popup.component';
 import { EditUserComponent } from './account/account-info/edit-user/edit-user.component';
 import { PostExtendedComponent } from './content/post/post-extended/post-extended.component';
+import { PostIconsComponent } from './shared/post-icons/post-icons/post-icons.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { PostExtendedComponent } from './content/post/post-extended/post-extende
     EditPopupComponent,
     EditUserComponent,
     PostExtendedComponent,
+    PostIconsComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

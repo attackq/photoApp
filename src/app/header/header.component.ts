@@ -47,7 +47,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.button);
   }
 
   ngOnInit(): void {
