@@ -1,11 +1,12 @@
 <div class="content__card">
-  <img [src]="postImg" alt="">
-  <div class="content__btns">
+  <img [src]="postImg" alt="" (click)="openExtendedPostDialog(postImg, postDesc, postDate)">
+<!--  <div>{{postDate | date:'short'}}</div>-->
+  <div class="content__buttons">
     <button mat-icon-button [matMenuTriggerFor]="beforeMenu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button mat-menu-item (click)="openDialog(postID)">Edit</button>
+      <button mat-menu-item (click)="openEditPopupDialog(postID)">Edit</button>
       <button mat-menu-item (click)="delete(postID)">Delete</button>
     </mat-menu>
   </div>

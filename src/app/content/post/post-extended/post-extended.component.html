@@ -1,0 +1,19 @@
+<div class="extended__post">
+  <div class="container">
+    <div class="extended__wrapper">
+      <div class="extended__img">
+        <img [src]="postImg" alt="">
+      </div>
+      <div class="extended__info">
+        <div class="extended__user">
+          <div class="extended__logo"><app-user-logo></app-user-logo></div>
+          <div class="extended__name" *ngFor="let fireUser of (fireUsers | async)">{{fireUser.name}}</div>
+        </div>
+        <div class="extended__description">{{postDesc}}</div>
+        <div class="extended__date">{{postDate | date: 'short'}}</div>
+        <div class="extended__icons"></div>
+        <div class="extended__comments"></div>
+      </div>
+    </div>
+  </div>
+</div>

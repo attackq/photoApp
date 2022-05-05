@@ -4,6 +4,7 @@ import {CrudService} from "../../services/crud/crud.service";
 import {UploadService} from "../../services/crud/upload.service";
 import {MatDialog} from "@angular/material/dialog";
 import {EditPopupComponent} from "./edit-popup/edit-popup.component";
+import {PostExtendedComponent} from "./post-extended/post-extended.component";
 
 @Component({
   selector: 'app-post',
@@ -25,6 +26,8 @@ export class PostComponent implements OnInit {
   public postID: string = '';
   @Input()
   public postDesc: string = '';
+  @Input()
+  public postDate: number;
 
 
   public delete(id: string): void {
@@ -40,9 +43,16 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public openDialog(id: string) {
+  public openEditPopupDialog(id: string) {
     let editPopup = this.dialog.open(EditPopupComponent);
     editPopup.componentInstance.postID = id;
+  }
+
+  public openExtendedPostDialog(img: string | null, desc: string, date: number) {
+    let extendedPost = this.dialog.open(PostExtendedComponent);
+    extendedPost.componentInstance.postImg = img;
+    extendedPost.componentInstance.postDesc = desc;
+    extendedPost.componentInstance.postDate = date;
   }
 
 }
