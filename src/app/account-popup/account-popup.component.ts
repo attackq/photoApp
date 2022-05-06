@@ -7,6 +7,8 @@ import {CrudService} from "../services/crud/crud.service";
 import {Collections} from "../services/crud/collections";
 import {UploadService} from "../services/crud/upload.service";
 import {combineLatest, takeWhile} from "rxjs";
+import firebase from "firebase/compat/app";
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-account-popup',
@@ -21,6 +23,8 @@ export class AccountPopupComponent implements OnInit {
 
   public progress: string | undefined = '';
 
+  public user: firebase.User | null = null;
+
   public icons = iconsSrc;
 
   public isImage: boolean = false;
@@ -30,10 +34,13 @@ export class AccountPopupComponent implements OnInit {
   public formControls: typeof FormControls = FormControls;
 
   constructor(private crudService: CrudService,
-              private uploadService: UploadService) {
+              private uploadService: UploadService,
+              private authService: AuthService) {
+    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
   }
 
   ngOnInit(): void {
+
     this.myForm.addControl(FormControls.img, new FormControl('', Validators.required));
     this.myForm.addControl(FormControls.title, new FormControl('', Validators.required));
     this.myForm.addControl(FormControls.description, new FormControl('', Validators.required));
@@ -51,7 +58,8 @@ export class AccountPopupComponent implements OnInit {
         description: this.myForm?.controls[FormControls.description].value,
         likes: [],
         comments: [],
-        sortID: new Date().getTime()
+        sortID: new Date().getTime(),
+        createdBy: this.user?.uid!
       }
       this.addPost(post);
       this.myForm?.reset();

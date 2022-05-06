@@ -22,7 +22,7 @@ export class AuthService {
       tap((value: firebase.User | null) => this.user$.next(value)),
       filter((value: firebase.User | null) => !!value),
       switchMap((userFromLogin: firebase.User | null) => {
-        return this.crudService.handleMailData(Collections.USERS, userFromLogin?.email!).pipe(
+        return this.crudService.handleMailData(Collections.USERS, '==', userFromLogin?.email!).pipe(
           map(userFromStore => {
             if (userFromStore.length !== 0) {
               return null;

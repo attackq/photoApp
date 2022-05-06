@@ -1,0 +1,34 @@
+.post__icons {
+  display: flex;
+  align-items: center;
+}
+.post__icon {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.post__img {
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.post__img img {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2%) hue-rotate(6deg) brightness(110%) contrast(101%);
+}
+
+.post__img.active {
+  filter: brightness(0) saturate(100%) invert(48%) sepia(33%) saturate(1102%) hue-rotate(313deg) brightness(93%) contrast(98%);
+}
+
+.post__text {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: center;
+  color: #FFFFFF;
+}

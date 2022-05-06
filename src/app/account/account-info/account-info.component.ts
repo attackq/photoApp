@@ -12,15 +12,15 @@ import {EditUserComponent} from "./edit-user/edit-user.component";
 export class AccountInfoComponent implements OnInit {
 
   @Input()
-  public username: string = '';
+  public username: string;
   @Input()
-  public followers: number = 0;
+  public followers: number;
   @Input()
-  public following: number = 0;
+  public following: number;
   @Input()
-  public description: string = '';
+  public status: string;
   @Input()
-  public firestoreID: string = '';
+  public firestoreID: string;
 
   icons = iconsSrc;
 

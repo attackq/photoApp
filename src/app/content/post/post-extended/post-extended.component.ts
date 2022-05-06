@@ -37,7 +37,7 @@ export class PostExtendedComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
-    this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, this.user?.email!);
+    this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, '==' ,this.user?.email!);
   }
 
 }

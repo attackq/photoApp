@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface Links {
-  name: string;
-  id: number;
-}
+import {Observable} from "rxjs";
+import {PostStore, UserStore} from "../../post";
+import {Collections} from "../../services/crud/collections";
+import {CrudService} from "../../services/crud/crud.service";
+import firebase from "firebase/compat";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-nav',
@@ -11,13 +12,17 @@ export interface Links {
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  public links: Links[] = [
-    {name: 'Home', id: 1},
-    {name: 'Feed', id: 2},
-  ]
-  constructor() { }
+
+  public user: firebase.User | null = null;
+
+  public fireUsers: Observable<UserStore[]> = this.crudService.handleData<UserStore>(Collections.USERS);
+
+  constructor(private crudService: CrudService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
+    this.fireUsers.subscribe(value => console.log(value));
   }
 
 }

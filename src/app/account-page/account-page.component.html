@@ -1,11 +1,16 @@
-<app-account></app-account>
-<app-filter></app-filter>
-<div class="content__scroll">
-  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll__viewport">
-    <app-content></app-content>
-  </cdk-virtual-scroll-viewport>
-</div>
-
-
-
+<ng-container *ngFor="let fireUser of fireUsers">
+  <app-account [background]="fireUser.background"
+               [username]="fireUser.name"
+               [followers]="fireUser.followers"
+               [following]="fireUser.following"
+               [status]="fireUser.status"
+               [firestoreID]="fireUser.id"
+               [userID]="fireUser.userID"></app-account>
+  <app-filter></app-filter>
+  <div class="content__scroll">
+    <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll__viewport">
+      <app-content [id]="fireUser.userID"></app-content>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</ng-container>
 
