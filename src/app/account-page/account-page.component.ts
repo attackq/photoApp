@@ -15,30 +15,30 @@ import {GetUserService} from "../services/get-user.service";
 })
 export class AccountPageComponent implements OnInit {
 
+  public id: string;
+  private subscription: Subscription;
 
-  // private subscription: Subscription;
-
-  public fireUsers: UserStore[];
+  public fireUsers: Observable<UserStore[]>;
 
   constructor(private crudService: CrudService,
               private activatedRoute: ActivatedRoute,
               private getUserService: GetUserService) {
-    // this.subscription = activatedRoute.params.subscribe(params => this.id = params['id']);
+    this.subscription = activatedRoute.params.subscribe(params => this.id = params['id']);
   }
 
   @HostBinding('class.account__page') someField: boolean = true;
 
   ngOnInit(): void {
-    this.getUser()
-    // this.fireUsers = this.crudService.handleIdData<UserStore>(Collections.USERS, this.id!);
+    // this.getUser()
+    this.fireUsers = this.crudService.handleIdData<UserStore>(Collections.USERS, '==',this.id!);
     // this.fireUsers.subscribe(value => console.log(value))
   }
 
-  getUser() {
-    const id: string | null = this.activatedRoute.snapshot.paramMap.get('id');
-    this.getUserService.getHero(id!).subscribe(user =>{
-      this.fireUsers = user;
-      console.log(user);
-    } )
-  }
+  // getUser() {
+  //   const id: string | null = this.activatedRoute.snapshot.paramMap.get('id');
+  //   this.getUserService.getHero(id!).subscribe(user =>{
+  //     this.fireUsers = user;
+  //     // console.log(user);
+  //   } )
+  // }
 }

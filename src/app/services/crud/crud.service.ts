@@ -80,11 +80,13 @@ export class CrudService {
       );
   }
 
-  public handleIdData<T>(collectionName: string, value: string): Observable<T[]> {
+
+
+  public handleIdData<T>(collectionName: string, operator: WhereFilterOp, value: string): Observable<T[]> {
     return this.angularFirestore
       .collection(collectionName, ref => {
         const query: firebase.firestore.Query = ref;
-        return query.where('userID', '==', value);
+        return query.where('userID', operator, value);
       })
       .snapshotChanges()
       .pipe(

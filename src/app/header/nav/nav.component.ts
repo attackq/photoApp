@@ -15,6 +15,7 @@ export class NavComponent implements OnInit {
 
   public user: firebase.User | null = null;
 
+  // public fireUsers: Observable<UserStore[]> = this.crudService.handleData<UserStore>(Collections.USERS);
   public fireUsers: Observable<UserStore[]> = this.crudService.handleData<UserStore>(Collections.USERS);
 
   constructor(private crudService: CrudService,
@@ -22,7 +23,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
-    this.fireUsers.subscribe(value => console.log(value));
+    this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, '!=', this.user?.email!)
   }
 
 }

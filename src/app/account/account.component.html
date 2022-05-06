@@ -47,13 +47,9 @@
     </app-button>
     <app-button *ngIf="user?.uid! !== this.userID"
                 class="account__btn"
-                [label]="'Follow'"
-                [bgColor]="'green'">
-    </app-button>
-    <app-button *ngIf="user?.uid! !== this.userID"
-                class="account__btn"
-                [label]="'Unfollow'"
-                [bgColor]="'green'">
+                [label]=" isFollow ? 'Unfollow' : 'Follow' "
+                [bgColor]="'green'"
+                (click)="getFollowers(this.firestoreID)">
     </app-button>
   </div>
 </div>

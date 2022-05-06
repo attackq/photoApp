@@ -1,4 +1,4 @@
-<ng-container *ngFor="let fireUser of fireUsers">
+<ng-container *ngFor="let fireUser of (fireUsers | async)">
   <app-account [background]="fireUser.background"
                [username]="fireUser.name"
                [followers]="fireUser.followers"

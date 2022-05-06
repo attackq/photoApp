@@ -11,6 +11,6 @@ export class GetUserService {
   constructor(private crudService: CrudService) { }
 
   getHero(id: string) {
-    return this.crudService.handleIdData<UserStore>(Collections.USERS, id);
+    return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', id);
   }
 }

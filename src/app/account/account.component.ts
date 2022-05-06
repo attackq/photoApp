@@ -9,7 +9,7 @@ import {Post, PostStore, UserStore} from "../post";
 import {Collections} from "../services/crud/collections";
 import {CrudService} from "../services/crud/crud.service";
 import DocumentReference = firebase.firestore.DocumentReference;
-import {map, switchMap} from "rxjs/operators";
+import {map, switchMap, tap} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -22,9 +22,9 @@ export class AccountComponent implements OnInit {
   @Input()
   public username: string;
   @Input()
-  public followers: [];
+  public followers: string[];
   @Input()
-  public following: [];
+  public following: string[];
   @Input()
   public status: string;
   @Input()
@@ -34,10 +34,12 @@ export class AccountComponent implements OnInit {
   @Input()
   public background: string
 
+  public isFollow: boolean;
+
   public user: firebase.User | null = null;
 
   public fireUsers: Observable<UserStore[]>;
-  // public id: string;
+  public id: string | null;
   // private subscription: Subscription;
 
   constructor(private authService: AuthService,
@@ -48,57 +50,54 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
     // this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, '==', this.user?.email!);
     // this.fireUsers = this.crudService.handleIdData<UserStore>(Collections.USERS, this.id);
     // console.log(this.id)
-
-    // this.getFollow();
+    // this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.authService.user$.pipe(
+      tap((value: firebase.User | null) => this.user = value),
+      filter((value: firebase.User | null) => !!value),
+      switchMap((value: firebase.User | null) => {
+        return this.crudService.getUserDoc<UserStore>(Collections.USERS, this.firestoreID).pipe(
+          tap((modifiedUser: UserStore | undefined) => {
+            this.isFollow = !!(modifiedUser?.followers.includes(value?.uid!));
+          }))
+      })
+    ).subscribe();
   }
 
   public openDialog() {
     this.dialog.open(AccountPopupComponent);
   }
 
-  // public getFollow() {
-  //   this.crudService.handleMailData<UserStore>(Collections.USERS, '!=', this.user?.email!).pipe(
-  //     map()
-  //   );
-  // this.authService.user$.pipe(
-  //   filter((value: firebase.User | null) => !!value),
-  //   switchMap((value: firebase.User | null) => {
-  //     return this.crudService.handleMailData<UserStore>(Collections.USERS, '!=', this.user?.email!).pipe(
-  //
-  //     )
-  //   })
-  // )
-  // }
+  public getFollowers(id: string) {
+    this.authService.user$.pipe(
+      filter((value: firebase.User | null) => !!value),
+      switchMap((value: firebase.User | null) => {
+        return this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
+          map((userFromStore: UserStore | undefined) => {
+            const userIndex = userFromStore?.followers.indexOf(value?.uid!);
+            if (userIndex === -1) {
+              this.isFollow = true;
+              return {
+                followers: userFromStore?.followers.concat(value?.uid!),
+              }
+            } else {
+              const newArr: string[] | undefined = userFromStore?.followers.splice(userIndex!, 1);
+              this.isFollow = false;
+              return {
+                followers: userFromStore?.followers,
+              };
+            }
+          }),
+          switchMap(newUser => this.crudService.updateObject(Collections.USERS, id, {...newUser})))
+      })
+    ).subscribe();
+  }
 
+  public getFollowing() {
 
-  // public updateLikes(id: string) {
-  //   this.authService.user$.pipe(
-  //     filter((value: firebase.User | null) => !!value),
-  //     switchMap((value: firebase.User | null) => {
-  //       return this.crudService.getUserDoc<PostStore>(Collections.POSTS, id).pipe(
-  //         map((postFromStore: PostStore | undefined) => {
-  //           const userIndex = postFromStore?.likes.indexOf(value?.uid!);
-  //           if (userIndex === -1) {
-  //             this.addColor = true;
-  //             return {
-  //               likes: postFromStore?.likes.concat(value?.uid!),
-  //             }
-  //           } else {
-  //             const newArr: string[] | undefined = postFromStore?.likes.splice(userIndex!, 1);
-  //             this.addColor = false;
-  //             return {
-  //               likes: postFromStore?.likes,
-  //             };
-  //           }
-  //         }),
-  //         switchMap(newPost => this.crudService.updateObject(Collections.POSTS, id, {...newPost})))
-  //     })
-  //   ).subscribe();
-  // }
+  }
 }
 
 

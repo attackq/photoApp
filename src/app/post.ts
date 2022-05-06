@@ -15,8 +15,8 @@ export interface User {
   userID: string,
   status: string,
   background: string,
-  followers: [],
-  following: []
+  followers: string[],
+  following: string[]
  }
 
 export interface EditDescription {
