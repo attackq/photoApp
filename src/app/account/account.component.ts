@@ -40,6 +40,8 @@ export class AccountComponent implements OnInit {
 
   public fireUsers: Observable<UserStore[]>;
   public id: string | null;
+  public currentUserID: string;
+
   // private subscription: Subscription;
 
   constructor(private authService: AuthService,
@@ -90,14 +92,42 @@ export class AccountComponent implements OnInit {
               };
             }
           }),
-          switchMap(newUser => this.crudService.updateObject(Collections.USERS, id, {...newUser})))
+          switchMap(newUser => this.crudService.updateObject(Collections.USERS, id, {...newUser})
+          ),
+          switchMap((currentUser) => {
+             return  this.crudService.handleIdData<UserStore>(Collections.USERS, '==',value?.uid!).pipe(
+              tap(valueS => {
+                valueS[0].following.concat(id)
+                console.log(valueS[0].following)
+              })
+            )
+          })
+          )
       })
     ).subscribe();
-  }
-
-  public getFollowing() {
 
   }
 }
 
 
+// switchMap((currentUser) => {
+//   console.log(currentUser)
+//   return this.crudService.getUserDoc<UserStore>(Collections.USERS, value?.uid!).pipe(
+//     map((currentUser: UserStore | undefined) => {
+//       // console.log(currentUser);
+//       this.currentUserID = currentUser?.id!;
+//       const currentUserIndex = currentUser?.following.indexOf(id);
+//       if (currentUserIndex === -1) {
+//         return {
+//           following: currentUser?.following.concat(id),
+//         }
+//       } else {
+//         const newArr: string[] | undefined = currentUser?.following.splice(currentUserIndex!, 1)
+//         return {
+//           following: currentUser?.following.concat(id)
+//         }
+//       }
+//     }),
+//     tap(newCurrentUser => this.crudService.updateObject(Collections.USERS, this.currentUserID, {...newCurrentUser}))
+//   )
+// })
