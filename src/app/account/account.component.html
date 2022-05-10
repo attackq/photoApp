@@ -1,3 +1,36 @@
+<div class="account"
+     [ngStyle]="{'background-image': 'url(' + this.background + ')'}"
+     *ngFor="let current of currentUser"
+     >
+  <div class="container">
+    <div class="account__wrapper" >
+      <app-user-logo [size]="'big'" [userLogo]="this.userLogo">
+      </app-user-logo>
+      <app-account-info [username]="this.username"
+                        [followers]="this.followers.length"
+                        [following]="this.following.length"
+                        [status]="this.status"
+                        [firestoreID]="this.firestoreID">
+      </app-account-info>
+    </div>
+    <app-button *ngIf="user?.uid! === this.userID"
+                class="account__btn"
+                [label]="'Add photo'"
+                [bgColor]="'green'"
+                (click)="openDialog()">
+    </app-button>
+    <app-button *ngIf="user?.uid! !== this.userID"
+                class="account__btn"
+                [label]=" isFollow ? 'Unfollow' : 'Follow' "
+                [bgColor]="'green'"
+                (click)="getFollowers(this.firestoreID, current.id)">
+    </app-button>
+  </div>
+</div>
+<!--[avatar]="this.user?.photoURL!"-->
+<!--[username]='this.user?.displayName!.slice(0,1)'-->
+
+
 <!--<div class="account" *ngFor="let fireUser of (fireUsers | async)"-->
 <!--     [ngStyle]="{'background-image': 'url(' + fireUser.background + ')'}">-->
 <!--  <div class="container">-->
@@ -26,32 +59,3 @@
 <!--    </app-button>-->
 <!--  </div>-->
 <!--</div>-->
-<div class="account"
-     [ngStyle]="{'background-image': 'url(' + this.background + ')'}">
-  <div class="container">
-    <div class="account__wrapper">
-      <app-user-logo [size]="'big'">
-      </app-user-logo>
-      <app-account-info [username]="this.username"
-                        [followers]="this.followers.length"
-                        [following]="this.following.length"
-                        [status]="this.status"
-                        [firestoreID]="this.firestoreID">
-      </app-account-info>
-    </div>
-    <app-button *ngIf="user?.uid! === this.userID"
-                class="account__btn"
-                [label]="'Add photo'"
-                [bgColor]="'green'"
-                (click)="openDialog()">
-    </app-button>
-    <app-button *ngIf="user?.uid! !== this.userID"
-                class="account__btn"
-                [label]=" isFollow ? 'Unfollow' : 'Follow' "
-                [bgColor]="'green'"
-                (click)="getFollowers(this.firestoreID)">
-    </app-button>
-  </div>
-</div>
-<!--[avatar]="this.user?.photoURL!"-->
-<!--[username]='this.user?.displayName!.slice(0,1)'-->

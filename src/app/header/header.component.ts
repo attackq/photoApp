@@ -15,8 +15,9 @@ import firebase from "firebase/compat/app";
 import {Collections} from "../services/crud/collections";
 import {DocumentReference} from "@angular/fire/compat/firestore";
 import {CrudService} from "../services/crud/crud.service";
-import {filter, switchMap} from "rxjs";
+import {filter, Observable, switchMap} from "rxjs";
 import {tap} from "rxjs/operators";
+import {UserStore} from "../post";
 
 @Component({
   selector: 'app-header',
@@ -40,6 +41,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   public user: firebase.User | null = null;
 
   public icons = iconsSrc;
+  public fireUsers: Observable<UserStore[]>;
+
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -50,7 +53,14 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
+    // this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
+    // this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, '==', this.user?.email!)
+    this.authService.user$.pipe(
+      tap((value: firebase.User | null) => this.user = value),
+      switchMap((value: firebase.User | null) => {
+        return this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!)
+      })
+    ).subscribe()
   }
 
   public toggle: boolean = false;
@@ -59,9 +69,14 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.toggle = !this.toggle;
   }
 
+  // public login(): void {
+  //   this.authService.googleSingIn().subscribe(
+  //     () => this.authService.user$.subscribe(() => this.router.navigate(["/account"])));
+  // }
+
   public login(): void {
     this.authService.googleSingIn().subscribe(
-      () => this.authService.user$.subscribe(() => this.router.navigate(["/account"])));
+      () => this.authService.user$.subscribe(() => this.router.navigate(['/account/', this.user?.uid!])));
   }
 
 }

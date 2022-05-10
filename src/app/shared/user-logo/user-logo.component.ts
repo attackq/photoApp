@@ -15,6 +15,8 @@ export class UserLogoComponent implements OnInit {
 
   @Input()
   public size: string = '';
+  @Input()
+  public userLogo: string;
 
   public user: firebase.User | null = null;
 
@@ -30,7 +32,7 @@ export class UserLogoComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
-    this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, '==',this.user?.email!);
+    // this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, '==', this.user?.email!);
   }
 
   // getPhotoUrl() {

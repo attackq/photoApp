@@ -40,7 +40,6 @@ export class AccountPopupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.myForm.addControl(FormControls.img, new FormControl('', Validators.required));
     this.myForm.addControl(FormControls.title, new FormControl('', Validators.required));
     this.myForm.addControl(FormControls.description, new FormControl('', Validators.required));

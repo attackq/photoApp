@@ -1,5 +1,5 @@
 <nav class="header__nav">
-  <a [routerLink]="['/account', user?.uid!]" class="nav__link">Home</a>
+  <a [routerLink]="['/account/', user?.uid!]" class="nav__link">Home</a>
   <a *ngFor="let fireUser of (fireUsers | async)" [routerLink]="['/account/', fireUser.userID]" class="nav__link">{{fireUser.name}}</a>
 <!--  <ng-container>-->
 <!--    <a [routerLink]="'/account'" *ngFor="let link of links" class="nav__link">{{link.name}}</a>-->

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, switchMap, tap} from "rxjs";
 import {PostStore, UserStore} from "../../post";
 import {Collections} from "../../services/crud/collections";
 import {CrudService} from "../../services/crud/crud.service";
@@ -15,8 +15,7 @@ export class NavComponent implements OnInit {
 
   public user: firebase.User | null = null;
 
-  // public fireUsers: Observable<UserStore[]> = this.crudService.handleData<UserStore>(Collections.USERS);
-  public fireUsers: Observable<UserStore[]> = this.crudService.handleData<UserStore>(Collections.USERS);
+  public fireUsers: Observable<UserStore[]>;
 
   constructor(private crudService: CrudService,
               private authService: AuthService) { }
@@ -24,6 +23,12 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
     this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, '!=', this.user?.email!)
+
+    // this.authService.user$.pipe(
+    //   tap((value: firebase.User | null) => this.user = value),
+    //   switchMap((value: firebase.User | null) => {
+    //     return this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, '!=', value?.email!)})
+    // ).subscribe()
   }
 
 }

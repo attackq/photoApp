@@ -33,27 +33,27 @@ export class AccountComponent implements OnInit {
   public userID: string;
   @Input()
   public background: string
+  @Input()
+  public userLogo: string;
 
   public isFollow: boolean;
 
   public user: firebase.User | null = null;
 
   public fireUsers: Observable<UserStore[]>;
-  public id: string | null;
-  public currentUserID: string;
+  public currentUser: UserStore[] | undefined;
 
-  // private subscription: Subscription;
+  public userFromStoreId: string;
+
 
   constructor(private authService: AuthService,
               public dialog: MatDialog,
-              public crudService: CrudService,
-              private activatedRoute: ActivatedRoute) {
-    // this.subscription = activatedRoute.params.subscribe(params => this.id = params['id']);
+              public crudService: CrudService) {
   }
 
   ngOnInit(): void {
     // this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, '==', this.user?.email!);
-    // this.fireUsers = this.crudService.handleIdData<UserStore>(Collections.USERS, this.id);
+    // this.currentUser = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.user?.uid!);
     // console.log(this.id)
     // this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.authService.user$.pipe(
@@ -64,6 +64,13 @@ export class AccountComponent implements OnInit {
           tap((modifiedUser: UserStore | undefined) => {
             this.isFollow = !!(modifiedUser?.followers.includes(value?.uid!));
           }))
+      }),
+      switchMap((currentUser: UserStore | undefined) => {
+        return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.user?.uid!).pipe(
+          tap((user: UserStore[] | undefined) => {
+            this.currentUser = user;
+          })
+        )
       })
     ).subscribe();
   }
@@ -72,13 +79,14 @@ export class AccountComponent implements OnInit {
     this.dialog.open(AccountPopupComponent);
   }
 
-  public getFollowers(id: string) {
+  public getFollowers(id: string, currentID: string) {
     this.authService.user$.pipe(
       filter((value: firebase.User | null) => !!value),
       switchMap((value: firebase.User | null) => {
         return this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
           map((userFromStore: UserStore | undefined) => {
             const userIndex = userFromStore?.followers.indexOf(value?.uid!);
+            this.userFromStoreId = userFromStore?.userID!;
             if (userIndex === -1) {
               this.isFollow = true;
               return {
@@ -92,42 +100,30 @@ export class AccountComponent implements OnInit {
               };
             }
           }),
-          switchMap(newUser => this.crudService.updateObject(Collections.USERS, id, {...newUser})
+          switchMap(newFollowers => this.crudService.updateObject(Collections.USERS, id, {...newFollowers})
           ),
           switchMap((currentUser) => {
-             return  this.crudService.handleIdData<UserStore>(Collections.USERS, '==',value?.uid!).pipe(
-              tap(valueS => {
-                valueS[0].following.concat(id)
-                console.log(valueS[0].following)
-              })
+            return this.crudService.getUserDoc<UserStore>(Collections.USERS, currentID).pipe(
+              map((currentUserFromStore: UserStore | undefined) => {
+                const followingInd = currentUserFromStore?.following.indexOf(this.userFromStoreId);
+                if (followingInd === -1) {
+                  return {
+                    following: currentUserFromStore?.following.concat(this.userFromStoreId),
+                  }
+                } else {
+                  const newArray: string[] | undefined = currentUserFromStore?.following.splice(followingInd!, 1)
+                  return {
+                    following: currentUserFromStore?.following
+                  }
+                }
+              }),
+              switchMap( newFollowing => this.crudService.updateObject(Collections.USERS, currentID, {...newFollowing}))
             )
-          })
-          )
+          }),
+        )
       })
     ).subscribe();
-
   }
+
+
 }
-
-
-// switchMap((currentUser) => {
-//   console.log(currentUser)
-//   return this.crudService.getUserDoc<UserStore>(Collections.USERS, value?.uid!).pipe(
-//     map((currentUser: UserStore | undefined) => {
-//       // console.log(currentUser);
-//       this.currentUserID = currentUser?.id!;
-//       const currentUserIndex = currentUser?.following.indexOf(id);
-//       if (currentUserIndex === -1) {
-//         return {
-//           following: currentUser?.following.concat(id),
-//         }
-//       } else {
-//         const newArr: string[] | undefined = currentUser?.following.splice(currentUserIndex!, 1)
-//         return {
-//           following: currentUser?.following.concat(id)
-//         }
-//       }
-//     }),
-//     tap(newCurrentUser => this.crudService.updateObject(Collections.USERS, this.currentUserID, {...newCurrentUser}))
-//   )
-// })
