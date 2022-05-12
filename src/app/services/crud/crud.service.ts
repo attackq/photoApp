@@ -41,11 +41,11 @@ export class CrudService {
       );
   }
 
-  public handlePostsData<T>(collectionName: string, value: string): Observable<T[]> {
+  public handlePostsData<T>(collectionName: string, id: string): Observable<T[]> {
     return this.angularFirestore
       .collection(collectionName, ref => {
         const query: firebase.firestore.Query = ref;
-        return query.orderBy(value, 'desc');
+        return query.where('createdBy', '==', id)
       })
       .snapshotChanges()
       .pipe(
@@ -54,13 +54,12 @@ export class CrudService {
             const data: any = a.payload.doc.data();
             const {id} = a.payload.doc;
             return {id, ...data} as T;
-          }),
+          })
         ),
       );
   }
 
-  // return query.where('createdBy', '==', id).orderBy(value, 'desc');
-
+// ;.orderBy('sortID', 'desc')
 
   public handleMailData<T>(collectionName: string, operator: WhereFilterOp, value: string): Observable<T[]> {
     return this.angularFirestore

@@ -1,7 +1,8 @@
 <div class="account__info">
   <div class="account__user">
     <div class="account__name">{{username}}</div>
-    <img [src]="icons.edit" (click)="openDialog(this.firestoreID)">
+    <img [src]="icons.edit" (click)="openDialog(this.firestoreID)"
+         *ngIf="user?.uid! == this.userID">
   </div>
   <div class="account__desc">{{status}}</div>
   <div class="account__follow">

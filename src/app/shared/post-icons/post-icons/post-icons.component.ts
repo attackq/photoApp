@@ -31,6 +31,8 @@ export class PostIconsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.postLikes);
+
     this.authService.user$.pipe(
       filter((value: firebase.User | null) => !!value),
       switchMap((value: firebase.User | null) => {

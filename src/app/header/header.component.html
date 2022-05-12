@@ -18,7 +18,7 @@
         <app-search [imagePath]="icons.search" [size]="'small'"></app-search>
       </div>
       <div class="user" *ngIf="user" #buttonElement>
-        <ng-container *ngFor="let fireUser of (fireUsers | async)">
+        <ng-container *ngFor="let fireUser of fireUsers | async">
           <app-user-logo  (click)="togglePopup()" [userLogo]="fireUser.logo"></app-user-logo>
         </ng-container>
         <app-popup [username]="this.user.displayName!.split(' ')[0]"
@@ -38,7 +38,7 @@
       </div>
     </div>
     <ng-container *ngIf="user" class="burger">
-      <app-header-burger ></app-header-burger>
+      <app-header-burger></app-header-burger>
     </ng-container>
   </div>
 </div>

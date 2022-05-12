@@ -3,6 +3,8 @@ import {iconsSrc} from "../../icons-path";
 import {MatDialog} from "@angular/material/dialog";
 import {EditPopupComponent} from "../../content/post/edit-popup/edit-popup.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
+import firebase from "firebase/compat";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-account-info',
@@ -21,10 +23,16 @@ export class AccountInfoComponent implements OnInit {
   public status: string;
   @Input()
   public firestoreID: string;
+  @Input()
+  public userID: string;
 
-  icons = iconsSrc;
+  public icons = iconsSrc;
 
-  constructor(private dialog: MatDialog) { }
+  public user: firebase.User | null = null;
+
+
+  constructor(private dialog: MatDialog,
+              private authService: AuthService) { }
 
   public openDialog(id: string) {
     let editPopup = this.dialog.open(EditUserComponent);
@@ -32,6 +40,7 @@ export class AccountInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
   }
 
 }

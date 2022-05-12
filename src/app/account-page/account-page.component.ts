@@ -5,6 +5,7 @@ import {CrudService} from "../services/crud/crud.service";
 import {Observable, Subscription, switchMap, tap} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {GetUserService} from "../services/get-user.service";
+import {take} from "rxjs/operators";
 
 @Component({
   selector: 'app-account-page',
@@ -25,8 +26,8 @@ export class AccountPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.fireUsers = this.activatedRoute.params.pipe(
-      tap(value => console.log(value)),
-      switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']))
+      // tap(value => console.log(value)),
+      switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']).pipe(take(1)))
     )
   }
 }

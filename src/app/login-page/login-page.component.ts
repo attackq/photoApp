@@ -33,17 +33,13 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
-    // this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, '==', this.user?.email!)
   }
 
   public login(): void {
-    this.authService.googleSingIn().subscribe(
-      () => this.authService.user$.subscribe(() => this.router.navigate(['/account/', this.user?.uid!])));
+    this.authService.googleSingIn().pipe(
+      switchMap(() => this.authService.user$)
+    ).subscribe(() => this.router.navigate(['/account/', this.user?.uid!]))
   }
-
-  // public login(): void {
-  //   this.authService.googleSingIn().subscribe()
-  // }
 
 
 }

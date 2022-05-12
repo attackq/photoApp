@@ -11,6 +11,7 @@ import {CrudService} from "../services/crud/crud.service";
 import DocumentReference = firebase.firestore.DocumentReference;
 import {map, switchMap, tap} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
+import {GetUserService} from "../services/get-user.service";
 
 @Component({
   selector: 'app-account',
@@ -40,39 +41,63 @@ export class AccountComponent implements OnInit {
 
   public user: firebase.User | null = null;
 
-  public fireUsers: Observable<UserStore[]>;
-  public currentUser: UserStore[] | undefined;
-
   public userFromStoreId: string;
 
+  public authID: string;
 
   constructor(private authService: AuthService,
-              public dialog: MatDialog,
-              public crudService: CrudService) {
+              private dialog: MatDialog,
+              private crudService: CrudService) {
   }
 
+
   ngOnInit(): void {
-    // this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, '==', this.user?.email!);
-    // this.currentUser = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.user?.uid!);
-    // console.log(this.id)
-    // this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    console.log("init");
     this.authService.user$.pipe(
-      tap((value: firebase.User | null) => this.user = value),
+      tap((value: firebase.User | null) => {this.user = value; console.log("1")}),
       filter((value: firebase.User | null) => !!value),
       switchMap((value: firebase.User | null) => {
         return this.crudService.getUserDoc<UserStore>(Collections.USERS, this.firestoreID).pipe(
           tap((modifiedUser: UserStore | undefined) => {
             this.isFollow = !!(modifiedUser?.followers.includes(value?.uid!));
-          }))
-      }),
-      switchMap((currentUser: UserStore | undefined) => {
-        return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.user?.uid!).pipe(
-          tap((user: UserStore[] | undefined) => {
-            this.currentUser = user;
+            console.log(modifiedUser?.followers.length)
+          }),
+          switchMap(() => {
+            return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', value?.uid!).pipe(
+              map(user => {
+                user.forEach(currentUser => this.authID = currentUser.id)
+              })
+            )
           })
         )
-      })
+      }),
     ).subscribe();
+
+    // this.authService.user$.pipe(
+    //   tap((value: firebase.User | null) => this.user = value),
+    //   filter((value: firebase.User | null) => !!value),
+    //   switchMap((value: firebase.User | null) => {
+    //     return this.crudService.getUserDoc<UserStore>(Collections.USERS, this.firestoreID).pipe(
+    //       tap((modifiedUser: UserStore | undefined) => {
+    //         this.isFollow = !!(modifiedUser?.followers.includes(value?.uid!));
+    //       })
+    //     )
+    //   }),
+    // ).subscribe();
+    //
+    //
+    // this.authService.user$.pipe(
+    //   tap((value: firebase.User | null) => this.user = value),
+    //   filter((value: firebase.User | null) => !!value),
+    //   switchMap((value: firebase.User | null) => {
+    //     return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', value?.uid!).pipe(
+    //       map(user => {
+    //         user.forEach(currentUser => this.authID = currentUser.id)
+    //       })
+    //     )
+    //   })
+    // ).subscribe();
+
   }
 
   public openDialog() {
@@ -106,7 +131,7 @@ export class AccountComponent implements OnInit {
             return this.crudService.getUserDoc<UserStore>(Collections.USERS, currentID).pipe(
               map((currentUserFromStore: UserStore | undefined) => {
                 const followingInd = currentUserFromStore?.following.indexOf(this.userFromStoreId);
-                if (followingInd === -1) {
+                if (followingInd == -1) {
                   return {
                     following: currentUserFromStore?.following.concat(this.userFromStoreId),
                   }
@@ -117,7 +142,7 @@ export class AccountComponent implements OnInit {
                   }
                 }
               }),
-              switchMap( newFollowing => this.crudService.updateObject(Collections.USERS, currentID, {...newFollowing}))
+              switchMap(newFollowing => this.crudService.updateObject(Collections.USERS, currentID, {...newFollowing}))
             )
           }),
         )

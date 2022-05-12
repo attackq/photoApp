@@ -1,16 +1,16 @@
 <div class="account"
      [ngStyle]="{'background-image': 'url(' + this.background + ')'}"
-     *ngFor="let current of currentUser"
-     >
+>
   <div class="container">
-    <div class="account__wrapper" >
+    <div class="account__wrapper">
       <app-user-logo [size]="'big'" [userLogo]="this.userLogo">
       </app-user-logo>
       <app-account-info [username]="this.username"
                         [followers]="this.followers.length"
                         [following]="this.following.length"
                         [status]="this.status"
-                        [firestoreID]="this.firestoreID">
+                        [firestoreID]="this.firestoreID"
+                        [userID]="this.userID">
       </app-account-info>
     </div>
     <app-button *ngIf="user?.uid! === this.userID"
@@ -21,15 +21,15 @@
     </app-button>
     <app-button *ngIf="user?.uid! !== this.userID"
                 class="account__btn"
-                [label]=" isFollow ? 'Unfollow' : 'Follow' "
+                [label]="isFollow ? 'Unfollow' : 'Follow'"
                 [bgColor]="'green'"
-                (click)="getFollowers(this.firestoreID, current.id)">
+                (click)="getFollowers(this.firestoreID, this.authID)">
     </app-button>
   </div>
 </div>
 <!--[avatar]="this.user?.photoURL!"-->
 <!--[username]='this.user?.displayName!.slice(0,1)'-->
-
+<!--*ngFor="let current of (currentUser | async)"-->
 
 <!--<div class="account" *ngFor="let fireUser of (fireUsers | async)"-->
 <!--     [ngStyle]="{'background-image': 'url(' + fireUser.background + ')'}">-->
