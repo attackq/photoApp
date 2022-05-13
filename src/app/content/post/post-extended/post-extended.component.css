@@ -51,6 +51,7 @@
 .extended__description:after {
   content: '';
   display: block;
+  min-width: 50px;
   width: 50%;
   height: 1px;
   background: #4F4F4F;

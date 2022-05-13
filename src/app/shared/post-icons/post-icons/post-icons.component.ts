@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {iconsSrc} from "../../../icons-path";
-import {filter} from "rxjs";
+import {filter, Observable} from "rxjs";
 import firebase from "firebase/compat";
 import {map, switchMap, tap} from "rxjs/operators";
-import {PostStore} from "../../../post";
+import {PostStore, UserStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
 import {AuthService} from "../../../services/auth/auth.service";
 import {CrudService} from "../../../services/crud/crud.service";
@@ -16,29 +16,39 @@ import {CrudService} from "../../../services/crud/crud.service";
 export class PostIconsComponent implements OnInit {
 
   @Input()
-  public postLikes: string[];
-  @Input()
-  public postComments: [];
-  @Input()
   public postID: string;
+  @Input()
+  public userID: string;
 
   public addColor: boolean;
 
+  public likes: number | undefined;
+
+  public comments: number | undefined;
+
   public icons = iconsSrc;
+
+  public firePosts: Observable<PostStore[]>
 
   constructor(private authService: AuthService,
               private crudService: CrudService) {
   }
 
-  ngOnInit(): void {
-    console.log(this.postLikes);
+  public user: firebase.User | null = null;
 
+  ngOnInit(): void {
     this.authService.user$.pipe(
       filter((value: firebase.User | null) => !!value),
       switchMap((value: firebase.User | null) => {
-        return this.crudService.getUserDoc<PostStore>(Collections.POSTS, this.postID).pipe(
-          tap((modifiedPost: PostStore | undefined) => {
-            this.addColor = !!(modifiedPost?.likes.includes(value?.uid!));
+        return this.crudService.handlePostsData<PostStore>(Collections.POSTS, this.userID).pipe(
+          map((chosenPost: PostStore[]) => {
+            chosenPost.forEach((currentPost: PostStore) => {
+              if (currentPost.id === this.postID) {
+                this.addColor = !!(currentPost?.likes.includes(value?.uid!));
+                this.likes = currentPost.likes.length;
+                this.comments = currentPost.comments.length
+              }
+            })
           }))
       })
     ).subscribe();

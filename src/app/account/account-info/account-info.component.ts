@@ -5,6 +5,10 @@ import {EditPopupComponent} from "../../content/post/edit-popup/edit-popup.compo
 import {EditUserComponent} from "./edit-user/edit-user.component";
 import firebase from "firebase/compat";
 import {AuthService} from "../../services/auth/auth.service";
+import {Observable} from "rxjs";
+import {UserStore} from "../../post";
+import {CrudService} from "../../services/crud/crud.service";
+import {Collections} from "../../services/crud/collections";
 
 @Component({
   selector: 'app-account-info',
@@ -13,14 +17,7 @@ import {AuthService} from "../../services/auth/auth.service";
 })
 export class AccountInfoComponent implements OnInit {
 
-  @Input()
-  public username: string;
-  @Input()
-  public followers: number;
-  @Input()
-  public following: number;
-  @Input()
-  public status: string;
+
   @Input()
   public firestoreID: string;
   @Input()
@@ -30,9 +27,11 @@ export class AccountInfoComponent implements OnInit {
 
   public user: firebase.User | null = null;
 
+  public firestoreUser: Observable<UserStore[]>
 
   constructor(private dialog: MatDialog,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private crudService: CrudService) { }
 
   public openDialog(id: string) {
     let editPopup = this.dialog.open(EditUserComponent);
@@ -41,6 +40,9 @@ export class AccountInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
+
+    this.firestoreUser = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID)
+
   }
 
 }

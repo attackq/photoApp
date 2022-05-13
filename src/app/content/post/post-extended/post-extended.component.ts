@@ -22,11 +22,9 @@ export class PostExtendedComponent implements OnInit {
   @Input()
   public postDate: number;
   @Input()
-  public postLikes: string[];
-  @Input()
-  public postComments: [];
-  @Input()
   public postID: string;
+  @Input()
+  public userID: string
 
   public user: firebase.User | null = null;
 

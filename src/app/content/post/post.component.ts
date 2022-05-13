@@ -19,16 +19,14 @@ export class PostComponent implements OnInit {
   @Input()
   public postTitle: string = '';
   @Input()
-  public postLikes: string[];
-  @Input()
-  public postComments: [];
-  @Input()
   public postID: string = '';
   @Input()
   public postDesc: string = '';
   @Input()
   public postDate: number;
 
+  @Input()
+  public userid: string;
 
   public delete(id: string): void {
     this.crudService.deleteObject(Collections.POSTS, id).subscribe();
@@ -54,8 +52,7 @@ export class PostComponent implements OnInit {
     extendedPost.componentInstance.postDesc = this.postDesc;
     extendedPost.componentInstance.postDate = date;
     extendedPost.componentInstance.postID = id;
-    extendedPost.componentInstance.postLikes = this.postLikes;
-    extendedPost.componentInstance.postComments = this.postComments;
+    extendedPost.componentInstance.userID = this.userid
   }
 
 }

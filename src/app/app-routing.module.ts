@@ -4,12 +4,15 @@ import {LoginPageComponent} from "./login-page/login-page.component";
 import {AccountPageComponent} from "./account-page/account-page.component";
 import {AuthGuard} from "./services/auth/auth.guard";
 import * as path from "path";
+import {FeedPageComponent} from "./feed-page/feed-page.component";
 
 const routes: Routes = [
   {path: 'account/:id', component: AccountPageComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginPageComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: '**', component: LoginPageComponent}
+  {path: 'feed', component: FeedPageComponent},
+
+  // {path: '**', component: LoginPageComponent}
 ]
 
 @NgModule({

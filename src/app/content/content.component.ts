@@ -14,11 +14,11 @@ import {AuthService} from "../services/auth/auth.service";
 export class ContentComponent implements OnInit {
 
   @Input()
-  public id: string;
+  public userID: string;
 
   public user: firebase.User | null = null;
 
-  public firePosts: Observable<PostStore[]>
+  public firePosts: Observable<PostStore[]>;
 
   constructor(private crudService: CrudService,
               private authService: AuthService) {
@@ -26,8 +26,7 @@ export class ContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
-    this.firePosts = this.crudService.handlePostsData<PostStore>(Collections.POSTS, this.id);
-    console.log(this.id)
+    this.firePosts = this.crudService.handlePostsData<PostStore>(Collections.POSTS, this.userID);
   }
 
   public trackByID(index: number, post: PostStore) {

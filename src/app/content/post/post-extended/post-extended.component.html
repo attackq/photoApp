@@ -11,9 +11,10 @@
         <div class="extended__description">{{postDesc}}</div>
         <div class="extended__date">{{postDate | date: 'd.M.yy, H:mm'}}</div>
         <div class="extended__icons">
-          <app-post-icons [postLikes]="postLikes" [postComments]="postComments" [postID]="this.postID"></app-post-icons>
+          <app-post-icons [postID]="this.postID" [userID]="userID"></app-post-icons>
         </div>
-        <div class="extended__comments">{{postLikes.length}}</div>
+        <div class="extended__comments">comments</div>
       </div>
   </div>
 </div>
+<!--[postLikes]="postLikes"-->

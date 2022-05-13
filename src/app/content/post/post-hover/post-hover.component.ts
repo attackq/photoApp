@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {iconsSrc} from "../../../icons-path";
 
 @Component({
   selector: 'app-post-hover',
@@ -8,12 +7,11 @@ import {iconsSrc} from "../../../icons-path";
 })
 export class PostHoverComponent implements OnInit {
 
+
+  @Input()
+  public userID: string;
   @Input()
   public postTitle: string = '';
-  @Input()
-  public postLikes: string[];
-  @Input()
-  public postComments: [];
   @Input()
   public postID: string;
 

@@ -41,6 +41,7 @@ import { EditPopupComponent } from './content/post/edit-popup/edit-popup.compone
 import { EditUserComponent } from './account/account-info/edit-user/edit-user.component';
 import { PostExtendedComponent } from './content/post/post-extended/post-extended.component';
 import { PostIconsComponent } from './shared/post-icons/post-icons/post-icons.component';
+import { FeedPageComponent } from './feed-page/feed-page.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { PostIconsComponent } from './shared/post-icons/post-icons/post-icons.co
     EditUserComponent,
     PostExtendedComponent,
     PostIconsComponent,
+    FeedPageComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

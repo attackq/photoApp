@@ -58,6 +58,23 @@ export class CrudService {
         ),
       );
   }
+  public handlePostsIDData<T>(collectionName: string, id: string): Observable<T[]> {
+    return this.angularFirestore
+      .collection(collectionName, ref => {
+        const query: firebase.firestore.Query = ref;
+        return query.where('id', '==', id)
+      })
+      .snapshotChanges()
+      .pipe(
+        map((actions) =>
+          actions.map((a) => {
+            const data: any = a.payload.doc.data();
+            const {id} = a.payload.doc;
+            return {id, ...data} as T;
+          })
+        ),
+      );
+  }
 
 // ;.orderBy('sortID', 'desc')
 

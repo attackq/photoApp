@@ -1,0 +1,9 @@
+<div class="feed" >
+  <div class="container">
+    <div class="feed__wrapper">
+      <ng-container *ngFor="let fireUser of (firePosts | async)">
+        <app-post class="feed__column" [postImg]="fireUser.photo"></app-post>
+      </ng-container>
+    </div>
+  </div>
+</div>
