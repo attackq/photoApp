@@ -1,18 +1,18 @@
 <div class="post__icons">
-  <div class="post__icon">
-    <div class="post__img" (click)="updateLikes(postID)" [class.active]="addColor">
+  <div class="post__icon {{size}}">
+    <div class="post__img {{size}}" (click)="updateLikes(postID)" [class.active]="addColor">
       <img [src]="icons.like" alt="" >
     </div>
-    <div class="post__text">{{likes}}</div>
+    <div class="post__text {{size}}">{{likes}}</div>
   </div>
-  <div class="post__icon">
-    <div class="post__img">
+  <div class="post__icon {{size}}">
+    <div class="post__img {{size}}">
       <img [src]="icons.comment" alt="">
     </div>
-    <div class="post__text">{{comments}}</div>
+    <div class="post__text {{size}}">{{comments}}</div>
   </div>
-  <div class="post__icon">
-    <div class="post__img">
+  <div class="post__icon {{size}}">
+    <div class="post__img {{size}}">
       <img [src]="icons.bookmark" alt="">
     </div>
   </div>

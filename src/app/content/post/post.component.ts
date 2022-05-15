@@ -5,6 +5,8 @@ import {UploadService} from "../../services/crud/upload.service";
 import {MatDialog} from "@angular/material/dialog";
 import {EditPopupComponent} from "./edit-popup/edit-popup.component";
 import {PostExtendedComponent} from "./post-extended/post-extended.component";
+import {AuthService} from "../../services/auth/auth.service";
+import firebase from "firebase/compat";
 
 @Component({
   selector: 'app-post',
@@ -24,9 +26,13 @@ export class PostComponent implements OnInit {
   public postDesc: string = '';
   @Input()
   public postDate: number;
-
   @Input()
-  public userid: string;
+  public creator: string;
+  @Input()
+  public userID: string;
+
+  public user: firebase.User | null = null;
+
 
   public delete(id: string): void {
     this.crudService.deleteObject(Collections.POSTS, id).subscribe();
@@ -35,10 +41,12 @@ export class PostComponent implements OnInit {
 
   constructor(private crudService: CrudService,
               private uploadService: UploadService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
   }
 
   public openEditPopupDialog(id: string) {
@@ -46,13 +54,14 @@ export class PostComponent implements OnInit {
     editPopup.componentInstance.postID = id;
   }
 
-  public openExtendedPostDialog(img: string | null, date: number, id: string) {
+  public openExtendedPostDialog() {
     let extendedPost = this.dialog.open(PostExtendedComponent);
-    extendedPost.componentInstance.postImg = img;
+    extendedPost.componentInstance.postImg = this.postImg;
     extendedPost.componentInstance.postDesc = this.postDesc;
-    extendedPost.componentInstance.postDate = date;
-    extendedPost.componentInstance.postID = id;
-    extendedPost.componentInstance.userID = this.userid
+    extendedPost.componentInstance.postDate = this.postDate;
+    extendedPost.componentInstance.postID = this.postID;
+    extendedPost.componentInstance.userID = this.userID;
+    extendedPost.componentInstance.creator = this.creator;
   }
 
 }

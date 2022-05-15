@@ -16,9 +16,13 @@ import {CrudService} from "../../../services/crud/crud.service";
 export class PostIconsComponent implements OnInit {
 
   @Input()
+  public size: string;
+  @Input()
   public postID: string;
   @Input()
   public userID: string;
+  @Input()
+  public creator: string;
 
   public addColor: boolean;
 
@@ -28,7 +32,8 @@ export class PostIconsComponent implements OnInit {
 
   public icons = iconsSrc;
 
-  public firePosts: Observable<PostStore[]>
+  public firePosts: Observable<PostStore[]>;
+
 
   constructor(private authService: AuthService,
               private crudService: CrudService) {
@@ -37,21 +42,40 @@ export class PostIconsComponent implements OnInit {
   public user: firebase.User | null = null;
 
   ngOnInit(): void {
+    // this.authService.user$.pipe(
+    //   filter((value: firebase.User | null) => !!value),
+    //   switchMap((value: firebase.User | null) => {
+    //     return this.crudService.handlePostsData<PostStore>(Collections.POSTS, this.userID).pipe(
+    //       map((chosenPost: PostStore[]) => {
+    //         chosenPost.forEach((currentPost: PostStore) => {
+    //           if (currentPost.id === this.postID) {
+    //             this.addColor = !!(currentPost?.likes.includes(value?.uid!));
+    //             this.likes = currentPost.likes.length;
+    //             this.comments = currentPost.comments.length
+    //           }
+    //         })
+    //       }))
+    //   })
+    // ).subscribe();
+
+
     this.authService.user$.pipe(
       filter((value: firebase.User | null) => !!value),
       switchMap((value: firebase.User | null) => {
-        return this.crudService.handlePostsData<PostStore>(Collections.POSTS, this.userID).pipe(
+        return this.crudService.handleData<PostStore>(Collections.POSTS).pipe(
           map((chosenPost: PostStore[]) => {
             chosenPost.forEach((currentPost: PostStore) => {
               if (currentPost.id === this.postID) {
                 this.addColor = !!(currentPost?.likes.includes(value?.uid!));
                 this.likes = currentPost.likes.length;
-                this.comments = currentPost.comments.length
+                this.comments = currentPost.comments.length;
               }
             })
           }))
       })
     ).subscribe();
+
+
   }
 
   public updateLikes(id: string) {

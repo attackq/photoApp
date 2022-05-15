@@ -1,5 +1,8 @@
 .feed {
+  display: flex;
   flex: 1 1 auto;
+  background: #E5E5E5;
+
 }
 
 .feed__wrapper {
@@ -14,4 +17,26 @@
   flex: 0 0 33.333%;
   margin: 5px 0;
   padding: 0 7.5px;
+}
+
+.scroll__viewport {
+  flex: 1 1 auto;
+}
+
+@media (max-width: 992px) {
+  .feed__column {
+    max-width: 380px;
+    flex: 0 0 50%;
+  }
+
+  .feed__wrapper {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .feed__column {
+    max-width: 380px;
+    flex: 0 0 100%;
+  }
 }

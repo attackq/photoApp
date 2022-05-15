@@ -14,9 +14,12 @@
 }
 
 .button.green {
-  background: #27AE60;
+  background: #23be63;
+  transition: background-color 0.5s linear;
 }
-
+.button.green:disabled {
+  background: #77b48a;
+}
 .button.blue {
   background: #2D9CDB;
   transition: background-color 0.5s linear;

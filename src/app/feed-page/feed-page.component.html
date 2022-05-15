@@ -1,9 +1,17 @@
-<div class="feed" >
+<cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll__viewport">
   <div class="container">
     <div class="feed__wrapper">
-      <ng-container *ngFor="let fireUser of (firePosts | async)">
-        <app-post class="feed__column" [postImg]="fireUser.photo"></app-post>
+      <ng-container *ngFor="let post of (firePosts | async)">
+        <app-post class="feed__column"
+                  [postImg]="post.photo"
+                  [postDesc]="post.description"
+                  [postID]="post.id"
+                  [postTitle]="post.title"
+                  [postDate]="post.sortID"
+                  [userID]="this.routedID"
+                  [creator]="post.createdBy"></app-post>
       </ng-container>
     </div>
   </div>
-</div>
+</cdk-virtual-scroll-viewport>
+

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="header__inner" [ngClass]="!user ? 'login' : 'other'">
       <ng-container>
-        <app-head-logo [imagePath]=icons.photoLogo [class.hide]="condition"></app-head-logo>
+        <app-head-logo [imagePath]=icons.photoLogo [class.hide]="condition" ></app-head-logo>
       </ng-container>
       <ng-container *ngIf="user">
         <app-nav></app-nav>

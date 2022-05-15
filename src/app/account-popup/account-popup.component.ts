@@ -36,10 +36,11 @@ export class AccountPopupComponent implements OnInit {
   constructor(private crudService: CrudService,
               private uploadService: UploadService,
               private authService: AuthService) {
-    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
   }
 
   ngOnInit(): void {
+    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
+
     this.myForm.addControl(FormControls.img, new FormControl('', Validators.required));
     this.myForm.addControl(FormControls.title, new FormControl('', Validators.required));
     this.myForm.addControl(FormControls.description, new FormControl('', Validators.required));

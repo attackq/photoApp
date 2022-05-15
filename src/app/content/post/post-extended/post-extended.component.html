@@ -1,20 +1,39 @@
 <div class="extended__post">
-    <div class="extended__wrapper">
-      <div class="extended__img">
-        <img [src]="postImg">
-      </div>
-      <div class="extended__info" *ngFor="let fireUser of (fireUsers | async)">
+  <div class="extended__wrapper">
+    <div class="extended__img">
+      <img [src]="postImg">
+    </div>
+    <div class="extended__info" *ngFor="let fireUser of (fireUser | async)">
+      <div class="extended__header">
         <div class="extended__user">
-          <div class="extended__logo"><app-user-logo [userLogo]="fireUser.logo"></app-user-logo></div>
-          <div class="extended__name" >{{fireUser.name}}</div>
+          <div class="extended__logo">
+            <app-user-logo mat-dialog-close [userLogo]="fireUser.logo"
+                           [routerLink]="['/account/', fireUser.userID]"></app-user-logo>
+          </div>
+          <div class="extended__name">{{fireUser.name}}</div>
+          <div class="extended__close" mat-dialog-close>
+            <img [src]="icons.close">
+          </div>
         </div>
         <div class="extended__description">{{postDesc}}</div>
         <div class="extended__date">{{postDate | date: 'd.M.yy, H:mm'}}</div>
         <div class="extended__icons">
-          <app-post-icons [postID]="this.postID" [userID]="userID"></app-post-icons>
+          <app-post-icons [postID]="this.postID" [userID]="userID" [size]="'big'"></app-post-icons>
         </div>
-        <div class="extended__comments">comments</div>
       </div>
+      <div class="extended__comments">commetns</div>
+      <form class="extended__form" [formGroup]="commentsForm">
+        <input id="title" type="text" class="choose__input" placeholder="Add comment..." [formControlName]="formControls.comment">
+        <div class="extended__btn" >
+          <app-button [label]="'Send'"
+                      [bgColor]="'green'"
+                      [cond]="commentsForm.invalid"
+                      (click)="submitFrom()"
+                      class="form__btn">
+          </app-button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 <!--[postLikes]="postLikes"-->

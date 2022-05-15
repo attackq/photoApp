@@ -3,7 +3,7 @@ export interface Post {
   title: string,
   description: string,
   likes: string[],
-  comments: [],
+  comments: Object[],
   sortID: number,
   createdBy: string
 }

@@ -1,6 +1,5 @@
 <ng-container *ngFor="let fireUser of (fireUsers | async)">
-  <app-account
-               [firestoreID]="fireUser.id"
+  <app-account [firestoreID]="fireUser.id"
                [userID]="fireUser.userID"></app-account>
   <app-filter></app-filter>
   <div class="content__scroll">

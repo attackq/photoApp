@@ -2,44 +2,75 @@
   display: flex;
   height: 100%;
 }
+
 .extended__img {
   flex: 1 1 70%;
   display: flex;
   max-height: 500px;
   max-width: 700px;
-  /*height: 500px;*/
 }
+
 .extended__img img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
+
 .extended__info {
   flex: 1 1 30%;
   max-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   margin: 0 10px;
+  min-height: 100%;
 }
+
+.extended__header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .extended__user {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
   margin: 10px 0;
 }
+
 .extended__logo {
-  margin: 0 10px;
+  flex: 0 0 20%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
 }
+
 .extended__name {
+  flex: 0 0 70%;
   font-weight: 500;
   font-size: 18px;
-  line-height: 30px;
+  line-height: 20px;
   color: #4F4F4F;
-  margin: 0 10px;
-
-  /*margin-left: 20px;*/
+  text-align: center;
 }
+
+.extended__close {
+  display: flex;
+  width: 100%;
+  justify-content: right;
+}
+
+.extended__close img {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  filter: brightness(0) saturate(100%) invert(57%) sepia(6%) saturate(13%) hue-rotate(336deg) brightness(89%) contrast(89%);
+}
+
 .extended__description {
   font-weight: 400;
   font-size: 16px;
@@ -47,6 +78,7 @@
   color: #4F4F4F;
   text-align: center;
 }
+
 .extended__description:before,
 .extended__description:after {
   content: '';
@@ -58,12 +90,27 @@
   text-align: center;
   margin: 5px auto;
 }
+
 .extended__date {
   font-size: 10px;
   line-height: 14px;
-  /*text-align: center;*/
   color: #828282;
 }
+
 .extended__icons {
-  background: #333333;
+  margin-top: 10px;
+}
+.extended__comments {
+  flex: 1 1 auto;
+  margin-top: 10px;
+}
+.extended__form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.extended__btn {
+  margin-left: 10px;
 }
