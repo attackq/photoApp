@@ -4,7 +4,8 @@
   <app-filter></app-filter>
   <div class="content__scroll">
     <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll__viewport">
-      <app-content [userID]="fireUser.userID"></app-content>
+      <router-outlet></router-outlet>
+<!--      <app-content [userID]="fireUser.userID"></app-content>-->
     </cdk-virtual-scroll-viewport>
   </div>
 </ng-container>

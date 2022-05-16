@@ -34,27 +34,11 @@ export class FeedPageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.firePosts = this.authService.user$.pipe(
-    //   tap((value: firebase.User | null) => this.user = value),
-    //   filter((value: firebase.User | null) => !!value),
-    //   switchMap((value: firebase.User | null) => {
-    //     return this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!).pipe(
-    //       // tap(value => console.log(value[0]))
-    //       combineLatestWith(this.crudService.handleData<PostStore>(Collections.POSTS)),
-    //       // tap(value => console.log(value)),
-    //       map((combo) => {
-    //         return combo[1].filter(i => {
-    //          return  combo[0][0].following.includes(i.createdBy)
-    //         })
-    //       })
-    //     )
-    //   })
-    // )
-
     this.activatedRoute.params.pipe(
       switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']).pipe(
-        take(1))),
-        tap((user) => this.routedID = user[0].userID)
+        take(1)
+      )),
+      tap((user) => this.routedID = user[0].userID)
     ).subscribe()
 
 
@@ -63,13 +47,13 @@ export class FeedPageComponent implements OnInit {
       filter((value: firebase.User | null) => !!value),
       switchMap((value: firebase.User | null) => {
         return this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!).pipe(
-          tap(user => this.userID = user[0].userID)
+          tap((user: UserStore[]) => this.userID = user[0].userID)
         )
       }),
       switchMap((user: UserStore[]) => {
         return this.crudService.handleData<PostStore>(Collections.POSTS).pipe(
-          map(posts => {
-            return posts.filter(i => {
+          map((posts: PostStore[]) => {
+            return posts.filter((i: PostStore) => {
               return user[0].following.includes(i.createdBy)
             })
           }),

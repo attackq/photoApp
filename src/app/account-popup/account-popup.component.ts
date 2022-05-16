@@ -59,7 +59,8 @@ export class AccountPopupComponent implements OnInit {
         likes: [],
         comments: [],
         sortID: new Date().getTime(),
-        createdBy: this.user?.uid!
+        createdBy: this.user?.uid!,
+        bookmarks: []
       }
       this.addPost(post);
       this.myForm?.reset();

@@ -21,10 +21,15 @@
           <app-post-icons [postID]="this.postID" [userID]="userID" [size]="'big'"></app-post-icons>
         </div>
       </div>
-      <div class="extended__comments">commetns</div>
+      <div class="extended__comments" *ngFor="let com of fireComments | async">
+        <div>{{this.text}}</div>
+        <div>{{this.date}}</div>
+        <div>{{this.userComment}}</div>
+      </div>
       <form class="extended__form" [formGroup]="commentsForm">
-        <input id="title" type="text" class="choose__input" placeholder="Add comment..." [formControlName]="formControls.comment">
-        <div class="extended__btn" >
+        <input id="title" type="text" class="choose__input" placeholder="Add comment..."
+               [formControlName]="formControls.comment">
+        <div class="extended__btn">
           <app-button [label]="'Send'"
                       [bgColor]="'green'"
                       [cond]="commentsForm.invalid"
@@ -36,4 +41,3 @@
     </div>
   </div>
 </div>
-<!--[postLikes]="postLikes"-->

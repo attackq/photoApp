@@ -24,7 +24,9 @@ export class PostIconsComponent implements OnInit {
   @Input()
   public creator: string;
 
-  public addColor: boolean;
+  public changeLike: boolean;
+  public changeBookmark: boolean;
+
 
   public likes: number | undefined;
 
@@ -66,7 +68,8 @@ export class PostIconsComponent implements OnInit {
           map((chosenPost: PostStore[]) => {
             chosenPost.forEach((currentPost: PostStore) => {
               if (currentPost.id === this.postID) {
-                this.addColor = !!(currentPost?.likes.includes(value?.uid!));
+                this.changeLike = !!(currentPost?.likes.includes(value?.uid!));
+                this.changeBookmark = !!(currentPost?.bookmarks.includes(value?.uid!));
                 this.likes = currentPost.likes.length;
                 this.comments = currentPost.comments.length;
               }
@@ -86,15 +89,41 @@ export class PostIconsComponent implements OnInit {
           map((postFromStore: PostStore | undefined) => {
             const userIndex = postFromStore?.likes.indexOf(value?.uid!);
             if (userIndex === -1) {
-              this.addColor = true;
+              this.changeLike = true;
               return {
                 likes: postFromStore?.likes.concat(value?.uid!),
               }
             } else {
               const newArr: string[] | undefined = postFromStore?.likes.splice(userIndex!, 1);
-              this.addColor = false;
+              this.changeLike = false;
               return {
                 likes: postFromStore?.likes,
+              };
+            }
+          }),
+          switchMap(newPost => this.crudService.updateObject(Collections.POSTS, id, {...newPost})))
+      })
+    ).subscribe();
+  }
+
+
+  public addBookmark(id: string) {
+    this.authService.user$.pipe(
+      filter((value: firebase.User | null) => !!value),
+      switchMap((value: firebase.User | null) => {
+        return this.crudService.getUserDoc<PostStore>(Collections.POSTS, id).pipe(
+          map((postFromStore: PostStore | undefined) => {
+            const userIndex = postFromStore?.bookmarks.indexOf(value?.uid!);
+            if (userIndex === -1) {
+              this.changeBookmark = true;
+              return {
+                bookmarks: postFromStore?.bookmarks.concat(value?.uid!),
+              }
+            } else {
+              const newArr: string[] | undefined = postFromStore?.bookmarks.splice(userIndex!, 1);
+              this.changeBookmark = false;
+              return {
+                bookmarks: postFromStore?.bookmarks,
               };
             }
           }),

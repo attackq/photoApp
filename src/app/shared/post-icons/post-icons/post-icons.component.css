@@ -29,8 +29,11 @@
   filter: brightness(0) saturate(100%) invert(18%) sepia(1%) saturate(1240%) hue-rotate(314deg) brightness(99%) contrast(93%);
 }
 
-.post__img.active {
+.post__img.like {
   filter: brightness(0) saturate(100%) invert(48%) sepia(33%) saturate(1102%) hue-rotate(313deg) brightness(93%) contrast(98%);
+}
+.post__img.bookmark {
+  filter: brightness(0) saturate(100%) invert(79%) sepia(61%) saturate(3519%) hue-rotate(359deg) brightness(103%) contrast(102%);
 }
 
 .post__text {

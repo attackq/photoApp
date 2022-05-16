@@ -1,6 +1,6 @@
 <div class="post__icons">
   <div class="post__icon {{size}}">
-    <div class="post__img {{size}}" (click)="updateLikes(postID)" [class.active]="addColor">
+    <div class="post__img {{size}}" (click)="updateLikes(postID)" [class.like]="changeLike">
       <img [src]="icons.like" alt="" >
     </div>
     <div class="post__text {{size}}">{{likes}}</div>
@@ -12,7 +12,7 @@
     <div class="post__text {{size}}">{{comments}}</div>
   </div>
   <div class="post__icon {{size}}">
-    <div class="post__img {{size}}">
+    <div class="post__img {{size}}" (click)="addBookmark(postID)" [class.bookmark]="changeBookmark">
       <img [src]="icons.bookmark" alt="">
     </div>
   </div>

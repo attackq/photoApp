@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {filter, Observable, switchMap} from "rxjs";
-import {EditUser, PostStore, UserStore} from "../../../post";
+import {EditUser, NewComment, PostStore, UserStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
 import {CrudService} from "../../../services/crud/crud.service";
 import firebase from "firebase/compat";
@@ -8,7 +8,7 @@ import {AuthService} from "../../../services/auth/auth.service";
 import {iconsSrc} from "../../../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../../../controls";
-import {map} from "rxjs/operators";
+import {map, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-post-extended',
@@ -41,8 +41,11 @@ export class PostExtendedComponent implements OnInit {
   public commentsForm: FormGroup = new FormGroup({});
   public formControls: typeof FormControls = FormControls;
 
-  public text: Object;
-
+  public fireComments: Observable<PostStore[]>
+  public com: Object[];
+  public text: string;
+  public date: Date;
+  public userComment: string;
   constructor(private crudService: CrudService,
               private authService: AuthService) {
   }
@@ -50,35 +53,35 @@ export class PostExtendedComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
     this.fireUser = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.creator);
-
     this.commentsForm.addControl(FormControls.comment, new FormControl('', Validators.required));
 
+    this.fireComments = this.crudService.handleData<PostStore>(Collections.POSTS).pipe(
+      map((post: PostStore[]) => {
+        return  post.filter(i => {
+          return i.id === this.postID
+        })
+      }),
+      tap ((flPost: PostStore[]) => {
+        flPost[0].comments.forEach((i: NewComment) => {
+          this.text = i.text;
+          this.date = i.date ;
+          this.userComment = i.userID
+        })
+      })
+    )
 
-    // this.authService.user$.pipe(
-    //   filter((value: firebase.User | null) => !!value),
-    //   switchMap((value: firebase.User | null) => {
-    //     return this.crudService.handleData<PostStore>(Collections.POSTS).pipe(
-    //       map((chosenPost: PostStore[]) => {
-    //         chosenPost.forEach((currentPost: PostStore) => {
-    //           if (currentPost.id === this.postID) {
-    //             this.text = currentPost.comments[0]
-    //           }
-    //         })
-    //       }))
-    //   })
-    // ).subscribe();
+
   }
 
   public addComment() {
     const inputComment = this.commentsForm.controls[FormControls.comment].value;
     this.crudService.getUserDoc<PostStore>(Collections.POSTS, this.postID).pipe(
       map((post: PostStore | undefined) => {
-        const comment = {
+        const comment: NewComment = {
           text: inputComment,
-          userID: this.user?.uid,
+          userID: this.user?.uid!,
           date: new Date()
         };
-        console.log(inputComment)
         let comments: Object[] | undefined = post?.comments
         comments?.push(comment);
         return this.crudService.updateObject(Collections.POSTS, this.postID, {comments})
@@ -86,14 +89,6 @@ export class PostExtendedComponent implements OnInit {
     ).subscribe()
   }
 
-  // public isControlValid(controlName: string): boolean {
-  //   const control: AbstractControl | undefined = this.commentsForm?.controls[controlName];
-  //   if (control) {
-  //     return control.invalid && (control.dirty || control.touched);
-  //   } else {
-  //     return false;
-  //   }
-  // }
 
   public submitFrom(): void {
     if (this.commentsForm.valid) {

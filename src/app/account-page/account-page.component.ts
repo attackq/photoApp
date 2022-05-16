@@ -26,7 +26,6 @@ export class AccountPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.fireUsers = this.activatedRoute.params.pipe(
-      // tap(value => console.log(value)),
       switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']).pipe(take(1)))
     )
   }

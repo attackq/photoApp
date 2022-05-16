@@ -1,31 +1,13 @@
 .filter {
-  background: #FFFFFF;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  position: relative;
 }
 
 .filter__link {
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 18px;
-  text-align: center;
+  margin-left: 20px;
+  font-size: 14px;
   color: #828282;
   cursor: pointer;
-}
-
-.filter__link img {
-  width: 24px;
-  height: 24px;
-  filter: brightness(0) saturate(100%) invert(59%) sepia(2%) saturate(4%) hue-rotate(316deg) brightness(87%) contrast(82%);
-}
-
-.filter__text {
-  margin-right: 7px;
 }
 
 .mat-form-field {
@@ -66,15 +48,19 @@
 .mat-form-field-infix {
   border-top: none !important;
 }
+
 .mat-form-field-appearance-standard .mat-form-field-flex {
   padding-top: 0 !important;
 }
+
 .mat-form-field-wrapper {
   padding: 0 !important;
 }
+
 .mat-form-field-appearance-standard .mat-form-field-underline {
   display: none !important;
 }
+
 .mat-select-panel {
   max-width: 111px !important;
 }

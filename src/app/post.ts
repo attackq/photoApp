@@ -3,9 +3,10 @@ export interface Post {
   title: string,
   description: string,
   likes: string[],
-  comments: Object[],
+  comments: [],
   sortID: number,
-  createdBy: string
+  createdBy: string,
+  bookmarks: string[]
 }
 
 export interface User {
@@ -26,6 +27,12 @@ export interface EditDescription {
 
 export interface Like {
   likes: string[] | undefined
+}
+
+export interface NewComment {
+  text: string,
+  userID: string,
+  date: Date
 }
 
 export interface EditUser {

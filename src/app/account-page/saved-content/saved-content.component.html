@@ -1,18 +1,18 @@
 <div class="content__data">
   <div class="container">
     <div class="content__wrapper">
-      <ng-container *ngFor="let post of (firePosts | async); trackBy: trackByID">
+      <ng-container *ngFor="let post of (firePosts | async)">
         <app-post class="content__column"
+                  [postImg]="post.photo"
                   [postDesc]="post.description"
                   [postID]="post.id"
-                  [postImg]="post.photo"
                   [postTitle]="post.title"
                   [postDate]="post.sortID"
-                  [userID]="this.id"
-                  [creator]="post.createdBy">
-        </app-post>
+                  [userID]="this.routedID"
+                  [creator]="post.createdBy"></app-post>
       </ng-container>
     </div>
   </div>
 </div>
+
 
