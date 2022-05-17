@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {iconsSrc} from "../../../icons-path";
 import {filter, Observable} from "rxjs";
 import firebase from "firebase/compat";
-import {map, switchMap, tap} from "rxjs/operators";
+import {map, switchMap, take, tap} from "rxjs/operators";
 import {PostStore, UserStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
 import {AuthService} from "../../../services/auth/auth.service";
@@ -20,13 +20,11 @@ export class PostIconsComponent implements OnInit {
   @Input()
   public postID: string;
   @Input()
-  public userID: string;
-  @Input()
   public creator: string;
 
   public changeLike: boolean;
-  public changeBookmark: boolean;
 
+  public changeBookmark: boolean;
 
   public likes: number | undefined;
 
@@ -36,31 +34,11 @@ export class PostIconsComponent implements OnInit {
 
   public firePosts: Observable<PostStore[]>;
 
-
   constructor(private authService: AuthService,
               private crudService: CrudService) {
   }
 
-  public user: firebase.User | null = null;
-
   ngOnInit(): void {
-    // this.authService.user$.pipe(
-    //   filter((value: firebase.User | null) => !!value),
-    //   switchMap((value: firebase.User | null) => {
-    //     return this.crudService.handlePostsData<PostStore>(Collections.POSTS, this.userID).pipe(
-    //       map((chosenPost: PostStore[]) => {
-    //         chosenPost.forEach((currentPost: PostStore) => {
-    //           if (currentPost.id === this.postID) {
-    //             this.addColor = !!(currentPost?.likes.includes(value?.uid!));
-    //             this.likes = currentPost.likes.length;
-    //             this.comments = currentPost.comments.length
-    //           }
-    //         })
-    //       }))
-    //   })
-    // ).subscribe();
-
-
     this.authService.user$.pipe(
       filter((value: firebase.User | null) => !!value),
       switchMap((value: firebase.User | null) => {
@@ -74,11 +52,10 @@ export class PostIconsComponent implements OnInit {
                 this.comments = currentPost.comments.length;
               }
             })
-          }))
+          })
+        )
       })
     ).subscribe();
-
-
   }
 
   public updateLikes(id: string) {
@@ -105,7 +82,6 @@ export class PostIconsComponent implements OnInit {
       })
     ).subscribe();
   }
-
 
   public addBookmark(id: string) {
     this.authService.user$.pipe(

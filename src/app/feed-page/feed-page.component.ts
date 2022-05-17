@@ -17,13 +17,8 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class FeedPageComponent implements OnInit {
 
-  public user: firebase.User | null = null;
-  public fireUser: UserStore
-  public userFollowing: string[]
   public firePosts: Observable<PostStore[]>;
-  public fireUsers: Observable<UserStore[]>;
-  public routedID: string
-  public userID: string;
+  public routedID: null;
 
   constructor(private authService: AuthService,
               private crudService: CrudService,
@@ -34,22 +29,17 @@ export class FeedPageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.activatedRoute.params.pipe(
-      switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']).pipe(
-        take(1)
-      )),
-      tap((user) => this.routedID = user[0].userID)
-    ).subscribe()
+    // this.activatedRoute.params.pipe(
+    //   switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']).pipe(
+    //     take(1),
+    //     tap((user: UserStore[]) => this.routedID = user[0].userID)
+    //   ))
+    // ).subscribe()
 
 
     this.firePosts = this.authService.user$.pipe(
-      // tap((value: firebase.User | null) => this.user = value),
       filter((value: firebase.User | null) => !!value),
-      switchMap((value: firebase.User | null) => {
-        return this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!).pipe(
-          tap((user: UserStore[]) => this.userID = user[0].userID)
-        )
-      }),
+      switchMap((value: firebase.User | null) => this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!)),
       switchMap((user: UserStore[]) => {
         return this.crudService.handleData<PostStore>(Collections.POSTS).pipe(
           map((posts: PostStore[]) => {

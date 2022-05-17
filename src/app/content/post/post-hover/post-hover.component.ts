@@ -8,8 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class PostHoverComponent implements OnInit {
 
 
-  @Input()
-  public userID: string;
+
   @Input()
   public postTitle: string = '';
   @Input()

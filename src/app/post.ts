@@ -32,7 +32,7 @@ export interface Like {
 export interface NewComment {
   text: string,
   userID: string,
-  date: Date
+  date: number
 }
 
 export interface EditUser {

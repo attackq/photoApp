@@ -18,24 +18,11 @@ export class UserLogoComponent implements OnInit {
   @Input()
   public userLogo: string;
 
-  public user: firebase.User | null = null;
-
-  public fireUsers: Observable<UserStore[]>;
-
-  public toggle: boolean = false;
-
-  public photoUrl: string;
-
   constructor(private authService: AuthService,
               private crudService: CrudService) {
   }
 
   ngOnInit(): void {
-    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
-    // this.fireUsers = this.crudService.handleMailData<UserStore>(Collections.USERS, '==', this.user?.email!);
   }
 
-  // getPhotoUrl() {
-  //   return this.photoUrl = this.user?.photoURL!;
-  // }
 }

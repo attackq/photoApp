@@ -23,7 +23,6 @@ const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'feed', component: FeedPageComponent},
-
   // {path: '**', component: LoginPageComponent}
 ]
 

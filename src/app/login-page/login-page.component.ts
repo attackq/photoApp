@@ -1,19 +1,18 @@
-import {Component, HostBinding, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation} from '@angular/core';
 import {AuthService} from '../services/auth/auth.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import firebase from "firebase/compat/app";
-import {Observable, Subscription, switchMap} from "rxjs";
+import {Observable, switchMap} from "rxjs";
 import {UserStore} from "../post";
-import {Collections} from "../services/crud/collections";
 import {CrudService} from "../services/crud/crud.service";
-import {tap} from "rxjs/operators";
 
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 export class LoginPageComponent implements OnInit {

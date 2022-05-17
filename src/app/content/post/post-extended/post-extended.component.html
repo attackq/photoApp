@@ -18,13 +18,19 @@
         <div class="extended__description">{{postDesc}}</div>
         <div class="extended__date">{{postDate | date: 'd.M.yy, H:mm'}}</div>
         <div class="extended__icons">
-          <app-post-icons [postID]="this.postID" [userID]="userID" [size]="'big'"></app-post-icons>
+          <app-post-icons [postID]="this.postID" [size]="'big'"></app-post-icons>
         </div>
       </div>
-      <div class="extended__comments" *ngFor="let com of fireComments | async">
-        <div>{{this.text}}</div>
-        <div>{{this.date}}</div>
-        <div>{{this.userComment}}</div>
+      <div class="extended__comments" >
+        <div class="extended__comment" *ngFor="let comment of (fireComments | async)">
+          <app-user-logo [userLogo]="comment.userID"></app-user-logo>
+          <div class="comment__text">{{comment.text}}</div>
+          <div class="comment__date">{{comment.date | date: 'short'}}</div>
+        </div>
+
+<!--        <div>{{this.text}}</div>-->
+<!--        <div>{{this.date}}</div>-->
+<!--        <div>{{this.userComment}}</div>-->
       </div>
       <form class="extended__form" [formGroup]="commentsForm">
         <input id="title" type="text" class="choose__input" placeholder="Add comment..."

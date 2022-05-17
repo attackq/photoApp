@@ -1,6 +1,6 @@
 <div class="content__card">
   <img [src]="postImg" alt="" (click)="openExtendedPostDialog()">
-  <div class="content__buttons" *ngIf="this.user?.uid! === this.userID">
+  <div class="content__buttons" *ngIf="this.userID">
     <button mat-icon-button [matMenuTriggerFor]="beforeMenu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
@@ -12,6 +12,5 @@
   <app-post-hover
     [postTitle]="postTitle"
     [postID]="postID"
-    [userID]="userID"
   ></app-post-hover>
 </div>

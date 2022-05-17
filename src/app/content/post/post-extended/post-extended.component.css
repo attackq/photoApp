@@ -104,6 +104,11 @@
   flex: 1 1 auto;
   margin-top: 10px;
 }
+.extended__comment {
+  display: flex;
+  margin: 10px 0;
+  align-items: center;
+}
 .extended__form {
   display: flex;
   align-items: center;

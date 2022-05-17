@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {iconsSrc} from "../../icons-path";
 import {MatDialog} from "@angular/material/dialog";
-import {EditPopupComponent} from "../../content/post/edit-popup/edit-popup.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
 import firebase from "firebase/compat";
 import {AuthService} from "../../services/auth/auth.service";
@@ -13,7 +12,8 @@ import {Collections} from "../../services/crud/collections";
 @Component({
   selector: 'app-account-info',
   templateUrl: './account-info.component.html',
-  styleUrls: ['./account-info.component.css']
+  styleUrls: ['./account-info.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AccountInfoComponent implements OnInit {
 
