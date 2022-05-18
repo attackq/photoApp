@@ -26,8 +26,8 @@ export class EditPopupComponent implements OnInit {
   constructor(private crudService: CrudService) { }
 
   ngOnInit(): void {
-    this.editPostForm.addControl(FormControls.title, new FormControl('', Validators.required));
-    this.editPostForm.addControl(FormControls.description, new FormControl('', Validators.required));
+    this.editPostForm.addControl(FormControls.title, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(25)])));
+    this.editPostForm.addControl(FormControls.description, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(200)])));
   }
 
   public isControlValid(controlName: string): boolean {

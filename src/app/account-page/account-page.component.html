@@ -1,11 +1,10 @@
 <ng-container *ngFor="let fireUser of (fireUsers | async)">
   <app-account [firestoreID]="fireUser.id"
                [userID]="fireUser.userID"></app-account>
-  <app-filter></app-filter>
+  <app-filter [userID]="fireUser.userID"></app-filter>
   <div class="content__scroll">
     <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll__viewport">
       <router-outlet></router-outlet>
-<!--      <app-content [userID]="fireUser.userID"></app-content>-->
     </cdk-virtual-scroll-viewport>
   </div>
 </ng-container>

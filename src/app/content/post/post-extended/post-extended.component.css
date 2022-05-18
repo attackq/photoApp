@@ -101,21 +101,57 @@
   margin-top: 10px;
 }
 .extended__comments {
+  width: 100%;
   flex: 1 1 auto;
-  margin-top: 10px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+.scroll__viewport {
+  background: #FFFFFF;
+  overflow-x: hidden;
 }
 .extended__comment {
+  width: 100%;
   display: flex;
   margin: 10px 0;
   align-items: center;
+  justify-content: space-between;
 }
 .extended__form {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 10px;
 }
-
+.extended__input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal_err {
+  font-size: 12px;
+}
 .extended__btn {
   margin-left: 10px;
 }
+.comment__logo {
+  margin-right: 10px;
+  cursor: pointer;
+  /*width: 15%;*/
+}
+.comment__text {
+  max-width: 165px;
+  margin-right: 10px;
+  flex: 0 0 80%;
+  /*width: 80%;*/
+  font-weight: 500;
+  font-size: 14px;
+  color: #4F4F4F;
+}
+.comment__info {
+  /*width: 30%;*/
+  display: flex;
+  align-items: center;
+}
+

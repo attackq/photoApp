@@ -31,6 +31,7 @@ export class PostComponent implements OnInit {
   @Input()
   public userID: string | null;
 
+  public user: firebase.User | null = null;
 
 
   public delete(id: string): void {
@@ -45,6 +46,7 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
   }
 
   public openEditPopupDialog(id: string) {

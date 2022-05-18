@@ -11,7 +11,6 @@ import {HeaderComponent} from "./header/header.component";
 import {SearchComponent} from "./header/search/search.component";
 import { HeadLogoComponent } from './header/head-logo/head-logo.component';
 import { FilterComponent } from './filter/filter.component';
-import { FilterPopupComponent } from './filter/filter-popup/filter-popup.component';
 import { AccountComponent } from './account/account.component';
 import { AccountInfoComponent } from './account/account-info/account-info.component';
 import { ButtonComponent } from './shared/button/button.component';
@@ -43,6 +42,8 @@ import { PostExtendedComponent } from './content/post/post-extended/post-extende
 import { PostIconsComponent } from './shared/post-icons/post-icons/post-icons.component';
 import { FeedPageComponent } from './feed-page/feed-page.component';
 import { SavedContentComponent } from './account-page/saved-content/saved-content.component';
+import { FollowersComponent } from './account/account-info/followers/followers.component';
+import { FollowingComponent } from './account/account-info/following/following.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,6 @@ import { SavedContentComponent } from './account-page/saved-content/saved-conten
     SearchComponent,
     HeadLogoComponent,
     FilterComponent,
-    FilterPopupComponent,
     AccountComponent,
     AccountInfoComponent,
     ButtonComponent,
@@ -72,6 +72,8 @@ import { SavedContentComponent } from './account-page/saved-content/saved-conten
     PostIconsComponent,
     FeedPageComponent,
     SavedContentComponent,
+    FollowersComponent,
+    FollowingComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

@@ -1,13 +1,15 @@
 <div class="container">
   <div class="filter">
     <mat-form-field appearance="standard">
-      <mat-select [(value)]="selected" disableOptionCentering panelClass="myPanelClass">
+      <mat-select [(value)]="defaultLink" disableOptionCentering panelClass="myPanelClass">
         <mat-option *ngFor="let link of filterLinks" [value]="link.name" >
           {{link.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <div class="filter__link" [routerLink]="'./saved'">Saved</div>
+    <ng-container *ngIf="this.user?.uid === this.userID">
+      <a class="filter__link" [routerLink]="'./saved'">Saved</a>
+    </ng-container>
   </div>
 </div>
 

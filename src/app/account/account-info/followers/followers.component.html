@@ -1,0 +1,19 @@
+<div mat-dialog-content>
+  <div class="modal__content">
+    <div class="modal__title">
+      <div class="modal__text">Followers</div>
+      <img [src]="icons.close" alt="" mat-dialog-close>
+    </div>
+    <div class="followers__list">
+      <div class="follower" *ngFor="let user of firestoreUser | async">
+        <div class="follower__logo">
+          <app-user-logo [userLogo]="user.logo"
+                         [routerLink]="['/account/', user.userID]"
+                         mat-dialog-close></app-user-logo>
+        </div>
+        <div class="follower__name">{{user.name}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+

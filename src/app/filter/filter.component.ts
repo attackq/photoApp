@@ -1,20 +1,16 @@
 import {
-  AfterViewInit,
   Component,
-  ElementRef,
-  HostListener,
   Input,
   OnInit,
-  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import {iconsSrc} from "../icons-path";
-import {MatSelect} from "@angular/material/select";
+import firebase from "firebase/compat";
+import {AuthService} from "../services/auth/auth.service";
 
 
 export interface FilterLinks {
   name: string;
-  viewValue:string;
+  viewValue: string;
 }
 
 @Component({
@@ -26,19 +22,12 @@ export interface FilterLinks {
 
 export class FilterComponent implements OnInit {
 
-  @ViewChild('mySelect') private select: MatSelect;
+  @Input()
+  public userID: string;
 
-  // @ViewChild('filterLink') filterLink: ElementRef | undefined;
-  // @ViewChild('filterPopup') filterPopup: ElementRef | undefined;
-  //
-  // @HostListener('document:mousedown', ['$event'])
-  // onGlobalClick(event: MouseEvent): void {
-  //   if (!this.filterLink?.nativeElement.contains(event.target)) {
-  //     this.toggle = false;
-  //   }
-  // }
+  public user: firebase.User | null = null;
 
-  public selected: string = 'All photos';
+  public defaultLink: string = 'All photos';
 
   public filterLinks: FilterLinks[] = [
     {name: 'All photos', viewValue: 'All photos'},
@@ -47,22 +36,11 @@ export class FilterComponent implements OnInit {
     {name: 'Most commented', viewValue: 'Most commented'}
   ]
 
-  public icons = iconsSrc;
-
-  public linkName: string = 'All photos';
-
-  public changeName(newLink: string) {
-    this.linkName = newLink;
+  constructor(private authService: AuthService) {
   }
-
-  toggle: boolean = false;
-  togglePopup() {
-    this.toggle = !this.toggle;
-  }
-
-  constructor() { }
 
   ngOnInit(): void {
+    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
   }
 
 }

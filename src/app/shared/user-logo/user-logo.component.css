@@ -18,12 +18,11 @@
   overflow: hidden;
   position: relative;
 }
-.user__c {
-  position: absolute;
-}
+
 .user__name img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 .user__name.big {
   width: 95px;

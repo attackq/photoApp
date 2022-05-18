@@ -17,6 +17,7 @@
 }
 .mat-menu-panel {
   min-width: 90px !important;
+  min-height: auto !important;
 }
 .mat-menu-item {
   line-height: 24px !important;
@@ -28,6 +29,7 @@
   height: 30px !important;
   line-height: 30px !important;
 }
-.mat-icon {
-  color: #ffffff !important;
+
+.white__icon {
+  color: #ffffff;
 }

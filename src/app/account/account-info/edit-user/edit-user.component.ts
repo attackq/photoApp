@@ -26,14 +26,27 @@ export class EditUserComponent implements OnInit {
 
   public formControls: typeof FormControls = FormControls;
 
-  public imageLogoSrc: string | null = '';
-  public imageBackSrc: string | null = '';
-  public progressLogo: string | undefined = ''
-  public progressBack: string | undefined = '';
+  public imageLogoSrc: string | null;
 
-  public isImageLogo: boolean = false;
-  public isImageBack: boolean = false;
+  public imageBackSrc: string | null;
 
+  public progressLogo: string | undefined;
+
+  public progressBack: string | undefined;
+
+  public isImageLogo: boolean;
+
+  public isImageBack: boolean;
+
+  public isLogoTypeFile: boolean;
+
+  public isBackTypeFile: boolean;
+
+  public fileTypes: string[] = [
+    'image/jpeg',
+    'image/pjpeg',
+    'image/png',
+  ]
 
   constructor(private crudService: CrudService,
               private uploadService: UploadService,
@@ -43,8 +56,8 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
     this.editUserForm.addControl(FormControls.logo, new FormControl(''));
     this.editUserForm.addControl(FormControls.background, new FormControl(''));
-    this.editUserForm.addControl(FormControls.name, new FormControl('',Validators.compose([ Validators.maxLength(20), Validators.required]) ));
-    this.editUserForm.addControl(FormControls.description, new FormControl(''));
+    this.editUserForm.addControl(FormControls.name, new FormControl('', Validators.maxLength(20)));
+    this.editUserForm.addControl(FormControls.description, new FormControl('', Validators.maxLength(30)));
   }
 
   public onLogoSelected(event: Event): void {
@@ -53,18 +66,23 @@ export class EditUserComponent implements OnInit {
       event.preventDefault();
       if (eventTarget && eventTarget.files) {
         const file: File = eventTarget.files[0];
-        combineLatest(this.uploadService.uploadFileAndGetMetadata('userInfo', file))
-          .pipe(
-            takeWhile(([, link]) => {
-              return !link;
-            }, true),
-          )
-          .subscribe(([percent, link]) => {
-            this.progressLogo = percent;
-            this.imageLogoSrc = link;
-          });
+        this.isLogoTypeFile = false
+        if (this.fileTypes.includes(file.type)) {
+          combineLatest(this.uploadService.uploadFileAndGetMetadata('posts', file))
+            .pipe(
+              takeWhile(([, link]) => {
+                return !link;
+              }, true),
+            )
+            .subscribe(([percent, link]) => {
+              this.progressLogo = percent;
+              this.imageLogoSrc = link;
+            });
+          this.isImageLogo = true;
+        } else {
+          this.isLogoTypeFile = true;
+        }
       }
-      this.isImageLogo = true;
     }
   }
 
@@ -74,18 +92,23 @@ export class EditUserComponent implements OnInit {
       event.preventDefault();
       if (eventTarget && eventTarget.files) {
         const file: File = eventTarget.files[0];
-        combineLatest(this.uploadService.uploadFileAndGetMetadata('userInfo', file))
-          .pipe(
-            takeWhile(([, link]) => {
-              return !link;
-            }, true),
-          )
-          .subscribe(([percent, link]) => {
-            this.progressBack = percent;
-            this.imageBackSrc = link;
-          });
+        this.isBackTypeFile = false
+        if (this.fileTypes.includes(file.type)) {
+          combineLatest(this.uploadService.uploadFileAndGetMetadata('posts', file))
+            .pipe(
+              takeWhile(([, link]) => {
+                return !link;
+              }, true),
+            )
+            .subscribe(([percent, link]) => {
+              this.progressBack = percent;
+              this.imageBackSrc = link;
+            });
+          this.isImageBack = true;
+        } else {
+          this.isBackTypeFile = true;
+        }
       }
-      this.isImageBack = true;
     }
   }
 
@@ -100,11 +123,9 @@ export class EditUserComponent implements OnInit {
 
   public updateDescription(id: string): void {
     const name = this.editUserForm.controls[FormControls.name].value;
-    // console.log(this.editUserForm.controls[FormControls.title]);
     const status = this.editUserForm.controls[FormControls.description].value;
     this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
       map((user: UserStore | undefined) => {
-          // console.log(this.editUserForm.controls[FormControls.name]);
           const newUser: EditUser = {
             name: name || user?.name,
             logo: this.imageLogoSrc || user?.logo!,
@@ -116,6 +137,10 @@ export class EditUserComponent implements OnInit {
     ).subscribe()
   }
 
+  public deleteImg(): void {
+    this.uploadService.deleteFile(this.imageBackSrc!);
+    this.uploadService.deleteFile(this.imageLogoSrc!);
+  }
 
   public submitFrom(id: string): void {
     if (this.editUserForm.valid) {

@@ -8,11 +8,11 @@
       <label for="title" class="modal__choose">Please, edit the title</label>
       <input id="title" [formControlName]="formControls.title" type="text" class="choose__input"
              placeholder="Write the title...">
-      <div class="modal_err" *ngIf="isControlValid(formControls.title)">Provide a title</div>
+      <div class="modal_err" *ngIf="isControlValid(formControls.title)">Max length is 25 symbols</div>
       <label for="title" class="modal__choose">Please, edit the description</label>
       <textarea [formControlName]="formControls.description" name="description" class="choose__input big"
                 placeholder="Write the description..."></textarea>
-      <div class="modal_err" *ngIf="isControlValid(formControls.description)">Provide a description</div>
+      <div class="modal_err" *ngIf="isControlValid(formControls.description)">Max length is 200 symbols</div>
       <app-button [label]="'Change'"
                   [bgColor]="'blue'"
                   [cond]="editPostForm.invalid"

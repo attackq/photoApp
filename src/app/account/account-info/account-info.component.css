@@ -42,7 +42,12 @@
 .followers {
   margin-right: 45px;
   position: relative;
+  cursor: pointer;
 }
+.following {
+  cursor: pointer;
+}
+
 .followers:after {
   content: '';
   display: block;

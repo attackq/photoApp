@@ -114,9 +114,12 @@ input[type='submit'] {
   color: #828282;
   font-family: 'Montserrat', sans-serif;
 }
-
+textarea {
+  resize: none;
+}
 .choose__input.big {
   margin-top: 10px;
+  width: 100%;
   height: 120px;
 }
 

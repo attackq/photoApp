@@ -3,7 +3,7 @@ export interface Post {
   title: string,
   description: string,
   likes: string[],
-  comments: [],
+  comments: NewComment[],
   sortID: number,
   createdBy: string,
   bookmarks: string[]
@@ -31,8 +31,9 @@ export interface Like {
 
 export interface NewComment {
   text: string,
-  userID: string,
-  date: number
+  logo: string,
+  date: number,
+  createdBy: string
 }
 
 export interface EditUser {

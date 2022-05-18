@@ -5,9 +5,10 @@
       <img [src]="icons.close" alt="" mat-dialog-close>
     </div>
     <div class="modal__choose">Please, choose the photo</div>
-    <form [formGroup]="myForm" class="choose__form">
+    <form [formGroup]="addPostForm" class="choose__form">
       <label class="choose__label" for="choose">Choose</label>
       <input type="file" id="choose" (change)="onFileSelected($event)" [formControlName]="formControls.img">
+      <div class="modal_err" *ngIf="this.isTypeFile">Please, choose JPEG/PNG</div>
       <progress class="choose__progress" max="100" [value]="progress" *ngIf="isImage"></progress>
       <div class="choose__img" *ngIf="this.progress === '100'">
         <img [src]="img" alt="choose your pic">
@@ -17,13 +18,13 @@
       </div>
       <label for="title" class="modal__choose">Please, add the description</label>
       <input id="title" [formControlName]="formControls.title" type="text" class="choose__input" placeholder="Write the title...">
-      <div class="modal_err" *ngIf="isControlValid(formControls.title)">Provide a title</div>
+      <div class="modal_err" *ngIf="isControlValid(formControls.title)">Max length is 25 symbols</div>
       <textarea [formControlName]="formControls.description" name="description" class="choose__input big"
                 placeholder="Write the description..."></textarea>
-      <div class="modal_err" *ngIf="isControlValid(formControls.description)">Provide a description</div>
+      <div class="modal_err" *ngIf="isControlValid(formControls.description)">Max length is 200 symbols</div>
       <app-button [label]="'Publish'"
                   [bgColor]="'blue'"
-                  [cond]="myForm.invalid"
+                  [cond]="addPostForm.invalid"
                   (click)="submitFrom()"
                   mat-dialog-close
                   class="form__btn">
