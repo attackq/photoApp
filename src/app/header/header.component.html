@@ -2,7 +2,7 @@
   <div class="container">
     <div class="header__inner" [ngClass]="!user ? 'login' : 'other'">
       <ng-container>
-        <app-head-logo [imagePath]=icons.photoLogo [class.hide]="condition" ></app-head-logo>
+        <app-head-logo [imagePath]=icons.photoLogo [class.hide]="condition"></app-head-logo>
       </ng-container>
       <ng-container *ngIf="user">
         <app-nav></app-nav>
@@ -19,7 +19,7 @@
       </div>
       <div class="user" *ngIf="user" #buttonElement>
         <ng-container *ngFor="let fireUser of fireUsers | async">
-          <app-user-logo  (click)="togglePopup()" [userLogo]="fireUser.logo"></app-user-logo>
+          <app-user-logo (click)="togglePopup()" [userLogo]="fireUser.logo"></app-user-logo>
         </ng-container>
         <app-popup [username]="this.user.displayName!.split(' ')[0]"
                    *ngIf="toggle"
@@ -31,15 +31,8 @@
                     *ngIf="!user"
                     (click)="login()">
         </app-button>
-<!--        <app-button [label]="'Sing up'"-->
-<!--                    [bgColor]="'white'"-->
-<!--                    *ngIf="!user">-->
-<!--        </app-button>-->
       </div>
     </div>
-    <ng-container *ngIf="user" class="burger">
-      <app-header-burger></app-header-burger>
-    </ng-container>
   </div>
 </div>
 

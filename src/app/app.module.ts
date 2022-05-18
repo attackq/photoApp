@@ -30,7 +30,6 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { AuthGuard } from './services/auth/auth.guard';
 import {ReactiveFormsModule} from "@angular/forms";
-import { HeaderBurgerComponent } from './header/header-burger/header-burger.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatButtonModule} from '@angular/material/button';
@@ -44,6 +43,7 @@ import { FeedPageComponent } from './feed-page/feed-page.component';
 import { SavedContentComponent } from './account-page/saved-content/saved-content.component';
 import { FollowersComponent } from './account/account-info/followers/followers.component';
 import { FollowingComponent } from './account/account-info/following/following.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -65,7 +65,6 @@ import { FollowingComponent } from './account/account-info/following/following.c
     LoginPageComponent,
     AccountPageComponent,
     AccountPopupComponent,
-    HeaderBurgerComponent,
     EditPopupComponent,
     EditUserComponent,
     PostExtendedComponent,
@@ -90,7 +89,8 @@ import { FollowingComponent } from './account/account-info/following/following.c
     MatMenuModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSidenavModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

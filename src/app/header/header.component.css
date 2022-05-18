@@ -20,10 +20,6 @@
   justify-content: space-between;
 }
 
-.burger {
-  flex: 1 1 auto;
-}
-
 .header__search {
   margin-right: auto;
   position: relative;
@@ -34,7 +30,7 @@
   display: none;
   position: fixed;
   right: 75px;
-  top: 22px;
+  top: 17px;
   cursor: pointer;
 }
 
