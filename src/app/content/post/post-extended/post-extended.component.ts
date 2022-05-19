@@ -64,7 +64,6 @@ export class PostExtendedComponent implements OnInit {
     this.fireUser = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.creator);
 
     this.commentsForm.addControl(FormControls.comment, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(200)])));
-
     this.fireComments = this.crudService.handleData<PostStore>(Collections.POSTS).pipe(
       map((post: PostStore[]) => {
         return post.filter((i: PostStore) => i.id === this.postID)
@@ -81,7 +80,6 @@ export class PostExtendedComponent implements OnInit {
       map((post: PostStore | undefined) => {
         const comment: NewComment = {
           text: inputComment,
-          logo: this.commentLogo,
           date: new Date().getTime(),
           createdBy: this.user?.uid!
         };

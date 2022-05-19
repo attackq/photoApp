@@ -25,7 +25,7 @@
         <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll__viewport">
           <div class="extended__comment" *ngFor="let comment of (fireComments | async)">
             <div class="comment__logo">
-              <app-user-logo mat-dialog-close [userLogo]="comment.logo" [routerLink]="['/account/', comment.createdBy]"></app-user-logo>
+              <app-user-logo mat-dialog-close [userLogo]="comment.createdBy === this.currentID ? this.commentLogo :  fireUser.logo" [routerLink]="['/account/', comment.createdBy]"></app-user-logo>
             </div>
             <div class="comment__text">{{comment.text}}</div>
             <div class="comment__info">

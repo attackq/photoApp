@@ -1,6 +1,6 @@
 export enum FormControls {
   img = 'img',
-  title= 'title',
+  title = 'title',
   name = 'name',
   description = 'description',
   logo = 'logo',

@@ -31,7 +31,6 @@ export interface Like {
 
 export interface NewComment {
   text: string,
-  logo: string,
   date: number,
   createdBy: string
 }

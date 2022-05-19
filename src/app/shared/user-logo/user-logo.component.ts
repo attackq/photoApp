@@ -16,7 +16,7 @@ export class UserLogoComponent implements OnInit {
   @Input()
   public size: string = '';
   @Input()
-  public userLogo: string;
+  public userLogo: string | null;
 
   constructor(private authService: AuthService,
               private crudService: CrudService) {
