@@ -47,6 +47,11 @@ export class FeedPageComponent implements OnInit {
               return user[0].following.includes(i.createdBy)
             })
           }),
+          tap((posts: PostStore[]) => {
+            return posts.sort((a: PostStore, b: PostStore) => {
+              return b.sortID - a.sortID
+            })
+          }),
           take(1)
         )
       })
