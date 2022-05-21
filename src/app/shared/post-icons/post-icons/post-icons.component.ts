@@ -93,12 +93,14 @@ export class PostIconsComponent implements OnInit {
             if (userIndex === -1) {
               this.changeBookmark = true;
               return {
+                bookmarkDate: new Date().getTime(),
                 bookmarks: postFromStore?.bookmarks.concat(value?.uid!),
               }
             } else {
               const newArr: string[] | undefined = postFromStore?.bookmarks.splice(userIndex!, 1);
               this.changeBookmark = false;
               return {
+                bookmarkDate: 0,
                 bookmarks: postFromStore?.bookmarks,
               };
             }

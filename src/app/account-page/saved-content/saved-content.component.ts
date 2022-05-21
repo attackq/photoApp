@@ -26,12 +26,6 @@ export class SavedContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.activatedRoute.params.pipe(
-    //   switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']).pipe(
-    //     take(1),
-    //     tap((user: UserStore[]) => this.routedID = user[0].userID)
-    //   ))
-    // ).subscribe()
 
     this.firePosts = this.authService.user$.pipe(
       filter((value: firebase.User | null) => !!value),
@@ -43,9 +37,14 @@ export class SavedContentComponent implements OnInit {
               return i.bookmarks.includes(user[0].userID)
             })
           }),
+          tap((posts: PostStore[]) => {
+            return posts.sort((a: PostStore, b: PostStore) => {
+              return b.bookmarkDate - a.bookmarkDate
+            })
+          })
           // take(1)
         )
-      })
+      }),
     )
   }
 

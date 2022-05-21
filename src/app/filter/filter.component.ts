@@ -7,6 +7,7 @@ import {
 import firebase from "firebase/compat";
 import {AuthService} from "../services/auth/auth.service";
 import {Router} from "@angular/router";
+import {FilterService} from "../services/filter.service";
 
 
 export interface FilterLinks {
@@ -28,17 +29,18 @@ export class FilterComponent implements OnInit {
 
   public user: firebase.User | null = null;
 
-  public defaultLink: string = 'standart';
+  public defaultLink: string = 'Filter';
 
   public filterLinks: FilterLinks[] = [
-    {name: 'standart', viewValue: 'All photos'},
-    {name: 'SSSRecent', viewValue: 'Recent'},
+    {name: 'Filter', viewValue: 'Filter'},
+    {name: 'All photos', viewValue: 'All photos'},
     {name: 'Most liked', viewValue: 'Most liked'},
     {name: 'Most commented', viewValue: 'Most commented'}
   ]
 
   constructor(private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              public filterService: FilterService) {
   }
 
   ngOnInit(): void {
@@ -46,14 +48,12 @@ export class FilterComponent implements OnInit {
   }
 
   public getDefaultValue() {
-    this.defaultLink = 'standart';
+    this.defaultLink = 'Filter';
   }
 
-  public logValue(value: string) {
-    console.log(value)
-    if (value === 'All photos') {
-      this.router.navigate(['/account/', this.user?.uid!])
-    }
+  public setChangedValue(value: string) {
+    this.filterService.changedValue = value;
+    this.router.navigate(['/account/', this.userID]);
   }
 }
 

@@ -6,7 +6,8 @@ export interface Post {
   comments: NewComment[],
   sortID: number,
   createdBy: string,
-  bookmarks: string[]
+  bookmarks: string[],
+  bookmarkDate: number
 }
 
 export interface User {
