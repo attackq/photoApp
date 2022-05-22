@@ -29,7 +29,7 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { AuthGuard } from './services/auth/auth.guard';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatButtonModule} from '@angular/material/button';
@@ -90,7 +90,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FormsModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

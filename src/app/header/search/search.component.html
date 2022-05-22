@@ -1,7 +1,16 @@
-<form action="/search-btn" class="search__form ">
-  <input type="text" class="search__input {{size}}" placeholder="Photos, people..." name="search">
-  <label class="search__logo {{size}}">
-    <img [src]="imagePath" alt="">
-    <input type="submit" (submit)="$event.preventDefault()">
-  </label>
-</form>
+<div class="search__bar" #searchElement>
+  <input type="text" class="search__input {{size}}" #searchInput placeholder="Photos, people..." name="search"
+         (keyup)="showResult($event)" autocomplete="off">
+  <div class="search__results" *ngIf="isResults">
+    <ng-container *ngFor="let user of (fireUsers | async)">
+      <div class="search__result" [routerLink]="['/account/', user.userID]"
+           (click)="isResults = false; searchInput.value = ''">
+        <div class="result__logo">
+          <app-user-logo [userLogo]="user.logo"></app-user-logo>
+        </div>
+        <div class="result__name">{{user.name}}</div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+

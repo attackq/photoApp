@@ -43,6 +43,7 @@
   margin-right: 45px;
   position: relative;
   cursor: pointer;
+  z-index: 0;
 }
 .following {
   cursor: pointer;

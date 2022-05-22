@@ -6,11 +6,17 @@
   width: 25px;
   height: 25px;
   cursor: pointer;
+
 }
 .sidenav__show img {
   width: 100%;
   height: 100%;
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2%) hue-rotate(6deg) brightness(110%) contrast(101%);
+  /*filter: brightness(0) saturate(100%) invert(91%) sepia(21%) saturate(6046%) hue-rotate(32deg) brightness(106%) contrast(105%);*/
+  position: relative;
+  z-index: 51;
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2%) hue-rotate(11deg) brightness(106%) contrast(101%);
+  /*filter: brightness(0) saturate(100%) invert(25%) sepia(21%) saturate(1263%) hue-rotate(58deg) brightness(97%) contrast(86%);*/
+  /*filter: brightness(0) saturate(100%) invert(8%) sepia(20%) saturate(5893%) hue-rotate(275deg) brightness(95%) contrast(96%);*/
 }
 
 .side__links {
@@ -23,7 +29,7 @@
   font-weight: 500;
   font-size: 20px;
   text-decoration: none;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 10px 0;
 }
 

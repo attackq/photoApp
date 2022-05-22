@@ -58,6 +58,25 @@ export class CrudService {
         ),
       );
   }
+
+  public handleUserNameData<T>(collectionName: string, name: string): Observable<T[]> {
+    return this.angularFirestore
+      .collection(collectionName, ref => {
+        const query: firebase.firestore.Query = ref;
+        return query.where('name', '==', name)
+      })
+      .snapshotChanges()
+      .pipe(
+        map((actions) =>
+          actions.map((a) => {
+            const data: any = a.payload.doc.data();
+            const {id} = a.payload.doc;
+            return {id, ...data} as T;
+          })
+        ),
+      );
+  }
+
   public handlePostsIDData<T>(collectionName: string, id: string): Observable<T[]> {
     return this.angularFirestore
       .collection(collectionName, ref => {
@@ -75,8 +94,6 @@ export class CrudService {
         ),
       );
   }
-
-// ;.orderBy('sortID', 'desc')
 
   public handleMailData<T>(collectionName: string, operator: WhereFilterOp, value: string): Observable<T[]> {
     return this.angularFirestore

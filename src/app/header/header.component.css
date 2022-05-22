@@ -1,5 +1,10 @@
+.header {
+  /*height: 55px;*/
+}
 .header.other {
   background: rgba(0, 0, 0, 0.88);
+  position: relative;
+  z-index: 50;
 }
 
 .header.login {
@@ -8,6 +13,8 @@
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 50;
+
 }
 
 .header__inner {
@@ -30,7 +37,7 @@
   display: none;
   position: fixed;
   right: 75px;
-  top: 17px;
+  top: 15px;
   cursor: pointer;
 }
 
@@ -42,9 +49,7 @@
 
 .search {
   display: none;
-  position: fixed;
-  left: 200px;
-  top: 15px;
+  /*left: 200px;*/
 }
 
 .active {
@@ -57,7 +62,7 @@
 
 .user {
   position: relative;
-  margin: 5px 0 5px 20px;
+  margin: 7.5px 0 7.5px 20px;
 }
 .header__login {
   display: flex;
