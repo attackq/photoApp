@@ -57,8 +57,10 @@ export class AccountComponent implements OnInit {
 
   }
 
-  public openDialog() {
-    this.dialog.open(AccountPopupComponent);
+  public openAddPostDialog() {
+    this.dialog.open(AccountPopupComponent, {
+      autoFocus: false
+    });
   }
 
   public updateFollowers(id: string) {

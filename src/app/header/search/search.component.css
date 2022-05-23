@@ -24,6 +24,8 @@
   color: #4F4F4F;
 }
 .search__results {
+  overflow: auto;
+  max-height: 153px;
   width: 100%;
   position: absolute;
   top: 32px;
@@ -33,6 +35,9 @@
   align-items: center;
   box-shadow: 0 39px 24px -1px rgba(34, 60, 80, 0.3);
   z-index: 100;
+}
+.search__results::-webkit-scrollbar {
+  display: none;
 }
 .search__result {
   width: 100%;

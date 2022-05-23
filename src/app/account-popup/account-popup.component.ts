@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {iconsSrc} from "../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../controls";
@@ -16,6 +16,7 @@ import {AuthService} from "../services/auth/auth.service";
   styleUrls: ['./account-popup.component.css'],
 })
 export class AccountPopupComponent implements OnInit {
+
 
   public imageSrc: string | null = '';
 
@@ -48,7 +49,6 @@ export class AccountPopupComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
-
     this.addPostForm.addControl(FormControls.img, new FormControl('', Validators.required));
     this.addPostForm.addControl(FormControls.title, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(25)])));
     this.addPostForm.addControl(FormControls.description, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(200)])));
@@ -123,4 +123,5 @@ export class AccountPopupComponent implements OnInit {
     this.isImage = false;
     this.img = '';
   }
+
 }

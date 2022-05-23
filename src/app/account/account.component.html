@@ -13,7 +13,7 @@
                 class="account__btn"
                 [label]="'Add photo'"
                 [bgColor]="'green'"
-                (click)="openDialog()">
+                (click)="openAddPostDialog()">
     </app-button>
     <app-button *ngIf="this.user?.uid! !== this.userID"
                 class="account__btn"

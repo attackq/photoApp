@@ -14,9 +14,15 @@ import {map} from "rxjs/operators";
 })
 export class SearchComponent implements OnInit {
 
-  @ViewChild('searchElement') button: ElementRef | undefined;
-  @ViewChild('searchInput') input: ElementRef;
+  @Input()
+  public imagePath: string = '';
 
+  @Input()
+  public size: string = '';
+
+  @ViewChild('searchElement') button: ElementRef | undefined;
+
+  @ViewChild('searchInput') input: ElementRef;
 
   @HostListener('document:mousedown', ['$event'])
   onGlobalClick(event: MouseEvent): void {
@@ -26,18 +32,11 @@ export class SearchComponent implements OnInit {
     }
   }
 
-
   public isResults: boolean = false;
 
   public fireUsers: Observable<UserStore[]>;
 
   public name: ReplaySubject<string> = new ReplaySubject<string>(1);
-
-  @Input()
-  public imagePath: string = '';
-
-  @Input()
-  public size: string = '';
 
   constructor(private crudService: CrudService) { }
 
@@ -47,7 +46,7 @@ export class SearchComponent implements OnInit {
         return this.crudService.handleData<UserStore>(Collections.USERS).pipe(
           map((users: UserStore[]) => {
             return users.filter((i: UserStore) => {
-              return i.name.toLowerCase().includes(value);
+              return i.name.trim().toLowerCase().includes(value);
             })
           })
         )
@@ -65,7 +64,7 @@ export class SearchComponent implements OnInit {
 
   public showResult(event: any) {
     this.isResults = event.target.value !== '';
-    this.name.next(event.target.value.toLowerCase());
+    this.name.next(event.target.value.trim().toLowerCase());
   }
 
 }

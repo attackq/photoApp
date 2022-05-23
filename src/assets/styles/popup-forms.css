@@ -97,11 +97,17 @@ input[type='submit'] {
 
 .choose__close {
   position: absolute;
-  top: -7px;
-  right: 1px;
-  width: 7px;
-  height: 7px;
+  top: -4px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
   cursor: pointer;
+
+}
+.choose__close img {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0) saturate(100%) invert(95%) sepia(5%) saturate(0%) hue-rotate(34deg) brightness(106%) contrast(100%);;
 }
 
 .choose__input {
@@ -114,6 +120,7 @@ input[type='submit'] {
   color: #828282;
   font-family: 'Montserrat', sans-serif;
 }
+
 textarea {
   resize: none;
 }
