@@ -1,0 +1,19 @@
+import {Component, HostBinding, OnInit, ViewEncapsulation} from '@angular/core';
+
+@Component({
+  selector: 'app-privacy',
+  templateUrl: './privacy.component.html',
+  styleUrls: ['./privacy.component.css'],
+  encapsulation: ViewEncapsulation.None
+
+})
+export class PrivacyComponent implements OnInit {
+
+  @HostBinding('class.privacy') someField: boolean = true;
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}

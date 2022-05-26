@@ -6,7 +6,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  padding: 5px 0;
 }
 
 .footer__links {
@@ -31,13 +31,16 @@ footer {
   display: flex;
   width: 50%;
   justify-content: flex-end;
+  align-items: center;
 }
-
+.footer__link {
+  display: flex;
+  margin: auto 20px;
+}
 .footer__icons img {
   width: 30px;
   height: 30px;
   filter: brightness(0) saturate(100%) invert(56%) sepia(7%) saturate(24%) hue-rotate(327deg) brightness(90%) contrast(81%);
-  margin: 0 20px;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -86,7 +89,6 @@ footer {
   .footer__icons img {
     width: 20px;
     height: 20px;
-    margin: 0 15px;
   }
 
 }

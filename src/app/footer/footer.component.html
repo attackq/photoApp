@@ -2,14 +2,20 @@
   <div class="container">
     <div class="footer__row">
       <ul class="footer__links">
-        <ng-container>
-          <li *ngFor="let link of links">{{link.name}}</li>
-        </ng-container>
+        <li [routerLink]="routes.about">About</li>
+        <li [routerLink]="routes.terms">Terms</li>
+        <li [routerLink]="routes.privacy">Privacy</li>
       </ul>
       <div class="footer__icons">
-        <img [src]="icons.facebook">
-        <img [src]="icons.twitter">
-        <img [src]="icons.inst">
+        <a class="footer__link" [href]="routeLinks.facebook" target="_blank">
+          <img [src]="icons.facebook">
+        </a>
+        <a class="footer__link" [href]="routeLinks.twitter" target="_blank">
+          <img [src]="icons.twitter">
+        </a>
+        <a class="footer__link" [href]="routeLinks.instagram" target="_blank">
+          <img [src]="icons.inst">
+        </a>
       </div>
     </div>
   </div>

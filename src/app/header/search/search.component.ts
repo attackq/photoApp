@@ -1,6 +1,6 @@
 import {Component, ElementRef, HostListener, Input, OnInit, ViewChild, ViewEncapsulation} from "@angular/core";
 import {CrudService} from "../../services/crud/crud.service";
-import {BehaviorSubject, Observable, of, ReplaySubject, switchMap} from "rxjs";
+import {BehaviorSubject, filter, Observable, of, ReplaySubject, switchMap} from "rxjs";
 import {UserStore} from "../../post";
 import {Collections} from "../../services/crud/collections";
 import {map} from "rxjs/operators";
@@ -36,12 +36,13 @@ export class SearchComponent implements OnInit {
 
   public fireUsers: Observable<UserStore[]>;
 
-  public name: ReplaySubject<string> = new ReplaySubject<string>(1);
+  public name: ReplaySubject<string> = new ReplaySubject<string>(0);
 
   constructor(private crudService: CrudService) { }
 
   ngOnInit(): void {
     this.fireUsers = this.name.pipe(
+      filter(value =>  value.length > 2),
       switchMap((value: string) => {
         return this.crudService.handleData<UserStore>(Collections.USERS).pipe(
           map((users: UserStore[]) => {

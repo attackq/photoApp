@@ -1,0 +1,25 @@
+.privacy {
+  display: flex;
+  flex: 1 1 auto;
+}
+.privacy__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+.privacy__viewport {
+  flex: 1 1 auto;
+}
+.privacy__title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.privacy__subtitle {
+  font-weight: 700;
+  margin: 10px 0;
+}

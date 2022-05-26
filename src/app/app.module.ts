@@ -44,6 +44,9 @@ import { SavedContentComponent } from './account-page/saved-content/saved-conten
 import { FollowersComponent } from './account/account-info/followers/followers.component';
 import { FollowingComponent } from './account/account-info/following/following.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { TermsComponent } from './terms/terms.component';
+import { AboutComponent } from './about/about.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +76,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     SavedContentComponent,
     FollowersComponent,
     FollowingComponent,
+    TermsComponent,
+    AboutComponent,
+    PrivacyComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

@@ -1,0 +1,24 @@
+.about__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  font-size: 16px;
+  line-height: 24px;
+  min-height: 100%;
+  justify-content: center;
+}
+.about__title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+.about__img {
+  width: 150px;
+  height: 150px;
+}
+.about__img img {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0) saturate(100%) invert(56%) sepia(63%) saturate(218%) hue-rotate(133deg) brightness(91%) contrast(95%);
+}

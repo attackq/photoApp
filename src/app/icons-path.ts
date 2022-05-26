@@ -11,7 +11,8 @@ export interface IconsPath {
   twitter: string,
   close: string,
   menu: string,
-  delete: string
+  delete: string,
+  picture: string
 }
 
 export const iconsSrc: IconsPath = {
@@ -27,5 +28,6 @@ export const iconsSrc: IconsPath = {
   twitter: 'assets/icons/twitter.svg',
   close: 'assets/icons/close.svg',
   menu: 'assets/icons/menu.svg',
-  delete: 'assets/icons/delete.svg'
+  delete: 'assets/icons/delete.svg',
+  picture: 'assets/icons/picture.svg'
 }

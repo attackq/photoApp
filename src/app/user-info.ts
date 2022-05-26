@@ -5,5 +5,4 @@ export interface UserInfo {
   following: number,
   logo: string,
   ID: string | undefined;
-  // background: string
 }
