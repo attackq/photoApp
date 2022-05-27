@@ -21,7 +21,7 @@ export class ContentComponent implements OnInit {
   public id: string;
   public user: firebase.User | null = null;
   public firePosts: Observable<PostStore[]>;
-
+  public postsAmount: number;
   public sort: string;
 
   constructor(private crudService: CrudService,
@@ -43,7 +43,6 @@ export class ContentComponent implements OnInit {
             switchMap((value: string) => {
               return this.crudService.handlePostsData<PostStore>(Collections.POSTS, this.id).pipe(
                 map((posts: PostStore[]) => {
-                  // console.log('change')
                   return this.sortBy(posts, value)
                   // return  posts.sort((a: PostStore, b: PostStore) => {
                   //   return b.sortID - a.sortID
@@ -54,6 +53,7 @@ export class ContentComponent implements OnInit {
           ),
         ))
       ))
+
   }
 
   public sortBy(arr: PostStore[], sort: string) {

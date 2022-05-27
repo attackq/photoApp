@@ -2,10 +2,18 @@
   <app-account [firestoreID]="fireUser.id"
                [userID]="fireUser.userID"></app-account>
   <app-filter [userID]="fireUser.userID"></app-filter>
-  <div class="content__scroll">
+  <div class="content__scroll" *ngIf="!fireUser.blocked.includes(this.usedId); else blocked">
     <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll__viewport">
       <router-outlet></router-outlet>
     </cdk-virtual-scroll-viewport>
   </div>
+  <ng-template #blocked>
+    <div class="blocked">
+      <div class="container">
+        <div>You are blocked!</div>
+      </div>
+    </div>
+  </ng-template>
 </ng-container>
 
+<!--<router-outlet name="modal"></router-outlet>-->

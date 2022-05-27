@@ -21,5 +21,11 @@
                 [bgColor]="'green'"
                 (click)="updateFollowers(this.firestoreID); updateFollowing(this.authID)">
     </app-button>
+    <app-button *ngIf="this.user?.uid! !== this.userID"
+                class="account__btn"
+                [label]="'Block'"
+                [bgColor]="'green'"
+                (click)="updateBlocked(this.authID)">
+    </app-button>
   </div>
 </div>

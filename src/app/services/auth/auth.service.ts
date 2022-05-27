@@ -35,7 +35,8 @@ export class AuthService {
                 status: 'You can find pictures here!',
                 background: 'https://firebasestorage.googleapis.com/v0/b/photoapp-2cd29.appspot.com/o/default_background_3.jpg?alt=media&token=35ef59de-dac7-401d-9c9d-5dde260dafbf',
                 followers: [],
-                following: []
+                following: [],
+                blocked: []
               }
               return user;
             }

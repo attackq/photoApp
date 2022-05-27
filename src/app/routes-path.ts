@@ -1,7 +1,9 @@
 export enum RoutesPath {
   terms = 'terms',
   about = 'about',
-  privacy = 'privacy'
+  privacy = 'privacy',
+  feed = 'feed',
+  login = 'login'
 }
 
 export enum RouteLinks {

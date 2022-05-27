@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-import { MatDialogModule} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogModule} from "@angular/material/dialog";
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './header/nav/nav.component';
@@ -99,7 +99,6 @@ import { PrivacyComponent } from './privacy/privacy.component';
     MatSidenavModule,
     FormsModule
   ],
-  providers: [AuthGuard],
   bootstrap: [AppComponent],
 
 })

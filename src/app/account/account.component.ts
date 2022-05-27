@@ -26,6 +26,7 @@ export class AccountComponent implements OnInit {
   public userLogo: string;
 
   public isFollow: boolean;
+  public isBlocked: boolean;
 
   public user: firebase.User | null = null;
 
@@ -98,6 +99,25 @@ export class AccountComponent implements OnInit {
         }
       }),
       switchMap(newFollowing => this.crudService.updateObject(Collections.USERS, id, {...newFollowing}))
+    ).subscribe()
+  }
+
+  public updateBlocked(id: string) {
+    this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
+      map((currentUserFromStore: UserStore | undefined) => {
+        const blockedInd = currentUserFromStore?.blocked.indexOf(this.userID);
+        if (blockedInd == -1) {
+          return {
+            blocked: currentUserFromStore?.blocked.concat(this.userID),
+          }
+        } else {
+          const newArray: string[] | undefined = currentUserFromStore?.blocked.splice(blockedInd!, 1)
+          return {
+            blocked: currentUserFromStore?.blocked
+          }
+        }
+      }),
+      switchMap(newBlocked => this.crudService.updateObject(Collections.USERS, id, {...newBlocked}))
     ).subscribe()
   }
 

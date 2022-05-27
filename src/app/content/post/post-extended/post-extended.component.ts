@@ -9,7 +9,7 @@ import {iconsSrc} from "../../../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../../../controls";
 import {map, tap} from "rxjs/operators";
-import {NewCommand} from "@angular/cli/commands/new-impl";
+import {FilterService} from "../../../services/filter.service";
 
 @Component({
   selector: 'app-post-extended',
@@ -32,7 +32,6 @@ export class PostExtendedComponent implements OnInit {
   public creator: string;
 
   public icons = iconsSrc;
-
   public user: firebase.User | null = null;
 
   public fireUser: Observable<UserStore[]>;
@@ -45,7 +44,8 @@ export class PostExtendedComponent implements OnInit {
   public fireComments: Observable<NewComment[]>;
 
   constructor(private crudService: CrudService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private filter: FilterService) {
   }
 
   ngOnInit(): void {

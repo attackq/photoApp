@@ -7,6 +7,8 @@ import {EditPopupComponent} from "./edit-popup/edit-popup.component";
 import {PostExtendedComponent} from "./post-extended/post-extended.component";
 import {AuthService} from "../../services/auth/auth.service";
 import firebase from "firebase/compat";
+import {Router} from "@angular/router";
+import {FilterService} from "../../services/filter.service";
 
 @Component({
   selector: 'app-post',
@@ -33,7 +35,6 @@ export class PostComponent implements OnInit {
 
   public user: firebase.User | null = null;
 
-
   public delete(id: string): void {
     this.crudService.deleteObject(Collections.POSTS, id).subscribe();
     this.uploadService.deleteFile(this.postImg!);
@@ -42,7 +43,8 @@ export class PostComponent implements OnInit {
   constructor(private crudService: CrudService,
               private uploadService: UploadService,
               private dialog: MatDialog,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -61,6 +63,10 @@ export class PostComponent implements OnInit {
     extendedPost.componentInstance.postDate = this.postDate;
     extendedPost.componentInstance.postID = this.postID;
     extendedPost.componentInstance.creator = this.creator;
+
+    extendedPost.afterClosed().subscribe(() => {
+      this.router.navigate(['account/', this.userID])
+    })
   }
 
 }

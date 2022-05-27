@@ -1,6 +1,6 @@
 <div class="content__data">
   <div class="container">
-    <div class="content__wrapper">
+    <div class="content__wrapper" *ngIf="(firePosts | async)?.length! > 0; else message">
       <ng-container *ngFor="let post of (firePosts | async); trackBy: trackByID">
         <app-post class="content__column"
                   [postDesc]="post.description"
@@ -13,6 +13,9 @@
         </app-post>
       </ng-container>
     </div>
+    <ng-template #message>
+      <div>no post yet</div>
+    </ng-template>
   </div>
 </div>
 

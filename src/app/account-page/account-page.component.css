@@ -12,3 +12,11 @@
   background: #E5E5E5;
   flex: 1 1 auto;
 }
+.blocked {
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

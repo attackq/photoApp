@@ -18,7 +18,8 @@ export interface User {
   status: string,
   background: string,
   followers: string[],
-  following: string[]
+  following: string[],
+  blocked: string[]
  }
 
 export interface EditDescription {
