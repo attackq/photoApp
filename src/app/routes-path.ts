@@ -3,7 +3,8 @@ export enum RoutesPath {
   about = 'about',
   privacy = 'privacy',
   feed = 'feed',
-  login = 'login'
+  login = 'login',
+  account = 'account/'
 }
 
 export enum RouteLinks {

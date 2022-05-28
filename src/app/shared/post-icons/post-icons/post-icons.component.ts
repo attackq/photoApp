@@ -7,6 +7,8 @@ import {PostStore, UserStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
 import {AuthService} from "../../../services/auth/auth.service";
 import {CrudService} from "../../../services/crud/crud.service";
+import {Clipboard} from "@angular/cdk/clipboard";
+import {NotifierService} from "angular-notifier";
 
 @Component({
   selector: 'app-post-icons',
@@ -21,6 +23,12 @@ export class PostIconsComponent implements OnInit {
   public postID: string;
   @Input()
   public creator: string;
+  @Input()
+  public isShare: boolean;
+  @Input()
+  public sharePostId: string;
+
+
 
   public changeLike: boolean;
 
@@ -35,7 +43,14 @@ export class PostIconsComponent implements OnInit {
   public firePosts: Observable<PostStore[]>;
 
   constructor(private authService: AuthService,
-              private crudService: CrudService) {
+              private crudService: CrudService,
+              private clipboard: Clipboard,
+              private notifier: NotifierService) {
+    this.notifier = notifier
+  }
+
+  public showNotification( type: string, message: string ): void {
+    this.notifier.notify( type, message );
   }
 
   ngOnInit(): void {
@@ -56,6 +71,11 @@ export class PostIconsComponent implements OnInit {
         )
       })
     ).subscribe();
+  }
+
+  public copyShareLink() {
+    this.clipboard.copy(this.sharePostId);
+    this.showNotification('success', 'Link copied!')
   }
 
   public updateLikes(id: string) {

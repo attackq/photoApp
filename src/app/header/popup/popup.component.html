@@ -1,9 +1,9 @@
 <div class="user__popup">
   <div class="popup__hello">Hello, {{username}}!</div>
   <div class="popup__links">
-    <ng-container>
-      <a href="#" *ngFor="let link of popuplinks" class="popup__link">{{link.name}}</a>
-    </ng-container>
-    <a href="#" class="popup__link" (click)="logout()">Log out</a>
+<!--    <a class="popup__link" [routerLink]="routes.privacy">Privacy</a>-->
+<!--    <a class="popup__link" [routerLink]="routes.terms">Terms</a>-->
+    <a class="popup__link" (click)="logout()">Log out</a>
   </div>
 </div>
+

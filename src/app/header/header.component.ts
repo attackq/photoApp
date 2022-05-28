@@ -55,6 +55,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
     this.fireUsers = this.authService.user$.pipe(
+      tap((value: firebase.User | null) => this.user = value),
       switchMap((value: firebase.User | null) => {
         return this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!)
       })
@@ -66,11 +67,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   public togglePopup(): void {
     this.toggle = !this.toggle;
   }
-
-  // public login(): void {
-  //   this.authService.googleSingIn().subscribe(
-  //     () => this.authService.user$.subscribe(() => this.router.navigate(["/account"])));
-  // }
 
   public login(): void {
     this.authService.googleSingIn().pipe(

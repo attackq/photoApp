@@ -1,7 +1,7 @@
 <div class="content__card">
-  <img [src]="postImg" alt="" (click)="openExtendedPostDialog()" [routerLink]="['/account/', this.userID, 'post' ,this.postID]"  >
+  <img [src]="postImg" alt="" (click)="openExtendedPostDialog()">
   <div class="content__buttons" *ngIf="this.user?.uid === this.userID">
-    <button mat-icon-button [matMenuTriggerFor]="beforeMenu" aria-label="Example icon-button with a menu">
+    <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
       <mat-icon class="white__icon">more_vert</mat-icon>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
@@ -14,3 +14,4 @@
     [postID]="postID"
   ></app-post-hover>
 </div>
+<!--[routerLink]="['/account/', this.userID, 'post' ,this.postID]"-->

@@ -7,7 +7,7 @@ import {EditPopupComponent} from "./edit-popup/edit-popup.component";
 import {PostExtendedComponent} from "./post-extended/post-extended.component";
 import {AuthService} from "../../services/auth/auth.service";
 import firebase from "firebase/compat";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FilterService} from "../../services/filter.service";
 
 @Component({
@@ -32,8 +32,10 @@ export class PostComponent implements OnInit {
   public creator: string;
   @Input()
   public userID: string | null;
-
+  public isOpenedDialog: boolean;
   public user: firebase.User | null = null;
+  public queryPostId: string
+  public sharingId: string;
 
   public delete(id: string): void {
     this.crudService.deleteObject(Collections.POSTS, id).subscribe();
@@ -44,10 +46,19 @@ export class PostComponent implements OnInit {
               private uploadService: UploadService,
               private dialog: MatDialog,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.route.queryParams
+      .subscribe(params => {
+          this.queryPostId = params['postId'];
+          if (params['postId'] === this.postID && !this.isOpenedDialog) {
+            this.openExtendedPostDialog();
+          }
+        }
+      );
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
   }
 
@@ -60,6 +71,20 @@ export class PostComponent implements OnInit {
 
   public openExtendedPostDialog() {
     let extendedPost = this.dialog.open(PostExtendedComponent);
+    this.isOpenedDialog = true;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        postId: this.postID
+      },
+      queryParamsHandling: "merge",
+
+    })
+    console.log(window.location.host + '/account/' + this.creator + '?postId=' + this.postID)
+    // this.sharingId = window.location.host + '?postId=' + this.postID;
+    this.sharingId = window.location.host + '/account/' + this.creator + '?postId=' + this.postID;
+    console.log(this.router.url)
+    extendedPost.componentInstance.sharePostId = this.sharingId;
     extendedPost.componentInstance.postImg = this.postImg;
     extendedPost.componentInstance.postDesc = this.postDesc;
     extendedPost.componentInstance.postDate = this.postDate;
@@ -67,7 +92,7 @@ export class PostComponent implements OnInit {
     extendedPost.componentInstance.creator = this.creator;
 
     extendedPost.afterClosed().subscribe(() => {
-      this.router.navigate(['account/', this.userID])
+      this.router.navigate([])
     })
   }
 

@@ -10,7 +10,8 @@ import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/form
 import {FormControls} from "../../../controls";
 import {map, tap} from "rxjs/operators";
 import {FilterService} from "../../../services/filter.service";
-
+import {Clipboard} from '@angular/cdk/clipboard';
+import { NotifierService } from 'angular-notifier';
 @Component({
   selector: 'app-post-extended',
   templateUrl: './post-extended.component.html',
@@ -19,6 +20,7 @@ import {FilterService} from "../../../services/filter.service";
 
 })
 export class PostExtendedComponent implements OnInit {
+
 
   @Input()
   public postImg: string | null = '';
@@ -30,6 +32,9 @@ export class PostExtendedComponent implements OnInit {
   public postID: string;
   @Input()
   public creator: string;
+  @Input()
+  public sharePostId: string;
+  public isShare: boolean = true;
 
   public icons = iconsSrc;
   public user: firebase.User | null = null;
@@ -45,8 +50,10 @@ export class PostExtendedComponent implements OnInit {
 
   constructor(private crudService: CrudService,
               private authService: AuthService,
-              private filter: FilterService) {
+              ) {
   }
+
+
 
   ngOnInit(): void {
     this.authService.user$.pipe(

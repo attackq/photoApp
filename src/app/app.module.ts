@@ -47,6 +47,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { TermsComponent } from './terms/terms.component';
 import { AboutComponent } from './about/about.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import {ClipboardModule} from '@angular/cdk/clipboard';
+import { NotifierModule } from 'angular-notifier'
 
 @NgModule({
   declarations: [
@@ -97,7 +99,18 @@ import { PrivacyComponent } from './privacy/privacy.component';
     MatFormFieldModule,
     MatSelectModule,
     MatSidenavModule,
-    FormsModule
+    FormsModule,
+    ClipboardModule,
+    NotifierModule.withConfig({
+      behaviour: {
+        autoHide: 2000
+      },
+      position: {
+        horizontal: {
+          position: "right"
+        }
+      }
+    })
   ],
   bootstrap: [AppComponent],
 

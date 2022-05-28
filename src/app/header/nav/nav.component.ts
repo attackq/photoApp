@@ -5,6 +5,7 @@ import {Collections} from "../../services/crud/collections";
 import {CrudService} from "../../services/crud/crud.service";
 import firebase from "firebase/compat";
 import {AuthService} from "../../services/auth/auth.service";
+import {RoutesPath} from "../../routes-path";
 
 @Component({
   selector: 'app-nav',
@@ -14,6 +15,7 @@ import {AuthService} from "../../services/auth/auth.service";
 export class NavComponent implements OnInit {
 
   public user: firebase.User | null = null;
+  public routes = RoutesPath;
 
   public fireUsers: Observable<UserStore[]>;
 

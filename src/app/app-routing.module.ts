@@ -22,10 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'saved', component: SavedContentComponent
-      },
-      // {
-      //   path: 'post/:id', component: PostExtendedComponent
-      // }
+      }
     ]
   },
 

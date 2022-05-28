@@ -13,7 +13,8 @@ export interface IconsPath {
   menu: string,
   delete: string,
   picture: string,
-  blocked: string
+  blocked: string,
+  send: string
 }
 
 export const iconsSrc: IconsPath = {
@@ -31,5 +32,6 @@ export const iconsSrc: IconsPath = {
   menu: 'assets/icons/menu.svg',
   delete: 'assets/icons/delete.svg',
   picture: 'assets/icons/picture.svg',
-  blocked: 'assets/icons/blocked.svg'
+  blocked: 'assets/icons/blocked.svg',
+  send: 'assets/icons/send.svg'
 }

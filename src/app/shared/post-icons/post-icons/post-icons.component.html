@@ -16,5 +16,13 @@
       <img [src]="icons.bookmark" alt="">
     </div>
   </div>
+  <ng-container *ngIf="isShare">
+    <div class="post__icon {{size}}">
+      <div class="post__img {{size}} share" (click)="copyShareLink()">
+        <img [src]="icons.send" alt="">
+      </div>
+    </div>
+  </ng-container>
+
 </div>
 

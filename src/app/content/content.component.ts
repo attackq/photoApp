@@ -35,6 +35,7 @@ export class ContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
     // this.firePosts = this.crudService.handlePostsData<PostStore>(Collections.POSTS, this.userID);
     this.firePosts = this.activatedRoute.params.pipe(
