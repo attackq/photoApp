@@ -4,10 +4,10 @@ import {Collections} from "../services/crud/collections";
 import {CrudService} from "../services/crud/crud.service";
 import {filter, Observable, Subscription, switchMap, tap} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
-import {GetUserService} from "../services/get-user.service";
 import {take} from "rxjs/operators";
 import {AuthService} from "../services/auth/auth.service";
 import firebase from "firebase/compat";
+import {iconsSrc} from "../icons-path";
 
 @Component({
   selector: 'app-account-page',
@@ -23,6 +23,8 @@ export class AccountPageComponent implements OnInit {
   public id: string;
   public usedId: string
 
+  public icons = iconsSrc
+
   constructor(private crudService: CrudService,
               private activatedRoute: ActivatedRoute,
               private authService: AuthService) {
@@ -32,7 +34,6 @@ export class AccountPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.fireUsers = this.activatedRoute.params.pipe(
-      tap(params => this.id = params['id']),
       switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']).pipe(take(1)))
     )
 

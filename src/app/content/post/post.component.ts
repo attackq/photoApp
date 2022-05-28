@@ -54,6 +54,8 @@ export class PostComponent implements OnInit {
   public openEditPopupDialog(id: string) {
     let editPopup = this.dialog.open(EditPopupComponent);
     editPopup.componentInstance.postID = id;
+    editPopup.componentInstance.postDesc = this.postDesc;
+    editPopup.componentInstance.postTitle = this.postTitle;
   }
 
   public openExtendedPostDialog() {

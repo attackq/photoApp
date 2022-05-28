@@ -17,6 +17,10 @@
   background: #23be63;
   transition: background-color 0.5s linear;
 }
+.button.red {
+  background: #cb2b31;
+  padding: 6px 10px;
+}
 .button.green:disabled {
   background: #77b48a;
 }

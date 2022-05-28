@@ -10,7 +10,12 @@
   <ng-template #blocked>
     <div class="blocked">
       <div class="container">
-        <div>You are blocked!</div>
+        <div class="blocked__wrapper">
+          <div class="blocked__title">You are blocked!</div>
+          <div class="blocked__img">
+            <img [src]="icons.blocked" alt="">
+          </div>
+        </div>
       </div>
     </div>
   </ng-template>

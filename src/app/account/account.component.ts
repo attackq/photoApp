@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import firebase from "firebase/compat/app";
 import {AuthService} from '../services/auth/auth.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -21,6 +21,7 @@ export class AccountComponent implements OnInit {
   public firestoreID: string;
   @Input()
   public userID: string;
+
 
   public background: string;
   public userLogo: string;
@@ -52,7 +53,10 @@ export class AccountComponent implements OnInit {
       }),
       switchMap(() => {
         return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.user?.uid!).pipe(
-          tap((currentUser: UserStore[]) => this.authID = currentUser[0].id))
+          tap((currentUser: UserStore[]) => {
+            this.authID = currentUser[0].id;
+            this.isBlocked = currentUser[0].blocked.includes(this.userID);
+          }))
       })
     ).subscribe();
 

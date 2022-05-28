@@ -11,6 +11,7 @@
 .scroll__viewport {
   background: #E5E5E5;
   flex: 1 1 auto;
+
 }
 .blocked {
   flex: 1 1 auto;
@@ -19,4 +20,27 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  background: #E5E5E5;
+
+}
+.blocked__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.blocked__title {
+  margin-bottom: 30px;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 18px;
+  color: #4F4F4F;
+}
+.blocked__img {
+  width: 70px;
+  height: 70px;
+}
+.blocked__img img {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0) saturate(100%) invert(40%) sepia(100%) saturate(2859%) hue-rotate(336deg) brightness(104%) contrast(102%);
 }

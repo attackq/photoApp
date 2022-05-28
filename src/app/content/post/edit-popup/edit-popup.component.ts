@@ -16,6 +16,10 @@ export class EditPopupComponent implements OnInit {
 
   @Input()
   public postID: string = '';
+  @Input()
+  public postDesc: string = '';
+  @Input()
+  public postTitle: string = '';
 
   public icons = iconsSrc;
 
@@ -26,8 +30,8 @@ export class EditPopupComponent implements OnInit {
   constructor(private crudService: CrudService) { }
 
   ngOnInit(): void {
-    this.editPostForm.addControl(FormControls.title, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(25)])));
-    this.editPostForm.addControl(FormControls.description, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(200)])));
+    this.editPostForm.addControl(FormControls.title, new FormControl('', Validators.maxLength(25)));
+    this.editPostForm.addControl(FormControls.description, new FormControl('', Validators.maxLength(200)));
   }
 
   public isControlValid(controlName: string): boolean {
@@ -41,8 +45,8 @@ export class EditPopupComponent implements OnInit {
 
   public updateDescription(id: string): void {
     const newDescription: EditDescription = {
-      title: this.editPostForm.controls[FormControls.title].value,
-      description: this.editPostForm.controls[FormControls.description].value
+      title: this.editPostForm.controls[FormControls.title].value || this.postTitle,
+      description: this.editPostForm.controls[FormControls.description].value || this.postDesc
     }
     this.crudService.updateObject(Collections.POSTS, id, newDescription).subscribe();
   }

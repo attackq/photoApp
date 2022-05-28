@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {PostStore, UserStore} from "../post";
 import {Observable, of, switchMap} from "rxjs";
 import {CrudService} from "../services/crud/crud.service";
@@ -8,20 +8,24 @@ import {AuthService} from "../services/auth/auth.service";
 import {map, take, tap} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
 import {FilterService} from "../services/filter.service";
+import {iconsSrc} from "../icons-path";
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
-  styleUrls: ['./content.component.css']
+  styleUrls: ['./content.component.css'],
+
 })
 export class ContentComponent implements OnInit {
 
   @Input()
   public userID: string;
+
+  public icons = iconsSrc;
+
   public id: string;
   public user: firebase.User | null = null;
   public firePosts: Observable<PostStore[]>;
-  public postsAmount: number;
   public sort: string;
 
   constructor(private crudService: CrudService,

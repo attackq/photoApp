@@ -17,14 +17,20 @@
 .account__btn {
   margin-left: 120px;
 }
+.block {
+  margin-left: 30px;
+}
 
 @media (max-width: 992px) {
   .account {
     padding: 15px 0;
   }
 }
-/*@media (max-width: 480px) {*/
-/*  .account {*/
-/*    padding: 10px 0;*/
-/*  }*/
-/*}*/
+@media (max-width: 480px) {
+  .account {
+    padding: 10px 0;
+  }
+  .account__wrapper {
+    margin-bottom: 10px;
+  }
+}

@@ -8,8 +8,6 @@
   display: flex;
   align-items: center;
   font-weight: 400;
-  font-size: 30px;
-  line-height: 37px;
   color: #FFFFFF;
   margin-bottom: 10px;
 }
@@ -21,6 +19,8 @@
   cursor: pointer;
 }
 .account__name {
+  font-size: 30px;
+  line-height: 37px;
   margin-right: 40px;
 }
 .account__desc {
@@ -63,5 +63,12 @@
 @media (max-width: 480px) {
   .account__follow {
     font-size: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .account__name {
+    font-size: 20px;
+    line-height: 23px;
+    margin-right: 20px;
   }
 }

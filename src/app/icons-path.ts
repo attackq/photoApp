@@ -12,7 +12,8 @@ export interface IconsPath {
   close: string,
   menu: string,
   delete: string,
-  picture: string
+  picture: string,
+  blocked: string
 }
 
 export const iconsSrc: IconsPath = {
@@ -29,5 +30,6 @@ export const iconsSrc: IconsPath = {
   close: 'assets/icons/close.svg',
   menu: 'assets/icons/menu.svg',
   delete: 'assets/icons/delete.svg',
-  picture: 'assets/icons/picture.svg'
+  picture: 'assets/icons/picture.svg',
+  blocked: 'assets/icons/blocked.svg'
 }
