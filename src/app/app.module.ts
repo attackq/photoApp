@@ -48,7 +48,8 @@ import { TermsComponent } from './terms/terms.component';
 import { AboutComponent } from './about/about.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import {ClipboardModule} from '@angular/cdk/clipboard';
-import { NotifierModule } from 'angular-notifier'
+import { NotifierModule } from 'angular-notifier';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { NotifierModule } from 'angular-notifier'
     TermsComponent,
     AboutComponent,
     PrivacyComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -103,7 +105,7 @@ import { NotifierModule } from 'angular-notifier'
     ClipboardModule,
     NotifierModule.withConfig({
       behaviour: {
-        autoHide: 2000
+        autoHide: 3000
       },
       position: {
         horizontal: {

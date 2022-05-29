@@ -21,22 +21,12 @@ export class FeedPageComponent implements OnInit {
   public routedID: null;
 
   constructor(private authService: AuthService,
-              private crudService: CrudService,
-              private activatedRoute: ActivatedRoute) {
+              private crudService: CrudService) {
   }
 
   @HostBinding('class.feed') someField: boolean = true;
 
-
   ngOnInit(): void {
-    // this.activatedRoute.params.pipe(
-    //   switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']).pipe(
-    //     take(1),
-    //     tap((user: UserStore[]) => this.routedID = user[0].userID)
-    //   ))
-    // ).subscribe()
-
-
     this.firePosts = this.authService.user$.pipe(
       filter((value: firebase.User | null) => !!value),
       switchMap((value: firebase.User | null) => this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!)),

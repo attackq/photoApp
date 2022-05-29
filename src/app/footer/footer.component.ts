@@ -11,7 +11,7 @@ export class FooterComponent implements OnInit {
 
   public icons = iconsSrc;
   public routes = RoutesPath;
-  public routeLinks = RouteLinks
+  public routeLinks = RouteLinks;
 
   constructor() { }
 

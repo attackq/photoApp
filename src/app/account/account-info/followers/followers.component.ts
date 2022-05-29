@@ -18,21 +18,21 @@ export class FollowersComponent implements OnInit {
 
   public icons = iconsSrc;
 
-  public firestoreUser: Observable<UserStore[]>;
+  public followers: Observable<UserStore[]>;
 
   constructor(private crudService: CrudService) {
   }
 
   ngOnInit(): void {
-    this.firestoreUser = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID).pipe(
+    this.followers = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID).pipe(
       switchMap((user: UserStore[]) => {
         return this.crudService.handleData<UserStore>(Collections.USERS).pipe(
           map((us: UserStore[]) => {
             return us.filter((i: UserStore) => {
               if (user[0].followers.includes(i.userID)) {
-                return i
+                return i;
               } else {
-                return null
+                return null;
               }
             })
           })

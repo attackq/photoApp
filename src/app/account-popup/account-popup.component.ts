@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {iconsSrc} from "../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../controls";
@@ -6,7 +6,7 @@ import {Post} from "../post";
 import {CrudService} from "../services/crud/crud.service";
 import {Collections} from "../services/crud/collections";
 import {UploadService} from "../services/crud/upload.service";
-import {combineLatest, takeWhile} from "rxjs";
+import {combineLatest, Subscription, takeWhile} from "rxjs";
 import firebase from "firebase/compat/app";
 import {AuthService} from "../services/auth/auth.service";
 
@@ -15,16 +15,15 @@ import {AuthService} from "../services/auth/auth.service";
   templateUrl: './account-popup.component.html',
   styleUrls: ['./account-popup.component.css'],
 })
-export class AccountPopupComponent implements OnInit {
+export class AccountPopupComponent implements OnInit, OnDestroy {
 
+  public imageSrc: string | null;
 
-  public imageSrc: string | null = '';
+  public img: string | ArrayBuffer | null;
 
-  public img: string | ArrayBuffer | null = '';
+  public progress: string | undefined;
 
-  public progress: string | undefined = '';
-
-  public user: firebase.User | null = null;
+  public user: firebase.User | null;
 
   public icons = iconsSrc;
 
@@ -42,13 +41,17 @@ export class AccountPopupComponent implements OnInit {
     'image/png',
   ]
 
+  private subscriptions: Subscription[] = [];
+
   constructor(private crudService: CrudService,
               private uploadService: UploadService,
               private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
+    this.subscriptions.push(
+      this.authService.user$.subscribe((value: firebase.User | null) => this.user = value)
+    );
     this.addPostForm.addControl(FormControls.img, new FormControl('', Validators.required));
     this.addPostForm.addControl(FormControls.title, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(25)])));
     this.addPostForm.addControl(FormControls.description, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(200)])));
@@ -124,4 +127,7 @@ export class AccountPopupComponent implements OnInit {
     this.img = '';
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
 }

@@ -10,31 +10,33 @@ import {TermsComponent} from "./terms/terms.component";
 import {RoutesPath} from "./routes-path";
 import {AboutComponent} from "./about/about.component";
 import {PrivacyComponent} from "./privacy/privacy.component";
-import {PostExtendedComponent} from "./content/post/post-extended/post-extended.component";
+import {CheckUserGuard} from "./services/check-user.guard";
+import {CheckUserIdGuard} from "./services/check-user-id.guard";
+import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {NotFoundGuard} from "./services/not-found.guard";
 
 const routes: Routes = [
+  {path: '', redirectTo: RoutesPath.login, pathMatch: 'full', },
+  {path: RoutesPath.login, component: LoginPageComponent},
   {
-    path: 'account/:id', component: AccountPageComponent, canActivate: [AuthGuard],
+    path: 'account/:id', component: AccountPageComponent, canActivate: [AuthGuard, CheckUserIdGuard],
     children: [
       {
         path: '',
         component: ContentComponent,
       },
       {
-        path: 'saved', component: SavedContentComponent
+        path: RoutesPath.saved, component: SavedContentComponent
       }
     ]
   },
-
-  {path: RoutesPath.login, component: LoginPageComponent},
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: RoutesPath.feed, component: FeedPageComponent},
+  {path: RoutesPath.feed, component: FeedPageComponent, canActivate: [AuthGuard]},
   {path: RoutesPath.terms, component: TermsComponent},
   {path: RoutesPath.about, component: AboutComponent},
   {path: RoutesPath.privacy, component: PrivacyComponent},
+  {path: '**', component: PageNotFoundComponent, canActivate: [NotFoundGuard]},
+  // canActivate: [CheckUserGuard]
 
-
-  // {path: '**', component: LoginPageComponent}
 ]
 
 @NgModule({

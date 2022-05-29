@@ -1,10 +1,10 @@
-import {Component, HostBinding, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, HostBinding, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {UserStore} from "../post";
 import {Collections} from "../services/crud/collections";
 import {CrudService} from "../services/crud/crud.service";
 import {filter, Observable, Subscription, switchMap, tap} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
-import {take} from "rxjs/operators";
+import {map, take} from "rxjs/operators";
 import {AuthService} from "../services/auth/auth.service";
 import firebase from "firebase/compat";
 import {iconsSrc} from "../icons-path";
@@ -16,14 +16,16 @@ import {iconsSrc} from "../icons-path";
   encapsulation: ViewEncapsulation.None
 
 })
-export class AccountPageComponent implements OnInit {
+export class AccountPageComponent implements OnInit, OnDestroy {
 
   public fireUsers: Observable<UserStore[]>;
-  public isShow: boolean;
   public id: string;
-  public usedId: string
+  public userId: string;
 
-  public icons = iconsSrc
+  public icons = iconsSrc;
+
+  private subscriptions: Subscription[] = [];
+
 
   constructor(private crudService: CrudService,
               private activatedRoute: ActivatedRoute,
@@ -35,14 +37,20 @@ export class AccountPageComponent implements OnInit {
   ngOnInit(): void {
     this.fireUsers = this.activatedRoute.params.pipe(
       switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']).pipe(take(1)))
+    );
+
+    this.subscriptions.push(
+      this.authService.user$.pipe(
+        filter((value: firebase.User | null) => !!value),
+        switchMap((value: firebase.User | null) => this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!).pipe(
+          tap(user => this.userId = user[0].userID)
+        )),
+      ).subscribe()
     )
 
-    this.authService.user$.pipe(
-      filter((value: firebase.User | null) => !!value),
-      switchMap((value: firebase.User | null) => this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!).pipe(
-        tap(user => this.usedId = user[0].userID)
-      )),
-    ).subscribe()
+  }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

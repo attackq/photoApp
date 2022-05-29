@@ -18,8 +18,7 @@ export class UserLogoComponent implements OnInit {
   @Input()
   public userLogo: string | null;
 
-  constructor(private authService: AuthService,
-              private crudService: CrudService) {
+  constructor() {
   }
 
   ngOnInit(): void {

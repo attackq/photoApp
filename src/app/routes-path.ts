@@ -4,7 +4,9 @@ export enum RoutesPath {
   privacy = 'privacy',
   feed = 'feed',
   login = 'login',
-  account = 'account/'
+  account = 'account/',
+  saved = 'saved',
+  notfound = '404'
 }
 
 export enum RouteLinks {

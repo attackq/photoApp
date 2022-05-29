@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  HostListener,
+  HostListener, OnDestroy,
   OnInit,
   ViewChild,
   ViewEncapsulation
@@ -15,7 +15,7 @@ import firebase from "firebase/compat/app";
 import {Collections} from "../services/crud/collections";
 import {DocumentReference} from "@angular/fire/compat/firestore";
 import {CrudService} from "../services/crud/crud.service";
-import {filter, Observable, switchMap} from "rxjs";
+import {filter, Observable, Subscription, switchMap} from "rxjs";
 import {tap} from "rxjs/operators";
 import {UserStore} from "../post";
 
@@ -25,14 +25,18 @@ import {UserStore} from "../post";
   styleUrls: ['./header.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class HeaderComponent implements OnInit, AfterViewInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   @ViewChild('buttonElement') button: ElementRef | undefined;
+  @ViewChild('smallSearch') smallSearch: ElementRef | undefined;
 
   @HostListener('document:mousedown', ['$event'])
   onGlobalClick(event: MouseEvent): void {
     if (!this.button?.nativeElement.contains(event.target)) {
       this.toggle = false;
+    }
+    if (!this.smallSearch?.nativeElement.contains(event.target)) {
+      this.condition = false;
     }
   }
 
@@ -42,6 +46,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   public icons = iconsSrc;
   public fireUsers: Observable<UserStore[]>;
+  public toggle: boolean = false;
+  private subscriptions: Subscription[] = [];
 
 
   constructor(private authService: AuthService,
@@ -49,28 +55,30 @@ export class HeaderComponent implements OnInit, AfterViewInit {
               private crudService: CrudService) {
   }
 
-  ngAfterViewInit(): void {
-  }
-
   ngOnInit(): void {
-    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
+    this.subscriptions.push(
+      this.authService.user$.subscribe((value: firebase.User | null) => this.user = value)
+    );
     this.fireUsers = this.authService.user$.pipe(
-      tap((value: firebase.User | null) => this.user = value),
       switchMap((value: firebase.User | null) => {
         return this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!)
       })
-    )
+    );
   }
-
-  public toggle: boolean = false;
 
   public togglePopup(): void {
     this.toggle = !this.toggle;
   }
 
   public login(): void {
-    this.authService.googleSingIn().pipe(
-      switchMap(() => this.authService.user$)
-    ).subscribe(() => this.router.navigate(['/account/', this.user?.uid!]))
+    this.subscriptions.push(
+      this.authService.googleSingIn().pipe(
+        switchMap(() => this.authService.user$))
+        .subscribe(() => this.router.navigate(['/account/', this.user?.uid!]))
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

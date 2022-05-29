@@ -12,6 +12,9 @@
   line-height: 24px;
   flex: 1 1 auto;
 }
+.terms__login {
+  padding-top: 75px;
+}
 .terms__title {
   font-size: 24px;
   margin-bottom: 10px;

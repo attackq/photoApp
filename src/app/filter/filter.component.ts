@@ -1,6 +1,6 @@
 import {
   Component,
-  Input,
+  Input, OnDestroy,
   OnInit,
   ViewEncapsulation
 } from '@angular/core';
@@ -8,7 +8,7 @@ import firebase from "firebase/compat";
 import {AuthService} from "../services/auth/auth.service";
 import {Router} from "@angular/router";
 import {FilterService} from "../services/filter.service";
-
+import {Subscription} from "rxjs";
 
 export interface FilterLinks {
   name: string;
@@ -22,7 +22,7 @@ export interface FilterLinks {
   encapsulation: ViewEncapsulation.None
 })
 
-export class FilterComponent implements OnInit {
+export class FilterComponent implements OnInit, OnDestroy {
 
   @Input()
   public userID: string;
@@ -30,6 +30,8 @@ export class FilterComponent implements OnInit {
   public user: firebase.User | null = null;
 
   public defaultLink: string = 'Filter';
+
+  private subscriptions: Subscription[] = [];
 
   public filterLinks: FilterLinks[] = [
     {name: 'Filter', viewValue: 'Filter'},
@@ -44,7 +46,9 @@ export class FilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
+    this.subscriptions.push(
+      this.authService.user$.subscribe((value: firebase.User | null) => this.user = value)
+    );
   }
 
   public getDefaultValue() {
@@ -54,6 +58,10 @@ export class FilterComponent implements OnInit {
   public setChangedValue(value: string) {
     this.filterService.changedValue = value;
     this.router.navigate(['/account/', this.userID]);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }
 

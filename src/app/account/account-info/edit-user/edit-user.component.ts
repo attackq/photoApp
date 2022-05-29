@@ -1,11 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {iconsSrc} from "../../../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../../../controls";
 import {CrudService} from "../../../services/crud/crud.service";
 import {EditDescription, EditUser, Post, UserStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
-import {combineLatest, filter, switchMap, takeWhile} from "rxjs";
+import {combineLatest, filter, Subscription, switchMap, takeWhile} from "rxjs";
 import {UploadService} from "../../../services/crud/upload.service";
 import {AuthService} from "../../../services/auth/auth.service";
 import {map, tap} from "rxjs/operators";
@@ -126,13 +126,13 @@ export class EditUserComponent implements OnInit {
     const status = this.editUserForm.controls[FormControls.description].value;
     this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
       map((user: UserStore | undefined) => {
-          const newUser: EditUser = {
-            name: name || user?.name,
-            logo: this.imageLogoSrc || user?.logo!,
-            status: status || user?.status,
-            background: this.imageBackSrc || user?.background!
-          }
-          return this.crudService.updateObject(Collections.USERS, id, {...newUser});
+        const newUser: EditUser = {
+          name: name || user?.name,
+          logo: this.imageLogoSrc || user?.logo!,
+          status: status || user?.status,
+          background: this.imageBackSrc || user?.background!
+        }
+        return this.crudService.updateObject(Collections.USERS, id, {...newUser});
       }),
     ).subscribe()
   }
@@ -150,5 +150,6 @@ export class EditUserComponent implements OnInit {
       alert('Error');
     }
   }
+
 
 }

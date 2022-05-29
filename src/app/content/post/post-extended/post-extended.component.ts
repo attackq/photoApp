@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {filter, from, Observable, of, switchMap} from "rxjs";
+import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {filter, from, Observable, of, Subscription, switchMap} from "rxjs";
 import {EditUser, NewComment, PostStore, UserStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
 import {CrudService} from "../../../services/crud/crud.service";
@@ -9,9 +9,7 @@ import {iconsSrc} from "../../../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../../../controls";
 import {map, tap} from "rxjs/operators";
-import {FilterService} from "../../../services/filter.service";
-import {Clipboard} from '@angular/cdk/clipboard';
-import { NotifierService } from 'angular-notifier';
+
 @Component({
   selector: 'app-post-extended',
   templateUrl: './post-extended.component.html',
@@ -19,8 +17,7 @@ import { NotifierService } from 'angular-notifier';
   encapsulation: ViewEncapsulation.None
 
 })
-export class PostExtendedComponent implements OnInit {
-
+export class PostExtendedComponent implements OnInit, OnDestroy {
 
   @Input()
   public postImg: string | null = '';
@@ -47,30 +44,31 @@ export class PostExtendedComponent implements OnInit {
   public commentsForm: FormGroup = new FormGroup({});
   public formControls: typeof FormControls = FormControls;
   public fireComments: Observable<NewComment[]>;
+  private subscriptions: Subscription[] = [];
 
   constructor(private crudService: CrudService,
-              private authService: AuthService,
-              ) {
+              private authService: AuthService) {
   }
 
-
-
   ngOnInit(): void {
-    this.authService.user$.pipe(
-      tap((value: firebase.User | null) => this.user = value),
-      switchMap((value: firebase.User | null) => {
-        return this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!).pipe(
-          tap((currentUser: UserStore[]) => {
-            this.currentID = currentUser[0].userID;
-            this.commentLogo = currentUser[0].logo
-          })
-        )
-      })
-    ).subscribe()
+    this.subscriptions.push(
+      this.authService.user$.pipe(
+        tap((value: firebase.User | null) => this.user = value),
+        switchMap((value: firebase.User | null) => {
+          return this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!).pipe(
+            tap((currentUser: UserStore[]) => {
+              this.currentID = currentUser[0].userID;
+              this.commentLogo = currentUser[0].logo;
+            })
+          )
+        })
+      ).subscribe()
+    )
 
     this.fireUser = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.creator);
 
     this.commentsForm.addControl(FormControls.comment, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(200)])));
+
     this.fireComments = this.crudService.handleData<PostStore>(Collections.POSTS).pipe(
       map((post: PostStore[]) => {
         return post.filter((i: PostStore) => i.id === this.postID)
@@ -83,39 +81,42 @@ export class PostExtendedComponent implements OnInit {
 
   public addComment() {
     const inputComment = this.commentsForm.controls[FormControls.comment].value;
-    this.crudService.getUserDoc<PostStore>(Collections.POSTS, this.postID).pipe(
-      map((post: PostStore | undefined) => {
-        const comment: NewComment = {
-          text: inputComment,
-          date: new Date().getTime(),
-          createdBy: this.user?.uid!
-        };
-        let comments: Object[] | undefined = post?.comments
-        comments?.push(comment);
-        return this.crudService.updateObject(Collections.POSTS, this.postID, {comments})
-      })
-    ).subscribe()
+    this.subscriptions.push(
+      this.crudService.getUserDoc<PostStore>(Collections.POSTS, this.postID).pipe(
+        map((post: PostStore | undefined) => {
+          const comment: NewComment = {
+            text: inputComment,
+            date: new Date().getTime(),
+            createdBy: this.user?.uid!
+          };
+          let comments: Object[] | undefined = post?.comments
+          comments?.push(comment);
+          return this.crudService.updateObject(Collections.POSTS, this.postID, {comments})
+        })
+      ).subscribe()
+    )
   }
 
   public deleteComment(time: number) {
-    this.crudService.getUserDoc<PostStore>(Collections.POSTS, this.postID).pipe(
-      map((post: PostStore | undefined) => {
-        const currentComment: NewComment[] | undefined = post?.comments.filter((i: NewComment) => i.date === time);
-        const ind = post?.comments.indexOf(currentComment![0])
-        if (ind !== -1) {
-          const array = post?.comments.splice(ind!, 1)
-          return {
-            comments: post?.comments
+    this.subscriptions.push(
+      this.crudService.getUserDoc<PostStore>(Collections.POSTS, this.postID).pipe(
+        map((post: PostStore | undefined) => {
+          const currentComment: NewComment[] | undefined = post?.comments.filter((i: NewComment) => i.date === time);
+          const ind = post?.comments.indexOf(currentComment![0])
+          if (ind !== -1) {
+            const array = post?.comments.splice(ind!, 1)
+            return {
+              comments: post?.comments
+            }
+          } else {
+            return {
+              comments: post?.comments
+            }
           }
-        } else {
-          return {
-            comments: post?.comments
-          }
-        }
-      }),
-      switchMap(comments => this.crudService.updateObject(Collections.POSTS, this.postID, {...comments}))
-    ).subscribe()
-
+        }),
+        switchMap(comments => this.crudService.updateObject(Collections.POSTS, this.postID, {...comments}))
+      ).subscribe()
+    )
   }
 
   public isControlValid(controlName: string): boolean {
@@ -134,5 +135,9 @@ export class PostExtendedComponent implements OnInit {
     } else {
       alert('Error');
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

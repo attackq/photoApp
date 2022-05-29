@@ -1,4 +1,4 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
 import firebase from "firebase/compat/app";
 import {AuthService} from '../services/auth/auth.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -15,23 +15,22 @@ import {map, switchMap, tap} from "rxjs/operators";
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent implements OnInit, OnDestroy {
 
   @Input()
   public firestoreID: string;
   @Input()
   public userID: string;
 
-
   public background: string;
   public userLogo: string;
-
   public isFollow: boolean;
   public isBlocked: boolean;
-
   public user: firebase.User | null = null;
-
   public authID: string;
+
+  private subscriptions: Subscription[] = [];
+
 
   constructor(private authService: AuthService,
               private dialog: MatDialog,
@@ -40,26 +39,27 @@ export class AccountComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.authService.user$.pipe(
-      tap((value: firebase.User | null) => this.user = value),
-      filter((value: firebase.User | null) => !!value),
-      switchMap(() => {
-        return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID).pipe(
-          tap((userFromStore: UserStore[]) => {
-            this.isFollow = userFromStore[0].followers.includes(this.user?.uid!);
-            this.background = userFromStore[0].background;
-            this.userLogo = userFromStore[0].logo;
-          }))
-      }),
-      switchMap(() => {
-        return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.user?.uid!).pipe(
-          tap((currentUser: UserStore[]) => {
-            this.authID = currentUser[0].id;
-            this.isBlocked = currentUser[0].blocked.includes(this.userID);
-          }))
-      })
-    ).subscribe();
-
+    this.subscriptions.push(
+      this.authService.user$.pipe(
+        tap((value: firebase.User | null) => this.user = value),
+        filter((value: firebase.User | null) => !!value),
+        switchMap(() => {
+          return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID).pipe(
+            tap((userFromStore: UserStore[]) => {
+              this.isFollow = userFromStore[0].followers.includes(this.user?.uid!);
+              this.background = userFromStore[0].background;
+              this.userLogo = userFromStore[0].logo;
+            }))
+        }),
+        switchMap(() => {
+          return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.user?.uid!).pipe(
+            tap((currentUser: UserStore[]) => {
+              this.authID = currentUser[0].id;
+              this.isBlocked = currentUser[0].blocked.includes(this.userID);
+            }))
+        })
+      ).subscribe()
+    )
   }
 
   public openAddPostDialog() {
@@ -69,60 +69,70 @@ export class AccountComponent implements OnInit {
   }
 
   public updateFollowers(id: string) {
-    this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
-      map((userFromStore: UserStore | undefined) => {
-        const userIndex = userFromStore?.followers.indexOf(this.user?.uid!);
-        if (userIndex === -1) {
-          return {
-            followers: userFromStore?.followers.concat(this.user?.uid!),
+    this.subscriptions.push(
+      this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
+        map((userFromStore: UserStore | undefined) => {
+          const userIndex = userFromStore?.followers.indexOf(this.user?.uid!);
+          if (userIndex === -1) {
+            return {
+              followers: userFromStore?.followers.concat(this.user?.uid!),
+            }
+          } else {
+            const newArr: string[] | undefined = userFromStore?.followers.splice(userIndex!, 1);
+            return {
+              followers: userFromStore?.followers,
+            }
           }
-        } else {
-          const newArr: string[] | undefined = userFromStore?.followers.splice(userIndex!, 1);
-          return {
-            followers: userFromStore?.followers,
-          }
-        }
-      }),
-      switchMap(newFollowers => this.crudService.updateObject(Collections.USERS, id, {...newFollowers})
-      )).subscribe()
+        }),
+        switchMap(newFollowers => this.crudService.updateObject(Collections.USERS, id, {...newFollowers})
+        )).subscribe()
+    )
   }
 
   public updateFollowing(id: string) {
-    this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
-      map((currentUserFromStore: UserStore | undefined) => {
-        const followingInd = currentUserFromStore?.following.indexOf(this.userID);
-        if (followingInd == -1) {
-          return {
-            following: currentUserFromStore?.following.concat(this.userID),
+    this.subscriptions.push(
+      this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
+        map((currentUserFromStore: UserStore | undefined) => {
+          const followingInd = currentUserFromStore?.following.indexOf(this.userID);
+          if (followingInd == -1) {
+            return {
+              following: currentUserFromStore?.following.concat(this.userID),
+            }
+          } else {
+            const newArray: string[] | undefined = currentUserFromStore?.following.splice(followingInd!, 1)
+            return {
+              following: currentUserFromStore?.following
+            }
           }
-        } else {
-          const newArray: string[] | undefined = currentUserFromStore?.following.splice(followingInd!, 1)
-          return {
-            following: currentUserFromStore?.following
-          }
-        }
-      }),
-      switchMap(newFollowing => this.crudService.updateObject(Collections.USERS, id, {...newFollowing}))
-    ).subscribe()
+        }),
+        switchMap(newFollowing => this.crudService.updateObject(Collections.USERS, id, {...newFollowing}))
+      ).subscribe()
+    )
   }
 
   public updateBlocked(id: string) {
-    this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
-      map((currentUserFromStore: UserStore | undefined) => {
-        const blockedInd = currentUserFromStore?.blocked.indexOf(this.userID);
-        if (blockedInd == -1) {
-          return {
-            blocked: currentUserFromStore?.blocked.concat(this.userID),
+    this.subscriptions.push(
+      this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
+        map((currentUserFromStore: UserStore | undefined) => {
+          const blockedInd = currentUserFromStore?.blocked.indexOf(this.userID);
+          if (blockedInd == -1) {
+            return {
+              blocked: currentUserFromStore?.blocked.concat(this.userID),
+            }
+          } else {
+            const newArray: string[] | undefined = currentUserFromStore?.blocked.splice(blockedInd!, 1)
+            return {
+              blocked: currentUserFromStore?.blocked
+            }
           }
-        } else {
-          const newArray: string[] | undefined = currentUserFromStore?.blocked.splice(blockedInd!, 1)
-          return {
-            blocked: currentUserFromStore?.blocked
-          }
-        }
-      }),
-      switchMap(newBlocked => this.crudService.updateObject(Collections.USERS, id, {...newBlocked}))
-    ).subscribe()
+        }),
+        switchMap(newBlocked => this.crudService.updateObject(Collections.USERS, id, {...newBlocked}))
+      ).subscribe()
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
 }

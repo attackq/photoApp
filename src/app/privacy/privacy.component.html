@@ -1,6 +1,6 @@
 <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="privacy__viewport">
   <div class="container">
-    <div class="privacy__wrapper">
+    <div class="privacy__wrapper" [class.privacy__login]="!user">
       <div class="privacy__title">PhotoApp Privacy Policy</div>
       <div class="privacy__point">
         <div class="privacy__subtitle">Object and Scene Type Recognition Technology</div>

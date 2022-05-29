@@ -1,6 +1,6 @@
 <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="terms__viewport">
   <div class="container">
-    <div class="terms__wrapper">
+    <div class="terms__wrapper" [class.terms__login]="!user">
       <div class="terms__title">PhotoApp Terms & Conditions of Use</div>
       <div class="terms__general"><p>Date of Last Revision: May 26, 2022</p>
         We strive to create consistent standards for all of our users. This agreement was written in English (US). To

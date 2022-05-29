@@ -14,7 +14,6 @@
   color: #FFFFFF;
   border-radius: 5px;
   margin: 5px 18px 5px 0;
-  cursor: pointer;
 }
 .logo__img img {
   width: 27px;
@@ -26,7 +25,6 @@
   font-size: 25px;
   line-height: 30px;
   color: #FFFFFF;
-  cursor: pointer;
 }
 
 @media (max-width: 992px) {

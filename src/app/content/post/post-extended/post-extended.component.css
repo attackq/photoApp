@@ -110,6 +110,7 @@
 .comments__viewport {
   background: #FFFFFF;
   overflow-x: hidden;
+  flex: 1 1 auto;
 }
 .extended__comment {
   width: 100%;
@@ -143,7 +144,7 @@
   max-width: 165px;
   overflow: hidden;
   margin-right: 10px;
-  flex: 0 0 80%;
+  flex: 0 0 50%;
   font-weight: 500;
   font-size: 14px;
   color: #4F4F4F;

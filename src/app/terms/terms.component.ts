@@ -1,4 +1,7 @@
-import {Component, HostBinding, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import firebase from "firebase/compat";
+import {AuthService} from "../services/auth/auth.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-terms',
@@ -7,13 +10,23 @@ import {Component, HostBinding, OnInit, ViewEncapsulation} from '@angular/core';
   encapsulation: ViewEncapsulation.None
 
 })
-export class TermsComponent implements OnInit {
+export class TermsComponent implements OnInit, OnDestroy {
 
   @HostBinding('class.terms') someField: boolean = true;
 
-  constructor() { }
+  public user: firebase.User | null = null;
+  private subscriptions: Subscription[] = [];
 
-  ngOnInit(): void {
+  constructor(private authService: AuthService) {
   }
 
+  ngOnInit(): void {
+    this.subscriptions.push(
+      this.authService.user$.subscribe((value: firebase.User | null) => this.user = value)
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
 }

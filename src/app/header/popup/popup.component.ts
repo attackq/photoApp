@@ -1,28 +1,37 @@
-import {Component, Input, OnInit} from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { Router } from '@angular/router';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {AuthService} from 'src/app/services/auth/auth.service';
+import {Router} from '@angular/router';
 import {RoutesPath} from "../../routes-path";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-popup',
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.css']
 })
-export class PopupComponent implements OnInit {
+export class PopupComponent implements OnInit, OnDestroy {
 
   @Input()
   public username: string = '';
 
   public routes = RoutesPath;
 
+  private subscriptions: Subscription[] = [];
+
   constructor(private authService: AuthService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
   public logout(): void {
-    this.authService.signOut().subscribe(() => this.router.navigate([this.routes.login]));
+    this.subscriptions.push(
+      this.authService.signOut().subscribe(() => this.router.navigate(['/']))
+    );
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
 }

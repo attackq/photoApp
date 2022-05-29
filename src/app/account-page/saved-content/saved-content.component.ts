@@ -26,7 +26,6 @@ export class SavedContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.firePosts = this.authService.user$.pipe(
       filter((value: firebase.User | null) => !!value),
       switchMap((value: firebase.User | null) => this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!)),
@@ -42,7 +41,6 @@ export class SavedContentComponent implements OnInit {
               return b.bookmarkDate - a.bookmarkDate
             })
           })
-          // take(1)
         )
       }),
     )

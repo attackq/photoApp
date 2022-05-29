@@ -5,7 +5,7 @@
       <img [src]="icons.close" alt="" mat-dialog-close>
     </div>
     <div class="followers__list">
-      <div class="follower" *ngFor="let user of firestoreUser | async">
+      <div class="follower" *ngFor="let user of (followers | async)">
         <div class="follower__logo">
           <app-user-logo [userLogo]="user.logo"
                          [routerLink]="['/account/', user.userID]"

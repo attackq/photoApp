@@ -2,6 +2,7 @@
   display: flex;
   flex: 1 1 auto;
 }
+
 .privacy__wrapper {
   display: flex;
   flex-direction: column;
@@ -10,6 +11,9 @@
   padding: 20px 0;
   font-size: 16px;
   line-height: 24px;
+}
+.privacy__login {
+  padding-top: 75px;
 }
 .privacy__viewport {
   flex: 1 1 auto;

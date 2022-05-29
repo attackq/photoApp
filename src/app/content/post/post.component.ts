@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {Collections} from "../../services/crud/collections";
 import {CrudService} from "../../services/crud/crud.service";
 import {UploadService} from "../../services/crud/upload.service";
@@ -8,7 +8,7 @@ import {PostExtendedComponent} from "./post-extended/post-extended.component";
 import {AuthService} from "../../services/auth/auth.service";
 import firebase from "firebase/compat";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FilterService} from "../../services/filter.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-post',
@@ -16,7 +16,7 @@ import {FilterService} from "../../services/filter.service";
   styleUrls: ['./post.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnInit, OnDestroy {
 
   @Input()
   public postImg: string | null = '';
@@ -36,6 +36,8 @@ export class PostComponent implements OnInit {
   public user: firebase.User | null = null;
   public queryPostId: string
   public sharingId: string;
+  private subscriptions: Subscription[] = [];
+
 
   public delete(id: string): void {
     this.crudService.deleteObject(Collections.POSTS, id).subscribe();
@@ -51,15 +53,17 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams
-      .subscribe(params => {
-          this.queryPostId = params['postId'];
-          if (params['postId'] === this.postID && !this.isOpenedDialog) {
-            this.openExtendedPostDialog();
+    this.subscriptions.push(
+      this.route.queryParams
+        .subscribe(params => {
+            this.queryPostId = params['postId'];
+            if (params['postId'] === this.postID && !this.isOpenedDialog) {
+              this.openExtendedPostDialog();
+            }
           }
-        }
-      );
-    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
+        ),
+      this.authService.user$.subscribe((value: firebase.User | null) => this.user = value)
+    )
   }
 
   public openEditPopupDialog(id: string) {
@@ -80,10 +84,7 @@ export class PostComponent implements OnInit {
       queryParamsHandling: "merge",
 
     })
-    console.log(window.location.host + '/account/' + this.creator + '?postId=' + this.postID)
-    // this.sharingId = window.location.host + '?postId=' + this.postID;
     this.sharingId = window.location.host + '/account/' + this.creator + '?postId=' + this.postID;
-    console.log(this.router.url)
     extendedPost.componentInstance.sharePostId = this.sharingId;
     extendedPost.componentInstance.postImg = this.postImg;
     extendedPost.componentInstance.postDesc = this.postDesc;
@@ -91,9 +92,15 @@ export class PostComponent implements OnInit {
     extendedPost.componentInstance.postID = this.postID;
     extendedPost.componentInstance.creator = this.creator;
 
-    extendedPost.afterClosed().subscribe(() => {
-      this.router.navigate([])
-    })
+    this.subscriptions.push(
+      extendedPost.afterClosed().subscribe(() => {
+        this.router.navigate([]);
+      })
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
 }
