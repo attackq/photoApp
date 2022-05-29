@@ -1,1 +1,20 @@
-<p>page-not-found works!</p>
+<div class="container">
+  <div class="notfound__wrapper">
+    <div class="notfound__title">Whoops!</div>
+    <div class="notfound__subtitle">404 Page Not Found</div>
+    <ng-container *ngIf="user">
+      <app-button [label]="'Home'"
+                  [bgColor]="'black'"
+                  (click)="routeToHome()">
+      </app-button>
+    </ng-container>
+    <ng-container *ngIf="!user">
+      <app-button [label]="'Log in'"
+                  [bgColor]="'black'"
+                  (click)="routeToLogin()">
+      </app-button>
+    </ng-container>
+    <!--    <button class="notfound__button" (click)="routeToHome()">GO HOME</button>-->
+    <!--    <button class="notfound__button" *ngIf="!user" (click)="routeToLogin()">GO LOGIN</button>-->
+  </div>
+</div>

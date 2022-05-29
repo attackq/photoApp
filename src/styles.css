@@ -1,6 +1,8 @@
 @import "assets/styles/popup-forms.css";
 @import "assets/styles/follow-popup.css";
 @import "assets/styles/sidenav.css";
+@import "assets/styles/empty-post.css";
+
 @import "~angular-notifier/styles";
 
 

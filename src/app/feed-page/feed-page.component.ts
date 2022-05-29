@@ -6,7 +6,7 @@ import {Collections} from "../services/crud/collections";
 import {AuthService} from "../services/auth/auth.service";
 import {CrudService} from "../services/crud/crud.service";
 import {combineLatest, map, switchMap, take, tap} from "rxjs/operators";
-import {ActivatedRoute} from "@angular/router";
+import {iconsSrc} from "../icons-path";
 
 @Component({
   selector: 'app-feed-page',
@@ -19,6 +19,7 @@ export class FeedPageComponent implements OnInit {
 
   public firePosts: Observable<PostStore[]>;
   public routedID: null;
+  public icons = iconsSrc;
 
   constructor(private authService: AuthService,
               private crudService: CrudService) {

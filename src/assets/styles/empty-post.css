@@ -1,0 +1,29 @@
+.empty__post {
+  margin-top: 25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.empty__title {
+  margin-bottom: 30px;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 18px;
+  color: #4F4F4F;
+}
+.empty__img {
+  width: 70px;
+  height: 70px;
+}
+.empty__img img {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0) saturate(100%) invert(40%) sepia(100%) saturate(2859%) hue-rotate(336deg) brightness(104%) contrast(102%);
+}
+
+@media (max-width: 480px) {
+  .empty__post {
+    margin-top: 15vh;
+  }
+}

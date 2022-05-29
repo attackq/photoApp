@@ -1,17 +1,28 @@
-<cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll__viewport">
+<ng-container *ngIf="(firePosts | async)?.length! > 0; else message">
+  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll__viewport" >
+    <div class="container">
+      <div class="feed__wrapper">
+        <ng-container *ngFor="let post of (firePosts | async)">
+          <app-post class="feed__column"
+                    [postImg]="post.photo"
+                    [postDesc]="post.description"
+                    [postID]="post.id"
+                    [postTitle]="post.title"
+                    [postDate]="post.sortID"
+                    [userID]="this.routedID"
+                    [creator]="post.createdBy"></app-post>
+        </ng-container>
+      </div>
+    </div>
+  </cdk-virtual-scroll-viewport>
+</ng-container>
+<ng-template #message>
   <div class="container">
-    <div class="feed__wrapper">
-      <ng-container *ngFor="let post of (firePosts | async)">
-        <app-post class="feed__column"
-                  [postImg]="post.photo"
-                  [postDesc]="post.description"
-                  [postID]="post.id"
-                  [postTitle]="post.title"
-                  [postDate]="post.sortID"
-                  [userID]="this.routedID"
-                  [creator]="post.createdBy"></app-post>
-      </ng-container>
+    <div class="empty__post">
+      <div class="empty__title">There are no posts yet!</div>
+      <div class="empty__img">
+        <img [src]="icons.picture" alt="">
+      </div>
     </div>
   </div>
-</cdk-virtual-scroll-viewport>
-
+</ng-template>

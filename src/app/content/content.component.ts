@@ -22,7 +22,7 @@ import {iconsSrc} from "../icons-path";
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
-  styleUrls: ['./content.component.css'],
+  styleUrls: ['./content.component.css']
 
 })
 export class ContentComponent implements OnInit, OnDestroy {
