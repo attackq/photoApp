@@ -51,6 +51,7 @@
   line-height: 18px;
   color: #828282;
   text-decoration: none;
+  cursor: pointer;
 }
 .popup__link:hover {
   color: #FFFFFF;

@@ -18,26 +18,21 @@ export class CheckUserGuard implements CanActivate {
     this.notifier = notifier
   }
 
-  private userId: string | undefined;
-
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authService.user$.pipe(
       take(1),
-      map((value: firebase.User | null) => !value),
+      map((value: firebase.User | null) => {
+        const user = !!value;
+        return !user;
+      }),
       tap((isLogged: boolean) => {
-        if (isLogged) {
-          console.log('usera net!')
-        } else {
-          console.log('user est')
-          // this.router.navigate(['login'])
+        if (!isLogged) {
+          this.router.navigate(['###']);
         }
       })
     )
-
-    // return true
-
   }
 
 }

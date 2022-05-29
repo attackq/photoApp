@@ -64,6 +64,9 @@
   position: relative;
   margin: 7.5px 0 7.5px 20px;
 }
+.pointer {
+  cursor: pointer;
+}
 .header__login {
   display: flex;
   align-items: center;

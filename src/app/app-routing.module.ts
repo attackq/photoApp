@@ -16,14 +16,13 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {NotFoundGuard} from "./services/not-found.guard";
 
 const routes: Routes = [
-  {path: '', redirectTo: RoutesPath.login, pathMatch: 'full', },
-  {path: RoutesPath.login, component: LoginPageComponent},
+  {path: '', redirectTo: RoutesPath.login, pathMatch: 'full'},
+  {path: RoutesPath.login, component: LoginPageComponent, canActivate: [CheckUserGuard]},
   {
     path: 'account/:id', component: AccountPageComponent, canActivate: [AuthGuard, CheckUserIdGuard],
     children: [
       {
-        path: '',
-        component: ContentComponent,
+        path: '', component: ContentComponent,
       },
       {
         path: RoutesPath.saved, component: SavedContentComponent
@@ -34,9 +33,7 @@ const routes: Routes = [
   {path: RoutesPath.terms, component: TermsComponent},
   {path: RoutesPath.about, component: AboutComponent},
   {path: RoutesPath.privacy, component: PrivacyComponent},
-  {path: '**', component: PageNotFoundComponent, canActivate: [NotFoundGuard]},
-  // canActivate: [CheckUserGuard]
-
+  {path: '**', component: PageNotFoundComponent}
 ]
 
 @NgModule({

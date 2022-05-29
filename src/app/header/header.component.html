@@ -18,8 +18,8 @@
         <app-search [imagePath]="icons.search" [size]="'small'" (click)="onGlobalClick($event)"></app-search>
       </div>
       <div class="user" *ngIf="user" #buttonElement>
-        <ng-container *ngFor="let fireUser of fireUsers | async">
-          <app-user-logo (click)="togglePopup()" [userLogo]="fireUser.logo"></app-user-logo>
+        <ng-container *ngFor="let fireUser of fireUsers | async" >
+          <app-user-logo (click)="togglePopup()" [userLogo]="fireUser.logo"  class="pointer"></app-user-logo>
         </ng-container>
         <app-popup [username]="this.user.displayName!.split(' ')[0]"
                    *ngIf="toggle"

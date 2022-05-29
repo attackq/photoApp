@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AuthService} from "./auth/auth.service";
 import {NotifierService} from "angular-notifier";
 
 @Injectable({
@@ -18,9 +17,9 @@ export class NotFoundGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.notifier.notify('error', 'Wrong URL');
+    // this.notifier.notify('error', 'Invalid page URL!');
     return true
-
   }
+
 
 }

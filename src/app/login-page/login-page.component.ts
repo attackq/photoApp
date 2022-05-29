@@ -40,7 +40,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authService.googleSingIn().pipe(
         switchMap(() => this.authService.user$))
-        .subscribe(() => this.router.navigate(['/account/', this.user?.uid!]))
+        .subscribe(() => this.router.navigate(['account/', this.user?.uid!]))
     );
   }
 
