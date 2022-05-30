@@ -1,12 +1,15 @@
 <div class="account__info" *ngFor="let fireUser of (firestoreUser | async)">
   <div class="account__user">
     <div class="account__name">{{fireUser.name}}</div>
-    <img [src]="icons.edit" (click)="openEditUserDialog(this.firestoreID)"
-         *ngIf="user?.uid! == this.userID">
+    <ng-container *ngIf="user?.uid! == this.userID">
+      <div class="account__img" (click)="openEditUserDialog(this.firestoreID)">
+        <img [src]="icons.edit">
+      </div>
+    </ng-container>
   </div>
   <div class="account__desc">{{fireUser.status}}</div>
   <div class="account__follow">
     <div class="followers" (click)="openFollowersDialog()">{{fireUser.followers.length}} Followers</div>
-    <div class="following" (click)="openFollowingDialog()" >{{fireUser.following.length}} Following</div>
+    <div class="following" (click)="openFollowingDialog()">{{fireUser.following.length}} Following</div>
   </div>
 </div>

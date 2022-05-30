@@ -21,8 +21,10 @@
 .account__name {
   font-size: 30px;
   line-height: 37px;
-  margin-right: 40px;
+  margin-right: 30px;
+  font-weight: 500;
 }
+
 .account__desc {
   font-weight: 400;
   font-size: 15px;

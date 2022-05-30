@@ -1,8 +1,8 @@
 <mat-sidenav-container>
   <mat-sidenav [(opened)]="opened">
     <div class="side__links">
-      <a class="side__link" [routerLink]="['/account/', user?.uid!]" (click)="opened = !opened">Home</a>
-      <a class="side__link" [routerLink]="['/feed']" (click)="opened = !opened">Feed</a>
+      <a class="side__link" [routerLink]="[routes.account, user?.uid!]" (click)="opened = !opened">Home</a>
+      <a class="side__link" [routerLink]="[routes.feed]" (click)="opened = !opened">Feed</a>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
