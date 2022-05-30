@@ -40,7 +40,7 @@ export class SavedContentComponent implements OnInit {
             return posts.sort((a: PostStore, b: PostStore) => {
               return b.bookmarkDate - a.bookmarkDate
             })
-          })
+          }),
         )
       }),
     )

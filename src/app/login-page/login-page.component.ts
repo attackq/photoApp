@@ -5,6 +5,7 @@ import firebase from "firebase/compat/app";
 import {Observable, Subscription, switchMap} from "rxjs";
 import {UserStore} from "../post";
 import {CrudService} from "../services/crud/crud.service";
+import {RoutesPath} from "../routes-path";
 
 
 @Component({
@@ -17,11 +18,12 @@ import {CrudService} from "../services/crud/crud.service";
 })
 export class LoginPageComponent implements OnInit, OnDestroy {
 
-  @HostBinding('class.login__background') someField: boolean = true;
+  @HostBinding('class.login__background') isLoginBg: boolean = true;
 
   public user: firebase.User | null = null;
 
   public fireUsers: Observable<UserStore[]>;
+  public routes = RoutesPath;
 
   public bgPath: string = 'assets/images/logiwp.jpg';
 
@@ -40,7 +42,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authService.googleSingIn().pipe(
         switchMap(() => this.authService.user$))
-        .subscribe(() => this.router.navigate(['account/', this.user?.uid!]))
+        .subscribe(() => this.router.navigate([this.routes.account, this.user?.uid!]))
     );
   }
 

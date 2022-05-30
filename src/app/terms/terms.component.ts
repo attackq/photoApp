@@ -12,7 +12,7 @@ import {Subscription} from "rxjs";
 })
 export class TermsComponent implements OnInit, OnDestroy {
 
-  @HostBinding('class.terms') someField: boolean = true;
+  @HostBinding('class.terms') isTerms: boolean = true;
 
   public user: firebase.User | null = null;
   private subscriptions: Subscription[] = [];

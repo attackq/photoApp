@@ -8,7 +8,7 @@
         <div class="extended__user">
           <div class="extended__logo">
             <app-user-logo mat-dialog-close [userLogo]="fireUser.logo"
-                           [routerLink]="['/account/', fireUser.userID]"></app-user-logo>
+                           [routerLink]="[routes.account, fireUser.userID]"></app-user-logo>
           </div>
           <div class="extended__name">{{fireUser.name}}</div>
           <div class="extended__close" mat-dialog-close>
@@ -21,12 +21,11 @@
           <app-post-icons [postID]="this.postID" [size]="'big'" [isShare]="isShare" [sharePostId]="this.sharePostId"></app-post-icons>
         </div>
       </div>
-<!--      <div class="extended__share"><a (click)="copyShareLink()">share</a></div>-->
       <div class="extended__comments">
         <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="comments__viewport">
           <div class="extended__comment" *ngFor="let comment of (fireComments | async)">
             <div class="comment__logo">
-              <app-user-logo mat-dialog-close [userLogo]="comment.createdBy === this.currentID ? this.commentLogo :  fireUser.logo" [routerLink]="['/account/', comment.createdBy]"></app-user-logo>
+              <app-user-logo mat-dialog-close [userLogo]="comment.createdBy === this.currentID ? this.commentLogo :  fireUser.logo" [routerLink]="[routes.account, comment.createdBy]"></app-user-logo>
             </div>
             <div class="comment__text">{{comment.text}}</div>
             <div class="comment__info">
@@ -53,7 +52,7 @@
         <div class="extended__btn">
           <app-button [label]="'Send'"
                       [bgColor]="'green'"
-                      [cond]="commentsForm.invalid"
+                      [condition]="commentsForm.invalid"
                       (click)="submitFrom()"
                       class="form__btn">
           </app-button>

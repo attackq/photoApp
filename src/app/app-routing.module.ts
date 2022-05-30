@@ -10,10 +10,9 @@ import {TermsComponent} from "./terms/terms.component";
 import {RoutesPath} from "./routes-path";
 import {AboutComponent} from "./about/about.component";
 import {PrivacyComponent} from "./privacy/privacy.component";
-import {CheckUserGuard} from "./services/check-user.guard";
-import {CheckUserIdGuard} from "./services/check-user-id.guard";
+import {CheckUserGuard} from "./services/guards/check-user.guard";
+import {CheckUserIdGuard} from "./services/guards/check-user-id.guard";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
-import {NotFoundGuard} from "./services/not-found.guard";
 
 const routes: Routes = [
   {path: '', redirectTo: RoutesPath.login, pathMatch: 'full'},

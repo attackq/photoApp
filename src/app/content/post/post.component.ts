@@ -82,7 +82,6 @@ export class PostComponent implements OnInit, OnDestroy {
         postId: this.postID
       },
       queryParamsHandling: "merge",
-
     })
     this.sharingId = window.location.host + '/account/' + this.creator + '?postId=' + this.postID;
     extendedPost.componentInstance.sharePostId = this.sharingId;

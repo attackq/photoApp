@@ -15,7 +15,7 @@
       <div class="modal_err" *ngIf="isControlValid(formControls.description)">Max length is 200 symbols</div>
       <app-button [label]="'Change'"
                   [bgColor]="'blue'"
-                  [cond]="editPostForm.invalid"
+                  [condition]="editPostForm.invalid"
                   (click)="updateDescription(postID)"
                   mat-dialog-close
                   class="form__btn">

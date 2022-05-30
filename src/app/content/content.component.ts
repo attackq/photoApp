@@ -1,12 +1,8 @@
 import {
   Component,
-  HostBinding,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
-  ViewEncapsulation
 } from '@angular/core';
 import {PostStore, UserStore} from "../post";
 import {Observable, of, Subscription, switchMap} from "rxjs";
@@ -61,28 +57,25 @@ export class ContentComponent implements OnInit, OnDestroy {
               return this.crudService.handlePostsData<PostStore>(Collections.POSTS, this.id).pipe(
                 map((posts: PostStore[]) => {
                   return this.sortBy(posts, value)
-                  // return  posts.sort((a: PostStore, b: PostStore) => {
-                  //   return b.sortID - a.sortID
-                  // })
                 })
               )
             })
-          ),
+          )
         ))
       ))
-
   }
 
   public sortBy(arr: PostStore[], sort: string) {
     return arr.sort((a: PostStore, b: PostStore) => {
-      if (sort === 'All photos') {
-        return b.sortID - a.sortID
-      } else if (sort === 'Most liked') {
-        return b.likes.length - a.likes.length
-      } else if (sort === 'Most commented') {
-        return b.comments.length - a.comments.length
-      } else {
-        return b.sortID - a.sortID
+      switch (sort) {
+        case 'All photos':
+          return b.sortID - a.sortID;
+        case 'Most liked':
+          return b.likes.length - a.likes.length;
+        case 'Most commented':
+          return b.comments.length - a.comments.length;
+        default:
+          return b.sortID - a.sortID;
       }
     })
   }

@@ -17,6 +17,8 @@ import {iconsSrc} from "../icons-path";
 })
 export class FeedPageComponent implements OnInit {
 
+  @HostBinding('class.feed') isFeed: boolean = true;
+
   public firePosts: Observable<PostStore[]>;
   public routedID: null;
   public icons = iconsSrc;
@@ -24,8 +26,6 @@ export class FeedPageComponent implements OnInit {
   constructor(private authService: AuthService,
               private crudService: CrudService) {
   }
-
-  @HostBinding('class.feed') someField: boolean = true;
 
   ngOnInit(): void {
     this.firePosts = this.authService.user$.pipe(

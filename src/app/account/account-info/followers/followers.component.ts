@@ -5,6 +5,7 @@ import {UserStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
 import {Observable, of, switchMap} from "rxjs";
 import {map, tap} from "rxjs/operators";
+import {RoutesPath} from "../../../routes-path";
 
 @Component({
   selector: 'app-followers',
@@ -17,6 +18,8 @@ export class FollowersComponent implements OnInit {
   public userID: string;
 
   public icons = iconsSrc;
+
+  public routes = RoutesPath;
 
   public followers: Observable<UserStore[]>;
 

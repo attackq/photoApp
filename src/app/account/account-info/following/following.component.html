@@ -1,14 +1,14 @@
 <div mat-dialog-content>
   <div class="modal__content">
     <div class="modal__title">
-      <div class="modal__text">Followers</div>
+      <div class="modal__text">Following</div>
       <img [src]="icons.close" alt="" mat-dialog-close>
     </div>
     <div class="followers__list" *ngIf="(following | async)?.length! > 0; else nobody">
       <div class="follower" *ngFor="let user of (following | async)">
         <div class="follower__logo">
           <app-user-logo [userLogo]="user.logo"
-                         [routerLink]="['/account/', user.userID]"
+                         [routerLink]="[routes.account, user.userID]"
                          mat-dialog-close></app-user-logo>
         </div>
         <div class="follower__name">{{user.name}}</div>

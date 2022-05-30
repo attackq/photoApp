@@ -12,7 +12,7 @@ import {Subscription, switchMap} from "rxjs";
 export class PopupComponent implements OnInit, OnDestroy {
 
   @Input()
-  public username: string = '';
+  public username: string;
 
   public routes = RoutesPath;
 

@@ -13,7 +13,7 @@ import {Subscription} from "rxjs";
 })
 export class AboutComponent implements OnInit, OnDestroy {
 
-  @HostBinding('class.about') someField: boolean = true;
+  @HostBinding('class.about') isAbout: boolean = true;
 
   public icons = iconsSrc;
 

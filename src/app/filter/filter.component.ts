@@ -9,6 +9,7 @@ import {AuthService} from "../services/auth/auth.service";
 import {Router} from "@angular/router";
 import {FilterService} from "../services/filter.service";
 import {Subscription} from "rxjs";
+import {RoutesPath} from "../routes-path";
 
 export interface FilterLinks {
   name: string;
@@ -30,6 +31,8 @@ export class FilterComponent implements OnInit, OnDestroy {
   public user: firebase.User | null = null;
 
   public defaultLink: string = 'Filter';
+
+  public routes = RoutesPath;
 
   private subscriptions: Subscription[] = [];
 
@@ -57,7 +60,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   public setChangedValue(value: string) {
     this.filterService.changedValue = value;
-    this.router.navigate(['/account/', this.userID]);
+    this.router.navigate([this.routes.account, this.userID]);
   }
 
   ngOnDestroy(): void {

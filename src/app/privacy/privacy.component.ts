@@ -12,11 +12,10 @@ import {Subscription} from "rxjs";
 })
 export class PrivacyComponent implements OnInit, OnDestroy {
 
-  @HostBinding('class.privacy') someField: boolean = true;
+  @HostBinding('class.privacy') isPrivacy: boolean = true;
 
   public user: firebase.User | null = null;
   private subscriptions: Subscription[] = [];
-
 
   constructor(private authService: AuthService) {
   }

@@ -14,7 +14,7 @@ import {Observable} from "rxjs";
 export class UserLogoComponent implements OnInit {
 
   @Input()
-  public size: string = '';
+  public size: string;
   @Input()
   public userLogo: string | null;
 

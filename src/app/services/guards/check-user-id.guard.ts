@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {filter, Observable, switchMap, tap} from 'rxjs';
-import {CrudService} from "./crud/crud.service";
-import {UserStore} from "../post";
-import {Collections} from "./crud/collections";
+import {CrudService} from "../crud/crud.service";
+import {UserStore} from "../../post";
+import {Collections} from "../crud/collections";
 import {map, take} from "rxjs/operators";
-import {AuthService} from "./auth/auth.service";
+import {AuthService} from "../auth/auth.service";
 import firebase from "firebase/compat";
 import {NotifierService} from "angular-notifier";
 

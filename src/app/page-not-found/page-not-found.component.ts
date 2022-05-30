@@ -1,6 +1,5 @@
 import {
-  AfterViewChecked,
-  AfterViewInit,
+
   Component,
   HostBinding,
   OnDestroy,
@@ -12,7 +11,6 @@ import {AuthService} from "../services/auth/auth.service";
 import {RoutesPath} from "../routes-path";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
-import {NotifierService} from "angular-notifier";
 
 @Component({
   selector: 'app-page-not-found',
@@ -23,7 +21,7 @@ import {NotifierService} from "angular-notifier";
 })
 export class PageNotFoundComponent implements OnInit, OnDestroy{
 
-  @HostBinding('class.notfound') someField: boolean = true;
+  @HostBinding('class.notfound') isNotFound: boolean = true;
   public user: firebase.User | null = null;
   public routes = RoutesPath;
   private subscriptions: Subscription[] = [];

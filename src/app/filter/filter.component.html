@@ -8,7 +8,7 @@
       </mat-select>
     </mat-form-field>
     <ng-container *ngIf="this.user?.uid === this.userID">
-      <a class="filter__link" [routerLink]="'./saved'" (click)="getDefaultValue()">Saved</a>
+      <a class="filter__link" [routerLink]="routes.saved" (click)="getDefaultValue()">Saved</a>
     </ng-container>
   </div>
 </div>

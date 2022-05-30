@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   HostListener, OnDestroy,
@@ -8,16 +7,14 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import {iconsSrc} from "../icons-path";
-import {UserInfo} from "../user-info";
 import {AuthService} from '../services/auth/auth.service';
 import {Router} from '@angular/router';
 import firebase from "firebase/compat/app";
 import {Collections} from "../services/crud/collections";
-import {DocumentReference} from "@angular/fire/compat/firestore";
 import {CrudService} from "../services/crud/crud.service";
-import {filter, Observable, Subscription, switchMap} from "rxjs";
-import {tap} from "rxjs/operators";
+import {Observable, Subscription, switchMap} from "rxjs";
 import {UserStore} from "../post";
+import {RoutesPath} from "../routes-path";
 
 @Component({
   selector: 'app-header',
@@ -41,14 +38,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public condition: boolean = false;
-
   public user: firebase.User | null = null;
-
+  public routes = RoutesPath;
   public icons = iconsSrc;
   public fireUsers: Observable<UserStore[]>;
   public toggle: boolean = false;
   private subscriptions: Subscription[] = [];
-
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -74,7 +69,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authService.googleSingIn().pipe(
         switchMap(() => this.authService.user$))
-        .subscribe(() => this.router.navigate(['/account/', this.user?.uid!]))
+        .subscribe(() => this.router.navigate([this.routes.account, this.user?.uid!]))
     );
   }
 

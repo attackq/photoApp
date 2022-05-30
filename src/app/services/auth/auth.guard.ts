@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {map, take, tap} from "rxjs/operators";
 import {AuthService} from "./auth.service";
 import firebase from "firebase/compat/app";
+import {NotifierService} from "angular-notifier";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,10 @@ import firebase from "firebase/compat/app";
 export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private notifier: NotifierService) {
+    this.notifier = notifier
+
   }
 
   canActivate(
@@ -23,6 +27,7 @@ export class AuthGuard implements CanActivate {
       tap((isLogged: boolean) => {
         if (!isLogged) {
           this.router.navigate(['login']);
+          this.notifier.notify('warning', 'Please, login into your account!')
         }
       }),
     )

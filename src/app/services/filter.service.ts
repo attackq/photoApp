@@ -7,6 +7,7 @@ import {BehaviorSubject} from "rxjs";
 export class FilterService {
 
   public filterValue: string;
+
   public val$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor() { }
@@ -18,6 +19,5 @@ export class FilterService {
   set changedValue(val: string) {
     this.filterValue = val;
     this.val$.next(val);
-    // console.log(this.filterValue)
   }
 }

@@ -8,7 +8,7 @@
       <div class="follower" *ngFor="let user of (followers | async)">
         <div class="follower__logo">
           <app-user-logo [userLogo]="user.logo"
-                         [routerLink]="['/account/', user.userID]"
+                         [routerLink]="[routes.account, user.userID]"
                          mat-dialog-close></app-user-logo>
         </div>
         <div class="follower__name">{{user.name}}</div>

@@ -20,7 +20,6 @@ export class SearchComponent implements OnInit {
   public size: string = '';
 
   @ViewChild('searchElement') button: ElementRef | undefined;
-
   @ViewChild('searchInput') input: ElementRef;
 
   @HostListener('document:mousedown', ['$event'])
@@ -30,6 +29,8 @@ export class SearchComponent implements OnInit {
       this.input.nativeElement.value = '';
     }
   }
+
+  private readonly MAX_SEARCH_SYMBOLS: number = 1;
 
   public isResults: boolean = false;
 
@@ -41,7 +42,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.fireUsers = this.name.pipe(
-      filter(value =>  value.length > 1),
+      filter(value =>  value.length > this.MAX_SEARCH_SYMBOLS),
       switchMap((value: string) => {
         return this.crudService.handleData<UserStore>(Collections.USERS).pipe(
           map((users: UserStore[]) => {

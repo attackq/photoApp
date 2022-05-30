@@ -5,6 +5,7 @@ import {UserStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
 import {map} from "rxjs/operators";
 import {CrudService} from "../../../services/crud/crud.service";
+import {RoutesPath} from "../../../routes-path";
 
 @Component({
   selector: 'app-following',
@@ -17,6 +18,8 @@ export class FollowingComponent implements OnInit {
   public userID: string;
 
   public icons = iconsSrc;
+
+  public routes = RoutesPath;
 
   public following: Observable<UserStore[]>;
 

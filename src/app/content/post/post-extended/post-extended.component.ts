@@ -9,6 +9,7 @@ import {iconsSrc} from "../../../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../../../controls";
 import {map, tap} from "rxjs/operators";
+import {RoutesPath} from "../../../routes-path";
 
 @Component({
   selector: 'app-post-extended',
@@ -34,6 +35,7 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
   public isShare: boolean = true;
 
   public icons = iconsSrc;
+  public routes = RoutesPath;
   public user: firebase.User | null = null;
 
   public fireUser: Observable<UserStore[]>;
