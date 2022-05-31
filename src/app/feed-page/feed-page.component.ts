@@ -42,11 +42,14 @@ export class FeedPageComponent implements OnInit {
             return posts.sort((a: PostStore, b: PostStore) => {
               return b.sortID - a.sortID
             })
-          }),
-          take(1)
+          })
         )
       })
     )
+  }
+
+  public trackFeedPosts(index: number, post: PostStore) {
+    return post.id;
   }
 
 }

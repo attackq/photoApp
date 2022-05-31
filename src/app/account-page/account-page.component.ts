@@ -36,7 +36,7 @@ export class AccountPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fireUsers = this.activatedRoute.params.pipe(
-      switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']).pipe(take(1)))
+      switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']))
     );
 
     this.subscriptions.push(
@@ -48,6 +48,10 @@ export class AccountPageComponent implements OnInit, OnDestroy {
       ).subscribe()
     )
 
+  }
+
+  public trackBlockedUser(index: number, user: UserStore) {
+    return user.id;
   }
 
   ngOnDestroy(): void {

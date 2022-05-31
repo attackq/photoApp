@@ -1,4 +1,4 @@
-<ng-container *ngFor="let fireUser of (fireUsers | async)">
+<ng-container *ngFor="let fireUser of (fireUsers | async); trackBy: trackBlockedUser">
   <app-account [firestoreID]="fireUser.id"
                [userID]="fireUser.userID"></app-account>
   <app-filter [userID]="fireUser.userID"></app-filter>
@@ -13,7 +13,7 @@
         <div class="blocked__wrapper">
           <div class="blocked__title">You are blocked!</div>
           <div class="blocked__img">
-            <img [src]="icons.blocked" alt="">
+            <img [src]="icons.blocked">
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
   <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll__viewport" >
     <div class="container">
       <div class="feed__wrapper">
-        <ng-container *ngFor="let post of (firePosts | async)">
+        <ng-container *ngFor="let post of (firePosts | async); trackBy: trackFeedPosts">
           <app-post class="feed__column"
                     [postImg]="post.photo"
                     [postDesc]="post.description"
