@@ -1,7 +1,7 @@
 <div class="content__data">
   <div class="container">
     <div class="content__wrapper">
-      <ng-container *ngFor="let post of (firePosts | async)">
+      <ng-container *ngFor="let post of (firePosts | async); trackBy: trackSavedPosts">
         <app-post class="content__column"
                   [postImg]="post.photo"
                   [postDesc]="post.description"

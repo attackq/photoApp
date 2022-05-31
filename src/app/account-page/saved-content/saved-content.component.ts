@@ -46,4 +46,8 @@ export class SavedContentComponent implements OnInit {
     )
   }
 
+  public trackSavedPosts(index: number, post: PostStore) {
+    return post.id;
+  }
+
 }
