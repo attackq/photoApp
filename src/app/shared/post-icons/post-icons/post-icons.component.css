@@ -52,3 +52,6 @@
   font-size: 20px;
   color: #333333;
 }
+.comment {
+  cursor: initial;
+}
