@@ -13,7 +13,6 @@ import {RoutesPath} from "../routes-path";
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 export class LoginPageComponent implements OnInit, OnDestroy {
