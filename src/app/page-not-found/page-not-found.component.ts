@@ -25,7 +25,7 @@ export class PageNotFoundComponent implements OnInit, OnDestroy{
   public user: firebase.User | null = null;
   public routes = RoutesPath;
   private subscriptions: Subscription[] = [];
-
+  public imagePath = 'assets/images/not-found-img.png';
 
   constructor(private authService: AuthService,
               private router: Router) {
