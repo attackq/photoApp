@@ -165,17 +165,23 @@
   .extended__comments {
     min-height: 150px;
   }
+  .extended__img img{
+    max-height: 400px;
+    max-width: 400px;
+  }
 }
 @media (max-width: 768px) {
-  .extended__img {
-    max-width: 500px;
+  .extended__img img{
+    max-width: 300px;
   }
 }
 @media (max-width: 480px) {
   .extended__user {
     margin: 5px 0;
   }
-
+  .extended__img img {
+    max-height: 300px;
+  }
   .extended__description {
     font-size: 12px;
   }

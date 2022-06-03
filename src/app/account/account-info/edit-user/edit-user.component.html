@@ -15,11 +15,11 @@
       <progress class="choose__progress" max="100" [value]="this.progressBack" *ngIf="isImageBack"></progress>
       <label for="nickname" class="modal__choose user">Please, edit the nickname</label>
       <input id="nickname" [formControlName]="formControls.name" type="text" class="choose__input"
-             placeholder="Write the nickname...">
+             [placeholder]="nickname" (keydown.space)="$event.preventDefault()">
       <div class="modal_err" *ngIf="isControlValid(formControls.name)">Max length is 20 symbols</div>
       <label for="status" class="modal__choose">Please, edit the status</label>
       <input id="status" [formControlName]="formControls.description" type="text" class="choose__input"
-             placeholder="Write the status...">
+             [placeholder]="status" (keydown.space)="$event.preventDefault()">
       <div class="modal_err" *ngIf="isControlValid(formControls.description)">Max length is 30 symbols</div>
       <app-button [label]="'Change'"
                   [bgColor]="'blue'"

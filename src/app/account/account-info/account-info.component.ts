@@ -23,6 +23,10 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   public firestoreID: string;
   @Input()
   public userID: string;
+  @Input()
+  public status: string;
+  @Input()
+  public nickname: string;
 
   public icons = iconsSrc;
 
@@ -47,6 +51,9 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   public openEditUserDialog(id: string) {
     let editPopup = this.dialog.open(EditUserComponent);
     editPopup.componentInstance.firestoreID = id;
+    editPopup.componentInstance.status = this.status;
+    editPopup.componentInstance.nickname = this.nickname;
+
   }
 
   public openFollowersDialog() {

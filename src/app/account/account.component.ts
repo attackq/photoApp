@@ -23,6 +23,8 @@ export class AccountComponent implements OnInit, OnDestroy {
   public userID: string;
 
   public background: string;
+  public status: string;
+  public nickname: string;
   public userLogo: string;
   public isFollow: boolean;
   public isBlocked: boolean;
@@ -49,6 +51,8 @@ export class AccountComponent implements OnInit, OnDestroy {
               this.isFollow = userFromStore[0].followers.includes(this.user?.uid!);
               this.background = userFromStore[0].background;
               this.userLogo = userFromStore[0].logo;
+              this.status = userFromStore[0].status;
+              this.nickname = userFromStore[0].name;
             }))
         }),
         switchMap(() => {

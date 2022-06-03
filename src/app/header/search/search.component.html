@@ -1,6 +1,6 @@
 <div class="search__bar" #searchElement>
-  <input type="text" class="search__input {{size}}" #searchInput placeholder="Photos, people..." name="search"
-         (keyup)="showResult($event)" autocomplete="off">
+  <input type="text" class="search__input {{size}}" #searchInput placeholder="Find people..." name="search"
+         (keyup)="showResult($event)" autocomplete="off" (keydown.space)="$event.preventDefault()">
   <div class="search__results" *ngIf="isResults">
     <ng-container *ngFor="let user of (fireUsers | async)">
       <div class="search__result" [routerLink]="['/account/', user.userID]"

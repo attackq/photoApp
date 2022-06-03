@@ -1,6 +1,6 @@
 import {Component, ElementRef, HostListener, Input, OnInit, ViewChild, ViewEncapsulation} from "@angular/core";
 import {CrudService} from "../../services/crud/crud.service";
-import {BehaviorSubject, filter, Observable, of, ReplaySubject, Subject, switchMap} from "rxjs";
+import {BehaviorSubject, debounceTime, filter, Observable, of, ReplaySubject, Subject, switchMap} from "rxjs";
 import {UserStore} from "../../post";
 import {Collections} from "../../services/crud/collections";
 import {map} from "rxjs/operators";
@@ -49,7 +49,8 @@ export class SearchComponent implements OnInit {
             return users.filter((i: UserStore) => {
               return i.name.trim().toLowerCase().includes(value);
             })
-          })
+          }),
+          debounceTime(500)
         )
       })
     )

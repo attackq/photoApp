@@ -28,8 +28,9 @@ export class PostComponent implements OnInit, OnDestroy {
   public postDesc: string = '';
   @Input()
   public postDate: number;
+
   @Input()
-  public creator: string;
+  public postCreator: string;
   @Input()
   public userID: string | null;
   public isOpenedDialog: boolean;
@@ -83,13 +84,13 @@ export class PostComponent implements OnInit, OnDestroy {
       },
       queryParamsHandling: "merge",
     })
-    this.sharingId = window.location.host + '/account/' + this.creator + '?postId=' + this.postID;
+    this.sharingId = window.location.host + '/account/' + this.postCreator + '?postId=' + this.postID;
     extendedPost.componentInstance.sharePostId = this.sharingId;
     extendedPost.componentInstance.postImg = this.postImg;
     extendedPost.componentInstance.postDesc = this.postDesc;
     extendedPost.componentInstance.postDate = this.postDate;
     extendedPost.componentInstance.postID = this.postID;
-    extendedPost.componentInstance.creator = this.creator;
+    extendedPost.componentInstance.postCreator = this.postCreator;
 
     this.subscriptions.push(
       extendedPost.afterClosed().subscribe(() => {

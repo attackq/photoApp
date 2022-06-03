@@ -19,6 +19,10 @@ export class EditUserComponent implements OnInit {
 
   @Input()
   public firestoreID: string = '';
+  @Input()
+  public status: string;
+  @Input()
+  public nickname: string;
 
   public icons = iconsSrc;
 
@@ -122,8 +126,8 @@ export class EditUserComponent implements OnInit {
   }
 
   public updateDescription(id: string): void {
-    const name = this.editUserForm.controls[FormControls.name].value;
-    const status = this.editUserForm.controls[FormControls.description].value;
+    const name = this.editUserForm.controls[FormControls.name].value.trim();
+    const status = this.editUserForm.controls[FormControls.description].value.trim();
     this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
       map((user: UserStore | undefined) => {
         const newUser: EditUser = {

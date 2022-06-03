@@ -8,7 +8,7 @@ import {AuthService} from "../../../services/auth/auth.service";
 import {iconsSrc} from "../../../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../../../controls";
-import {map, tap} from "rxjs/operators";
+import {map, take, tap} from "rxjs/operators";
 import {RoutesPath} from "../../../routes-path";
 
 @Component({
@@ -29,9 +29,9 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
   @Input()
   public postID: string;
   @Input()
-  public creator: string;
-  @Input()
   public sharePostId: string;
+  @Input()
+  public postCreator: string;
   public isShare: boolean = true;
 
   public icons = iconsSrc;
@@ -47,6 +47,7 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
   public formControls: typeof FormControls = FormControls;
   public fireComments: Observable<NewComment[]>;
   private subscriptions: Subscription[] = [];
+  public comLogo: string;
 
   constructor(private crudService: CrudService,
               private authService: AuthService) {
@@ -67,7 +68,7 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
       ).subscribe()
     )
 
-    this.fireUser = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.creator);
+    this.fireUser = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.postCreator);
 
     this.commentsForm.addControl(FormControls.comment, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(200)])));
 
@@ -89,7 +90,8 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
           const comment: NewComment = {
             text: inputComment,
             date: new Date().getTime(),
-            createdBy: this.user?.uid!
+            createdBy: this.user?.uid!,
+            logo: this.commentLogo
           };
           let comments: Object[] | undefined = post?.comments
           comments?.push(comment);

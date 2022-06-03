@@ -6,7 +6,9 @@
       </app-user-logo>
       <app-account-info
         [firestoreID]="this.firestoreID"
-        [userID]="this.userID">
+        [userID]="this.userID"
+        [status]="this.status"
+        [nickname]="nickname">
       </app-account-info>
     </div>
     <app-button *ngIf="this.user?.uid! === this.userID"

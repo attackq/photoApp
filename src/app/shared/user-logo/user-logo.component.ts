@@ -4,7 +4,7 @@ import {AuthService} from "../../services/auth/auth.service";
 import {CrudService} from "../../services/crud/crud.service";
 import {Collections} from "../../services/crud/collections";
 import {PostStore, UserStore} from "../../post";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-user-logo',

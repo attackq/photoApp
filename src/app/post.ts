@@ -34,7 +34,8 @@ export interface Like {
 export interface NewComment {
   text: string,
   date: number,
-  createdBy: string
+  createdBy: string,
+  logo: string
 }
 
 export interface EditUser {

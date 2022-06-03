@@ -15,7 +15,7 @@
 }
 
 .account__btn {
-  margin-left: 120px;
+  margin-left: 115px;
 }
 .block {
   margin-left: 30px;
@@ -32,5 +32,8 @@
   }
   .account__wrapper {
     margin-bottom: 10px;
+  }
+  .block {
+    margin-left: 15px;
   }
 }
