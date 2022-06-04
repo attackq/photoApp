@@ -37,7 +37,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {EditPopupComponent} from './content/post/edit-popup/edit-popup.component';
 import {EditUserComponent} from './account/account-info/edit-user/edit-user.component';
 import {PostExtendedComponent} from './content/post/post-extended/post-extended.component';
-import {PostIconsComponent} from './shared/post-icons/post-icons/post-icons.component';
+import {PostIconsComponent} from './shared/post-icons/post-icons.component';
 import {FeedPageComponent} from './feed-page/feed-page.component';
 import {SavedContentComponent} from './account-page/saved-content/saved-content.component';
 import {FollowersComponent} from './account/account-info/followers/followers.component';
@@ -53,6 +53,7 @@ import {ServiceWorkerModule} from '@angular/service-worker'
 import {ButtonModule} from "./shared/button/button.module";
 import {NotFoundModule} from "./not-found/not-found.module";
 import {LoginPageComponent} from "./login-page/login-page.component";
+import { LikesPopupComponent } from './shared/post-icons/likes-popup/likes-popup.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import {LoginPageComponent} from "./login-page/login-page.component";
     TermsComponent,
     AboutComponent,
     PrivacyComponent,
+    LikesPopupComponent,
     // PageNotFoundComponent,
   ],
   imports: [

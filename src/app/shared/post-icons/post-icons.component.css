@@ -55,3 +55,6 @@
 .comment {
   cursor: initial;
 }
+.likes {
+  cursor: pointer;
+}

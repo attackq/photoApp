@@ -10,6 +10,8 @@ import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/form
 import {FormControls} from "../../../controls";
 import {map, take, tap} from "rxjs/operators";
 import {RoutesPath} from "../../../routes-path";
+import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-post-extended',
@@ -50,7 +52,9 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
   public comLogo: string;
 
   constructor(private crudService: CrudService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -81,6 +85,8 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
       })
     )
   }
+
+
 
   public addComment() {
     const inputComment = this.commentsForm.controls[FormControls.comment].value;

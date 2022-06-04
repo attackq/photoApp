@@ -25,6 +25,7 @@ export class AuthGuard implements CanActivate {
       take(1),
       map((user: firebase.User | null) => !!user),
       tap((isLogged: boolean) => {
+        console.log('authh')
         if (!isLogged) {
           this.router.navigate(['login']);
           this.notifier.notify('warning', 'Please, login into your account!')

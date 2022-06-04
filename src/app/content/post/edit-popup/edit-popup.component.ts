@@ -45,8 +45,8 @@ export class EditPopupComponent implements OnInit {
 
   public updateDescription(id: string): void {
     const newDescription: EditDescription = {
-      title: this.editPostForm.controls[FormControls.title].value || this.postTitle,
-      description: this.editPostForm.controls[FormControls.description].value || this.postDesc
+      title: this.editPostForm.controls[FormControls.title].value.trim() || this.postTitle,
+      description: this.editPostForm.controls[FormControls.description].value.trim() || this.postDesc
     }
     this.crudService.updateObject(Collections.POSTS, id, newDescription).subscribe();
   }

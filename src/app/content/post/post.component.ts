@@ -28,7 +28,6 @@ export class PostComponent implements OnInit, OnDestroy {
   public postDesc: string = '';
   @Input()
   public postDate: number;
-
   @Input()
   public postCreator: string;
   @Input()
@@ -94,7 +93,12 @@ export class PostComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(
       extendedPost.afterClosed().subscribe(() => {
-        this.router.navigate([]);
+        this.router.navigate([], {
+          queryParams: {
+            postId: null
+          },
+          queryParamsHandling: "merge",
+        });
       })
     )
   }

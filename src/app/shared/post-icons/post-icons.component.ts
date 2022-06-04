@@ -1,14 +1,17 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {iconsSrc} from "../../../icons-path";
+import {iconsSrc} from "../../icons-path";
 import {filter, Observable, Subscription} from "rxjs";
 import firebase from "firebase/compat";
 import {map, switchMap, take, tap} from "rxjs/operators";
-import {PostStore, UserStore} from "../../../post";
-import {Collections} from "../../../services/crud/collections";
-import {AuthService} from "../../../services/auth/auth.service";
-import {CrudService} from "../../../services/crud/crud.service";
+import {PostStore, UserStore} from "../../post";
+import {Collections} from "../../services/crud/collections";
+import {AuthService} from "../../services/auth/auth.service";
+import {CrudService} from "../../services/crud/crud.service";
 import {Clipboard} from "@angular/cdk/clipboard";
 import {NotifierService} from "angular-notifier";
+import {EditUserComponent} from "../../account/account-info/edit-user/edit-user.component";
+import {MatDialog} from "@angular/material/dialog";
+import {LikesPopupComponent} from "./likes-popup/likes-popup.component";
 
 @Component({
   selector: 'app-post-icons',
@@ -40,10 +43,10 @@ export class PostIconsComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService,
               private crudService: CrudService,
               private clipboard: Clipboard,
-              private notifier: NotifierService) {
+              private notifier: NotifierService,
+              private dialog: MatDialog) {
     this.notifier = notifier
   }
-
 
   public showNotification(type: string, message: string): void {
     this.notifier.notify(type, message);
@@ -74,6 +77,13 @@ export class PostIconsComponent implements OnInit, OnDestroy {
   public copyShareLink() {
     this.clipboard.copy(this.sharePostId);
     this.showNotification('success', 'Link copied!')
+  }
+
+
+
+  public openLikesDialog() {
+    const likesPopup = this.dialog.open(LikesPopupComponent);
+    likesPopup.componentInstance.postID = this.postID;
   }
 
   public updateLikes(id: string) {
