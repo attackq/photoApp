@@ -40,13 +40,11 @@ export class CheckUserIdGuard implements CanActivate {
       filter((value: firebase.User | null) => !!value),
       switchMap((value: firebase.User | null) => {
         return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', id).pipe(
-          // take(1),
+          take(1),
           map((users: UserStore[]) => {
-            // console.log(users.length);
             return users.length !== 0
           }),
           tap((isId: boolean) => {
-            console.log('checkid');
             if (!isId) {
               this.router.navigate([this.routes.account, value?.uid])
               this.notifier.notify('warning', 'Invalid user ID')

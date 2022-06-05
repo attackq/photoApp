@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import {AuthService} from "../auth/auth.service";
 import {map, take, tap} from "rxjs/operators";
 import firebase from "firebase/compat";
-import {user} from "@angular/fire/auth";
 import {NotifierService} from "angular-notifier";
 import {RoutesPath} from "../../routes-path";
 
