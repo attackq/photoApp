@@ -7,9 +7,9 @@ import {
 import firebase from "firebase/compat";
 import {AuthService} from "../services/auth/auth.service";
 import {Router} from "@angular/router";
-import {FilterService} from "../services/filter.service";
 import {Subscription} from "rxjs";
 import {RoutesPath} from "../routes-path";
+import {ShareService} from "../services/share.service";
 
 export interface FilterLinks {
   name: string;
@@ -45,7 +45,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService,
               private router: Router,
-              public filterService: FilterService) {
+              private share: ShareService) {
   }
 
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   public setChangedValue(value: string) {
-    this.filterService.changedValue = value;
+    this.share.filterString.next(value)
     this.router.navigate([this.routes.account, this.userID]);
   }
 

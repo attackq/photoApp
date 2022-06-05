@@ -5,8 +5,9 @@ export enum RoutesPath {
   feed = 'feed',
   login = 'login',
   account = 'account/',
+  accountId = 'account/:id',
   saved = 'saved',
-  notfound = '404'
+  notfound = 'not-found'
 }
 
 export enum RouteLinks {

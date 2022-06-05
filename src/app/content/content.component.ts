@@ -12,8 +12,8 @@ import firebase from "firebase/compat";
 import {AuthService} from "../services/auth/auth.service";
 import {map, take, tap} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
-import {FilterService} from "../services/filter.service";
 import {iconsSrc} from "../icons-path";
+import {ShareService} from "../services/share.service";
 
 @Component({
   selector: 'app-content',
@@ -38,7 +38,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   constructor(private crudService: CrudService,
               private authService: AuthService,
               private activatedRoute: ActivatedRoute,
-              public filterService: FilterService) {
+              private share: ShareService) {
   }
 
   ngOnInit(): void {
@@ -52,7 +52,7 @@ export class ContentComponent implements OnInit, OnDestroy {
         tap((user: UserStore[]) => {
           this.id = user[0].userID
         }),
-        switchMap(() => this.filterService.val$.pipe(
+        switchMap(() => this.share.filterString.pipe(
             switchMap((value: string) => {
               return this.crudService.handlePostsData<PostStore>(Collections.POSTS, this.id).pipe(
                 map((posts: PostStore[]) => {

@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: '', redirectTo: RoutesPath.login, pathMatch: 'full'},
   {path: RoutesPath.login, component: LoginPageComponent, canActivate: [CheckUserGuard]},
   {
-    path: 'account/:id', component: AccountPageComponent, canActivate: [AuthGuard, CheckUserIdGuard],
+    path: RoutesPath.accountId, component: AccountPageComponent, canActivate: [AuthGuard, CheckUserIdGuard],
     children: [
       {
         path: '', component: ContentComponent,
@@ -32,8 +32,8 @@ const routes: Routes = [
   {path: RoutesPath.terms, component: TermsComponent},
   {path: RoutesPath.about, component: AboutComponent},
   {path: RoutesPath.privacy, component: PrivacyComponent},
-  {path: 'not-found', loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundModule)},
-  {path: '**', redirectTo: 'not-found'}
+  {path: RoutesPath.notfound, loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundModule)},
+  {path: '**', redirectTo: RoutesPath.notfound}
 ]
 
 @NgModule({

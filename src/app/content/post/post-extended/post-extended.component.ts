@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {filter, from, Observable, of, Subscription, switchMap} from "rxjs";
 import {EditUser, NewComment, PostStore, UserStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
@@ -8,10 +8,11 @@ import {AuthService} from "../../../services/auth/auth.service";
 import {iconsSrc} from "../../../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../../../controls";
-import {map, take, tap} from "rxjs/operators";
+import {map, tap} from "rxjs/operators";
 import {RoutesPath} from "../../../routes-path";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
+import {ShareService} from "../../../services/share.service";
 
 @Component({
   selector: 'app-post-extended',
@@ -23,9 +24,9 @@ import {MatDialog} from "@angular/material/dialog";
 export class PostExtendedComponent implements OnInit, OnDestroy {
 
   @Input()
-  public postImg: string | null = '';
+  public postImg: string | null;
   @Input()
-  public postDesc: string = '';
+  public postDesc: string;
   @Input()
   public postDate: number;
   @Input()
@@ -34,27 +35,24 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
   public sharePostId: string;
   @Input()
   public postCreator: string;
-  public isShare: boolean = true;
 
+  public isShare: boolean = true;
   public icons = iconsSrc;
   public routes = RoutesPath;
   public user: firebase.User | null = null;
-
   public fireUser: Observable<UserStore[]>;
-
   public currentID: string;
   public commentLogo: string
-
   public commentsForm: FormGroup = new FormGroup({});
   public formControls: typeof FormControls = FormControls;
   public fireComments: Observable<NewComment[]>;
   private subscriptions: Subscription[] = [];
-  public comLogo: string;
 
   constructor(private crudService: CrudService,
               private authService: AuthService,
               private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private share: ShareService) {
   }
 
   ngOnInit(): void {
@@ -86,7 +84,9 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
     )
   }
 
-
+  public routeToUser(id: string) {
+    this.share.customerLink.next(id);
+  }
 
   public addComment() {
     const inputComment = this.commentsForm.controls[FormControls.comment].value;

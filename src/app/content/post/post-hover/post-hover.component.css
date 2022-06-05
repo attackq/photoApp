@@ -6,17 +6,25 @@
   display: flex;
   justify-content: space-between;
   background: #333333;
-  opacity: 0.8;
+  opacity: 0.9;
   align-items: center;
 }
 
-.hover__title {
-  font-weight: 400;
+.hover__info {
+  display: flex;
   font-size: 12px;
   line-height: 15px;
   color: #FFFFFF;
-  width: 50%;
   padding: 4px 0;
   margin-left: 8px;
 }
-
+.hover__title {
+  margin-right: 3px;
+}
+.hover__name {
+  font-weight: 700;
+  cursor: pointer;
+}
+.hover__name span {
+  font-weight: 400;
+}

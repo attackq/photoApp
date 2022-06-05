@@ -6,11 +6,12 @@
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
       <button mat-menu-item (click)="openEditPopupDialog(postID)">Edit</button>
-      <button mat-menu-item (click)="delete(postID)">Delete</button>
+      <button mat-menu-item (click)="deletePost(postID)">Delete</button>
     </mat-menu>
   </div>
   <app-post-hover
     [postTitle]="postTitle"
     [postID]="postID"
+    [postCreator]="postCreator"
   ></app-post-hover>
 </div>

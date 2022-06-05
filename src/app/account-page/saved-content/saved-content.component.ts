@@ -7,6 +7,7 @@ import firebase from "firebase/compat";
 import {CrudService} from "../../services/crud/crud.service";
 import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../../services/auth/auth.service";
+import {iconsSrc} from "../../icons-path";
 
 @Component({
   selector: 'app-saved-content',
@@ -16,7 +17,7 @@ import {AuthService} from "../../services/auth/auth.service";
 export class SavedContentComponent implements OnInit {
 
   public routedID: null;
-
+  public icons = iconsSrc;
   public firePosts: Observable<PostStore[]>;
 
   constructor(private crudService: CrudService,

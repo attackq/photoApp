@@ -17,9 +17,9 @@
         </div>
       </div>
       <label for="title" class="modal__choose">Please, add the description</label>
-      <input id="title" [formControlName]="formControls.title" type="text" class="choose__input" tabindex="2"  placeholder="Write the title..." (keydown.space)="$event.preventDefault()">
+      <input id="title" [formControlName]="formControls.title" type="text" class="choose__input" tabindex="2"  placeholder="Write the title...">
       <div class="modal_err" *ngIf="isControlValid(formControls.title)">Max length is 25 symbols</div>
-      <textarea [formControlName]="formControls.description" name="description" class="choose__input big" (keydown.space)="$event.preventDefault()"
+      <textarea [formControlName]="formControls.description" name="description" class="choose__input big"
                 placeholder="Write the description..." tabindex="3"></textarea>
       <div class="modal_err" *ngIf="isControlValid(formControls.description)">Max length is 200 symbols</div>
       <app-button [label]="'Publish'"

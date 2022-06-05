@@ -9,6 +9,8 @@ import {AuthService} from "../../services/auth/auth.service";
 import firebase from "firebase/compat";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
+import {RoutesPath} from "../../routes-path";
+import {ShareService} from "../../services/share.service";
 
 @Component({
   selector: 'app-post',
@@ -32,24 +34,21 @@ export class PostComponent implements OnInit, OnDestroy {
   public postCreator: string;
   @Input()
   public userID: string | null;
+  public routes = RoutesPath;
   public isOpenedDialog: boolean;
   public user: firebase.User | null = null;
   public queryPostId: string
   public sharingId: string;
   private subscriptions: Subscription[] = [];
-
-
-  public delete(id: string): void {
-    this.crudService.deleteObject(Collections.POSTS, id).subscribe();
-    this.uploadService.deleteFile(this.postImg!);
-  }
+  public afterCloseSub: Subscription;
 
   constructor(private crudService: CrudService,
               private uploadService: UploadService,
               private dialog: MatDialog,
               private authService: AuthService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private share: ShareService) {
   }
 
   ngOnInit(): void {
@@ -62,7 +61,13 @@ export class PostComponent implements OnInit, OnDestroy {
             }
           }
         ),
-      this.authService.user$.subscribe((value: firebase.User | null) => this.user = value)
+      this.authService.user$.subscribe((value: firebase.User | null) => this.user = value),
+      this.share.customerLink.subscribe(
+        (customerId: string) => {
+          this.afterCloseSub.unsubscribe();
+          this.router.navigate([this.routes.account, customerId]);
+        }
+      )
     )
   }
 
@@ -91,20 +96,26 @@ export class PostComponent implements OnInit, OnDestroy {
     extendedPost.componentInstance.postID = this.postID;
     extendedPost.componentInstance.postCreator = this.postCreator;
 
-    this.subscriptions.push(
-      extendedPost.afterClosed().subscribe(() => {
-        this.router.navigate([], {
-          queryParams: {
-            postId: null
-          },
-          queryParamsHandling: "merge",
-        });
-      })
-    )
+    this.afterCloseSub = extendedPost.afterClosed().subscribe(() => {
+      this.router.navigate([], {
+        queryParams: {
+          postId: null
+        },
+        queryParamsHandling: "merge",
+      });
+    })
+  }
+
+  public deletePost(id: string): void {
+    this.crudService.deleteObject(Collections.POSTS, id).subscribe();
+    this.uploadService.deleteFile(this.postImg!);
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+    if (this.afterCloseSub) {
+      this.afterCloseSub.unsubscribe();
+    }
   }
 
 }

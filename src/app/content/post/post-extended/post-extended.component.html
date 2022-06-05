@@ -26,11 +26,11 @@
         <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="comments__viewport">
           <div class="extended__comment" *ngFor="let comment of (fireComments | async)">
             <div class="comment__logo">
-              <app-user-logo [routerLink]="[routes.account, comment.createdBy]"
+              <app-user-logo (click)="routeToUser(comment.createdBy)"
                              [userLogo]="comment.createdBy === this.user?.uid! ? this.commentLogo : comment.logo"
-                             mat-dialog-close ></app-user-logo>
+                             mat-dialog-close></app-user-logo>
             </div>
-            <div class="comment__text">{{comment.text}}</div>
+            <div class="comment__text">{{comment.text}} </div>
             <div class="comment__info">
               <div class="comment__date extended__date">{{comment.date | date: 'd.M.yy, H:mm'}}</div>
               <div class="comment__edit"
@@ -49,7 +49,7 @@
       <form class="extended__form" [formGroup]="commentsForm">
         <div class="extended__input">
           <input id="title" type="text" class="choose__input" placeholder="Add comment..."
-                 [formControlName]="formControls.comment" (keydown.space)="$event.preventDefault()">
+                 [formControlName]="formControls.comment">
           <div class="modal_err" *ngIf="isControlValid(formControls.comment)">Max length is 200 symbols</div>
         </div>
         <div class="extended__btn">
