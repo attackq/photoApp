@@ -63,7 +63,7 @@ export class CrudService {
     return this.angularFirestore
       .collection(collectionName, ref => {
         const query: firebase.firestore.Query = ref;
-        return query.where('name', '==', name)
+        return query.where('techName', '==', name)
       })
       .snapshotChanges()
       .pipe(

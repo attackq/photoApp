@@ -111,7 +111,9 @@ import { LikesPopupComponent } from './shared/post-icons/likes-popup/likes-popup
     NotFoundModule,
     NotifierModule.withConfig({
       behaviour: {
-        autoHide: 3000
+        autoHide: 3000,
+        onClick: false,
+        stacking: 3,
       },
       position: {
         horizontal: {

@@ -30,6 +30,7 @@ export class AuthService {
               const user: User = {
                 email: userFromLogin?.email!,
                 name: userFromLogin?.displayName!,
+                techName: userFromLogin?.displayName!.toLowerCase(),
                 logo: userFromLogin?.photoURL!,
                 userID: userFromLogin?.uid!,
                 status: 'You can find pictures here!',

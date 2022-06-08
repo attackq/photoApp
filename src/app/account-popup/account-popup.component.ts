@@ -84,6 +84,9 @@ export class AccountPopupComponent implements OnInit, OnDestroy {
   public isControlValid(controlName: string): boolean {
     const control: AbstractControl | undefined = this.addPostForm?.controls[controlName];
     if (control) {
+      if (control.value && control.value.match(/^[ ]+$/)) {
+        control.setValue(control.value.trim());
+      }
       return control.invalid && (control.dirty || control.touched);
     } else {
       return false;

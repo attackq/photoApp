@@ -13,6 +13,7 @@ export interface Post {
 export interface User {
   email: string,
   name: string,
+  techName: string | undefined,
   logo: string,
   userID: string,
   status: string,
@@ -39,7 +40,8 @@ export interface NewComment {
 }
 
 export interface EditUser {
-  name: string | undefined,
+  name: string,
+  techName: string | undefined,
   logo: string | null,
   status: string,
   background: string | null,

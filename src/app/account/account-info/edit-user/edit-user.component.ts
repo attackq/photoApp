@@ -119,6 +119,9 @@ export class EditUserComponent implements OnInit {
   public isControlValid(controlName: string): boolean {
     const control: AbstractControl | undefined = this.editUserForm?.controls[controlName];
     if (control) {
+      if (control.value && control.value.match(/^[ ]+$/)) {
+        control.setValue(control.value.trim());
+      }
       return control.invalid && (control.dirty || control.touched);
     } else {
       return false;
@@ -128,10 +131,10 @@ export class EditUserComponent implements OnInit {
   public updateDescription(id: string): void {
     const name = this.editUserForm.controls[FormControls.name].value.trim();
     const status = this.editUserForm.controls[FormControls.description].value.trim();
-    this.crudService.handleUserNameData<UserStore>(Collections.USERS, name).subscribe(
+    this.crudService.handleUserNameData<UserStore>(Collections.USERS, name.toLowerCase()).subscribe(
       value => console.log(value)
     )
-    this.crudService.handleUserNameData<UserStore>(Collections.USERS, name).pipe(
+    this.crudService.handleUserNameData<UserStore>(Collections.USERS, name.toLowerCase()).pipe(
       take(1),
       map((us: UserStore[]) => {
         console.log(us)
@@ -150,6 +153,7 @@ export class EditUserComponent implements OnInit {
             if (value) {
               const newUser: EditUser = {
                 name: name || user?.name,
+                techName: name.toLowerCase() || user?.techName,
                 logo: this.imageLogoSrc || user?.logo!,
                 status: status || user?.status,
                 background: this.imageBackSrc || user?.background!

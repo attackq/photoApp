@@ -72,7 +72,8 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
 
     this.fireUser = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.postCreator);
 
-    this.commentsForm.addControl(FormControls.comment, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(200)])));
+    this.commentsForm.addControl(FormControls.comment, new FormControl('', Validators.compose([Validators.required,
+      Validators.maxLength(200)])));
 
     this.fireComments = this.crudService.handleData<PostStore>(Collections.POSTS).pipe(
       map((post: PostStore[]) => {
@@ -132,6 +133,9 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
   public isControlValid(controlName: string): boolean {
     const control: AbstractControl | undefined = this.commentsForm?.controls[controlName];
     if (control) {
+      if (control.value && control.value.match(/^[ ]+$/)) {
+        control.setValue(control.value.trim());
+      }
       return control.invalid && (control.dirty || control.touched);
     } else {
       return false;

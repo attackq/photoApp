@@ -37,6 +37,9 @@ export class EditPopupComponent implements OnInit {
   public isControlValid(controlName: string): boolean {
     const control: AbstractControl | undefined = this.editPostForm?.controls[controlName];
     if (control) {
+      if (control.value && control.value.match(/^[ ]+$/)) {
+        control.setValue(control.value.trim());
+      }
       return control.invalid && (control.dirty || control.touched);
     } else {
       return false;

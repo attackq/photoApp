@@ -5,5 +5,6 @@ export enum FormControls {
   description = 'description',
   logo = 'logo',
   background = 'background',
-  comment = 'comment'
+  comment = 'comment',
+  search = 'search'
 }
