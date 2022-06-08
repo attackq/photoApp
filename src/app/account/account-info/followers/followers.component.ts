@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {iconsSrc} from "../../../icons-path";
 import {CrudService} from "../../../services/crud/crud.service";
-import {UserStore} from "../../../post";
+import {PostStore, UserStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
 import {Observable, of, switchMap} from "rxjs";
 import {map, tap} from "rxjs/operators";
@@ -15,19 +15,17 @@ import {RoutesPath} from "../../../routes-path";
 export class FollowersComponent implements OnInit {
 
   @Input()
+
   public userID: string;
-
   public icons = iconsSrc;
-
   public routes = RoutesPath;
-
-  public followers: Observable<UserStore[]>;
+  public followers$: Observable<UserStore[]>;
 
   constructor(private crudService: CrudService) {
   }
 
   ngOnInit(): void {
-    this.followers = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID).pipe(
+    this.followers$ = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID).pipe(
       switchMap((user: UserStore[]) => {
         return this.crudService.handleData<UserStore>(Collections.USERS).pipe(
           map((us: UserStore[]) => {
@@ -42,6 +40,10 @@ export class FollowersComponent implements OnInit {
         )
       })
     )
+  }
+
+  public trackFollowers(index: number, follower: UserStore) {
+    return follower.id;
   }
 
 }

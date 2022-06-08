@@ -47,7 +47,7 @@ export class SearchComponent implements OnInit {
         return this.crudService.handleData<UserStore>(Collections.USERS).pipe(
           map((users: UserStore[]) => {
             return users.filter((i: UserStore) => {
-              return i.name.trim().toLowerCase().includes(value);
+              return i.name?.trim().toLowerCase().includes(value);
             })
           }),
           debounceTime(500)

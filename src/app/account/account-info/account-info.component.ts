@@ -26,7 +26,7 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   @Input()
   public status: string;
   @Input()
-  public nickname: string;
+  public nickname: string | undefined;
 
   public icons = iconsSrc;
 
@@ -53,7 +53,6 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
     editPopup.componentInstance.firestoreID = id;
     editPopup.componentInstance.status = this.status;
     editPopup.componentInstance.nickname = this.nickname;
-
   }
 
   public openFollowersDialog() {

@@ -19,7 +19,6 @@ import {ShareService} from "../services/share.service";
   selector: 'app-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css']
-
 })
 export class ContentComponent implements OnInit, OnDestroy {
 
@@ -27,7 +26,6 @@ export class ContentComponent implements OnInit, OnDestroy {
   public userID: string;
 
   public icons = iconsSrc;
-
   public id: string;
   public user: firebase.User | null = null;
   public firePosts: Observable<PostStore[]>;
@@ -80,7 +78,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     })
   }
 
-  public trackByID(index: number, post: PostStore) {
+  public trackById(index: number, post: PostStore) {
     return post.sortID;
   }
 

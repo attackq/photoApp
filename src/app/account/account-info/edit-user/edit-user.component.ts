@@ -8,7 +8,7 @@ import {Collections} from "../../../services/crud/collections";
 import {combineLatest, filter, Subscription, switchMap, takeWhile} from "rxjs";
 import {UploadService} from "../../../services/crud/upload.service";
 import {AuthService} from "../../../services/auth/auth.service";
-import {map, tap} from "rxjs/operators";
+import {map, take, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-edit-user',
@@ -22,7 +22,7 @@ export class EditUserComponent implements OnInit {
   @Input()
   public status: string;
   @Input()
-  public nickname: string;
+  public nickname: string | undefined;
 
   public icons = iconsSrc;
 
@@ -128,18 +128,67 @@ export class EditUserComponent implements OnInit {
   public updateDescription(id: string): void {
     const name = this.editUserForm.controls[FormControls.name].value.trim();
     const status = this.editUserForm.controls[FormControls.description].value.trim();
-    this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
-      map((user: UserStore | undefined) => {
-        const newUser: EditUser = {
-          name: name || user?.name,
-          logo: this.imageLogoSrc || user?.logo!,
-          status: status || user?.status,
-          background: this.imageBackSrc || user?.background!
+    this.crudService.handleUserNameData<UserStore>(Collections.USERS, name).subscribe(
+      value => console.log(value)
+    )
+    this.crudService.handleUserNameData<UserStore>(Collections.USERS, name).pipe(
+      take(1),
+      map((us: UserStore[]) => {
+        console.log(us)
+        if (us.length !== 0) {
+          alert("Name exists")
+          return null;
+        } else {
+          return us;
         }
-        return this.crudService.updateObject(Collections.USERS, id, {...newUser});
       }),
+      switchMap((value) => {
+        return this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
+          tap(value => console.log(value)),
+          map((user: UserStore | undefined) => {
+            console.log(!!value)
+            if (value) {
+              const newUser: EditUser = {
+                name: name || user?.name,
+                logo: this.imageLogoSrc || user?.logo!,
+                status: status || user?.status,
+                background: this.imageBackSrc || user?.background!
+              }
+              return this.crudService.updateObject(Collections.USERS, id, {...newUser});
+            } else {
+              return null;
+            }
+          }),
+        )
+      })
     ).subscribe()
   }
+
+  // public updateDescription(id: string): void {
+  //   const name = this.editUserForm.controls[FormControls.name].value.trim();
+  //   this.crudService.handleUserNameData<UserStore>(Collections.USERS, name).pipe(
+  //     take(1),
+  //     tap((us: UserStore[]) => {
+  //       if (us) {
+  //         alert("Name exists")
+  //       } else {
+  //         return name
+  //       }
+  //     })
+  //   ).subscribe()
+  //   const status = this.editUserForm.controls[FormControls.description].value.trim();
+  //   this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
+  //     map((user: UserStore | undefined) => {
+  //       const newUser: EditUser = {
+  //         name: name || user?.name,
+  //         logo: this.imageLogoSrc || user?.logo!,
+  //         status: status || user?.status,
+  //         background: this.imageBackSrc || user?.background!
+  //       }
+  //       return this.crudService.updateObject(Collections.USERS, id, {...newUser});
+  //     }),
+  //   ).subscribe()
+  // }
 
   public deleteImg(): void {
     this.uploadService.deleteFile(this.imageBackSrc!);

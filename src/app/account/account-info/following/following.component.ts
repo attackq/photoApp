@@ -21,12 +21,12 @@ export class FollowingComponent implements OnInit {
 
   public routes = RoutesPath;
 
-  public following: Observable<UserStore[]>;
+  public following$: Observable<UserStore[]>;
 
   constructor(private crudService: CrudService) { }
 
   ngOnInit(): void {
-    this.following = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID).pipe(
+    this.following$ = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID).pipe(
       switchMap((user: UserStore[]) => {
         return this.crudService.handleData<UserStore>(Collections.USERS).pipe(
           map((us: UserStore[]) => {
@@ -41,6 +41,10 @@ export class FollowingComponent implements OnInit {
         )
       })
     )
+  }
+
+  public trackFollowing(index: number, following: UserStore) {
+    return following.id;
   }
 
 }

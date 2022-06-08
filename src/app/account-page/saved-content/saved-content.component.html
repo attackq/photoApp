@@ -1,28 +1,30 @@
-<ng-container *ngIf="(firePosts | async)?.length! > 0; else message">
-  <div class="content__data">
+<ng-container *ngIf="firePosts | async as posts">
+  <ng-container *ngIf="posts.length! > 0; else message">
+    <div class="content__data">
+      <div class="container">
+        <div class="content__wrapper">
+          <ng-container *ngFor="let post of posts; trackBy: trackSavedPosts">
+            <app-post class="content__column"
+                      [postImg]="post.photo"
+                      [postDesc]="post.description"
+                      [postID]="post.id"
+                      [postTitle]="post.title"
+                      [postDate]="post.sortID"
+                      [userID]="this.routedID"
+                      [postCreator]="post.createdBy"></app-post>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #message>
     <div class="container">
-      <div class="content__wrapper">
-        <ng-container *ngFor="let post of (firePosts | async); trackBy: trackSavedPosts">
-          <app-post class="content__column"
-                    [postImg]="post.photo"
-                    [postDesc]="post.description"
-                    [postID]="post.id"
-                    [postTitle]="post.title"
-                    [postDate]="post.sortID"
-                    [userID]="this.routedID"
-                    [postCreator]="post.createdBy"></app-post>
-        </ng-container>
+      <div class="empty__post">
+        <div class="empty__title">There are no posts yet!</div>
+        <div class="empty__img">
+          <img [src]="icons.picture" alt="">
+        </div>
       </div>
     </div>
-  </div>
+  </ng-template>
 </ng-container>
-<ng-template #message>
-  <div class="container">
-    <div class="empty__post">
-      <div class="empty__title">There are no posts yet!</div>
-      <div class="empty__img">
-        <img [src]="icons.picture" alt="">
-      </div>
-    </div>
-  </div>
-</ng-template>

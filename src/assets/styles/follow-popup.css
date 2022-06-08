@@ -23,3 +23,11 @@
 .nobody {
   margin: 20px 0;
 }
+.mat-dialog-content {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.mat-dialog-content::-webkit-scrollbar {
+  display: none;
+}

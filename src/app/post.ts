@@ -39,7 +39,7 @@ export interface NewComment {
 }
 
 export interface EditUser {
-  name: string,
+  name: string | undefined,
   logo: string | null,
   status: string,
   background: string | null,
