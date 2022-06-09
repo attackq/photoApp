@@ -8,7 +8,7 @@ import {PostExtendedComponent} from "./post-extended/post-extended.component";
 import {AuthService} from "../../services/auth/auth.service";
 import firebase from "firebase/compat";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import {Observable, of, Subject, Subscription} from "rxjs";
 import {RoutesPath} from "../../routes-path";
 import {ShareService} from "../../services/share.service";
 
@@ -72,6 +72,7 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   public openEditPopupDialog(id: string) {
+
     let editPopup = this.dialog.open(EditPopupComponent);
     editPopup.componentInstance.postID = id;
     editPopup.componentInstance.postDesc = this.postDesc;

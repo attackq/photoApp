@@ -9,6 +9,8 @@ import {combineLatest, filter, Subscription, switchMap, takeWhile} from "rxjs";
 import {UploadService} from "../../../services/crud/upload.service";
 import {AuthService} from "../../../services/auth/auth.service";
 import {map, take, tap} from "rxjs/operators";
+import {NotifierService} from "angular-notifier";
+import {imgTypes} from "../../../file-types";
 
 @Component({
   selector: 'app-edit-user',
@@ -46,15 +48,12 @@ export class EditUserComponent implements OnInit {
 
   public isBackTypeFile: boolean;
 
-  public fileTypes: string[] = [
-    'image/jpeg',
-    'image/pjpeg',
-    'image/png',
-  ]
+  private fileTypes = imgTypes;
 
   constructor(private crudService: CrudService,
               private uploadService: UploadService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private notifier: NotifierService) {
   }
 
   ngOnInit(): void {
@@ -131,15 +130,12 @@ export class EditUserComponent implements OnInit {
   public updateDescription(id: string): void {
     const name = this.editUserForm.controls[FormControls.name].value.trim();
     const status = this.editUserForm.controls[FormControls.description].value.trim();
-    this.crudService.handleUserNameData<UserStore>(Collections.USERS, name.toLowerCase()).subscribe(
-      value => console.log(value)
-    )
     this.crudService.handleUserNameData<UserStore>(Collections.USERS, name.toLowerCase()).pipe(
       take(1),
       map((us: UserStore[]) => {
         console.log(us)
         if (us.length !== 0) {
-          alert("Name exists")
+          this.notifier.notify('warning', 'Nickname already exists!');
           return null;
         } else {
           return us;
@@ -147,9 +143,7 @@ export class EditUserComponent implements OnInit {
       }),
       switchMap((value) => {
         return this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
-          tap(value => console.log(value)),
           map((user: UserStore | undefined) => {
-            console.log(!!value)
             if (value) {
               const newUser: EditUser = {
                 name: name || user?.name,
@@ -167,32 +161,6 @@ export class EditUserComponent implements OnInit {
       })
     ).subscribe()
   }
-
-  // public updateDescription(id: string): void {
-  //   const name = this.editUserForm.controls[FormControls.name].value.trim();
-  //   this.crudService.handleUserNameData<UserStore>(Collections.USERS, name).pipe(
-  //     take(1),
-  //     tap((us: UserStore[]) => {
-  //       if (us) {
-  //         alert("Name exists")
-  //       } else {
-  //         return name
-  //       }
-  //     })
-  //   ).subscribe()
-  //   const status = this.editUserForm.controls[FormControls.description].value.trim();
-  //   this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
-  //     map((user: UserStore | undefined) => {
-  //       const newUser: EditUser = {
-  //         name: name || user?.name,
-  //         logo: this.imageLogoSrc || user?.logo!,
-  //         status: status || user?.status,
-  //         background: this.imageBackSrc || user?.background!
-  //       }
-  //       return this.crudService.updateObject(Collections.USERS, id, {...newUser});
-  //     }),
-  //   ).subscribe()
-  // }
 
   public deleteImg(): void {
     this.uploadService.deleteFile(this.imageBackSrc!);

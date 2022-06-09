@@ -9,6 +9,7 @@ import {UploadService} from "../services/crud/upload.service";
 import {combineLatest, Subscription, takeWhile} from "rxjs";
 import firebase from "firebase/compat/app";
 import {AuthService} from "../services/auth/auth.service";
+import {imgTypes} from "../file-types";
 
 @Component({
   selector: 'app-account-popup',
@@ -18,29 +19,15 @@ import {AuthService} from "../services/auth/auth.service";
 export class AccountPopupComponent implements OnInit, OnDestroy {
 
   public imageSrc: string | null;
-
   public img: string | ArrayBuffer | null;
-
   public progress: string | undefined;
-
   public user: firebase.User | null;
-
   public icons = iconsSrc;
-
   public isImage: boolean = false;
-
   public addPostForm: FormGroup = new FormGroup({});
-
   public formControls: typeof FormControls = FormControls;
-
   public isTypeFile: boolean;
-
-  public fileTypes: string[] = [
-    'image/jpeg',
-    'image/pjpeg',
-    'image/png',
-  ]
-
+  public fileTypes = imgTypes;
   private subscriptions: Subscription[] = [];
 
   constructor(private crudService: CrudService,

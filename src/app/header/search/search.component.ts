@@ -1,13 +1,12 @@
 import {Component, ElementRef, HostListener, Input, OnInit, ViewChild, ViewEncapsulation} from "@angular/core";
 import {CrudService} from "../../services/crud/crud.service";
-import {BehaviorSubject, debounceTime, filter, Observable, of, ReplaySubject, Subject, switchMap} from "rxjs";
+import {debounceTime, filter, Observable, Subject, switchMap} from "rxjs";
 import {UserStore} from "../../post";
 import {Collections} from "../../services/crud/collections";
 import {map} from "rxjs/operators";
 import {RoutesPath} from "../../routes-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../../controls";
-import {NotifierService} from "angular-notifier";
 
 @Component({
   selector: 'app-search',
@@ -19,13 +18,9 @@ import {NotifierService} from "angular-notifier";
 export class SearchComponent implements OnInit {
 
   @Input()
-  public imagePath: string = '';
+  public imagePath: string;
   @Input()
-  public size: string = '';
-
-  public searchForm: FormGroup = new FormGroup({});
-  public formControls: typeof FormControls = FormControls;
-
+  public size: string;
 
   @ViewChild('searchElement') button: ElementRef | undefined;
 
@@ -37,14 +32,15 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  public searchForm: FormGroup = new FormGroup({});
+  public formControls: typeof FormControls = FormControls;
   private readonly MAX_SEARCH_SYMBOLS: number = 1;
   public routes = RoutesPath;
   public isResults: boolean = false;
   public fireUsers: Observable<UserStore[]>;
   public name: Subject<string> = new Subject<string>();
 
-  constructor(private crudService: CrudService,
-              private notifier: NotifierService) {
+  constructor(private crudService: CrudService) {
   }
 
   ngOnInit(): void {
@@ -74,12 +70,6 @@ export class SearchComponent implements OnInit {
       return control.invalid && (control.dirty || control.touched);
     } else {
       return false;
-    }
-  }
-
-  public showNote() {
-    if (this.searchForm.controls[FormControls.search].invalid) {
-      this.notifier.notify('error', 'Max Length is 5', 'INPUT__CONTROL')
     }
   }
 
