@@ -10,8 +10,10 @@
                       [postImg]="post.photo"
                       [postTitle]="post.title"
                       [postDate]="post.sortID"
-                      [userID]="this.id"
-                      [postCreator]="post.createdBy">
+                      [userIdFromParams]="this.id"
+                      [userIdFromAuth]="user?.uid!"
+                      [postCreator]="post.createdBy"
+                      [paramsId]="paramsId">
             </app-post>
           </ng-container>
         </div>

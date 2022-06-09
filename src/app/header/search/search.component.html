@@ -7,13 +7,13 @@
     <div class="search__result invalid">Max length is 10 symbols</div>
   </div>
   <div class="search__results" *ngIf="isResults">
-    <ng-container *ngFor="let user of (fireUsers | async)">
-      <div class="search__result" [routerLink]="[routes.account, user.userID]"
+    <ng-container *ngFor="let foundedUser of (foundedUsers | async)">
+      <div class="search__result" [routerLink]="[routes.account, foundedUser.userID]"
            (click)="clearInput()">
         <div class="result__logo">
-          <app-user-logo [userLogo]="user.logo"></app-user-logo>
+          <app-user-logo [userLogo]="foundedUser.logo"></app-user-logo>
         </div>
-        <div class="result__name">{{user.name}}</div>
+        <div class="result__name">{{foundedUser.name}}</div>
       </div>
     </ng-container>
   </div>

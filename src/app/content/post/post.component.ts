@@ -33,14 +33,17 @@ export class PostComponent implements OnInit, OnDestroy {
   @Input()
   public postCreator: string;
   @Input()
-  public userID: string | null;
+  public userIdFromParams: string | null;
+  @Input()
+  public userIdFromAuth: string = '';
+  @Input()
+  public paramsId: string = '';
+
   public routes = RoutesPath;
   public isOpenedDialog: boolean;
-  public user: firebase.User | null = null;
-  public queryPostId: string
   public sharingId: string;
-  private subscriptions: Subscription[] = [];
   public afterCloseSub: Subscription;
+  private subscriptions: Subscription[] = [];
 
   constructor(private crudService: CrudService,
               private uploadService: UploadService,
@@ -55,13 +58,11 @@ export class PostComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.route.queryParams
         .subscribe(params => {
-            this.queryPostId = params['postId'];
             if (params['postId'] === this.postID && !this.isOpenedDialog) {
               this.openExtendedPostDialog();
             }
           }
         ),
-      this.authService.user$.subscribe((value: firebase.User | null) => this.user = value),
       this.share.customerLink.subscribe(
         (customerId: string) => {
           this.afterCloseSub.unsubscribe();
@@ -72,7 +73,6 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   public openEditPopupDialog(id: string) {
-
     let editPopup = this.dialog.open(EditPopupComponent);
     editPopup.componentInstance.postID = id;
     editPopup.componentInstance.postDesc = this.postDesc;

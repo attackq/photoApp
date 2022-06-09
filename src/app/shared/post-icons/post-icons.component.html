@@ -1,15 +1,15 @@
 <div class="post__icons">
   <div class="post__icon {{size}}">
     <div class="post__img {{size}}" (click)="updateLikes(postID)" [class.like]="changeLike">
-      <img [src]="icons.like" alt="" >
+      <img [src]="icons.like" alt="">
     </div>
     <div class="post__text {{size}} likes" (click)="openLikesDialog()">{{likes}}</div>
   </div>
-  <div class="post__icon {{size}}" >
+  <div class="post__icon {{size}}">
     <div class="post__img {{size}} comment">
       <img [src]="icons.comment" alt="">
     </div>
-    <div class="post__text {{size}}" >{{comments}}</div>
+    <div class="post__text {{size}}">{{comments}}</div>
   </div>
   <div class="post__icon {{size}}">
     <div class="post__img {{size}}" (click)="addBookmark(postID)" [class.bookmark]="changeBookmark">
@@ -23,6 +23,5 @@
       </div>
     </div>
   </ng-container>
-
 </div>
 

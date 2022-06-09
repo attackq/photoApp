@@ -29,11 +29,8 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   public nickname: string | undefined;
 
   public icons = iconsSrc;
-
   public user: firebase.User | null = null;
-
   public firestoreUser: Observable<UserStore[]>;
-
   private subscriptions: Subscription[] = [];
 
   constructor(private dialog: MatDialog,

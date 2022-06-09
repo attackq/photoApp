@@ -1,37 +1,37 @@
-<div class="header" [ngClass]="!user ? 'login' : 'other'" >
+<div class="header" [ngClass]="!user ? 'login' : 'other'">
   <div class="container">
     <div class="header__inner" [ngClass]="!user ? 'login' : 'other'">
-      <ng-container>
-        <app-head-logo [imagePath]=icons.photoLogo [class.hide]="condition"></app-head-logo>
-      </ng-container>
+      <app-head-logo [imagePath]=icons.photoLogo [class.hide]="condition"></app-head-logo>
       <ng-container *ngIf="user">
-        <app-nav></app-nav>
+        <app-nav [userAuthId]="user.uid"></app-nav>
+        <div class="header__search">
+          <app-search [imagePath]="icons.search"></app-search>
+        </div>
+        <div class="small__search" (click)="condition = !condition">
+          <img [src]="icons.search" alt="" *ngIf="!condition">
+          <img [src]="icons.close" alt="" *ngIf="condition">
+        </div>
+        <div class="search" [class.active]="condition" #smallSearch>
+          <app-search [imagePath]="icons.search" [size]="'small'" (click)="onGlobalClick($event)"></app-search>
+        </div>
+        <div class="user" #buttonElement>
+          <ng-container *ngFor="let fireUser of fireUsers | async">
+            <app-user-logo (click)="togglePopup()" [userLogo]="fireUser.logo" class="pointer"></app-user-logo>
+            <app-popup [username]="fireUser.name.split(' ')[0]"
+                       *ngIf="toggle"
+                       (click)="onGlobalClick($event)"></app-popup>
+          </ng-container>
+        </div>
       </ng-container>
-      <div class="header__search" *ngIf="user">
-        <app-search [imagePath]="icons.search"></app-search>
-      </div>
-      <div class="small__search" *ngIf="user" (click)="condition = !condition">
-        <img [src]="icons.search" alt="" *ngIf="!condition">
-        <img [src]="icons.close" alt="" *ngIf="condition">
-      </div>
-      <div class="search" [class.active]="condition" *ngIf="user" #smallSearch>
-        <app-search [imagePath]="icons.search" [size]="'small'" (click)="onGlobalClick($event)"></app-search>
-      </div>
-      <div class="user" *ngIf="user" #buttonElement>
-        <ng-container *ngFor="let fireUser of fireUsers | async" >
-          <app-user-logo (click)="togglePopup()" [userLogo]="fireUser.logo"  class="pointer"></app-user-logo>
-        </ng-container>
-        <app-popup [username]="this.user.displayName!.split(' ')[0]"
-                   *ngIf="toggle"
-                   (click)="onGlobalClick($event)"></app-popup>
-      </div>
-      <div class="header__login" *ngIf="!user">
-        <app-button [label]="'Log in'"
-                    [bgColor]="'none'"
-                    *ngIf="!user"
-                    (click)="login()">
-        </app-button>
-      </div>
+      <ng-container *ngIf="!user">
+        <div class="header__login">
+          <app-button [label]="'Log in'"
+                      [bgColor]="'none'"
+                      *ngIf="!user"
+                      (click)="login()">
+          </app-button>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

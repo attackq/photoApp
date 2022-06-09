@@ -12,7 +12,7 @@ import firebase from "firebase/compat";
   templateUrl: './post-hover.component.html',
   styleUrls: ['./post-hover.component.css']
 })
-export class PostHoverComponent implements OnInit, OnDestroy {
+export class PostHoverComponent implements OnInit {
 
   @Input()
   public postCreator: string;
@@ -20,24 +20,17 @@ export class PostHoverComponent implements OnInit, OnDestroy {
   public postTitle: string = '';
   @Input()
   public postID: string;
+  @Input()
+  public paramId: string;
 
-  public paramId: string
   public routes = RoutesPath;
   public firePostCreator: Observable<UserStore[]>
-  private subscriptions: Subscription[] = [];
 
   constructor(private crudService: CrudService,
-              private router: Router,
-              private route: ActivatedRoute) {
+              private router: Router) {
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.route.params.subscribe(params => {
-          this.paramId = params['id'];
-        }
-      )
-    )
     this.firePostCreator = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.postCreator)
   }
 
@@ -45,7 +38,4 @@ export class PostHoverComponent implements OnInit, OnDestroy {
     this.router.navigate([this.routes.account, creatorId])
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
 }

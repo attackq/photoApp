@@ -19,13 +19,11 @@ import {iconsSrc} from "../icons-path";
 export class AccountPageComponent implements OnInit, OnDestroy {
 
   public fireUsers: Observable<UserStore[]>;
-
   public userId: string;
-
   public icons = iconsSrc;
-
   private subscriptions: Subscription[] = [];
-
+  public user: firebase.User | null = null;
+  public userIdFromAuth: string;
 
   constructor(private crudService: CrudService,
               private activatedRoute: ActivatedRoute,
@@ -42,6 +40,10 @@ export class AccountPageComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authService.user$.pipe(
         filter((value: firebase.User | null) => !!value),
+        tap((value: firebase.User | null) => {
+          this.user = value;
+          this.userIdFromAuth = value?.uid!;
+        }),
         switchMap((value: firebase.User | null) => this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!).pipe(
           tap(user => this.userId = user[0].userID)
         ))

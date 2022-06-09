@@ -16,10 +16,8 @@ import {RoutesPath} from "./routes-path";
 export class AppComponent implements OnInit {
 
   public user: firebase.User | null = null;
-
   public icons = iconsSrc;
   public routes = RoutesPath;
-
   public opened: boolean = false;
 
   constructor(private authService: AuthService) {

@@ -7,7 +7,6 @@ import {filter, Observable, Subscription} from "rxjs";
 import {Post, PostStore, UserStore} from "../post";
 import {Collections} from "../services/crud/collections";
 import {CrudService} from "../services/crud/crud.service";
-import DocumentReference = firebase.firestore.DocumentReference;
 import {map, switchMap, tap} from "rxjs/operators";
 
 @Component({
@@ -21,6 +20,8 @@ export class AccountComponent implements OnInit, OnDestroy {
   public firestoreID: string;
   @Input()
   public userID: string;
+  @Input()
+  public userIdFromAuth: string;
 
   public background: string;
   public status: string;
@@ -28,35 +29,27 @@ export class AccountComponent implements OnInit, OnDestroy {
   public userLogo: string;
   public isFollow: boolean;
   public isBlocked: boolean;
-  public user: firebase.User | null = null;
   public authID: string;
 
   private subscriptions: Subscription[] = [];
-
 
   constructor(private authService: AuthService,
               private dialog: MatDialog,
               private crudService: CrudService) {
   }
 
-
   ngOnInit(): void {
     this.subscriptions.push(
-      this.authService.user$.pipe(
-        tap((value: firebase.User | null) => this.user = value),
-        filter((value: firebase.User | null) => !!value),
-        switchMap(() => {
-          return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID).pipe(
-            tap((userFromStore: UserStore[]) => {
-              this.isFollow = userFromStore[0].followers.includes(this.user?.uid!);
-              this.background = userFromStore[0].background;
-              this.userLogo = userFromStore[0].logo;
-              this.status = userFromStore[0].status;
-              this.nickname = userFromStore[0].name;
-            }))
+      this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID).pipe(
+        tap((userFromStore: UserStore[]) => {
+          this.isFollow = userFromStore[0].followers.includes(this.userIdFromAuth);
+          this.background = userFromStore[0].background;
+          this.userLogo = userFromStore[0].logo;
+          this.status = userFromStore[0].status;
+          this.nickname = userFromStore[0].name;
         }),
         switchMap(() => {
-          return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.user?.uid!).pipe(
+          return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userIdFromAuth).pipe(
             tap((currentUser: UserStore[]) => {
               this.authID = currentUser[0].id;
               this.isBlocked = currentUser[0].blocked.includes(this.userID);
@@ -76,10 +69,10 @@ export class AccountComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
         map((userFromStore: UserStore | undefined) => {
-          const userIndex = userFromStore?.followers.indexOf(this.user?.uid!);
+          const userIndex = userFromStore?.followers.indexOf(this.userIdFromAuth);
           if (userIndex === -1) {
             return {
-              followers: userFromStore?.followers.concat(this.user?.uid!),
+              followers: userFromStore?.followers.concat(this.userIdFromAuth),
             }
           } else {
             const newArr: string[] | undefined = userFromStore?.followers.splice(userIndex!, 1);

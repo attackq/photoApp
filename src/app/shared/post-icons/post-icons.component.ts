@@ -38,6 +38,7 @@ export class PostIconsComponent implements OnInit, OnDestroy {
   public icons = iconsSrc;
   public firePosts: Observable<PostStore[]>;
   private subscriptions: Subscription[] = [];
+  public user: firebase.User | null = null;
 
 
   constructor(private authService: AuthService,
@@ -45,7 +46,6 @@ export class PostIconsComponent implements OnInit, OnDestroy {
               private clipboard: Clipboard,
               private notifier: NotifierService,
               private dialog: MatDialog) {
-    this.notifier = notifier
   }
 
   public showNotification(type: string, message: string): void {
@@ -56,6 +56,7 @@ export class PostIconsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authService.user$.pipe(
         filter((value: firebase.User | null) => !!value),
+        tap((value: firebase.User | null) => this.user = value),
         switchMap((value: firebase.User | null) => {
           return this.crudService.handleData<PostStore>(Collections.POSTS).pipe(
             map((chosenPost: PostStore[]) => {
@@ -79,8 +80,6 @@ export class PostIconsComponent implements OnInit, OnDestroy {
     this.showNotification('success', 'Link copied!')
   }
 
-
-
   public openLikesDialog() {
     const likesPopup = this.dialog.open(LikesPopupComponent);
     likesPopup.componentInstance.postID = this.postID;
@@ -88,56 +87,48 @@ export class PostIconsComponent implements OnInit, OnDestroy {
 
   public updateLikes(id: string) {
     this.subscriptions.push(
-      this.authService.user$.pipe(
-        filter((value: firebase.User | null) => !!value),
-        switchMap((value: firebase.User | null) => {
-          return this.crudService.getUserDoc<PostStore>(Collections.POSTS, id).pipe(
-            map((postFromStore: PostStore | undefined) => {
-              const userIndex = postFromStore?.likes.indexOf(value?.uid!);
-              if (userIndex === -1) {
-                this.changeLike = true;
-                return {
-                  likes: postFromStore?.likes.concat(value?.uid!),
-                }
-              } else {
-                const newArr: string[] | undefined = postFromStore?.likes.splice(userIndex!, 1);
-                this.changeLike = false;
-                return {
-                  likes: postFromStore?.likes,
-                };
-              }
-            }),
-            switchMap(newPost => this.crudService.updateObject(Collections.POSTS, id, {...newPost})))
-        })
+      this.crudService.getUserDoc<PostStore>(Collections.POSTS, id).pipe(
+        map((postFromStore: PostStore | undefined) => {
+          const userIndex = postFromStore?.likes.indexOf(this.user?.uid!);
+          if (userIndex === -1) {
+            this.changeLike = true;
+            return {
+              likes: postFromStore?.likes.concat(this.user?.uid!),
+            }
+          } else {
+            const newArr: string[] | undefined = postFromStore?.likes.splice(userIndex!, 1);
+            this.changeLike = false;
+            return {
+              likes: postFromStore?.likes,
+            };
+          }
+        }),
+        switchMap(newPost => this.crudService.updateObject(Collections.POSTS, id, {...newPost}))
       ).subscribe()
-    );
+    )
   }
 
   public addBookmark(id: string) {
     this.subscriptions.push(
-      this.authService.user$.pipe(
-        filter((value: firebase.User | null) => !!value),
-        switchMap((value: firebase.User | null) => {
-          return this.crudService.getUserDoc<PostStore>(Collections.POSTS, id).pipe(
-            map((postFromStore: PostStore | undefined) => {
-              const userIndex = postFromStore?.bookmarks.indexOf(value?.uid!);
-              if (userIndex === -1) {
-                this.changeBookmark = true;
-                return {
-                  bookmarkDate: new Date().getTime(),
-                  bookmarks: postFromStore?.bookmarks.concat(value?.uid!),
-                }
-              } else {
-                const newArr: string[] | undefined = postFromStore?.bookmarks.splice(userIndex!, 1);
-                this.changeBookmark = false;
-                return {
-                  bookmarkDate: 0,
-                  bookmarks: postFromStore?.bookmarks,
-                };
-              }
-            }),
-            switchMap(newPost => this.crudService.updateObject(Collections.POSTS, id, {...newPost})))
-        })
+      this.crudService.getUserDoc<PostStore>(Collections.POSTS, id).pipe(
+        map((postFromStore: PostStore | undefined) => {
+          const userIndex = postFromStore?.bookmarks.indexOf(this.user?.uid!);
+          if (userIndex === -1) {
+            this.changeBookmark = true;
+            return {
+              bookmarkDate: new Date().getTime(),
+              bookmarks: postFromStore?.bookmarks.concat(this.user?.uid!),
+            }
+          } else {
+            const newArr: string[] | undefined = postFromStore?.bookmarks.splice(userIndex!, 1);
+            this.changeBookmark = false;
+            return {
+              bookmarkDate: 0,
+              bookmarks: postFromStore?.bookmarks,
+            };
+          }
+        }),
+        switchMap(newPost => this.crudService.updateObject(Collections.POSTS, id, {...newPost}))
       ).subscribe()
     );
   }

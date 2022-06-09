@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class HeadLogoComponent implements OnInit {
 
   @Input()
-  public imagePath: string = '';
+  public imagePath: string;
 
   constructor() { }
 

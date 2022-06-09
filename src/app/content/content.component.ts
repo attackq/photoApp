@@ -14,6 +14,7 @@ import {map, take, tap} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
 import {iconsSrc} from "../icons-path";
 import {ShareService} from "../services/share.service";
+import {SortFields} from "../sort-fields";
 
 @Component({
   selector: 'app-content',
@@ -29,9 +30,9 @@ export class ContentComponent implements OnInit, OnDestroy {
   public id: string;
   public user: firebase.User | null = null;
   public firePosts: Observable<PostStore[]>;
-  public sort: string;
-
+  private sortFields = SortFields;
   private subscriptions: Subscription[] = [];
+  public paramsId: string;
 
   constructor(private crudService: CrudService,
               private authService: AuthService,
@@ -45,6 +46,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     );
 
     this.firePosts = this.activatedRoute.params.pipe(
+      tap(params => this.paramsId = params['id']),
       switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']).pipe(
         take(1),
         tap((user: UserStore[]) => {
@@ -66,11 +68,11 @@ export class ContentComponent implements OnInit, OnDestroy {
   public sortBy(arr: PostStore[], sort: string) {
     return arr.sort((a: PostStore, b: PostStore) => {
       switch (sort) {
-        case 'All photos':
+        case this.sortFields.all:
           return b.sortID - a.sortID;
-        case 'Most liked':
+        case this.sortFields.likes:
           return b.likes.length - a.likes.length;
-        case 'Most commented':
+        case this.sortFields.comments:
           return b.comments.length - a.comments.length;
         default:
           return b.sortID - a.sortID;

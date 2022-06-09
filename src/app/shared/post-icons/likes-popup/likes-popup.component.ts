@@ -45,7 +45,6 @@ export class LikesPopupComponent implements OnInit {
         )
       })
     )
-
   }
 
   public closeDialogs() {

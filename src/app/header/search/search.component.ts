@@ -32,21 +32,24 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  private readonly MAX_SEARCH_SYMBOLS: number = 1;
+  private readonly MAX_LENGTH_CONTROL: number = 10;
+
+
   public searchForm: FormGroup = new FormGroup({});
   public formControls: typeof FormControls = FormControls;
-  private readonly MAX_SEARCH_SYMBOLS: number = 1;
   public routes = RoutesPath;
   public isResults: boolean = false;
-  public fireUsers: Observable<UserStore[]>;
+  public foundedUsers: Observable<UserStore[]>;
   public name: Subject<string> = new Subject<string>();
 
   constructor(private crudService: CrudService) {
   }
 
   ngOnInit(): void {
-    this.searchForm.addControl(FormControls.search, new FormControl('', Validators.maxLength(10)));
+    this.searchForm.addControl(FormControls.search, new FormControl('', Validators.maxLength(this.MAX_LENGTH_CONTROL)));
 
-    this.fireUsers = this.name.pipe(
+    this.foundedUsers = this.name.pipe(
       filter(value => value.length > this.MAX_SEARCH_SYMBOLS),
       switchMap((value: string) => {
         return this.crudService.handleData<UserStore>(Collections.USERS).pipe(

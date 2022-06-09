@@ -21,17 +21,18 @@ export class EditPopupComponent implements OnInit {
   @Input()
   public postTitle: string = '';
 
+  private readonly MAX_LENGTH_TITLE_CONTROL: number = 25;
+  private readonly MAX_LENGTH_DESC_CONTROL: number = 200;
+
   public icons = iconsSrc;
-
   public editPostForm: FormGroup = new FormGroup({});
-
   public formControls: typeof FormControls = FormControls;
 
   constructor(private crudService: CrudService) { }
 
   ngOnInit(): void {
-    this.editPostForm.addControl(FormControls.title, new FormControl('', Validators.maxLength(25)));
-    this.editPostForm.addControl(FormControls.description, new FormControl('', Validators.maxLength(200)));
+    this.editPostForm.addControl(FormControls.title, new FormControl('', Validators.maxLength(this.MAX_LENGTH_TITLE_CONTROL)));
+    this.editPostForm.addControl(FormControls.description, new FormControl('', Validators.maxLength(this.MAX_LENGTH_DESC_CONTROL)));
   }
 
   public isControlValid(controlName: string): boolean {

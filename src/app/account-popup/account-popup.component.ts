@@ -18,6 +18,9 @@ import {imgTypes} from "../file-types";
 })
 export class AccountPopupComponent implements OnInit, OnDestroy {
 
+  private readonly MAX_LENGTH_TITLE_CONTROL: number = 25;
+  private readonly MAX_LENGTH_DESC_CONTROL: number = 200;
+
   public imageSrc: string | null;
   public img: string | ArrayBuffer | null;
   public progress: string | undefined;
@@ -28,6 +31,9 @@ export class AccountPopupComponent implements OnInit, OnDestroy {
   public formControls: typeof FormControls = FormControls;
   public isTypeFile: boolean;
   public fileTypes = imgTypes;
+
+
+
   private subscriptions: Subscription[] = [];
 
   constructor(private crudService: CrudService,
@@ -40,8 +46,10 @@ export class AccountPopupComponent implements OnInit, OnDestroy {
       this.authService.user$.subscribe((value: firebase.User | null) => this.user = value)
     );
     this.addPostForm.addControl(FormControls.img, new FormControl('', Validators.required));
-    this.addPostForm.addControl(FormControls.title, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(25)])));
-    this.addPostForm.addControl(FormControls.description, new FormControl('', Validators.compose([Validators.required, Validators.maxLength(200)])));
+    this.addPostForm.addControl(FormControls.title, new FormControl('', Validators.compose([Validators.required,
+      Validators.maxLength(this.MAX_LENGTH_TITLE_CONTROL)])));
+    this.addPostForm.addControl(FormControls.description, new FormControl('', Validators.compose([Validators.required,
+      Validators.maxLength(this.MAX_LENGTH_DESC_CONTROL)])));
   }
 
   public addPost(post: Post): void {

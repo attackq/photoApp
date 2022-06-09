@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {RoutesPath} from "../routes-path";
 import {ShareService} from "../services/share.service";
+import {SortFields} from "../sort-fields";
 
 export interface FilterLinks {
   name: string;
@@ -29,18 +30,16 @@ export class FilterComponent implements OnInit, OnDestroy {
   public userID: string;
 
   public user: firebase.User | null = null;
-
-  public defaultLink: string = 'Filter';
-
+  private sortFields = SortFields;
+  public defaultLink: string = this.sortFields.filter;
   public routes = RoutesPath;
-
   private subscriptions: Subscription[] = [];
 
   public filterLinks: FilterLinks[] = [
-    {name: 'Filter', viewValue: 'Filter'},
-    {name: 'All photos', viewValue: 'All photos'},
-    {name: 'Most liked', viewValue: 'Most liked'},
-    {name: 'Most commented', viewValue: 'Most commented'}
+    {name: this.sortFields.filter, viewValue: this.sortFields.filter},
+    {name: this.sortFields.all, viewValue: this.sortFields.all},
+    {name: this.sortFields.likes, viewValue: this.sortFields.likes},
+    {name: this.sortFields.comments, viewValue: this.sortFields.comments}
   ]
 
   constructor(private authService: AuthService,
@@ -55,7 +54,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   public getDefaultValue() {
-    this.defaultLink = 'Filter';
+    this.defaultLink = this.sortFields.filter;
   }
 
   public setChangedValue(value: string) {

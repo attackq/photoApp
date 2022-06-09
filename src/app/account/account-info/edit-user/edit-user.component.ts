@@ -29,25 +29,15 @@ export class EditUserComponent implements OnInit {
   public icons = iconsSrc;
 
   public editUserForm: FormGroup = new FormGroup({});
-
   public formControls: typeof FormControls = FormControls;
-
   public imageLogoSrc: string | null;
-
   public imageBackSrc: string | null;
-
   public progressLogo: string | undefined;
-
   public progressBack: string | undefined;
-
   public isImageLogo: boolean;
-
   public isImageBack: boolean;
-
   public isLogoTypeFile: boolean;
-
   public isBackTypeFile: boolean;
-
   private fileTypes = imgTypes;
 
   constructor(private crudService: CrudService,

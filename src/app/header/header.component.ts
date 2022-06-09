@@ -1,7 +1,7 @@
 import {
   Component,
   ElementRef,
-  HostListener, OnDestroy,
+  HostListener, Input, OnDestroy,
   OnInit,
   ViewChild,
   ViewEncapsulation

@@ -1,6 +1,6 @@
 <div class="content__card">
   <img [src]="postImg" alt="" (click)="openExtendedPostDialog()">
-  <div class="content__buttons" *ngIf="this.user?.uid === this.userID">
+  <div class="content__buttons" *ngIf="userIdFromAuth === userIdFromParams">
     <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
       <mat-icon class="white__icon">more_vert</mat-icon>
     </button>
@@ -13,5 +13,6 @@
     [postTitle]="postTitle"
     [postID]="postID"
     [postCreator]="postCreator"
+    [paramId]="paramsId"
   ></app-post-hover>
 </div>

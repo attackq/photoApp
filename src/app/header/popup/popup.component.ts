@@ -15,7 +15,6 @@ export class PopupComponent implements OnInit, OnDestroy {
   public username: string;
 
   public routes = RoutesPath;
-
   private subscriptions: Subscription[] = [];
 
   constructor(private authService: AuthService,

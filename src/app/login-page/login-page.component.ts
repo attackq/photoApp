@@ -20,12 +20,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   @HostBinding('class.login__background') isLoginBg: boolean = true;
 
   public user: firebase.User | null = null;
-
   public fireUsers: Observable<UserStore[]>;
   public routes = RoutesPath;
-
   public bgPath: string = 'assets/images/logiwp.jpg';
-
   private subscriptions: Subscription[] = [];
 
   constructor(private authService: AuthService,
@@ -34,7 +31,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.authService.user$.subscribe((value: firebase.User | null) => this.user = value);
+    this.subscriptions.push(
+      this.authService.user$.subscribe((value: firebase.User | null) => this.user = value)
+    );
   }
 
   public login(): void {
