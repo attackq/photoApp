@@ -21,13 +21,13 @@ import {ShareService} from "../../services/share.service";
 export class PostComponent implements OnInit, OnDestroy {
 
   @Input()
-  public postImg: string | null = '';
+  public postImg: string | null;
   @Input()
-  public postTitle: string = '';
+  public postTitle: string;
   @Input()
-  public postID: string = '';
+  public postID: string;
   @Input()
-  public postDesc: string = '';
+  public postDesc: string;
   @Input()
   public postDate: number;
   @Input()
@@ -35,7 +35,7 @@ export class PostComponent implements OnInit, OnDestroy {
   @Input()
   public userIdFromParams: string | null;
   @Input()
-  public userIdFromAuth: string = '';
+  public userIdFromAuth: string;
   @Input()
   public paramsId: string = '';
 

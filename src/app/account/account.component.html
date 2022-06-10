@@ -1,33 +1,33 @@
-<div class="account"
-     [ngStyle]="{'background-image': 'url(' + this.background + ')'}">
+<div class="account" *ngIf="background"
+     [ngStyle]="{'background-image': 'url(' + background + ')'}">
   <div class="container">
     <div class="account__wrapper">
-      <app-user-logo [size]="'big'" [userLogo]="this.userLogo">
+      <app-user-logo [size]="'big'" [userLogo]="userLogo">
       </app-user-logo>
       <app-account-info
-        [firestoreID]="this.firestoreID"
-        [userID]="this.userID"
-        [status]="this.status"
+        [firestoreID]="firestoreID"
+        [userID]="userID"
+        [status]="status"
         [nickname]="nickname">
       </app-account-info>
     </div>
-    <app-button *ngIf="this.userIdFromAuth === this.userID"
+    <app-button *ngIf="userIdFromAuth === userID"
                 class="account__btn"
                 [label]="'Add photo'"
                 [bgColor]="'green'"
                 (click)="openAddPostDialog()">
     </app-button>
-    <app-button *ngIf="this.userIdFromAuth !== this.userID"
+    <app-button *ngIf="userIdFromAuth !== userID"
                 class="account__btn"
                 [label]="isFollow ? 'Unfollow' : 'Follow'"
                 [bgColor]="'green'"
-                (click)="updateFollowers(this.firestoreID); updateFollowing(this.authID)">
+                (click)="updateFollowers(firestoreID); updateFollowing(authID)">
     </app-button>
-    <app-button *ngIf="this.userIdFromAuth !== this.userID"
+    <app-button *ngIf="userIdFromAuth !== userID"
                 class="account__btn block"
                 [label]="isBlocked ? 'Unblock' : 'Block'"
                 [bgColor]="'red'"
-                (click)="updateBlocked(this.authID)">
+                (click)="updateBlocked(authID)">
     </app-button>
   </div>
 </div>

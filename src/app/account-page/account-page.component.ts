@@ -22,7 +22,6 @@ export class AccountPageComponent implements OnInit, OnDestroy {
   public userId: string;
   public icons = iconsSrc;
   private subscriptions: Subscription[] = [];
-  public user: firebase.User | null = null;
   public userIdFromAuth: string;
 
   constructor(private crudService: CrudService,
@@ -41,7 +40,6 @@ export class AccountPageComponent implements OnInit, OnDestroy {
       this.authService.user$.pipe(
         filter((value: firebase.User | null) => !!value),
         tap((value: firebase.User | null) => {
-          this.user = value;
           this.userIdFromAuth = value?.uid!;
         }),
         switchMap((value: firebase.User | null) => this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!).pipe(

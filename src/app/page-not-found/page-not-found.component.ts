@@ -31,7 +31,6 @@ export class PageNotFoundComponent implements OnInit, OnDestroy{
               private router: Router) {
   }
 
-
   ngOnInit(): void {
     this.subscriptions.push(
       this.authService.user$.subscribe((value: firebase.User | null) => this.user = value)

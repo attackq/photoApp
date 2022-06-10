@@ -26,7 +26,7 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   @Input()
   public status: string;
   @Input()
-  public nickname: string | undefined;
+  public nickname: string;
 
   public icons = iconsSrc;
   public user: firebase.User | null = null;

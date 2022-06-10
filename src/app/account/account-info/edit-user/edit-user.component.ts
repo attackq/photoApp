@@ -27,7 +27,6 @@ export class EditUserComponent implements OnInit {
   public nickname: string | undefined;
 
   public icons = iconsSrc;
-
   public editUserForm: FormGroup = new FormGroup({});
   public formControls: typeof FormControls = FormControls;
   public imageLogoSrc: string | null;

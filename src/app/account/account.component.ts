@@ -1,10 +1,9 @@
-import {Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
-import firebase from "firebase/compat/app";
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {AccountPopupComponent} from "../account-popup/account-popup.component";
-import {filter, Observable, Subscription} from "rxjs";
-import {Post, PostStore, UserStore} from "../post";
+import {Subscription} from "rxjs";
+import {UserStore} from "../post";
 import {Collections} from "../services/crud/collections";
 import {CrudService} from "../services/crud/crud.service";
 import {map, switchMap, tap} from "rxjs/operators";
