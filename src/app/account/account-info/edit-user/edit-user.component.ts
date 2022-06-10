@@ -122,7 +122,6 @@ export class EditUserComponent implements OnInit {
     this.crudService.handleUserNameData<UserStore>(Collections.USERS, name.toLowerCase()).pipe(
       take(1),
       map((us: UserStore[]) => {
-        console.log(us)
         if (us.length !== 0) {
           this.notifier.notify('warning', 'Nickname already exists!');
           return null;
