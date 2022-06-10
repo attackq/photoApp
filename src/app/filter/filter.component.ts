@@ -58,7 +58,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   public setChangedValue(value: string) {
-    this.share.filterString.next(value)
+    this.share.setFilterString(value);
     this.router.navigate([this.routes.account, this.userID]);
   }
 

@@ -8,11 +8,12 @@ import {AuthService} from "../../../services/auth/auth.service";
 import {iconsSrc} from "../../../icons-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../../../controls";
-import {map, tap} from "rxjs/operators";
+import {map, take, tap} from "rxjs/operators";
 import {RoutesPath} from "../../../routes-path";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ShareService} from "../../../services/share.service";
+import {NotifierService} from "angular-notifier";
 
 @Component({
   selector: 'app-post-extended',
@@ -52,7 +53,8 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
               private authService: AuthService,
               private router: Router,
               private dialog: MatDialog,
-              private share: ShareService) {
+              private share: ShareService,
+              private notifier: NotifierService) {
   }
 
   ngOnInit(): void {
@@ -86,26 +88,56 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
   }
 
   public routeToUser(id: string) {
-    this.share.customerLink.next(id);
+    this.share.setCustomerLink(id);
   }
 
   public addComment() {
     const inputComment = this.commentsForm.controls[FormControls.comment].value;
-    this.subscriptions.push(
-      this.crudService.getUserDoc<PostStore>(Collections.POSTS, this.postID).pipe(
-        map((post: PostStore | undefined) => {
-          const comment: NewComment = {
-            text: inputComment,
-            date: new Date().getTime(),
-            createdBy: this.user?.uid!,
-            logo: this.commentLogo
-          };
-          let comments: Object[] | undefined = post?.comments
-          comments?.push(comment);
-          return this.crudService.updateObject(Collections.POSTS, this.postID, {comments})
-        })
-      ).subscribe()
-    )
+    this.crudService.handleData<PostStore>(Collections.POSTS).pipe(
+      take(1),
+      map((posts: PostStore[]) => {
+        return posts.filter((i: PostStore) => i.id === this.postID)
+      }),
+      switchMap((isPost: PostStore[]) => {
+        if (isPost.length !== 0) {
+          return this.crudService.getUserDoc<PostStore>(Collections.POSTS, this.postID).pipe(
+            map((post: PostStore | undefined) => {
+              const comment: NewComment = {
+                text: inputComment,
+                date: new Date().getTime(),
+                createdBy: this.user?.uid!,
+                logo: this.commentLogo
+              };
+              let comments: Object[] | undefined = post?.comments
+              comments?.push(comment);
+              return this.crudService.updateObject(Collections.POSTS, this.postID, {comments})
+            })
+          )
+        } else {
+          this.notifier.notify('error', 'Sorry! Post was deleted.')
+          setTimeout(() => {
+            this.dialog.closeAll();
+          }, 1000)
+          return isPost;
+        }
+      })
+    ).subscribe()
+
+    // this.subscriptions.push(
+    //   this.crudService.getUserDoc<PostStore>(Collections.POSTS, this.postID).pipe(
+    //     map((post: PostStore | undefined) => {
+    //       const comment: NewComment = {
+    //         text: inputComment,
+    //         date: new Date().getTime(),
+    //         createdBy: this.user?.uid!,
+    //         logo: this.commentLogo
+    //       };
+    //       let comments: Object[] | undefined = post?.comments
+    //       comments?.push(comment);
+    //       return this.crudService.updateObject(Collections.POSTS, this.postID, {comments})
+    //     })
+    //   ).subscribe()
+    // )
   }
 
   public deleteComment(time: number) {

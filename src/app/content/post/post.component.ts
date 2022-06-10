@@ -63,7 +63,7 @@ export class PostComponent implements OnInit, OnDestroy {
             }
           }
         ),
-      this.share.customerLink.subscribe(
+      this.share.getCustomerLink().subscribe(
         (customerId: string) => {
           this.afterCloseSub.unsubscribe();
           this.router.navigate([this.routes.account, customerId]);

@@ -46,13 +46,17 @@ export class CheckUserIdGuard implements CanActivate {
           }),
           tap((isId: boolean) => {
             if (!isId) {
-              this.router.navigate([this.routes.account, value?.uid])
-              this.notifier.notify('warning', 'Invalid user ID')
+              this.router.navigate([this.routes.account, value?.uid]);
+              if (value?.uid !== id) {
+                this.notifier.notify('warning', 'Invalid user ID')
+              }
             }
           })
         )
       })
     )
+
+
   }
 
 }

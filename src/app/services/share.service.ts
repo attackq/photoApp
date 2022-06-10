@@ -6,9 +6,24 @@ import {BehaviorSubject, Subject} from "rxjs";
 })
 export class ShareService {
 
-  public filterString: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private filterString$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private customerLink$: Subject<string> = new Subject<string>();
 
-  public customerLink: Subject<string> = new Subject<string>();
+  public setCustomerLink(id: string) {
+    this.customerLink$.next(id);
+  }
+
+  public getCustomerLink() {
+    return this.customerLink$.asObservable()
+  }
+
+  public setFilterString(id: string) {
+    this.filterString$.next(id);
+  }
+
+  public getFilterString() {
+    return this.filterString$.asObservable()
+  }
 
   constructor() { }
 }

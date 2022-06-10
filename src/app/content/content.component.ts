@@ -52,7 +52,7 @@ export class ContentComponent implements OnInit, OnDestroy {
         tap((user: UserStore[]) => {
           this.id = user[0].userID
         }),
-        switchMap(() => this.share.filterString.pipe(
+        switchMap(() => this.share.getFilterString().pipe(
             switchMap((value: string) => {
               return this.crudService.handlePostsData<PostStore>(Collections.POSTS, this.id).pipe(
                 map((posts: PostStore[]) => {
