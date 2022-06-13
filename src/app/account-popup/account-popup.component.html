@@ -24,7 +24,7 @@
       <div class="modal_err" *ngIf="isControlValid(formControls.description)">Max length is 200 symbols</div>
       <app-button [label]="'Publish'"
                   [bgColor]="'blue'"
-                  [condition]="addPostForm.invalid"
+                  [condition]="addPostForm.invalid || this.progress !== '100'"
                   (click)="submitFrom()"
                   mat-dialog-close
                   class="form__btn">
