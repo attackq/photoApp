@@ -27,7 +27,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   public userID: string;
 
   public icons = iconsSrc;
-  public id: string;
+  public userIdFromParams: string;
   public user: firebase.User | null = null;
   public firePosts: Observable<PostStore[]>;
   private sortFields = SortFields;
@@ -50,11 +50,11 @@ export class ContentComponent implements OnInit, OnDestroy {
       switchMap(params => this.crudService.handleIdData<UserStore>(Collections.USERS, '==', params['id']).pipe(
         take(1),
         tap((user: UserStore[]) => {
-          this.id = user[0].userID
+          this.userIdFromParams = user[0].userID
         }),
         switchMap(() => this.share.getFilterString().pipe(
             switchMap((value: string) => {
-              return this.crudService.handlePostsData<PostStore>(Collections.POSTS, this.id).pipe(
+              return this.crudService.handlePostsData<PostStore>(Collections.POSTS, this.userIdFromParams).pipe(
                 map((posts: PostStore[]) => {
                   return this.sortBy(posts, value)
                 })

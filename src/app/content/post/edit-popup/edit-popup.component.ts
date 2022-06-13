@@ -15,11 +15,11 @@ import {Collections} from "../../../services/crud/collections";
 export class EditPopupComponent implements OnInit {
 
   @Input()
-  public postID: string = '';
+  public postID: string;
   @Input()
-  public postDesc: string = '';
+  public postDesc: string;
   @Input()
-  public postTitle: string = '';
+  public postTitle: string;
 
   private readonly MAX_LENGTH_TITLE_CONTROL: number = 25;
   private readonly MAX_LENGTH_DESC_CONTROL: number = 200;

@@ -6,24 +6,26 @@
       </app-user-logo>
       <app-account-info
         [firestoreID]="firestoreID"
-        [userID]="userID"
+        [userIdFromParams]="userIdFromParams"
         [status]="status"
-        [nickname]="nickname">
+        [nickname]="nickname"
+        [followers]="followers"
+        [following]="following">
       </app-account-info>
     </div>
-    <app-button *ngIf="userIdFromAuth === userID"
+    <app-button *ngIf="userIdFromAuth === userIdFromParams"
                 class="account__btn"
                 [label]="'Add photo'"
                 [bgColor]="'green'"
                 (click)="openAddPostDialog()">
     </app-button>
-    <app-button *ngIf="userIdFromAuth !== userID"
+    <app-button *ngIf="userIdFromAuth !== userIdFromParams"
                 class="account__btn"
                 [label]="isFollow ? 'Unfollow' : 'Follow'"
                 [bgColor]="'green'"
                 (click)="updateFollowers(firestoreID); updateFollowing(authID)">
     </app-button>
-    <app-button *ngIf="userIdFromAuth !== userID"
+    <app-button *ngIf="userIdFromAuth !== userIdFromParams"
                 class="account__btn block"
                 [label]="isBlocked ? 'Unblock' : 'Block'"
                 [bgColor]="'red'"

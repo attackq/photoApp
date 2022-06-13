@@ -15,8 +15,8 @@ import {RoutesPath} from "../../../routes-path";
 export class FollowersComponent implements OnInit {
 
   @Input()
-
   public userID: string;
+
   public icons = iconsSrc;
   public routes = RoutesPath;
   public followers$: Observable<UserStore[]>;

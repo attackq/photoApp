@@ -12,30 +12,43 @@ import firebase from "firebase/compat";
   templateUrl: './post-hover.component.html',
   styleUrls: ['./post-hover.component.css']
 })
-export class PostHoverComponent implements OnInit {
+export class PostHoverComponent implements OnInit, OnDestroy {
 
   @Input()
   public postCreator: string;
   @Input()
-  public postTitle: string = '';
+  public postTitle: string;
   @Input()
   public postID: string;
   @Input()
   public paramId: string;
 
   public routes = RoutesPath;
-  public firePostCreator: Observable<UserStore[]>
+  public postCreatorId: string;
+  public postCreatorName: string;
+  private subscriptions: Subscription[] = [];
 
   constructor(private crudService: CrudService,
               private router: Router) {
   }
 
   ngOnInit(): void {
-    this.firePostCreator = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.postCreator)
+    this.subscriptions.push(
+      this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.postCreator).subscribe(
+        (postCr: UserStore[]) => {
+          this.postCreatorId = postCr[0].userID;
+          this.postCreatorName = postCr[0].name;
+        }
+      )
+    );
   }
 
   public goToPostCreator(creatorId: string) {
     this.router.navigate([this.routes.account, creatorId])
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
 }

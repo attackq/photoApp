@@ -16,9 +16,7 @@ export class AboutComponent implements OnInit, OnDestroy {
   @HostBinding('class.about') isAbout: boolean = true;
 
   public icons = iconsSrc;
-
   public user: firebase.User | null = null;
-
   private subscriptions: Subscription[] = [];
 
   constructor(private authService: AuthService) {

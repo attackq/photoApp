@@ -21,7 +21,7 @@
 }
 .filter__link:hover:after {
   width: 100%;
-  background: #ff9100;
+  background: #00bbff;
 }
 
 .mat-form-field {

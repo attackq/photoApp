@@ -22,6 +22,7 @@ import {Subscription} from "rxjs";
 export class PageNotFoundComponent implements OnInit, OnDestroy{
 
   @HostBinding('class.notfound') isNotFound: boolean = true;
+
   public user: firebase.User | null = null;
   public routes = RoutesPath;
   private subscriptions: Subscription[] = [];

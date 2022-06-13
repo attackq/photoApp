@@ -74,9 +74,6 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
 
     this.fireUser = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.postCreator);
 
-    this.commentsForm.addControl(FormControls.comment, new FormControl('', Validators.compose([Validators.required,
-      Validators.maxLength(200)])));
-
     this.fireComments = this.crudService.handleData<PostStore>(Collections.POSTS).pipe(
       map((post: PostStore[]) => {
         return post.filter((i: PostStore) => i.id === this.postID)
@@ -85,6 +82,9 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
         return of(value[0].comments)
       })
     )
+
+    this.commentsForm.addControl(FormControls.comment, new FormControl('', Validators.compose([Validators.required,
+      Validators.maxLength(200)])));
   }
 
   public routeToUser(id: string) {
@@ -122,22 +122,6 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
         }
       })
     ).subscribe()
-
-    // this.subscriptions.push(
-    //   this.crudService.getUserDoc<PostStore>(Collections.POSTS, this.postID).pipe(
-    //     map((post: PostStore | undefined) => {
-    //       const comment: NewComment = {
-    //         text: inputComment,
-    //         date: new Date().getTime(),
-    //         createdBy: this.user?.uid!,
-    //         logo: this.commentLogo
-    //       };
-    //       let comments: Object[] | undefined = post?.comments
-    //       comments?.push(comment);
-    //       return this.crudService.updateObject(Collections.POSTS, this.postID, {comments})
-    //     })
-    //   ).subscribe()
-    // )
   }
 
   public deleteComment(time: number) {

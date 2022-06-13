@@ -18,9 +18,7 @@ export class FollowingComponent implements OnInit {
   public userID: string;
 
   public icons = iconsSrc;
-
   public routes = RoutesPath;
-
   public following$: Observable<UserStore[]>;
 
   constructor(private crudService: CrudService) { }
@@ -32,9 +30,9 @@ export class FollowingComponent implements OnInit {
           map((us: UserStore[]) => {
             return us.filter((i: UserStore) => {
               if (user[0].following.includes(i.userID)) {
-                return i
+                return i;
               } else {
-                return null
+                return null;
               }
             })
           })

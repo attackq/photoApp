@@ -1,13 +1,10 @@
-<ng-container *ngFor="let fireCreator of (firePostCreator | async)">
-  <div class="hover__block">
+<div class="hover__block">
     <div class="hover__info">
       <div class="hover__title">{{postTitle}}</div>
-      <ng-container *ngIf="paramId !== fireCreator.userID">
-        <div class="hover__name" (click)="goToPostCreator(fireCreator.userID)"><span>by</span> {{fireCreator.name}}
+      <ng-container *ngIf="paramId !== postCreatorId">
+        <div class="hover__name" (click)="goToPostCreator(postCreatorId)"><span>by</span> {{postCreatorName}}
         </div>
       </ng-container>
     </div>
-    <app-post-icons [postID]="this.postID"></app-post-icons>
-  </div>
-</ng-container>
-
+  <app-post-icons [postID]="this.postID"></app-post-icons>
+</div>

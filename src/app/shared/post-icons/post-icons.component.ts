@@ -93,8 +93,6 @@ export class PostIconsComponent implements OnInit, OnDestroy {
         }
       })
     ).subscribe()
-    // this.clipboard.copy(this.sharePostId);
-    // this.showNotification('success', 'Link copied!')
   }
 
   public openLikesDialog() {
@@ -137,26 +135,6 @@ export class PostIconsComponent implements OnInit, OnDestroy {
         }
       })
     ).subscribe()
-    // this.subscriptions.push(
-    //   this.crudService.getUserDoc<PostStore>(Collections.POSTS, id).pipe(
-    //     map((postFromStore: PostStore | undefined) => {
-    //       const userIndex = postFromStore?.likes.indexOf(this.user?.uid!);
-    //       if (userIndex === -1) {
-    //         this.changeLike = true;
-    //         return {
-    //           likes: postFromStore?.likes.concat(this.user?.uid!),
-    //         }
-    //       } else {
-    //         const newArr: string[] | undefined = postFromStore?.likes.splice(userIndex!, 1);
-    //         this.changeLike = false;
-    //         return {
-    //           likes: postFromStore?.likes,
-    //         };
-    //       }
-    //     }),
-    //     switchMap(newPost => this.crudService.updateObject(Collections.POSTS, id, {...newPost}))
-    //   ).subscribe()
-    // )
   }
 
   public addBookmark(id: string) {
@@ -196,28 +174,6 @@ export class PostIconsComponent implements OnInit, OnDestroy {
         }
       })
     ).subscribe()
-    // this.subscriptions.push(
-    //   this.crudService.getUserDoc<PostStore>(Collections.POSTS, id).pipe(
-    //     map((postFromStore: PostStore | undefined) => {
-    //       const userIndex = postFromStore?.bookmarks.indexOf(this.user?.uid!);
-    //       if (userIndex === -1) {
-    //         this.changeBookmark = true;
-    //         return {
-    //           bookmarkDate: new Date().getTime(),
-    //           bookmarks: postFromStore?.bookmarks.concat(this.user?.uid!),
-    //         }
-    //       } else {
-    //         const newArr: string[] | undefined = postFromStore?.bookmarks.splice(userIndex!, 1);
-    //         this.changeBookmark = false;
-    //         return {
-    //           bookmarkDate: 0,
-    //           bookmarks: postFromStore?.bookmarks,
-    //         };
-    //       }
-    //     }),
-    //     switchMap(newPost => this.crudService.updateObject(Collections.POSTS, id, {...newPost}))
-    //   ).subscribe()
-    // );
   }
 
   ngOnDestroy(): void {

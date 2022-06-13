@@ -5,9 +5,6 @@ import {EditUserComponent} from "./edit-user/edit-user.component";
 import firebase from "firebase/compat";
 import {AuthService} from "../../services/auth/auth.service";
 import {Observable, Subscription} from "rxjs";
-import {UserStore} from "../../post";
-import {CrudService} from "../../services/crud/crud.service";
-import {Collections} from "../../services/crud/collections";
 import {FollowersComponent} from "./followers/followers.component";
 import {FollowingComponent} from "./following/following.component";
 
@@ -22,27 +19,28 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   @Input()
   public firestoreID: string;
   @Input()
-  public userID: string;
+  public userIdFromParams: string;
   @Input()
   public status: string;
   @Input()
   public nickname: string;
+  @Input()
+  public followers: number;
+  @Input()
+  public following: number;
 
   public icons = iconsSrc;
   public user: firebase.User | null = null;
-  public firestoreUser: Observable<UserStore[]>;
   private subscriptions: Subscription[] = [];
 
   constructor(private dialog: MatDialog,
-              private authService: AuthService,
-              private crudService: CrudService) {
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.subscriptions.push(
       this.authService.user$.subscribe((value: firebase.User | null) => this.user = value)
     )
-    this.firestoreUser = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID);
   }
 
   public openEditUserDialog(id: string) {
@@ -54,12 +52,12 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
 
   public openFollowersDialog() {
     let followerPopup = this.dialog.open(FollowersComponent)
-    followerPopup.componentInstance.userID = this.userID;
+    followerPopup.componentInstance.userID = this.userIdFromParams;
   }
 
   public openFollowingDialog() {
     let followingPopup = this.dialog.open(FollowingComponent);
-    followingPopup.componentInstance.userID = this.userID;
+    followingPopup.componentInstance.userID = this.userIdFromParams;
   }
 
   ngOnDestroy(): void {

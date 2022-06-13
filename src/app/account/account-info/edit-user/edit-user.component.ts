@@ -20,7 +20,7 @@ import {imgTypes} from "../../../file-types";
 export class EditUserComponent implements OnInit {
 
   @Input()
-  public firestoreID: string = '';
+  public firestoreID: string;
   @Input()
   public status: string;
   @Input()
@@ -55,10 +55,9 @@ export class EditUserComponent implements OnInit {
   public onLogoSelected(event: Event): void {
     if (event) {
       const eventTarget = (<HTMLInputElement>event?.target);
-      event.preventDefault();
       if (eventTarget && eventTarget.files) {
         const file: File = eventTarget.files[0];
-        this.isLogoTypeFile = false
+        this.isLogoTypeFile = false;
         if (this.fileTypes.includes(file.type)) {
           combineLatest(this.uploadService.uploadFileAndGetMetadata('posts', file))
             .pipe(

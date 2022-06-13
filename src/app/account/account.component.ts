@@ -18,7 +18,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   @Input()
   public firestoreID: string;
   @Input()
-  public userID: string;
+  public userIdFromParams: string;
   @Input()
   public userIdFromAuth: string;
 
@@ -29,6 +29,8 @@ export class AccountComponent implements OnInit, OnDestroy {
   public isFollow: boolean;
   public isBlocked: boolean;
   public authID: string;
+  public followers: number;
+  public following: number;
 
   private subscriptions: Subscription[] = [];
 
@@ -39,19 +41,21 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID).pipe(
+      this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userIdFromParams).pipe(
         tap((userFromStore: UserStore[]) => {
           this.isFollow = userFromStore[0].followers.includes(this.userIdFromAuth);
           this.background = userFromStore[0].background;
           this.userLogo = userFromStore[0].logo;
           this.status = userFromStore[0].status;
           this.nickname = userFromStore[0].name;
+          this.followers = userFromStore[0].followers.length;
+          this.following = userFromStore[0].following.length;
         }),
         switchMap(() => {
           return this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userIdFromAuth).pipe(
             tap((currentUser: UserStore[]) => {
               this.authID = currentUser[0].id;
-              this.isBlocked = currentUser[0].blocked.includes(this.userID);
+              this.isBlocked = currentUser[0].blocked.includes(this.userIdFromParams);
             }))
         })
       ).subscribe()
@@ -89,10 +93,10 @@ export class AccountComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
         map((currentUserFromStore: UserStore | undefined) => {
-          const followingInd = currentUserFromStore?.following.indexOf(this.userID);
+          const followingInd = currentUserFromStore?.following.indexOf(this.userIdFromParams);
           if (followingInd == -1) {
             return {
-              following: currentUserFromStore?.following.concat(this.userID),
+              following: currentUserFromStore?.following.concat(this.userIdFromParams),
             }
           } else {
             const newArray: string[] | undefined = currentUserFromStore?.following.splice(followingInd!, 1)
@@ -110,10 +114,10 @@ export class AccountComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.crudService.getUserDoc<UserStore>(Collections.USERS, id).pipe(
         map((currentUserFromStore: UserStore | undefined) => {
-          const blockedInd = currentUserFromStore?.blocked.indexOf(this.userID);
+          const blockedInd = currentUserFromStore?.blocked.indexOf(this.userIdFromParams);
           if (blockedInd == -1) {
             return {
-              blocked: currentUserFromStore?.blocked.concat(this.userID),
+              blocked: currentUserFromStore?.blocked.concat(this.userIdFromParams),
             }
           } else {
             const newArray: string[] | undefined = currentUserFromStore?.blocked.splice(blockedInd!, 1)

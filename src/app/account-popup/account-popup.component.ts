@@ -32,8 +32,6 @@ export class AccountPopupComponent implements OnInit, OnDestroy {
   public isTypeFile: boolean;
   public fileTypes = imgTypes;
 
-
-
   private subscriptions: Subscription[] = [];
 
   constructor(private crudService: CrudService,
