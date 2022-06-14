@@ -12,7 +12,7 @@
                          [routerLink]="[routes.account, follower.userID]"
                          mat-dialog-close></app-user-logo>
         </div>
-        <div class="follower__name">{{follower.name}}</div>
+        <div class="follower__name">{{checkUsername(follower.name)}}</div>
       </div>
 
     </div>

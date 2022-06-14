@@ -1,6 +1,5 @@
 .search__bar {
   position: relative;
-
 }
 
 .search__input {
@@ -70,6 +69,8 @@
   line-height: 18px;
   color: #4F4F4F;
   cursor: pointer;
+  max-width: 125px;
+  overflow-x: hidden;
 }
 .invalid {
   color: #ff0000;

@@ -12,7 +12,7 @@
                            [routerLink]="[routes.account, user.userID]"
                            mat-dialog-close (click)="closeDialogs()"></app-user-logo>
           </div>
-          <div class="follower__name">{{user.name}}</div>
+          <div class="follower__name">{{checkUsernameLength(user.name)}}</div>
         </div>
       </div>
       <ng-template #nobody>

@@ -7,6 +7,7 @@ import {map} from "rxjs/operators";
 import {RoutesPath} from "../../routes-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../../controls";
+import {CheckLengthService} from "../../services/check-length.service";
 
 @Component({
   selector: 'app-search',
@@ -43,7 +44,8 @@ export class SearchComponent implements OnInit {
   public foundedUsers: Observable<UserStore[]>;
   public name: Subject<string> = new Subject<string>();
 
-  constructor(private crudService: CrudService) {
+  constructor(private crudService: CrudService,
+              private checkLength: CheckLengthService) {
   }
 
   ngOnInit(): void {
@@ -86,4 +88,7 @@ export class SearchComponent implements OnInit {
     this.name.next(this.searchForm.controls[FormControls.search].value.trim().toLowerCase());
   }
 
+  public checkFoundedUsername(nickname: string) {
+    return this.checkLength.checkUsernameLength(nickname)
+  }
 }

@@ -6,6 +6,8 @@ import {Collections} from "../../../services/crud/collections";
 import {map} from "rxjs/operators";
 import {CrudService} from "../../../services/crud/crud.service";
 import {RoutesPath} from "../../../routes-path";
+import {ShareService} from "../../../services/share.service";
+import {CheckLengthService} from "../../../services/check-length.service";
 
 @Component({
   selector: 'app-following',
@@ -14,6 +16,7 @@ import {RoutesPath} from "../../../routes-path";
 })
 export class FollowingComponent implements OnInit {
 
+
   @Input()
   public userID: string;
 
@@ -21,7 +24,8 @@ export class FollowingComponent implements OnInit {
   public routes = RoutesPath;
   public following$: Observable<UserStore[]>;
 
-  constructor(private crudService: CrudService) { }
+  constructor(private crudService: CrudService,
+              private checkLength: CheckLengthService) { }
 
   ngOnInit(): void {
     this.following$ = this.crudService.handleIdData<UserStore>(Collections.USERS, '==', this.userID).pipe(
@@ -43,6 +47,10 @@ export class FollowingComponent implements OnInit {
 
   public trackFollowing(index: number, following: UserStore) {
     return following.id;
+  }
+
+  public checkUsername(name: string) {
+    return this.checkLength.checkUsernameLength(name)
   }
 
 }

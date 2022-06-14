@@ -13,6 +13,8 @@
 }
 .popup__hello {
   width: 100%;
+  /*max-width: 150px;*/
+  /*overflow-x: hidden;*/
   padding: 5px 15px;
   font-weight: 600;
   font-size: 20px;

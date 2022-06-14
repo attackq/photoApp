@@ -2,14 +2,17 @@
   display: flex;
   align-items: center;
 }
+
 .post__icon {
   display: flex;
   align-items: center;
   margin-left: 10px;
 }
+
 .post__icon.big {
   margin: 0 15px;
 }
+
 .post__img {
   width: 17px;
   height: 17px;
@@ -17,15 +20,18 @@
   margin-right: 5px;
   transition: all 0.1s linear;
 }
+
 .post__img.big {
   width: 25px;
   height: 25px;
 }
+
 .post__img img {
   width: 100%;
   height: 100%;
   filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2%) hue-rotate(6deg) brightness(110%) contrast(101%);
 }
+
 .post__img.big img {
   filter: brightness(0) saturate(100%) invert(18%) sepia(1%) saturate(1240%) hue-rotate(314deg) brightness(99%) contrast(93%);
 }
@@ -33,6 +39,7 @@
 .post__img.like {
   filter: brightness(0) saturate(100%) invert(48%) sepia(33%) saturate(1102%) hue-rotate(313deg) brightness(93%) contrast(98%);
 }
+
 .post__img.bookmark {
   filter: brightness(0) saturate(100%) invert(79%) sepia(61%) saturate(3519%) hue-rotate(359deg) brightness(103%) contrast(102%);
 }
@@ -47,14 +54,19 @@
   line-height: 18px;
   text-align: center;
   color: #FFFFFF;
+  min-width: 8px;
 }
+
 .post__text.big {
   font-size: 20px;
   color: #333333;
+  min-width: 15px;
 }
+
 .comment {
   cursor: initial;
 }
+
 .likes {
   cursor: pointer;
 }
