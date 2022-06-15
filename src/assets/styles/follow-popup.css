@@ -24,6 +24,8 @@
 }
 .nobody {
   margin: 20px 0;
+  max-width: none;
+  overflow-x: auto;
 }
 .mat-dialog-content {
   -ms-overflow-style: none;
