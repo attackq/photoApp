@@ -19,6 +19,7 @@ export class SavedContentComponent implements OnInit {
   public routedID: null;
   public icons = iconsSrc;
   public firePosts: Observable<PostStore[]>;
+  public user: firebase.User | null = null;
 
   constructor(private crudService: CrudService,
               private activatedRoute: ActivatedRoute,
@@ -29,6 +30,7 @@ export class SavedContentComponent implements OnInit {
   ngOnInit(): void {
     this.firePosts = this.authService.user$.pipe(
       filter((value: firebase.User | null) => !!value),
+      tap((value: firebase.User | null) => this.user = value),
       switchMap((value: firebase.User | null) => this.crudService.handleMailData<UserStore>(Collections.USERS, '==', value?.email!)),
       switchMap((user: UserStore[]) => {
         return this.crudService.handleData<PostStore>(Collections.POSTS).pipe(

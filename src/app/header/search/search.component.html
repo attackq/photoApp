@@ -3,9 +3,6 @@
     <input type="text" class="search__input {{size}}" placeholder="Find people..." name="search"
            (keyup)="showResult()" autocomplete="off" [formControlName]="formControls.search">
   </form>
-  <div class="search__results invalid" *ngIf="isControlValid(formControls.search)">
-    <div class="search__result invalid">Max length is 10 symbols</div>
-  </div>
   <div class="search__results" *ngIf="isResults">
     <ng-container *ngFor="let foundedUser of (foundedUsers | async)">
       <div class="search__result" [routerLink]="[routes.account, foundedUser.userID]"
@@ -13,7 +10,7 @@
         <div class="result__logo">
           <app-user-logo [userLogo]="foundedUser.logo"></app-user-logo>
         </div>
-        <div class="result__name">{{checkFoundedUsername(foundedUser.name)}}</div>
+        <div class="result__name">{{foundedUser.name}}</div>
       </div>
     </ng-container>
   </div>

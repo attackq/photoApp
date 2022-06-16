@@ -7,7 +7,6 @@ import {map} from "rxjs/operators";
 import {RoutesPath} from "../../routes-path";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormControls} from "../../controls";
-import {CheckLengthService} from "../../services/check-length.service";
 
 @Component({
   selector: 'app-search',
@@ -34,8 +33,6 @@ export class SearchComponent implements OnInit {
   }
 
   private readonly MAX_SEARCH_SYMBOLS: number = 1;
-  private readonly MAX_LENGTH_CONTROL: number = 10;
-
 
   public searchForm: FormGroup = new FormGroup({});
   public formControls: typeof FormControls = FormControls;
@@ -44,12 +41,11 @@ export class SearchComponent implements OnInit {
   public foundedUsers: Observable<UserStore[]>;
   public name: Subject<string> = new Subject<string>();
 
-  constructor(private crudService: CrudService,
-              private checkLength: CheckLengthService) {
+  constructor(private crudService: CrudService) {
   }
 
   ngOnInit(): void {
-    this.searchForm.addControl(FormControls.search, new FormControl('', Validators.maxLength(this.MAX_LENGTH_CONTROL)));
+    this.searchForm.addControl(FormControls.search, new FormControl(''));
 
     this.foundedUsers = this.name.pipe(
       filter(value => value.length > this.MAX_SEARCH_SYMBOLS),
@@ -88,7 +84,5 @@ export class SearchComponent implements OnInit {
     this.name.next(this.searchForm.controls[FormControls.search].value.trim().toLowerCase());
   }
 
-  public checkFoundedUsername(nickname: string) {
-    return this.checkLength.checkUsernameLength(nickname)
-  }
+
 }

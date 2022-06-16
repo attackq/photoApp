@@ -7,8 +7,6 @@ import {Post, PostStore, UserStore} from "../../../post";
 import {Collections} from "../../../services/crud/collections";
 import {map} from "rxjs/operators";
 import {MatDialog} from "@angular/material/dialog";
-import {ShareService} from "../../../services/share.service";
-import {CheckLengthService} from "../../../services/check-length.service";
 
 @Component({
   selector: 'app-likes-popup',
@@ -25,8 +23,7 @@ export class LikesPopupComponent implements OnInit {
   public usersLikes: Observable<UserStore[]>;
 
   constructor(private crudService: CrudService,
-              private dialog: MatDialog,
-              private checkLength: CheckLengthService) {
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -48,10 +45,6 @@ export class LikesPopupComponent implements OnInit {
         )
       })
     )
-  }
-
-  public checkUsernameLength(nickname: string) {
-    return this.checkLength.checkUsernameLength(nickname)
   }
 
   public closeDialogs() {

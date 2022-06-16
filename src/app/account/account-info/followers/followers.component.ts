@@ -6,7 +6,6 @@ import {Collections} from "../../../services/crud/collections";
 import {Observable, of, switchMap} from "rxjs";
 import {map, tap} from "rxjs/operators";
 import {RoutesPath} from "../../../routes-path";
-import {CheckLengthService} from "../../../services/check-length.service";
 
 @Component({
   selector: 'app-followers',
@@ -22,8 +21,7 @@ export class FollowersComponent implements OnInit {
   public routes = RoutesPath;
   public followers$: Observable<UserStore[]>;
 
-  constructor(private crudService: CrudService,
-              private checkLength: CheckLengthService) {
+  constructor(private crudService: CrudService) {
   }
 
   ngOnInit(): void {
@@ -48,7 +46,4 @@ export class FollowersComponent implements OnInit {
     return follower.id;
   }
 
-  public checkUsername(name: string) {
-    return this.checkLength.checkUsernameLength(name)
-  }
 }

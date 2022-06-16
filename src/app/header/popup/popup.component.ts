@@ -11,8 +11,6 @@ import {Subscription, switchMap} from "rxjs";
 })
 export class PopupComponent implements OnInit, OnDestroy {
 
-  private readonly MAX_NICKNAME_CROPPED: number = 8;
-
   @Input()
   public username: string;
 
@@ -24,7 +22,6 @@ export class PopupComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.checkUsernameLength(this.username, this.MAX_NICKNAME_CROPPED);
   }
 
   public logout(): void {
@@ -38,14 +35,5 @@ export class PopupComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
-
-  private checkUsernameLength(nickname: string, n: number) {
-    if (nickname.length > n) {
-      return this.username = nickname.substring(0, n) + '...';
-    } else {
-      return nickname;
-    }
-  }
-
 
 }

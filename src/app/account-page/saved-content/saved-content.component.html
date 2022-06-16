@@ -11,7 +11,8 @@
                       [postTitle]="post.title"
                       [postDate]="post.sortID"
                       [userIdFromParams]="this.routedID"
-                      [postCreator]="post.createdBy"></app-post>
+                      [postCreator]="post.createdBy"
+                      [userIdFromAuth]="user?.uid!"></app-post>
           </ng-container>
         </div>
       </div>
