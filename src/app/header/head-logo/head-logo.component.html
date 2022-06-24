@@ -1,7 +1,7 @@
 <div class="header__logo" >
   <div class="logo__img">
-    <img [src]="imagePath" alt="" >
+    <img [src]="imagePath" alt="" (click)="checkUserAuthAndRedirect()">
   </div>
-  <div class="logo__text">PhotoApp</div>
+  <div class="logo__text" (click)="checkUserAuthAndRedirect()">PhotoApp</div>
 </div>
 

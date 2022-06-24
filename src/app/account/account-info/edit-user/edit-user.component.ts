@@ -115,6 +115,22 @@ export class EditUserComponent implements OnInit {
     }
   }
 
+  public checkLogoStatus() {
+    if (this.progressLogo) {
+      return this.progressLogo !== '100';
+    } else {
+      return false;
+    }
+  }
+
+  public checkBackStatus() {
+    if (this.progressBack) {
+      return this.progressBack !== '100';
+    } else {
+      return false;
+    }
+  }
+
   public updateDescription(id: string): void {
     const name = this.editUserForm.controls[FormControls.name].value.trim();
     const status = this.editUserForm.controls[FormControls.description].value.trim();
