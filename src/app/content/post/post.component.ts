@@ -45,7 +45,6 @@ export class PostComponent implements OnInit, OnDestroy {
   public isOpenedDialog: boolean;
   public sharingId: string;
   public localStorageShareLink: string;
-  public encodeString: string;
   public afterCloseSub: Subscription;
   private subscriptions: Subscription[] = [];
 
