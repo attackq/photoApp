@@ -9,6 +9,7 @@ export class ShareService {
 
   private filterString$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private customerLink$: Subject<string> = new Subject<string>();
+  private sharePostLink: Subject<string> = new Subject<string>();
 
   public setCustomerLink(id: string) {
     this.customerLink$.next(id);
@@ -23,6 +24,14 @@ export class ShareService {
   }
 
   public getFilterString() {
+    return this.filterString$.asObservable()
+  }
+
+  public setSharePostLink(id: string) {
+    this.filterString$.next(id);
+  }
+
+  public getSharePostLink() {
     return this.filterString$.asObservable()
   }
 

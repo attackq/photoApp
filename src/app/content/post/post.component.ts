@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Observable, of, Subject, Subscription} from "rxjs";
 import {RoutesPath} from "../../routes-path";
 import {ShareService} from "../../services/share.service";
+import {HttpUrlEncodingCodec} from "@angular/common/http";
 
 @Component({
   selector: 'app-post',
@@ -39,9 +40,12 @@ export class PostComponent implements OnInit, OnDestroy {
   @Input()
   public paramsId: string = '';
 
+  codec = new HttpUrlEncodingCodec();
   public routes = RoutesPath;
   public isOpenedDialog: boolean;
   public sharingId: string;
+  public localStorageShareLink: string;
+  public encodeString: string;
   public afterCloseSub: Subscription;
   private subscriptions: Subscription[] = [];
 
@@ -90,6 +94,9 @@ export class PostComponent implements OnInit, OnDestroy {
       queryParamsHandling: "merge",
     })
     this.sharingId = window.location.host + '/account/' + this.postCreator + '?postId=' + this.postID;
+    this.localStorageShareLink = this.postCreator + '?postId=' + this.postID;
+    // this.localStorageShareLink = this.codec.encodeValue(this.encodeString)
+    extendedPost.componentInstance.localStorageShareLink = this.localStorageShareLink;
     extendedPost.componentInstance.sharePostId = this.sharingId;
     extendedPost.componentInstance.postImg = this.postImg;
     extendedPost.componentInstance.postDesc = this.postDesc;

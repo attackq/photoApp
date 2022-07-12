@@ -54,8 +54,13 @@ import {ButtonModule} from "./shared/button/button.module";
 import {NotFoundModule} from "./not-found/not-found.module";
 import {LoginPageComponent} from "./login-page/login-page.component";
 import { LikesPopupComponent } from './shared/post-icons/likes-popup/likes-popup.component';
+import {UrlSerializer} from "@angular/router";
+import {CustomUrlSerializer} from "./services/customUrlSerializer";
 
 @NgModule({
+  providers: [{
+    provide: UrlSerializer, useClass: CustomUrlSerializer
+  }],
   declarations: [
     AppComponent,
     NavComponent,

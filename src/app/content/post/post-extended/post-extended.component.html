@@ -19,7 +19,7 @@
         <div class="extended__date">{{postDate | date: 'd.M.yy, H:mm'}}</div>
         <div class="extended__icons">
           <app-post-icons [postID]="this.postID" [size]="'big'" [isShare]="isShare"
-                          [sharePostId]="this.sharePostId"></app-post-icons>
+                          [sharePostId]="this.sharePostId" [localStorageShareLink]="this.localStorageShareLink"></app-post-icons>
         </div>
       </div>
       <div class="extended__comments">

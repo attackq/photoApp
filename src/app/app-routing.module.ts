@@ -13,12 +13,12 @@ import {PrivacyComponent} from "./privacy/privacy.component";
 import {CheckUserGuard} from "./services/guards/check-user.guard";
 import {CheckUserIdGuard} from "./services/guards/check-user-id.guard";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
-
+// , CheckUserIdGuard
 const routes: Routes = [
   {path: '', redirectTo: RoutesPath.login, pathMatch: 'full'},
   {path: RoutesPath.login, component: LoginPageComponent, canActivate: [CheckUserGuard]},
   {
-    path: RoutesPath.accountId, component: AccountPageComponent, canActivate: [AuthGuard, CheckUserIdGuard],
+    path: RoutesPath.accountId, component: AccountPageComponent, canActivate: [AuthGuard],
     children: [
       {
         path: '', component: ContentComponent,

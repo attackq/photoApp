@@ -6,6 +6,8 @@ import {Observable, Subscription, switchMap} from "rxjs";
 import {UserStore} from "../post";
 import {CrudService} from "../services/crud/crud.service";
 import {RoutesPath} from "../routes-path";
+import {ShareService} from "../services/share.service";
+import {HttpParameterCodec, HttpUrlEncodingCodec} from "@angular/common/http";
 
 
 @Component({
@@ -35,7 +37,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authService.googleSingIn().pipe(
         switchMap(() => this.authService.user$))
-        .subscribe((user: firebase.User | null) => this.router.navigate([this.routes.account, user?.uid!]))
+        .subscribe((user: firebase.User | null) => this.router.navigate([this.routes.account, user?.uid]))
     );
   }
 
@@ -44,3 +46,4 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
 }
+

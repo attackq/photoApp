@@ -35,6 +35,8 @@ export class PostExtendedComponent implements OnInit, OnDestroy {
   @Input()
   public sharePostId: string;
   @Input()
+  public localStorageShareLink: string;
+  @Input()
   public postCreator: string;
 
   public isShare: boolean = true;

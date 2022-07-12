@@ -23,7 +23,7 @@
       <div class="modal_err" *ngIf="isControlValid(formControls.description)">Max length is 30 symbols</div>
       <app-button [label]="'Change'"
                   [bgColor]="'blue'"
-                  [condition]="editUserForm.invalid || checkLogoStatus() || checkBackStatus()"
+                  [condition]="editUserForm.invalid || checkUploadStatus(progressLogo) || checkUploadStatus(progressBack)"
                   (click)="submitFrom(this.firestoreID)"
                   mat-dialog-close
                   class="form__btn">

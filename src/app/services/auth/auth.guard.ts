@@ -6,6 +6,7 @@ import {AuthService} from "./auth.service";
 import firebase from "firebase/compat/app";
 import {NotifierService} from "angular-notifier";
 import {RoutesPath} from "../../routes-path";
+import {ShareService} from "../share.service";
 
 @Injectable({
   providedIn: 'root'

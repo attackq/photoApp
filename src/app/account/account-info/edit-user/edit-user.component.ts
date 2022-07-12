@@ -115,17 +115,9 @@ export class EditUserComponent implements OnInit {
     }
   }
 
-  public checkLogoStatus() {
-    if (this.progressLogo) {
-      return this.progressLogo !== '100';
-    } else {
-      return false;
-    }
-  }
-
-  public checkBackStatus() {
-    if (this.progressBack) {
-      return this.progressBack !== '100';
+  public checkUploadStatus(progress: string | undefined): boolean {
+    if (progress) {
+      return progress !== '100';
     } else {
       return false;
     }

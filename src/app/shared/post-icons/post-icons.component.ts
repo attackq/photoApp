@@ -12,6 +12,7 @@ import {NotifierService} from "angular-notifier";
 import {EditUserComponent} from "../../account/account-info/edit-user/edit-user.component";
 import {MatDialog} from "@angular/material/dialog";
 import {LikesPopupComponent} from "./likes-popup/likes-popup.component";
+import {ShareService} from "../../services/share.service";
 
 @Component({
   selector: 'app-post-icons',
@@ -30,6 +31,8 @@ export class PostIconsComponent implements OnInit, OnDestroy {
   public isShare: boolean;
   @Input()
   public sharePostId: string;
+  @Input()
+  public localStorageShareLink: string;
 
   public changeLike: boolean;
   public changeBookmark: boolean;
@@ -45,7 +48,8 @@ export class PostIconsComponent implements OnInit, OnDestroy {
               private crudService: CrudService,
               private clipboard: Clipboard,
               private notifier: NotifierService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private share: ShareService) {
   }
 
   public showNotification(type: string, message: string): void {
@@ -84,7 +88,8 @@ export class PostIconsComponent implements OnInit, OnDestroy {
       tap((isPost: PostStore[]) => {
         if (isPost.length !== 0) {
           this.clipboard.copy(this.sharePostId);
-          this.showNotification('success', 'Link was copied!')
+          localStorage.setItem('postLink', this.localStorageShareLink)
+          this.showNotification('success', 'Link was copied!');
         } else {
           this.notifier.notify('error', 'Sorry! Post was deleted.')
           setTimeout(() => {
